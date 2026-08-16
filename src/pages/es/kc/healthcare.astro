@@ -1,0 +1,202 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Salud — KC"
+    description="Clínicas gratuitas, FQHCs, medicina de calle, salud mental, y cómo obtener atención sin seguro en Kansas City."
+    lang="es"
+>
+    <KCLanguageSwitcher currentLang="es" enPath="/kc/healthcare" esPath="/es/kc/healthcare" />
+
+    <p class="kc-eyebrow">Salud</p>
+    <h1>Atención sin seguro, sin identificación, sin dirección.</h1>
+    <p class="kc-lede">
+        Varios niveles en el área metropolitana: centros de salud federalmente calificados (escala móvil),
+        clínicas gratuitas (sin cobro), medicina de calle (vienen a usted), y los hospitales de la red de
+        seguridad (Truman y KU). Además salud mental, que es su propio ecosistema.
+    </p>
+
+    <section class="kc-section">
+        <h2>Medicina de calle — vienen a usted</h2>
+
+        <ServiceCard
+            name="Care Beyond the Boulevard"
+            phone="913-291-2273"
+            website="https://carebeyondtheboulevard.org"
+            hours="40+ clínicas al mes, ubicaciones rotativas en ambos estados"
+            languages={["Inglés", "Español"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Llame para el horario actual. Atención médica, psiquiátrica y necesidades básicas. No requieren identificación, seguro o dirección. Construido explícitamente para personas que el sistema estándar no puede alcanzar."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting", "holds"]}
+            confidence="verified"
+            walkIn={true}
+            idRequired={false}
+            insuranceRequired={false}
+            flagSlug="care-beyond-blvd"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Clínicas gratuitas — sin cobro, sin seguro</h2>
+
+        <ServiceCard
+            name="Sojourner Health Clinic (UMKC)"
+            address="3151 Olive St, Kansas City, MO 64109"
+            website="https://med.umkc.edu/sojourner"
+            hours="Sábados 11:30am-2pm"
+            languages={["Inglés", "Español por solicitud"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Entre sin cita sábados 11:30am-2pm. Estudiantes de medicina de UMKC con supervisión médica. Pregunte en umkcfreeclinic@umkc.edu."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting"]}
+            confidence="verified"
+            walkIn={true}
+            idRequired={false}
+            insuranceRequired={false}
+            flagSlug="sojourner"
+        />
+
+        <ServiceCard
+            name="JayDoc Free Clinic (KU Med)"
+            phone="913-387-1202"
+            address="300 SW Boulevard, Kansas City, KS 66103"
+            website="https://jaydocfreeclinic.org"
+            hours="Martes y jueves por la tarde (verifique sitio web)"
+            languages={["Inglés", "Español"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Atención médica, dental (incluyendo extracciones) y de la vista gratuita. Estudiantes de KU con supervisión médica. La mayoría de las clínicas gratuitas no ofrecen dental — esta sí."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting"]}
+            confidence="verified"
+            walkIn={true}
+            idRequired={false}
+            insuranceRequired={false}
+            flagSlug="jaydoc"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>FQHCs — federalmente calificados, escala móvil</h2>
+        <p>
+            Los FQHCs están obligados por ley federal a atender a cualquier persona, sin importar el seguro
+            o la capacidad de pagar. El cobro es en escala móvil — la mayoría en el nivel más bajo paga
+            entre $5-$10 por visita. Lleve cualquier identificación o papel que tenga, pero no deberían
+            rechazarlo por no tenerlos.
+        </p>
+
+        <ServiceCard
+            name="KC Care Health Center"
+            phone="816-753-5144"
+            website="https://kccare.org"
+            address="3515 Broadway Blvd, Kansas City, MO 64111 (múltiples ubicaciones)"
+            hours="Múltiples sucursales; varía"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="FQHC. Atención primaria, salud conductual, dental, farmacia, atención de VIH, atención afirmativa de género. Escala móvil."
+            confidence="verified"
+            insuranceRequired={false}
+            flagSlug="kc-care"
+        />
+
+        <ServiceCard
+            name="Samuel U. Rodgers Health Center"
+            phone="816-474-4920"
+            website="https://www.rodgershealth.org"
+            address="825 Euclid Ave, Kansas City, MO 64124"
+            hours="Múltiples sucursales; varía"
+            languages={["Inglés", "Español", "Vietnamita", "Somalí", "Árabe"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="FQHC que sirve al noreste de KCMO. Atención primaria, dental, OB/GIN, salud conductual. Fuerte acceso al idioma (vietnamita, somalí, árabe, más)."
+            confidence="verified"
+            insuranceRequired={false}
+            flagSlug="rodgers-health"
+        />
+
+        <ServiceCard
+            name="Swope Health"
+            phone="816-922-7000"
+            website="https://www.swopehealth.org"
+            address="3801 Blue Pkwy, Kansas City, MO 64130 (múltiples ubicaciones)"
+            hours="Múltiples sucursales; varía"
+            languages={["Inglés", "Español"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="FQHC. Atención primaria, salud conductual, dental, farmacia, servicios para mujeres. Múltiples ubicaciones en ambos estados."
+            confidence="verified"
+            insuranceRequired={false}
+            flagSlug="swope"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Hospitales de la red de seguridad</h2>
+        <ul>
+            <li><strong>Truman Medical Centers / University Health:</strong> <a href="tel:816-404-1000">816-404-1000</a> · Hospital Hill, KCMO. El hospital del condado. Por ley (EMTALA) no pueden rechazarle en emergencias; las facturas igual llegan — solicite asistencia financiera.</li>
+            <li><strong>The University of Kansas Health System:</strong> <a href="tel:913-588-1227">913-588-1227</a> · KCK. Tiene asistencia financiera — solicítela.</li>
+            <li><strong>Children's Mercy:</strong> <a href="tel:816-234-3000">816-234-3000</a> · Pediatría, ambos lados. Tiene atención caritativa.</li>
+        </ul>
+        <p class="kc-note">
+            Si va a la sala de emergencias sin seguro, pida por escrito la solicitud de asistencia financiera
+            antes de salir. Están obligados a dársela. El plazo para solicitar a veces es corto — no espere
+            a que llegue la factura.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Beneficios de salud (MO HealthNet / KanCare)</h2>
+        <ul>
+            <li><strong>MO HealthNet (Medicaid de Missouri):</strong> <a href="tel:855-373-4636">855-373-4636</a> · Missouri expandió Medicaid en 2021 — muchos adultos ahora califican.</li>
+            <li><strong>KanCare (Medicaid de Kansas):</strong> <a href="tel:1-800-792-4884">1-800-792-4884</a> · Kansas NO expandió. Adultos sin discapacidades o hijos en casa usualmente no califican.</li>
+            <li><strong>Marketplace (ACA):</strong> <a href="https://www.cuidadodesalud.gov" rel="noopener noreferrer">cuidadodesalud.gov</a> · Para quienes están por encima de los límites de Medicaid.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section">
+        <h2>Salud mental</h2>
+        <p>
+            988 es la línea federal de crisis (llame o envíe mensaje, presione 2 para español). Para atención continua:
+        </p>
+        <ul>
+            <li><strong>Truman Behavioral Health:</strong> <a href="tel:816-404-5700">816-404-5700</a> · lado MO, escala móvil</li>
+            <li><strong>Wyandot Behavioral Health Network:</strong> <a href="tel:913-328-4600">913-328-4600</a> · lado KS, escala móvil</li>
+            <li><strong>Johnson County Mental Health Center:</strong> <a href="tel:913-826-4200">913-826-4200</a> · lado KS</li>
+            <li><strong>Mattie Rhodes Center:</strong> <a href="tel:816-471-2536">816-471-2536</a> · salud conductual en español, Noreste de KCMO</li>
+            <li><strong>The Whole Person:</strong> <a href="tel:816-561-0304">816-561-0304</a> · apoyo de pares dirigido por personas con discapacidad</li>
+        </ul>
+    </section>
+
+    <section class="kc-section">
+        <h2>Uso de sustancias</h2>
+        <p>
+            Muchos programas requieren sobriedad al entrar. Los siguientes explícitamente no, o tienen
+            opciones de reducción de daños:
+        </p>
+        <ul>
+            <li><strong>First Call:</strong> <a href="tel:816-361-5900">816-361-5900</a> · tratamiento de uso de sustancias + apoyo familiar. Escala móvil.</li>
+            <li><strong>Mattie Rhodes Center:</strong> salud conductual en español, Noreste de KCMO</li>
+            <li><strong>Línea de SAMHSA:</strong> <a href="tel:1-800-662-4357">1-800-662-4357</a> (24/7, gratis, confidencial, en español)</li>
+        </ul>
+        <p>
+            Naloxona (Narcan) está disponible sin receta en la mayoría de las farmacias en MO y KS.
+            Varios grupos de reducción de daños la distribuyen gratis — pregunte en cualquier FQHC o KC Care.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Salud reproductiva</h2>
+        <ul>
+            <li><strong>Planned Parenthood Great Plains:</strong> <a href="tel:1-800-230-7526">1-800-230-7526</a> · múltiples ubicaciones, ambos estados. Kansas sigue siendo un estado de destino para el acceso al aborto — el panorama de Missouri ha estado cambiando desde 2024.</li>
+            <li><strong>Trust Women KC:</strong> con base en Wichita pero sirve al área metropolitana — <a href="https://itrustwomen.org" rel="noopener noreferrer">itrustwomen.org</a></li>
+        </ul>
+        <p class="kc-note">
+            Las leyes estatales sobre atención reproductiva han estado en cambio desde 2022. Confirme qué
+            está disponible actualmente en la clínica específica antes de viajar.
+        </p>
+    </section>
+</KCLayout>

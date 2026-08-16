@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+        title="Intake — CivicBrands"
+        description="Submission intake access for CivicBrands."
+        robots="noindex, nofollow"
+>
+    <section class="section">
+        <p class="eyebrow">Intake</p>
+
+        <div class="measure">
+            <h1>Submission intake</h1>
+
+            <p>
+                Contact form submissions are stored in the CivicBrands Worker database. Export access requires the configured intake token.
+            </p>
+
+            <form class="intake-form" id="export-form">
+                <div class="field">
+                    <label for="token">Export token</label>
+                    <input id="token" name="token" type="password" autocomplete="off" />
+                </div>
+
+                <button type="submit">Load submissions</button>
+
+                <p class="form-status" id="export-status" aria-live="polite"></p>
+            </form>
+
+            <pre class="intake-output" id="intake-output"></pre>
+        </div>
+    </section>
+
+    <script>
+        const form = document.querySelector("#export-form");
+        const status = document.querySelector("#export-status");
+        const output = document.querySelector("#intake-output");
+
+        form?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const data = new FormData(form);
+            const token = String(data.get("token") || "");
+            const button = form.querySelector("button[type='submit']");
+
+            if (status) {
+                status.textContent = "Loading.";
+            }
+
+            button?.setAttribute("disabled", "true");
+
+            try {
+                const response = await fetch(`/api/intake/export?token=${encodeURIComponent(token)}`);
+                const result = await response.json();
+
+                if (!response.ok || !result.ok) {
+                    throw new Error(result.error || "Export failed.");
+                }
+
+                if (output) {
+                    output.textContent = JSON.stringify(result.submissions, null, 2);
+                }
+
+                if (status) {
+                    status.textContent = `${result.submissions.length} submissions loaded.`;
+                }
+            } catch (error) {
+                if (status) {
+                    status.textContent = error instanceof Error
+                        ? error.message
+                        : "Export failed.";
+                }
+            } finally {
+                button?.removeAttribute("disabled");
+            }
+        });
+    </script>
+</BaseLayout>

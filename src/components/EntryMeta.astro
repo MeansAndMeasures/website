@@ -1,0 +1,124 @@
+---
+interface Props {
+    published?: Date;
+    updated?: Date;
+    status?: string;
+    tags?: string[];
+    canonical?: string;
+    website?: string;
+    artifactType?: string;
+    authors?: string[];
+    source?: string;
+    agency?: string;
+    docket?: string;
+    submitted?: Date;
+}
+
+const {
+    published,
+    updated,
+    status,
+    tags = [],
+    canonical,
+    website,
+    artifactType,
+    authors = [],
+    source,
+    agency,
+    docket,
+    submitted
+} = Astro.props;
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC"
+}).format(date);
+---
+
+<dl class="entry-meta" aria-label="Entry metadata">
+    {published && (
+            <>
+                <dt>Published</dt>
+                <dd>{formatDate(published)}</dd>
+            </>
+    )}
+
+    {updated && (
+            <>
+                <dt>Updated</dt>
+                <dd>{formatDate(updated)}</dd>
+            </>
+    )}
+
+    {submitted && (
+            <>
+                <dt>Submitted</dt>
+                <dd>{formatDate(submitted)}</dd>
+            </>
+    )}
+
+    {status && (
+            <>
+                <dt>Status</dt>
+                <dd>{status}</dd>
+            </>
+    )}
+
+    {artifactType && (
+            <>
+                <dt>Type</dt>
+                <dd>{artifactType}</dd>
+            </>
+    )}
+
+    {authors.length > 0 && (
+            <>
+                <dt>Authors</dt>
+                <dd>{authors.join(", ")}</dd>
+            </>
+    )}
+
+    {agency && (
+            <>
+                <dt>Agency</dt>
+                <dd>{agency}</dd>
+            </>
+    )}
+
+    {docket && (
+            <>
+                <dt>Docket</dt>
+                <dd>{docket}</dd>
+            </>
+    )}
+
+    {source && (
+            <>
+                <dt>Source</dt>
+                <dd>{source}</dd>
+            </>
+    )}
+
+    {tags.length > 0 && (
+            <>
+                <dt>Tags</dt>
+                <dd>{tags.join(", ")}</dd>
+            </>
+    )}
+
+    {website && (
+            <>
+                <dt>Live Site</dt>
+                <dd><a href={website}>{website}</a></dd>
+            </>
+    )}
+
+    {canonical && (
+            <>
+                <dt>Canonical</dt>
+                <dd><a href={canonical}>{canonical}</a></dd>
+            </>
+    )}
+</dl>

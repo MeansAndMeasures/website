@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const entries = (await getCollection("work")).sort((a, b) =>
+    a.data.title.localeCompare(b.data.title)
+);
+---
+
+<BaseLayout
+        title="Work — CivicBrands"
+        description="Representative work from CivicBrands."
+>
+    <section class="section">
+        <p class="eyebrow">Work</p>
+
+        <div class="measure">
+            <h1>Representative work</h1>
+            <p>
+                Representative work includes infrastructure and reference systems built to preserve legibility, traceability, and meaningful agency.
+            </p>
+        </div>
+
+        <div class="grid">
+            {entries.map((entry) => (
+                    <a
+                            class="route-panel"
+                            href={`/work/${entry.id}`}
+                    >
+                        <div>
+                            <p class="eyebrow">
+                                {entry.data.initiative ?? "Work"}
+                            </p>
+
+                            <h2 class="card-title">
+                                {entry.data.title}
+                            </h2>
+                        </div>
+
+                        {entry.data.summary && (
+                                <p>{entry.data.summary}</p>
+                        )}
+
+                        {entry.data.website && (
+                                <p class="route-panel__meta">Live site: {new URL(entry.data.website).host}</p>
+                        )}
+                    </a>
+            ))}
+        </div>
+    </section>
+</BaseLayout>

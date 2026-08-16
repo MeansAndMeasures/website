@@ -1,0 +1,46 @@
+---
+interface EntryItem {
+    id: string;
+    data: {
+        title: string;
+        summary?: string;
+        published?: Date;
+        status?: string;
+        tags?: string[];
+        initiative?: string;
+        artifactType?: string;
+    };
+}
+
+interface Props {
+    entries: EntryItem[];
+    basePath: string;
+    fallback: string;
+}
+
+const { entries, basePath, fallback } = Astro.props;
+---
+
+{entries.length > 0 ? (
+        <div class="grid entry-list">
+            {entries.map((entry) => (
+                    <a class="route-panel" href={`${basePath}/${entry.id}`}>
+                        <div>
+                            <p class="eyebrow">
+                                {entry.data.initiative ?? entry.data.artifactType ?? entry.data.status ?? "Entry"}
+                            </p>
+
+                            <h2 class="card-title">{entry.data.title}</h2>
+                        </div>
+
+                        {entry.data.summary && (
+                                <p>{entry.data.summary}</p>
+                        )}
+                    </a>
+            ))}
+        </div>
+) : (
+        <div class="measure">
+            <p>{fallback}</p>
+        </div>
+)}

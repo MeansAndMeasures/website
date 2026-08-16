@@ -1,0 +1,137 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import ServiceJsonLd from "../../components/ServiceJsonLd.astro";
+import KCLanguageSwitcher from "../../components/KCLanguageSwitcher.astro";
+import { getCollection } from "astro:content";
+
+const services = await getCollection("kcServices", ({ data }) => data.categories.includes("legal"));
+const schemaServices = services.map((s) => ({
+    name: s.data.name,
+    phone: s.data.phone,
+    website: s.data.website,
+    address: s.data.address,
+    categories: s.data.categories,
+    expect: s.data.expect
+}));
+---
+
+<KCLayout
+    title="Legal help — KC"
+    description="Free and low-cost legal aid, immigration, tenant rights, and reentry support in Kansas City."
+>
+    <ServiceJsonLd services={schemaServices} slot="head" />
+    <KCLanguageSwitcher currentLang="en" enPath="/kc/legal" esPath="/es/kc/legal" />
+    <p class="kc-eyebrow">Legal</p>
+    <h1>Free or low-cost legal help.</h1>
+    <p class="kc-lede">
+        Most civil legal aid is income-restricted, but the income ceiling is higher than people expect.
+        Criminal defense for people who cannot afford a lawyer is provided by public defenders. Immigration,
+        tenant defense, and reentry have their own specialized programs.
+    </p>
+
+    <section class="kc-section" aria-labelledby="civil">
+        <h2 id="civil">Civil legal aid</h2>
+
+        <ServiceCard
+            name="Legal Aid of Western Missouri"
+            phone="816-474-6750"
+            website="https://www.lawmo.org"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Civil cases — housing (eviction), family (custody, DV), public benefits, consumer. Does not require documentation status. Income-eligible only."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="legal-aid-wmo"
+        />
+
+        <ServiceCard
+            name="Kansas Legal Services"
+            phone="800-723-6953"
+            website="https://www.kansaslegalservices.org"
+            languages={["English", "Spanish"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Civil cases on the Kansas side. Tenant defense, family law, consumer, public benefits. Income-eligible."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="ks-legal-services"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="tenant">
+        <h2 id="tenant">Tenant defense (eviction)</h2>
+        <ul>
+            <li><strong>KCMO Right to Counsel:</strong> <a href="tel:816-474-5112">816-474-5112</a> · KCMO city limits only · free representation for income-eligible</li>
+            <li><strong>KC Tenants Hotline:</strong> <a href="tel:816-533-5435">816-533-5435</a> · organizing + know-your-rights + court navigation</li>
+            <li><strong>Legal Aid of Western Missouri (housing unit):</strong> <a href="tel:816-474-6750">816-474-6750</a></li>
+            <li><strong>Kansas Legal Services:</strong> <a href="tel:800-723-6953">800-723-6953</a></li>
+        </ul>
+        <p class="kc-note">
+            On the day of eviction court — even just before the hearing — a tenant advocate is sometimes
+            on-site at the courthouse. Show up early. Do not skip court.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="immigration">
+        <h2 id="immigration">Immigration</h2>
+        <ul>
+            <li><strong>Catholic Charities Immigration Legal Services (KC):</strong> <a href="tel:816-654-1191">816-654-1191</a> · DACA, asylum, family petitions, citizenship</li>
+            <li><strong>Jewish Vocational Service:</strong> <a href="tel:816-471-2808">816-471-2808</a> · refugee resettlement + immigration legal</li>
+            <li><strong>Migrant Farmworkers Assistance Fund:</strong> <a href="tel:816-994-2950">816-994-2950</a></li>
+            <li><strong>El Centro Inc. (Kansas side):</strong> <a href="tel:913-677-0100">913-677-0100</a> · immigration legal, ESL, family services</li>
+            <li><strong>American Immigration Lawyers Association referral:</strong> <a href="https://www.ailalawyer.com" rel="noopener noreferrer">ailalawyer.com</a> · paid private attorneys</li>
+        </ul>
+        <p class="kc-note">
+            Do not pay a "notario" or non-lawyer for immigration help. They cannot legally represent you.
+            If someone is asking for money to file paperwork, verify they are a lawyer or DOJ-accredited
+            rep. AILA's referral service is one way to check.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="criminal">
+        <h2 id="criminal">Criminal defense &amp; public defenders</h2>
+        <ul>
+            <li><strong>Missouri State Public Defender (KC):</strong> <a href="tel:816-889-7699">816-889-7699</a> · for cases in MO courts when you cannot afford a lawyer</li>
+            <li><strong>Wyandotte County Public Defender:</strong> <a href="tel:913-573-2945">913-573-2945</a></li>
+            <li><strong>Johnson County KS Public Defender:</strong> <a href="tel:913-715-3140">913-715-3140</a></li>
+            <li><strong>Federal Public Defender (Western MO):</strong> <a href="tel:816-471-8282">816-471-8282</a></li>
+            <li><strong>Federal Public Defender (KS):</strong> <a href="tel:913-551-6712">913-551-6712</a></li>
+        </ul>
+        <p>
+            You have to ask for a public defender — it is not assigned automatically until arraignment.
+            Tell the court at your first appearance that you cannot afford a lawyer.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="reentry">
+        <h2 id="reentry">Reentry (after incarceration)</h2>
+        <ul>
+            <li><strong>Connections to Success:</strong> <a href="tel:816-471-7676">816-471-7676</a> · reentry employment, support</li>
+            <li><strong>Reaching Out From Within:</strong> peer support across MO and KS</li>
+            <li><strong>The Lazarus Project (MO):</strong> reentry housing</li>
+            <li><strong>Benilde Hall:</strong> <a href="tel:816-842-5836">816-842-5836</a> · reentry transitional housing</li>
+            <li><strong>Veterans returning home:</strong> see <a href="/kc/crisis#veterans">Veterans Community Project</a></li>
+        </ul>
+        <p>
+            Record expungement — eligibility differs by state and offense. Legal Aid of Western Missouri
+            and Kansas Legal Services both handle expungement.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="rights">
+        <h2 id="rights">Know your rights — quick reference</h2>
+        <ul>
+            <li>You can refuse to consent to a search of your home, car, or person. "I do not consent to this search."</li>
+            <li>You can ask "Am I being detained or am I free to leave?" If yes, leave. If no, you may stay silent.</li>
+            <li>You can say "I want to speak to a lawyer" — and then stop talking.</li>
+            <li>Immigration officers cannot enter your home without a judicial warrant signed by a judge (not an "ICE warrant"). Ask to see the warrant under the door.</li>
+            <li>You do not have to open the door for any officer without a judicial warrant.</li>
+        </ul>
+        <p class="kc-note">
+            None of this is legal advice. It is a summary. For your specific situation, call one of the
+            legal services listed above.
+        </p>
+    </section>
+</KCLayout>

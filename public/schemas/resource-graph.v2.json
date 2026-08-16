@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://civicbrands.org/schemas/resource-graph.v2.json",
+  "title": "CivicBrands resource graph",
+  "type": "object",
+  "required": ["schema", "count", "resources", "byKey", "byUrl"],
+  "properties": {
+    "schema": { "const": "https://civicbrands.org/schemas/resource-graph.v2.json" },
+    "count": { "type": "integer", "minimum": 0 },
+    "resources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/resource" }
+    },
+    "byKey": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/resource" }
+    },
+    "byUrl": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type": "object",
+      "required": ["key", "id", "kind", "collection", "url", "title", "metadata", "body", "relationships"],
+      "properties": {
+        "key": { "type": "string" },
+        "id": { "type": "string" },
+        "kind": { "type": "string" },
+        "collection": { "type": "string" },
+        "url": { "type": "string" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "metadata": { "type": "object" },
+        "body": { "type": "string" },
+        "relationships": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

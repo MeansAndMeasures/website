@@ -1,0 +1,72 @@
+---
+const navItems = [
+    { href: "/systems", label: "Systems" },
+    { href: "/work", label: "Work" },
+    { href: "/research", label: "Research" },
+    { href: "/artifacts", label: "Artifacts" },
+    { href: "/procurement", label: "Procurement" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" }
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isKcSection = pathname === "/kc" || pathname.startsWith("/kc/") || pathname.startsWith("/es/kc");
+---
+
+<header class="site-header" data-kc={isKcSection ? "true" : undefined}>
+    <div class="site-header__inner">
+        <a class="site-header__mark" href="/" aria-label="CivicBrands home">
+            <img src="/brand/assets/header.svg" alt="CivicBrands" width="280" height="64" />
+        </a>
+
+        <nav class="site-header__nav" aria-label="Primary navigation">
+            {navItems.map((item) => {
+                const isCurrent = pathname === item.href;
+
+                return (
+                    <a href={item.href} aria-current={isCurrent ? "page" : undefined}>
+                        {item.label}
+                    </a>
+                );
+            })}
+            {!isKcSection && (
+                <a href="/kc" class="site-header__kclink">KC</a>
+            )}
+            {isKcSection && (
+                <>
+                    <a href="/kc/crisis" class="site-header__needhelp">Need Help Now</a>
+                    <button type="button" class="site-header__escape" aria-label="Leave this site quickly">
+                        Leave site
+                    </button>
+                </>
+            )}
+        </nav>
+    </div>
+</header>
+
+{isKcSection && (
+    <script is:inline>
+        (function () {
+            const button = document.querySelector(".site-header__escape");
+            if (!button) return;
+
+            const escape = function () {
+                try {
+                    sessionStorage.clear();
+                    localStorage.clear();
+                } catch (e) {
+                    /* storage may be unavailable; continue */
+                }
+                window.location.replace("https://www.google.com");
+            };
+
+            button.addEventListener("click", escape);
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape" && event.shiftKey) {
+                    escape();
+                }
+            });
+        })();
+    </script>
+)}

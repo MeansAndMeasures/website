@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+        title="Status — CivicBrands"
+        description="Operational posture and known status for CivicBrands public surfaces."
+>
+    <section class="section">
+        <p class="eyebrow">Status</p>
+
+        <div class="measure">
+            <h1>Operational posture.</h1>
+            <p>
+                Status means two things here: whether the public surfaces are expected to be reachable,
+                and whether the information inside them should be treated as current, reviewed, or
+                best-effort. Both matter.
+            </p>
+        </div>
+
+        <div class="status-list">
+            <section>
+                <h2>CivicBrands main site</h2>
+                <dl class="entry-meta">
+                    <dt>Surface</dt>
+                    <dd><a href="https://civicbrands.org">civicbrands.org</a></dd>
+                    <dt>Posture</dt>
+                    <dd>Static-first publication and records surface.</dd>
+                    <dt>Expected Availability</dt>
+                    <dd>High, subject to hosting and DNS availability.</dd>
+                </dl>
+            </section>
+
+            <section>
+                <h2>KC directory</h2>
+                <dl class="entry-meta">
+                    <dt>Surface</dt>
+                    <dd><a href="/kc">civicbrands.org/kc</a></dd>
+                    <dt>Posture</dt>
+                    <dd>Human-reviewed, best-effort resource directory with correction pathways and practical access guidance.</dd>
+                    <dt>Urgent Corrections</dt>
+                    <dd><a href="/kc/suggest">Suggest / correct</a> or email <a href="mailto:corrections@mail.civicbrands.org">corrections@mail.civicbrands.org</a>.</dd>
+                </dl>
+            </section>
+
+            <section>
+                <h2>Forecast</h2>
+                <dl class="entry-meta">
+                    <dt>Surface</dt>
+                    <dd><a href="https://forecast.civicbrands.org">forecast.civicbrands.org</a></dd>
+                    <dt>Posture</dt>
+                    <dd>Operational public information infrastructure. Data and interfaces may evolve as sources are added.</dd>
+                    <dt>Reference</dt>
+                    <dd><a href="/work/forecast">Forecast work entry</a></dd>
+                </dl>
+            </section>
+        </div>
+
+        <div class="measure">
+            <p>
+                If a public page is down, a critical phone number fails, or a listed service is turning
+                people away, treat that as actionable. Send the correction through the most direct path
+                available. We would rather fix the record than preserve the appearance of certainty.
+            </p>
+        </div>
+    </section>
+</BaseLayout>

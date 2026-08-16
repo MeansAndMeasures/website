@@ -1,0 +1,482 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import { getCollection } from "astro:content";
+import { buildKcMachine } from "../../lib/kcMachine";
+
+const services = await getCollection("kcServices");
+const machine = buildKcMachine(services);
+
+const allCategories = [...new Set(services.flatMap((s) => s.data.categories))].sort();
+
+const filterIndex = services.map((s) => ({
+    slug: s.id,
+    name: s.data.name,
+    categories: s.data.categories,
+    states: s.data.states,
+    languages: s.data.languages,
+    noImmigrationDocuments: s.data.statusNeutral,
+    hours24: s.data.hours24,
+    petsAllowed: s.data.petsAllowed ?? false,
+    reachableWithoutCar: s.data.reachableWithoutCar ?? false,
+    emergency: s.data.emergency,
+    lat: s.data.lat ?? null,
+    lng: s.data.lng ?? null,
+    phone: s.data.phone ?? "",
+    address: s.data.address ?? "",
+    searchText: [
+        s.data.name,
+        s.data.expect ?? "",
+        s.data.address ?? "",
+        s.data.phone ?? "",
+        s.data.eligibility ?? "",
+        s.data.categories.join(" "),
+        s.data.languages.join(" "),
+        machine.searchTermsForService(s).join(" ")
+    ].join(" ").toLowerCase()
+}));
+
+const geoEntries = filterIndex.filter((s) => s.lat !== null && s.lng !== null);
+---
+
+<KCLayout
+    title="Directory — KC"
+    description="Search and filter the full Kansas City directory by category, state, language, and access barriers. Optional map view."
+>
+    <link rel="stylesheet" href="/lib/leaflet/leaflet.css" slot="head" />
+    <script src="/lib/fuse.min.js" defer slot="head"></script>
+
+    <p class="kc-eyebrow">Directory</p>
+    <h1>Search the whole directory.</h1>
+    <p class="kc-lede">
+        Everything in the directory, searchable. Filter by what matters to you — state, language,
+        around-the-clock availability, whether immigration-status documents are required, pets,
+        and whether you can get there without a car. Toggle the map view to see what's nearby.
+    </p>
+
+    <form class="kc-search" id="kc-search-form" novalidate>
+        <input
+            type="search"
+            id="kc-search-input"
+            name="q"
+            placeholder="Search by name, address, or what you need"
+            aria-label="Search the directory"
+            autocomplete="off"
+        />
+
+        <div class="kc-search__filters" role="group" aria-label="Filter">
+            <button type="button" class="kc-search__chip" data-filter="state" data-value="MO" aria-pressed="false">Missouri</button>
+            <button type="button" class="kc-search__chip" data-filter="state" data-value="KS" aria-pressed="false">Kansas</button>
+            <button type="button" class="kc-search__chip" data-filter="lang" data-value="Spanish" aria-pressed="false">Spanish</button>
+            <button type="button" class="kc-search__chip" data-filter="noImmigrationDocuments" data-value="true" aria-pressed="false">No immigration documents required</button>
+            <button type="button" class="kc-search__chip" data-filter="hours24" data-value="true" aria-pressed="false">24/7</button>
+            <button type="button" class="kc-search__chip" data-filter="pets" data-value="true" aria-pressed="false">Pets allowed</button>
+            <button type="button" class="kc-search__chip" data-filter="transit" data-value="true" aria-pressed="false">Reachable without a car</button>
+        </div>
+
+        <div class="kc-search__filters" role="group" aria-label="Category filter">
+            {allCategories.map((c) => (
+                <button type="button" class="kc-search__chip" data-filter="category" data-value={c} aria-pressed="false">{c}</button>
+            ))}
+        </div>
+
+        <div class="kc-search__filters" role="group" aria-label="View + sort">
+            <button type="button" class="kc-search__chip" id="kc-toggle-map" aria-pressed="false">Show map</button>
+            <button type="button" class="kc-search__chip" id="kc-sort-distance" aria-pressed="false">Sort by distance from me</button>
+            <button type="button" class="kc-search__chip" id="kc-clear-search">Clear search and filters</button>
+        </div>
+
+        <p class="form-status" id="kc-search-count" aria-live="polite"></p>
+    </form>
+
+    <div id="kc-directory-map" class="kc-directory-map" hidden></div>
+
+    <div id="kc-directory-results">
+        {services.map((s) => (
+            <div data-service-slug={s.id} data-lat={s.data.lat ?? ""} data-lng={s.data.lng ?? ""}>
+                <ServiceCard
+                    name={s.data.name}
+                    phone={s.data.phone}
+                    sms={s.data.sms}
+                    website={s.data.website}
+                    address={s.data.address}
+                    hours={s.data.hours}
+                    hours24={s.data.hours24}
+                    languages={s.data.languages}
+                    states={s.data.states}
+                    statusNeutral={s.data.statusNeutral}
+                    expect={s.data.expect}
+                    fearAddressed={s.data.fearAddressed}
+                    confidence={s.data.confidence}
+                    lastKnownGood={s.data.lastKnownGood}
+                    nearestBusRoute={s.data.nearestBusRoute}
+                    reachableWithoutCar={s.data.reachableWithoutCar}
+                    walkIn={s.data.walkIn}
+                    veteranOnly={s.data.veteranOnly}
+                    petsAllowed={s.data.petsAllowed}
+                    emergency={s.data.emergency}
+                    flagSlug={s.id}
+                />
+            </div>
+        ))}
+    </div>
+</KCLayout>
+
+<style>
+    .kc-directory-map {
+        height: 24rem;
+        margin-block: 1.62rem;
+        border: 1px solid #463a6b;
+    }
+    .kc-directory-map .leaflet-popup-content {
+        font-family: "Spectral", serif;
+        font-size: 0.85rem;
+    }
+    .kc-directory-map .leaflet-popup-content a {
+        text-decoration-color: #c9482f;
+    }
+</style>
+
+<script is:inline define:vars={{ filterIndex, geoEntries }}>
+    (function () {
+        const input = document.getElementById("kc-search-input");
+        const countEl = document.getElementById("kc-search-count");
+        const cards = document.querySelectorAll("[data-service-slug]");
+        const chips = document.querySelectorAll("[data-filter]");
+        const resultsEl = document.getElementById("kc-directory-results");
+        const mapEl = document.getElementById("kc-directory-map");
+        const toggleMapBtn = document.getElementById("kc-toggle-map");
+        const sortDistBtn = document.getElementById("kc-sort-distance");
+        const clearBtn = document.getElementById("kc-clear-search");
+
+        let map = null;
+        let markerLayer = null;
+        let userLatLng = null;
+
+        const state = {
+            q: "",
+            state: null,
+            lang: null,
+            noImmigrationDocuments: false,
+            hours24: false,
+            pets: false,
+            transit: false,
+            categories: new Set(),
+            service: null,
+            mapVisible: false,
+            sortByDistance: false,
+            fuzzyHits: null  // Set of slugs matching the query, or null when q is empty
+        };
+
+        function readUrlState() {
+            const params = new URLSearchParams(window.location.search);
+            state.q = (params.get("q") || "").trim().toLowerCase();
+            state.state = ["MO", "KS"].includes(params.get("state")) ? params.get("state") : null;
+            state.lang = params.get("lang") || null;
+            state.noImmigrationDocuments = params.get("immigration-documents") === "no";
+            state.hours24 = params.get("hours") === "24";
+            state.pets = params.get("pets") === "yes";
+            state.transit = params.get("transit") === "no-car";
+            state.categories = new Set(params.getAll("category").filter(Boolean));
+            state.service = params.get("service") || null;
+            state.mapVisible = params.get("map") === "1";
+        }
+
+        function syncControlsFromState() {
+            if (input) input.value = state.q;
+            chips.forEach(function (chip) {
+                const filter = chip.dataset.filter;
+                const value = chip.dataset.value;
+                let active = false;
+                if (filter === "category") active = state.categories.has(value);
+                else if (filter === "state") active = state.state === value;
+                else if (filter === "lang") active = state.lang === value;
+                else active = Boolean(state[filter]);
+                chip.setAttribute("aria-pressed", active ? "true" : "false");
+            });
+            if (toggleMapBtn) {
+                toggleMapBtn.setAttribute("aria-pressed", state.mapVisible ? "true" : "false");
+                toggleMapBtn.textContent = state.mapVisible ? "Hide map" : "Show map";
+            }
+            if (mapEl) mapEl.hidden = !state.mapVisible;
+        }
+
+        function syncUrl() {
+            const params = new URLSearchParams();
+            if (state.q) params.set("q", state.q);
+            if (state.state) params.set("state", state.state);
+            if (state.lang) params.set("lang", state.lang);
+            if (state.noImmigrationDocuments) params.set("immigration-documents", "no");
+            if (state.hours24) params.set("hours", "24");
+            if (state.pets) params.set("pets", "yes");
+            if (state.transit) params.set("transit", "no-car");
+            state.categories.forEach(function (category) { params.append("category", category); });
+            if (state.service) params.set("service", state.service);
+            if (state.mapVisible) params.set("map", "1");
+            const query = params.toString();
+            history.replaceState(null, "", window.location.pathname + (query ? "?" + query : ""));
+        }
+
+        // Fuse.js fuzzy search. Initialized when the script finishes loading.
+        let fuse = null;
+        function initFuse() {
+            if (typeof Fuse === "undefined") return;
+            fuse = new Fuse(filterIndex, {
+                keys: [
+                    { name: "name", weight: 0.5 },
+                    { name: "categories", weight: 0.2 },
+                    { name: "languages", weight: 0.1 },
+                    { name: "searchText", weight: 0.2 }
+                ],
+                threshold: 0.4,           // 0=exact, 1=anything; 0.4 forgives typos
+                minMatchCharLength: 2,
+                ignoreLocation: true,
+                includeScore: false
+            });
+        }
+        initFuse();
+        if (!fuse) {
+            // Fuse not loaded yet — wait briefly then retry once.
+            setTimeout(function () { initFuse(); apply(); }, 200);
+        }
+
+        function recomputeFuzzy() {
+            if (!state.q) {
+                state.fuzzyHits = null;
+                return;
+            }
+            if (!fuse) {
+                // Fallback to substring if Fuse hasn't loaded.
+                const hits = new Set();
+                filterIndex.forEach(function (item) {
+                    if (item.searchText.includes(state.q)) hits.add(item.slug);
+                });
+                state.fuzzyHits = hits;
+                return;
+            }
+            const results = fuse.search(state.q);
+            const hits = new Set();
+            results.forEach(function (r) { hits.add(r.item.slug); });
+            state.fuzzyHits = hits;
+        }
+
+        function matches(item) {
+            if (state.service && item.slug !== state.service) return false;
+            if (state.fuzzyHits !== null && !state.fuzzyHits.has(item.slug)) return false;
+            if (state.state && !item.states.includes(state.state)) return false;
+            if (state.lang && !item.languages.some(function (l) {
+                return l.toLowerCase().includes(state.lang.toLowerCase());
+            })) return false;
+            if (state.noImmigrationDocuments && !item.noImmigrationDocuments) return false;
+            if (state.hours24 && !item.hours24) return false;
+            if (state.pets && !item.petsAllowed) return false;
+            if (state.transit && !item.reachableWithoutCar) return false;
+            if (state.categories.size > 0) {
+                let ok = false;
+                state.categories.forEach(function (c) {
+                    if (item.categories.includes(c)) ok = true;
+                });
+                if (!ok) return false;
+            }
+            return true;
+        }
+
+        function haversine(lat1, lng1, lat2, lng2) {
+            const R = 6371; // km
+            const toRad = function (d) { return d * Math.PI / 180; };
+            const dLat = toRad(lat2 - lat1);
+            const dLng = toRad(lng2 - lng1);
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                Math.sin(dLng/2) * Math.sin(dLng/2);
+            return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        function apply() {
+            let count = 0;
+            const slugSet = new Set();
+            filterIndex.forEach(function (item) {
+                if (matches(item)) {
+                    slugSet.add(item.slug);
+                    count++;
+                }
+            });
+
+            // Build an ordered list of card elements, possibly sorted by distance.
+            const cardArr = Array.from(cards);
+            if (state.sortByDistance && userLatLng) {
+                cardArr.sort(function (a, b) {
+                    const aLat = parseFloat(a.dataset.lat);
+                    const aLng = parseFloat(a.dataset.lng);
+                    const bLat = parseFloat(b.dataset.lat);
+                    const bLng = parseFloat(b.dataset.lng);
+                    const aHas = !isNaN(aLat) && !isNaN(aLng);
+                    const bHas = !isNaN(bLat) && !isNaN(bLng);
+                    if (!aHas && !bHas) return 0;
+                    if (!aHas) return 1;
+                    if (!bHas) return -1;
+                    const dA = haversine(userLatLng.lat, userLatLng.lng, aLat, aLng);
+                    const dB = haversine(userLatLng.lat, userLatLng.lng, bLat, bLng);
+                    return dA - dB;
+                });
+                cardArr.forEach(function (card) { resultsEl.appendChild(card); });
+            }
+
+            cardArr.forEach(function (card) {
+                const slug = card.getAttribute("data-service-slug");
+                card.style.display = slugSet.has(slug) ? "" : "none";
+            });
+            if (countEl) countEl.textContent = count + " result" + (count === 1 ? "" : "s");
+
+            if (map && markerLayer) {
+                renderMarkers(slugSet);
+            }
+        }
+
+        function renderMarkers(visibleSlugs) {
+            markerLayer.clearLayers();
+            geoEntries.forEach(function (entry) {
+                if (!visibleSlugs.has(entry.slug)) return;
+                const marker = L.marker([entry.lat, entry.lng]);
+                const phoneHtml = entry.phone
+                    ? '<br><a href="tel:' + entry.phone.replace(/[^0-9+]/g, "") + '">' + entry.phone + "</a>"
+                    : "";
+                const addrHtml = entry.address ? "<br>" + entry.address : "";
+                marker.bindPopup("<strong>" + entry.name + "</strong>" + phoneHtml + addrHtml);
+                markerLayer.addLayer(marker);
+            });
+        }
+
+        function initMap() {
+            if (map) return;
+            if (typeof L === "undefined") return;
+            map = L.map(mapEl, { scrollWheelZoom: false }).setView([39.0997, -94.5786], 11);
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                maxZoom: 18
+            }).addTo(map);
+            markerLayer = L.layerGroup().addTo(map);
+            apply();
+        }
+
+        if (input) {
+            input.addEventListener("input", function () {
+                state.service = null;
+                state.q = input.value.trim().toLowerCase();
+                recomputeFuzzy();
+                apply();
+                syncUrl();
+            });
+        }
+
+        chips.forEach(function (chip) {
+            chip.addEventListener("click", function () {
+                state.service = null;
+                const filter = chip.dataset.filter;
+                const value = chip.dataset.value;
+                const pressed = chip.getAttribute("aria-pressed") === "true";
+                if (filter === "category") {
+                    if (pressed) state.categories.delete(value);
+                    else state.categories.add(value);
+                } else if (filter === "state") {
+                    chips.forEach(function (other) {
+                        if (other.dataset.filter === "state" && other !== chip) {
+                            other.setAttribute("aria-pressed", "false");
+                        }
+                    });
+                    state.state = pressed ? null : value;
+                } else if (filter === "lang") {
+                    state.lang = pressed ? null : value;
+                } else {
+                    state[filter] = !pressed;
+                }
+                chip.setAttribute("aria-pressed", pressed ? "false" : "true");
+                apply();
+                syncUrl();
+            });
+        });
+
+        if (toggleMapBtn) {
+            toggleMapBtn.addEventListener("click", function () {
+                state.mapVisible = !state.mapVisible;
+                toggleMapBtn.setAttribute("aria-pressed", state.mapVisible ? "true" : "false");
+                toggleMapBtn.textContent = state.mapVisible ? "Hide map" : "Show map";
+                mapEl.hidden = !state.mapVisible;
+                if (state.mapVisible) {
+                    // Lazy-load Leaflet on first show.
+                    if (typeof L === "undefined") {
+                        const s = document.createElement("script");
+                        s.src = "/lib/leaflet/leaflet.js";
+                        s.onload = function () { initMap(); };
+                        document.body.appendChild(s);
+                    } else {
+                        initMap();
+                        setTimeout(function () { map && map.invalidateSize(); }, 50);
+                    }
+                }
+                syncUrl();
+            });
+        }
+
+        if (clearBtn) {
+            clearBtn.addEventListener("click", function () {
+                state.q = "";
+                state.state = null;
+                state.lang = null;
+                state.noImmigrationDocuments = false;
+                state.hours24 = false;
+                state.pets = false;
+                state.transit = false;
+                state.categories = new Set();
+                state.service = null;
+                state.mapVisible = false;
+                state.sortByDistance = false;
+                state.fuzzyHits = null;
+                syncControlsFromState();
+                apply();
+                syncUrl();
+            });
+        }
+
+        if (sortDistBtn) {
+            sortDistBtn.addEventListener("click", function () {
+                if (!navigator.geolocation) {
+                    if (countEl) countEl.textContent = "Geolocation not supported in this browser.";
+                    return;
+                }
+                if (state.sortByDistance) {
+                    state.sortByDistance = false;
+                    sortDistBtn.setAttribute("aria-pressed", "false");
+                    sortDistBtn.textContent = "Sort by distance from me";
+                    apply();
+                    return;
+                }
+                if (countEl) countEl.textContent = "Getting your location…";
+                navigator.geolocation.getCurrentPosition(
+                    function (pos) {
+                        userLatLng = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+                        state.sortByDistance = true;
+                        sortDistBtn.setAttribute("aria-pressed", "true");
+                        sortDistBtn.textContent = "Stop sorting by distance";
+                        apply();
+                    },
+                    function (err) {
+                        if (countEl) countEl.textContent = "Could not get location: " + (err.message || "permission denied");
+                    },
+                    { timeout: 8000, maximumAge: 300000 }
+                );
+            });
+        }
+
+        readUrlState();
+        syncControlsFromState();
+        recomputeFuzzy();
+        if (state.mapVisible) {
+            const script = document.createElement("script");
+            script.src = "/lib/leaflet/leaflet.js";
+            script.onload = function () { initMap(); };
+            document.body.appendChild(script);
+        }
+        apply();
+    })();
+</script>

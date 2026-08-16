@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EntryList from "../../components/EntryList.astro";
+
+const entries = (await getCollection("research")).sort((a, b) =>
+    (b.data.published?.getTime() ?? 0) - (a.data.published?.getTime() ?? 0)
+);
+---
+
+<BaseLayout
+        title="Research — CivicBrands"
+        description="Research, analysis, and interpretive writing from CivicBrands."
+>
+    <section class="section">
+        <p class="eyebrow">Research</p>
+
+        <div class="measure">
+            <h1>Analysis and writing</h1>
+            <p>
+                Research entries collect analytical frames, working papers, and interpretive material that support CivicBrands' publication and infrastructure work. The work is long-form when it earns the room and brief when it does not.
+            </p>
+        </div>
+
+        <EntryList
+                entries={entries}
+                basePath="/research"
+                fallback="Research entries are being prepared for publication."
+        />
+    </section>
+</BaseLayout>

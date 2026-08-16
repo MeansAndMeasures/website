@@ -1,0 +1,33 @@
+---
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const links = [
+    { href: "/kc", label: "KC overview" },
+    { href: "/kc/crisis", label: "Need help now" },
+    { href: "/kc/directory", label: "Directory (search)" },
+    { href: "/kc/food", label: "Food" },
+    { href: "/kc/housing", label: "Housing" },
+    { href: "/kc/healthcare", label: "Healthcare" },
+    { href: "/kc/legal", label: "Legal aid" },
+    { href: "/kc/veterans", label: "Veterans" },
+    { href: "/kc/utilities", label: "Utilities" },
+    { href: "/kc/libraries", label: "Libraries" },
+    { href: "/kc/transit", label: "Transit" },
+    { href: "/kc/government", label: "Government" },
+    { href: "/kc/use-the-data", label: "Use the data" },
+    { href: "/kc/newcomers", label: "Newcomers" },
+    { href: "/kc/worldcup", label: "World Cup" },
+    { href: "/kc/give-help", label: "Give help" },
+    { href: "/kc/suggest", label: "Suggest / correct" },
+    { href: "/kc/about", label: "About" }
+];
+---
+
+<nav class="kc-subnav" aria-label="KC section">
+    {links.map((link) => {
+        const isCurrent = pathname === link.href;
+        return (
+            <a href={link.href} aria-current={isCurrent ? "page" : undefined}>{link.label}</a>
+        );
+    })}
+</nav>

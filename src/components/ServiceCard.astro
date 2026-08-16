@@ -1,0 +1,91 @@
+---
+import { buildPracticalNotes } from "../lib/servicePresentation";
+
+interface Props {
+    name: string;
+    phone?: string;
+    sms?: string;
+    website?: string;
+    address?: string;
+    hours?: string;
+    hours24?: boolean;
+    languages?: string[];
+    states?: string[];
+    statusNeutral?: boolean;
+    expect?: string;
+    fearAddressed?: string[];
+    confidence?: "verified" | "community-confirmed" | "legacy" | "unverified" | "seasonal";
+    lastKnownGood?: string;
+    nearestBusRoute?: string;
+    nearestMAXStop?: string;
+    reachableWithoutCar?: boolean;
+    transitNote?: string;
+    walkIn?: boolean;
+    appointmentRequired?: boolean;
+    idRequired?: boolean;
+    insuranceRequired?: boolean;
+    petsAllowed?: boolean;
+    veteranOnly?: boolean;
+    soberRequired?: boolean;
+    genderRestrictions?: string;
+    ageRestrictions?: string;
+    emergency?: boolean;
+    children?: unknown;
+    flagSlug?: string;
+}
+
+const props = Astro.props as Props;
+const locale = Astro.url.pathname.startsWith("/es/") ? "es" : "en";
+const practicalNotes = buildPracticalNotes(props, locale);
+
+const phoneHref = props.phone ? `tel:${props.phone.replace(/[^0-9+]/g, "")}` : null;
+const smsHref = props.sms ? `sms:${props.sms.replace(/[^0-9+]/g, "")}` : null;
+const directionsHref = props.address
+    ? `https://maps.google.com/?q=${encodeURIComponent(props.address)}`
+    : null;
+const flagHref = props.flagSlug
+    ? `/kc/suggest?flag=${encodeURIComponent(props.flagSlug)}`
+    : "/kc/suggest";
+---
+
+<article class="service-card" data-emergency={props.emergency ? "true" : undefined}>
+    <h3 class="service-card__name">{props.name}</h3>
+
+    {phoneHref && (
+        <div>
+            <a class="service-card__phone" href={phoneHref}>{props.phone}</a>
+            <button type="button" class="service-card__copy" data-copy={props.phone} aria-label={`Copy phone number ${props.phone}`}>
+                Copy
+            </button>
+        </div>
+    )}
+
+    <ul class="service-card__contact">
+        {smsHref && <li>Text: <a href={smsHref}>{props.sms}</a></li>}
+        {props.website && <li>Web: <a href={props.website} rel="noopener noreferrer">{props.website.replace(/^https?:\/\//, "")}</a></li>}
+        {props.address && (
+            <li>
+                {props.address}
+                {directionsHref && (
+                    <> · <a href={directionsHref} rel="noopener noreferrer">directions</a></>
+                )}
+            </li>
+        )}
+        {props.hours && <li>Hours: {props.hours}{props.hours24 && " (24/7)"}</li>}
+        {(props.nearestBusRoute || props.nearestMAXStop || props.transitNote) && (
+            <li>Transit: {[props.nearestBusRoute, props.nearestMAXStop, props.transitNote].filter(Boolean).join(" · ")}</li>
+        )}
+    </ul>
+
+    {props.expect && <p class="service-card__expect">{props.expect}</p>}
+
+    {practicalNotes.length > 0 && (
+        <p class="service-card__access">{practicalNotes.join(" ")}</p>
+    )}
+
+    <slot />
+
+    <p class="service-card__correction">
+        <a href={flagHref}>Something here is wrong — flag it</a>
+    </p>
+</article>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CivicBrands Header Lockup (mark + wordmark) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Sora:wght@600&amp;display=swap");
+      .wm { font-family: "Sora", sans-serif; font-weight: 600; font-size: 22px; fill: #3B4A66; }
+    </style>
+  </defs>
+  <!-- Logo mark (r2-reciprocal, scaled to 64px) -->
+  <g fill="#0F1A2C">
+    <rect x="26" y="4" width="6" height="34"/>
+    <path d="M 14 30 L 22 30 L 22 38 L 36 38 L 36 30 L 44 30 L 29 50 Z"/>
+  </g>
+  <g fill="#6A5A95" transform="translate(6,0)">
+    <rect x="26" y="26" width="6" height="34" opacity="0.95"/>
+    <path d="M 14 34 L 22 34 L 22 26 L 36 26 L 36 34 L 44 34 L 29 14 Z" opacity="0.95"/>
+  </g>
+  <!-- Wordmark -->
+  <text class="wm" x="76" y="40">CivicBrands</text>
+</svg>

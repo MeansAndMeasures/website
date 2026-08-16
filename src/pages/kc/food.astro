@@ -1,0 +1,139 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import ServiceJsonLd from "../../components/ServiceJsonLd.astro";
+import KCLanguageSwitcher from "../../components/KCLanguageSwitcher.astro";
+import { getCollection } from "astro:content";
+
+const services = await getCollection("kcServices", ({ data }) => data.categories.includes("food"));
+const schemaServices = services.map((s) => ({
+    name: s.data.name,
+    phone: s.data.phone,
+    website: s.data.website,
+    address: s.data.address,
+    categories: s.data.categories,
+    expect: s.data.expect
+}));
+---
+
+<KCLayout
+    title="Food — KC"
+    description="Pantries, hot meals, SNAP, and mutual aid food networks across the Kansas City metro."
+>
+    <ServiceJsonLd services={schemaServices} slot="head" />
+    <KCLanguageSwitcher currentLang="en" enPath="/kc/food" esPath="/es/kc/food" />
+    <p class="kc-eyebrow">Food</p>
+    <h1>Food, today and this month.</h1>
+    <p class="kc-lede">
+        There are three kinds of food help in the metro: pantries (groceries to take home), hot meals
+        (eat now), and benefits (SNAP — food stamps). Most pantries take you with minimal paperwork.
+        Most hot meals are walk-in. SNAP requires more.
+    </p>
+
+    <section class="kc-section" aria-labelledby="tonight">
+        <h2 id="tonight">Food tonight</h2>
+
+        <ServiceCard
+            name="Harvesters Pantry Locator"
+            phone="816-929-3000"
+            website="https://www.harvesters.org/find-food"
+            hours="Locator is online 24/7; pantries vary"
+            languages={["English", "Spanish"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Use the locator at harvesters.org — enter ZIP, see what's open. Harvesters supplies most of the metro's food pantries. Individual pantries set their own rules; most need minimal paperwork."
+            confidence="verified"
+            flagSlug="harvesters"
+        />
+
+        <ServiceCard
+            name="Thelma's Kitchen / Reconciliation Services"
+            phone="816-931-4751"
+            address="1006 E Linwood Blvd, Kansas City, MO 64109"
+            hours="Weekday lunch; pantry hours by appointment"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Pay-what-you-can hot lunch. No one is turned away for lack of money. Pantry serves Linwood/Troost-corridor neighborhoods. Also has ID recovery and mental health support."
+            confidence="verified"
+            reachableWithoutCar={true}
+            nearestBusRoute="RideKC Route 71 (Troost MAX) at Linwood"
+            walkIn={true}
+            flagSlug="reconciliation-services"
+        />
+
+        <ServiceCard
+            name="KC Mutual Aid"
+            website="https://linktr.ee/kcmutualaid"
+            hours="Network-based — varies by request"
+            languages={["English", "Spanish"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Peer network — not a charity. Request food, supplies, transportation through the linktree. They do not means-test, do not require documentation, do not report."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting", "religion"]}
+            confidence="verified"
+            flagSlug="kc-mutual-aid"
+        />
+
+        <ServiceCard
+            name="Chosen Family Mutual Aid KC"
+            website="https://linktr.ee/chosenfamilykc"
+            hours="Network-based"
+            languages={["English"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Queer/trans-led mutual aid network. Food, housing, supplies, care navigation."
+            fearAddressed={["paperwork", "cost", "religion", "reporting"]}
+            confidence="verified"
+            flagSlug="chosen-family-kc"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="benefits">
+        <h2 id="benefits">SNAP (food stamps) — different in each state</h2>
+        <p>
+            SNAP is administered by each state separately. You must apply in the state where you live.
+            You cannot have it in both states. Eligibility, paperwork, and processing time differ.
+        </p>
+
+        <h3>Missouri — MO DSS</h3>
+        <ul>
+            <li>Apply online: <a href="https://mydss.mo.gov/" rel="noopener noreferrer">mydss.mo.gov</a></li>
+            <li>Family Support Division: <a href="tel:855-373-4636">855-373-4636</a></li>
+            <li>You can be approved in 30 days; emergency SNAP in 7 if you qualify.</li>
+        </ul>
+
+        <h3>Kansas — KS DCF</h3>
+        <ul>
+            <li>Apply online: <a href="https://www.dcf.ks.gov/services/ees/" rel="noopener noreferrer">dcf.ks.gov</a></li>
+            <li>DCF Service Center: <a href="tel:1-888-369-4777">1-888-369-4777</a></li>
+            <li>Kansas has additional work requirements for non-elderly, non-disabled adults — ask about exemptions.</li>
+        </ul>
+
+        <p class="kc-note">
+            Income limits and rules change. If denied, ask for the calculation in writing and call
+            <a href="tel:211">211</a> for help appealing.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="wic">
+        <h2 id="wic">WIC — for pregnant, postpartum, infants, children under 5</h2>
+        <ul>
+            <li>Missouri WIC: <a href="tel:1-800-392-8209">1-800-392-8209</a> · <a href="https://health.mo.gov/living/families/wic/" rel="noopener noreferrer">health.mo.gov/wic</a></li>
+            <li>Kansas WIC: <a href="tel:1-800-332-6262">1-800-332-6262</a> · <a href="https://www.kansaswic.org/" rel="noopener noreferrer">kansaswic.org</a></li>
+        </ul>
+        <p>
+            WIC is not means-tested in the same way as SNAP — income limits are higher. Many people who
+            think they don't qualify actually do.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="library-food">
+        <h2 id="library-food">Library-based food</h2>
+        <p>
+            The KC Public Library's Community Resources Team at the Central Branch (14 W 10th St)
+            maintains a live free-food map and connects people to pantries, hot meals, and benefits
+            in person. They do not require a library card. Walk in.
+        </p>
+    </section>
+</KCLayout>

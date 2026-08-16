@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://civicbrands.org/schemas/kc-journeys.v1.json",
+  "title": "Kansas City service journeys",
+  "type": "object",
+  "required": ["schema", "count", "journeys"],
+  "properties": {
+    "schema": { "const": "https://civicbrands.org/schemas/kc-journeys.v1.json" },
+    "count": { "type": "integer", "minimum": 0 },
+    "journeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "question", "summary", "searchTerms", "href", "steps"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "question": { "type": "string" },
+          "summary": { "type": "string" },
+          "searchTerms": { "type": "array", "items": { "type": "string" } },
+          "href": { "type": "string" },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "title", "guidance", "href", "serviceSlugs", "services"],
+              "properties": {
+                "id": { "type": "string" },
+                "title": { "type": "string" },
+                "guidance": { "type": "string" },
+                "href": { "type": "string" },
+                "serviceSlugs": { "type": "array", "items": { "type": "string" } },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["slug", "name", "href"],
+                    "properties": {
+                      "slug": { "type": "string" },
+                      "name": { "type": "string" },
+                      "href": { "type": "string" }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

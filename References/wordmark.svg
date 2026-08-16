@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CivicBrands Wordmark -->
+<!-- Font: Sora (must be loaded externally or embedded) -->
+<!-- Color: #3B4A66 | Tracking: default -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" width="200" height="32">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600&amp;display=swap");
+      .wordmark { font-family: "Sora", sans-serif; font-weight: 600; font-size: 20px; fill: #3B4A66; }
+    </style>
+  </defs>
+  <text class="wordmark" x="0" y="24">CivicBrands</text>
+</svg>

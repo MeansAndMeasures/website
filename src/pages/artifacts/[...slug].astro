@@ -1,0 +1,56 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EntryMeta from "../../components/EntryMeta.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    const entries = await getCollection("artifacts");
+
+    return entries.map((entry) => ({
+        params: {
+            slug: entry.id
+        },
+        props: {
+            entry
+        }
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+        title={`${entry.data.title} — CivicBrands`}
+        description={entry.data.summary}
+>
+    <article class="section">
+        <p class="eyebrow">Artifact</p>
+
+        <div class="measure">
+            <h1>{entry.data.title}</h1>
+
+            {entry.data.summary && (
+                    <p><strong>{entry.data.summary}</strong></p>
+            )}
+
+            <EntryMeta
+                    published={entry.data.published}
+                    updated={entry.data.updated}
+                    status={entry.data.status}
+                    tags={entry.data.tags}
+                    canonical={entry.data.canonical}
+                    artifactType={entry.data.artifactType}
+                    authors={entry.data.authors}
+                    source={entry.data.source}
+                    agency={entry.data.agency}
+                    docket={entry.data.docket}
+                    submitted={entry.data.submitted}
+            />
+
+            <Content />
+        </div>
+    </article>
+</BaseLayout>

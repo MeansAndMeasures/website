@@ -1,0 +1,55 @@
+---
+interface ServiceSchema {
+    name: string;
+    phone?: string;
+    website?: string;
+    address?: string;
+    categories: string[];
+    expect?: string;
+}
+
+interface Props {
+    services: ServiceSchema[];
+}
+
+const { services } = Astro.props as Props;
+
+const categoryToSchemaType: Record<string, string> = {
+    healthcare: "MedicalClinic",
+    food: "FoodEstablishment",
+    crisis: "GovernmentOrganization",
+    "mental-health": "MedicalOrganization",
+    legal: "LegalService",
+    housing: "Residence",
+    government: "GovernmentOrganization"
+};
+
+function schemaTypeFor(categories: string[]) {
+    for (const c of categories) {
+        if (categoryToSchemaType[c]) return categoryToSchemaType[c];
+    }
+    return "Organization";
+}
+
+const itemList = services.map((service) => ({
+    "@type": schemaTypeFor(service.categories),
+    name: service.name,
+    ...(service.phone && { telephone: service.phone }),
+    ...(service.website && { url: service.website }),
+    ...(service.address && { address: { "@type": "PostalAddress", streetAddress: service.address } }),
+    ...(service.expect && { description: service.expect })
+}));
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Kansas City Crisis &amp; Survival Directory",
+    itemListElement: itemList.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item
+    }))
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>

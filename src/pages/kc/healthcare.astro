@@ -1,0 +1,212 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import ServiceJsonLd from "../../components/ServiceJsonLd.astro";
+import KCLanguageSwitcher from "../../components/KCLanguageSwitcher.astro";
+import { getCollection } from "astro:content";
+
+const services = await getCollection("kcServices", ({ data }) => data.categories.includes("healthcare"));
+const schemaServices = services.map((s) => ({
+    name: s.data.name,
+    phone: s.data.phone,
+    website: s.data.website,
+    address: s.data.address,
+    categories: s.data.categories,
+    expect: s.data.expect
+}));
+---
+
+<KCLayout
+    title="Healthcare — KC"
+    description="Free clinics, FQHCs, street medicine, mental health, and how to get care without insurance in Kansas City."
+>
+    <ServiceJsonLd services={schemaServices} slot="head" />
+    <KCLanguageSwitcher currentLang="en" enPath="/kc/healthcare" esPath="/es/kc/healthcare" />
+    <p class="kc-eyebrow">Healthcare</p>
+    <h1>Care without insurance, ID, or address.</h1>
+    <p class="kc-lede">
+        Several layers in the metro: federally qualified health centers (sliding scale), free clinics
+        (no charge), street medicine (they come to you), and the safety-net hospitals (Truman and KU).
+        Plus mental health, which is its own ecosystem.
+    </p>
+
+    <section class="kc-section" aria-labelledby="street">
+        <h2 id="street">Street medicine — they come to you</h2>
+
+        <ServiceCard
+            name="Care Beyond the Boulevard"
+            phone="913-291-2273"
+            website="https://carebeyondtheboulevard.org"
+            hours="40+ clinics per month, rotating locations both states"
+            languages={["English", "Spanish"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Call for current clinic schedule. Medical, psychiatric, and basic needs. No ID, no insurance, no address required. Built explicitly for people the standard system cannot reach."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting", "holds"]}
+            confidence="verified"
+            walkIn={true}
+            idRequired={false}
+            insuranceRequired={false}
+            flagSlug="care-beyond-blvd"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="free">
+        <h2 id="free">Free clinics — no charge, no insurance</h2>
+
+        <ServiceCard
+            name="Sojourner Health Clinic (UMKC)"
+            address="3151 Olive St, Kansas City, MO 64109"
+            website="https://med.umkc.edu/sojourner"
+            hours="Saturdays 11:30am-2pm"
+            languages={["English", "Spanish on request"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Walk in Saturday 11:30am-2pm. UMKC medical students with attending physician supervision. Email umkcfreeclinic@umkc.edu with questions."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting"]}
+            confidence="verified"
+            walkIn={true}
+            idRequired={false}
+            insuranceRequired={false}
+            flagSlug="sojourner"
+        />
+
+        <ServiceCard
+            name="JayDoc Free Clinic (KU Med)"
+            phone="913-387-1202"
+            address="300 SW Boulevard, Kansas City, KS 66103"
+            website="https://jaydocfreeclinic.org"
+            hours="Tues & Thurs evenings (check website)"
+            languages={["English", "Spanish"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Free medical, dental (including extractions), and vision. KU medical students with physician oversight. Most free clinics do not offer dental — this one does."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting"]}
+            confidence="verified"
+            walkIn={true}
+            idRequired={false}
+            insuranceRequired={false}
+            flagSlug="jaydoc"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="fqhc">
+        <h2 id="fqhc">FQHCs — federally qualified, sliding scale</h2>
+        <p>
+            FQHCs are required by federal law to see anyone, regardless of insurance or ability to pay.
+            Charge is on a sliding scale — most people on the bottom of the scale pay $5-$10 per visit.
+            Bring whatever ID/paperwork you have but they should not turn you away for lacking it.
+        </p>
+
+        <ServiceCard
+            name="KC Care Health Center"
+            phone="816-753-5144"
+            website="https://kccare.org"
+            address="3515 Broadway Blvd, Kansas City, MO 64111 (multiple locations)"
+            hours="Multiple sites; varies"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="FQHC. Primary care, behavioral health, dental, pharmacy, HIV care, gender-affirming care. Sliding scale. Multiple locations."
+            confidence="verified"
+            insuranceRequired={false}
+            flagSlug="kc-care"
+        />
+
+        <ServiceCard
+            name="Samuel U. Rodgers Health Center"
+            phone="816-474-4920"
+            website="https://www.rodgershealth.org"
+            address="825 Euclid Ave, Kansas City, MO 64124"
+            hours="Multiple sites; varies"
+            languages={["English", "Spanish", "Vietnamese", "Somali", "Arabic"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="FQHC serving northeast KCMO. Primary care, dental, OB/GYN, behavioral health. Strong language access (Vietnamese, Somali, Arabic, more)."
+            confidence="verified"
+            insuranceRequired={false}
+            flagSlug="rodgers-health"
+        />
+
+        <ServiceCard
+            name="Swope Health"
+            phone="816-922-7000"
+            website="https://www.swopehealth.org"
+            address="3801 Blue Pkwy, Kansas City, MO 64130 (multiple locations)"
+            hours="Multiple sites; varies"
+            languages={["English", "Spanish"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="FQHC. Primary care, behavioral health, dental, pharmacy, women's services. Multiple metro locations both sides."
+            confidence="verified"
+            insuranceRequired={false}
+            flagSlug="swope"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="hospital">
+        <h2 id="hospital">Safety-net hospitals</h2>
+        <ul>
+            <li><strong>Truman Medical Centers / University Health:</strong> <a href="tel:816-404-1000">816-404-1000</a> · Hospital Hill, KCMO. The county hospital. Cannot turn you away for emergencies; bills can still arrive — apply for charity care.</li>
+            <li><strong>The University of Kansas Health System:</strong> <a href="tel:913-588-1227">913-588-1227</a> · KCK. Has financial assistance — apply.</li>
+            <li><strong>Children's Mercy:</strong> <a href="tel:816-234-3000">816-234-3000</a> · Pediatric, both sides. Has charity care.</li>
+        </ul>
+        <p class="kc-note">
+            If you go to an ER without insurance, ask in writing for the financial assistance application
+            before you leave. They are required to give it to you. The deadline to apply is sometimes
+            short — don't wait for the bill.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="benefits">
+        <h2 id="benefits">Health benefits (MO HealthNet / KanCare)</h2>
+        <ul>
+            <li><strong>MO HealthNet (Missouri Medicaid):</strong> <a href="tel:855-373-4636">855-373-4636</a> · Missouri expanded Medicaid in 2021 — many adults now qualify.</li>
+            <li><strong>KanCare (Kansas Medicaid):</strong> <a href="tel:1-800-792-4884">1-800-792-4884</a> · Kansas did NOT expand. Adults without disabilities or children at home usually do not qualify.</li>
+            <li><strong>Marketplace (ACA):</strong> <a href="https://www.healthcare.gov" rel="noopener noreferrer">healthcare.gov</a> · For those above Medicaid income limits.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="mental-health">
+        <h2 id="mental-health">Mental health</h2>
+        <p>
+            988 is the federal crisis line (call or text). For ongoing care:
+        </p>
+        <ul>
+            <li><strong>Truman Behavioral Health:</strong> <a href="tel:816-404-5700">816-404-5700</a> · MO side, sliding scale</li>
+            <li><strong>Wyandot Behavioral Health Network:</strong> <a href="tel:913-328-4600">913-328-4600</a> · KS side, sliding scale</li>
+            <li><strong>Johnson County Mental Health Center:</strong> <a href="tel:913-826-4200">913-826-4200</a> · KS side</li>
+            <li><strong>Comprehensive Mental Health Services:</strong> <a href="tel:816-254-3652">816-254-3652</a> · Jackson/Lafayette MO</li>
+            <li><strong>The Whole Person:</strong> <a href="tel:816-561-0304">816-561-0304</a> · disability-led peer support</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="substance">
+        <h2 id="substance">Substance use</h2>
+        <p>
+            Many programs require sobriety upon entry. The ones below explicitly do not, or have harm-reduction options:
+        </p>
+        <ul>
+            <li><strong>First Call:</strong> <a href="tel:816-361-5900">816-361-5900</a> · Substance use treatment + family support. Sliding scale.</li>
+            <li><strong>Mid-America Addiction Technology Transfer Center:</strong> referrals + training</li>
+            <li><strong>Mattie Rhodes Center:</strong> Spanish-language behavioral health, Northeast KCMO</li>
+            <li><strong>SAMHSA helpline:</strong> <a href="tel:1-800-662-4357">1-800-662-4357</a> (24/7, free, confidential, in Spanish too)</li>
+        </ul>
+        <p>
+            Naloxone (Narcan) is available over the counter at most pharmacies in MO and KS. Several harm-reduction groups distribute it free — ask at any FQHC or KC Care.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="reproductive">
+        <h2 id="reproductive">Reproductive healthcare</h2>
+        <ul>
+            <li><strong>Planned Parenthood Great Plains:</strong> <a href="tel:1-800-230-7526">1-800-230-7526</a> · multiple locations, both states. Kansas remains a destination state for abortion access — Missouri's landscape has been changing since 2024.</li>
+            <li><strong>Comprehensive Health of Planned Parenthood Great Plains:</strong> Kansas-side abortion care.</li>
+            <li><strong>Trust Women KC:</strong> Wichita-based but serves the metro — <a href="https://itrustwomen.org" rel="noopener noreferrer">itrustwomen.org</a></li>
+        </ul>
+        <p class="kc-note">
+            State laws on reproductive care have been in flux since 2022. Confirm what is currently
+            available at the specific clinic before traveling.
+        </p>
+    </section>
+</KCLayout>

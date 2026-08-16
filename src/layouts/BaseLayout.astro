@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    robots?: string;
+}
+
+const {
+    title = "CivicBrands",
+    description = "CivicBrands stewards agency-enabling infrastructure.",
+    image = "/social-card.svg",
+    robots,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, "https://civicbrands.org").toString();
+const imageUrl = new URL(image, "https://civicbrands.org").toString();
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
+    <link rel="canonical" href={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&family=Spectral+SC:wght@400&family=Spectral:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:site_name" content="CivicBrands" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<SiteHeader />
+<main id="main-content" tabindex="-1">
+    <slot />
+</main>
+<SiteFooter />
+</body>
+</html>

@@ -1,0 +1,181 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Ayuda inmediata — Kansas City"
+    description="Números de crisis y ayuda inmediata para el área metropolitana de Kansas City, ambos estados."
+    noReferrer={true}
+    lang="es"
+>
+    <KCLanguageSwitcher currentLang="es" enPath="/kc/crisis" esPath="/es/kc/crisis" />
+
+    <p class="kc-eyebrow">Crisis y ayuda inmediata</p>
+    <h1>Necesito ayuda ahora.</h1>
+    <p class="kc-lede">
+        Estos números responden las 24 horas y no rechazan a nadie por falta de papeles, seguro o sobriedad.
+        Si un número deja de funcionar, avísanos — hay un botón al final de cada tarjeta.
+    </p>
+
+    <div class="kc-urgent">
+        <h2>Peligro inmediato</h2>
+        <p><a class="kc-urgent__phone" href="tel:911">911</a></p>
+        <p>
+            Puede enviar mensaje de texto al 911 si no puede hablar. Nota: el SMS <strong>no</strong>
+            transmite su ubicación automáticamente. Comience diciendo dónde está.
+        </p>
+        <p class="kc-note kc-note--strong">
+            El 911 envía policía, paramédicos o bomberos. Si su preocupación es la salud mental y la
+            policía podría empeorar la situación, llame al <a href="tel:988">988</a> o a una línea de
+            crisis abajo — no son primeros respondedores.
+        </p>
+    </div>
+
+    <section class="kc-section">
+        <h2>Líneas de crisis — sin requisitos de estatus, seguro o sobriedad</h2>
+
+        <ServiceCard
+            name="988 Línea de Vida (Suicidio y Crisis)"
+            phone="988"
+            sms="988"
+            hours="24/7"
+            hours24={true}
+            languages={["Español", "Inglés", "240+ por intérprete"]}
+            statusNeutral={true}
+            expect="Llame al 988 y presione 2 para español, o envíe AYUDA por mensaje de texto al 988. Los consejeros son oyentes capacitados — no despachan policía automáticamente."
+            fearAddressed={["police", "cost", "paperwork", "reporting"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="988"
+        />
+
+        <ServiceCard
+            name="Línea SAMHSA de Desastres"
+            phone="1-800-985-5990"
+            sms="1-800-985-5990"
+            hours="24/7"
+            hours24={true}
+            languages={["Español", "Inglés", "100+ idiomas"]}
+            statusNeutral={true}
+            expect="Llame o envíe mensaje. Presione 2 para español. Para angustia relacionada con desastres naturales, violencia masiva, incendios, emergencias de salud pública."
+            fearAddressed={["cost", "paperwork", "reporting"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="samhsa-ddh"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>LGBTQ+</h2>
+        <p>
+            La opción "Press 3" del 988 fue cancelada por defondeo federal el 17 de julio de 2025.
+            Estas dos líneas llenan ese vacío.
+        </p>
+
+        <ServiceCard
+            name="The Trevor Project"
+            phone="1-866-488-7386"
+            sms="678678"
+            website="https://www.thetrevorproject.org"
+            hours="24/7"
+            hours24={true}
+            languages={["Español", "Inglés"]}
+            statusNeutral={true}
+            expect="Llame al 1-866-488-7386 o envíe START al 678678. Consejeros capacitados en crisis juvenil LGBTQ+."
+            fearAddressed={["religion", "reporting", "cost"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="trevor"
+        />
+
+        <ServiceCard
+            name="Trans Lifeline"
+            phone="877-565-8860"
+            website="https://translifeline.org"
+            hours="24/7"
+            hours24={true}
+            languages={["Español", "Inglés"]}
+            statusNeutral={true}
+            expect="Apoyo de pares atendido por personas trans. No envían policía ni emergencias sin su consentimiento explícito."
+            fearAddressed={["police", "religion", "reporting", "cost"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="trans-lifeline"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Veteranos — cualquier baja, cualquier era</h2>
+
+        <ServiceCard
+            name="Línea de Crisis para Veteranos"
+            phone="988"
+            sms="838255"
+            website="https://www.veteranscrisisline.net"
+            hours="24/7"
+            hours24={true}
+            languages={["Español", "Inglés"]}
+            statusNeutral={true}
+            expect="Llame al 988 y presione 1, o envíe mensaje al 838255. Cualquier veterano, cualquier tipo de baja, inscrito o no en el VA."
+            fearAddressed={["police", "cost", "paperwork", "reporting"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="veterans-crisis"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Información y referencia (211)</h2>
+        <p>
+            211 no resuelve el problema en la llamada. Le dirá qué está abierto y aceptando personas.
+            El 211 de Missouri y de Kansas son separados.
+        </p>
+
+        <ServiceCard
+            name="211 Missouri"
+            phone="211"
+            website="https://www.uwgkc.org/211"
+            hours="24/7"
+            hours24={true}
+            languages={["Español", "Inglés"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Marque 211 en Missouri. Línea directa: 816-474-5112. Referencias para comida, renta, servicios públicos, salud mental."
+            confidence="verified"
+            flagSlug="211-mo"
+        />
+
+        <ServiceCard
+            name="211 Kansas"
+            phone="211"
+            sms="898-211"
+            website="https://211kansas.org"
+            hours="Teléfono 24/7 · SMS lunes-viernes 7am-7pm"
+            languages={["Español", "Inglés"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Marque 211 en Kansas. Para mensaje de texto envíe su código postal al 898-211 — esa línea solo en días laborables."
+            confidence="verified"
+            flagSlug="211-ks"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Una vez que haya llamado</h2>
+        <p>Si necesita más ayuda después:</p>
+        <ul>
+            <li><a href="/kc/food">Comida — despensas y comidas, MO + KS</a></li>
+            <li><a href="/kc/housing">Vivienda — refugio de emergencia y ayuda con renta</a></li>
+            <li><a href="/kc/healthcare">Salud — clínicas gratuitas, medicina de calle, FQHCs</a></li>
+            <li><a href="/kc/legal">Ayuda legal — inquilinos, inmigración, reingreso</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section">
+        <p class="kc-note">
+            Si un número deja de funcionar, <a href="/kc/suggest">avísenos</a>.
+        </p>
+    </section>
+</KCLayout>

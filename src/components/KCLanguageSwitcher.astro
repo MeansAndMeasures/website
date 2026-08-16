@@ -1,0 +1,38 @@
+---
+interface Props {
+    currentLang: "en" | "es";
+    enPath: string;
+    esPath: string;
+}
+
+const { currentLang, enPath, esPath } = Astro.props;
+---
+
+<nav class="kc-lang" aria-label="Language">
+    <a href={enPath} aria-current={currentLang === "en" ? "true" : undefined} lang="en">English</a>
+    <a href={esPath} aria-current={currentLang === "es" ? "true" : undefined} lang="es">Español</a>
+</nav>
+
+{currentLang === "en" && (
+    <div id="kc-lang-banner" class="kc-lang-banner" hidden>
+        <p style="margin: 0;">
+            Su navegador está configurado en español. <a href={esPath}>Ver esta página en español</a>.
+        </p>
+    </div>
+)}
+
+<script is:inline define:vars={{ currentLang, esPath }}>
+    (function () {
+        if (currentLang !== "en") return;
+        const banner = document.getElementById("kc-lang-banner");
+        if (!banner) return;
+        try {
+            const dismissed = localStorage.getItem("kc-lang-banner-dismissed");
+            if (dismissed === "es") return;
+            const lang = (navigator.language || "").toLowerCase();
+            if (lang.startsWith("es")) {
+                banner.hidden = false;
+            }
+        } catch (e) { /* ignore */ }
+    })();
+</script>

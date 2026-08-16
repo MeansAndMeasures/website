@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+        title="Privacy — CivicBrands"
+        description="Privacy information for the CivicBrands website."
+>
+    <section class="section">
+        <p class="eyebrow">Privacy</p>
+
+        <div class="measure">
+            <h1>Privacy</h1>
+
+            <p>
+                CivicBrands is a static-first publication surface. The site does not require user accounts, behavioral profiling, or application telemetry to provide its public content.
+            </p>
+
+            <h2>What we do not run</h2>
+            <p>
+                No Google Analytics, no Meta Pixel, no Hotjar, no behavioral analytics. No tracking cookies. No fingerprinting. No third-party advertising scripts.
+            </p>
+            <p>
+                CivicBrands does not set non-essential analytics or advertising cookies. If that changes,
+                the site will say so plainly and give people a real choice instead of a decorative banner.
+            </p>
+
+            <h2>What we store</h2>
+            <p>
+                The site has two forms that store data in Cloudflare D1, our hosting provider's database:
+            </p>
+            <ul>
+                <li>
+                    <strong>The contact form</strong> on <a href="/contact">/contact</a> stores: name (if you provided), email (if you provided), topic, message, time of submission, your IP address, and your browser user-agent string.
+                </li>
+                <li>
+                    <strong>The KC suggestion form</strong> on <a href="/kc/suggest">/kc/suggest</a> stores: the contribution itself (organization name, description, URL, category, urgency flag), an optional translation contribution, your name and contact (if you provided), time of submission, your IP address, and your browser user-agent string. See the <a href="/kc/about">KC directory About page</a> for how suggestions are reviewed.
+                </li>
+            </ul>
+
+            <h2>How we use it</h2>
+            <p>
+                Contact form submissions are used to respond to you. KC suggestion submissions are used to update the directory. Neither is sold, shared, or used for any other purpose.
+            </p>
+
+            <h2>What our hosting provider sees</h2>
+            <p>
+                Cloudflare sees every request to this site, as it is in the request path. Their privacy practices apply. CivicBrands does not enable Cloudflare Web Analytics or any optional behavioral feature on this property.
+            </p>
+
+            <h2>Server logs</h2>
+            <p>
+                Cloudflare Workers observability logs request metadata (URL, status, basic timings) for operational purposes. These logs are retained according to Cloudflare's defaults. No request body content is logged.
+            </p>
+<h2>Text Messaging and Consent</h2>
+
+<p>
+  Mobile numbers and SMS consent information are not sold, rented, shared,
+  transferred, or disclosed to third parties for marketing, advertising,
+  lead generation, or promotional purposes. SMS consent is collected solely
+  for the purpose of communicating with the individual who provided it and
+  is not transferred to other organizations for independent marketing
+  purposes.
+</p>
+
+<p>
+  CivicBrands sends text messages only in response to inquiries, requests,
+  interactions initiated by the recipient, or where the recipient has
+  otherwise requested follow-up communication.
+</p>
+
+<p>
+  No mobile information will be shared with third parties/affiliates for
+  marketing/promotional purposes. All other categories exclude text
+  messaging originator opt-in data and consent; this information will not
+  be shared with any third parties.
+</p>
+
+<p>
+  Questions regarding text messaging may be directed to CivicBrands by text
+  at <a href="sms:18165533700">(816) 553-3700</a> or by telephone at
+  <a href="tel:18163063481">(816) 306-3481</a>.
+</p>
+            <h2>Removal</h2>
+            <p>
+                To request deletion of a contact form or suggestion form submission, email <a href="mailto:privacy@mail.civicbrands.org">privacy@mail.civicbrands.org</a> with the approximate submission time.
+            </p>
+        </div>
+    </section>
+</BaseLayout>

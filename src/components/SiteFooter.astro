@@ -1,0 +1,30 @@
+---
+const year = new Date().getFullYear();
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isKcSection = pathname === "/kc" || pathname.startsWith("/kc/") || pathname.startsWith("/es/kc");
+---
+
+<footer class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__meta">
+            <p>&copy; {year} CivicBrands</p>
+            <p> <em>For the Commons</em> • EIN 39-2829761</p>
+            <p><a href="tel:+18163063481">816-306-3481</a> · <a href="mailto:info@mail.civicbrands.org">info@mail.civicbrands.org</a></p>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer navigation">
+            {isKcSection
+                ? <a href="/kc/crisis" class="site-footer__needhelp">Need Help Now</a>
+                : <a href="/kc">KC resources</a>}
+            <a href="/systems">Systems</a>
+            <a href="/updates">Updates</a>
+            <a href="/status">Status</a>
+            <a href="/sitemap">Site map</a>
+            <a href="/brand">Brand</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+            <a href="/legal">Legal</a>
+            <a href="/procurement">Procurement</a>
+        </nav>
+    </div>
+</footer>

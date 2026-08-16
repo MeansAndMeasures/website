@@ -1,0 +1,67 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+---
+
+<KCLayout
+    title="Use the KC data — CivicBrands"
+    description="How to mirror, cite, and build with the Kansas City resource directory data."
+>
+    <p class="kc-eyebrow">Use the data</p>
+    <h1>Mirror it. Check it. Send corrections back.</h1>
+    <p class="kc-lede">
+        The KC directory is public-interest infrastructure. The data is intentionally exportable so
+        mutual aid groups, clinics, libraries, newsrooms, researchers, and local builders can use it
+        without asking permission first.
+    </p>
+
+    <section class="kc-section" aria-labelledby="exports">
+        <h2 id="exports">Exports</h2>
+        <ul>
+            <li><a href="/kc/services.json">All services as JSON</a></li>
+            <li><a href="/kc/services.csv">All services as CSV</a></li>
+            <li><a href="/kc/crisis.json">Crisis contacts as JSON</a></li>
+            <li><a href="/kc/crisis.txt">Crisis contacts as plain text</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="reuse">
+        <h2 id="reuse">Reuse rule</h2>
+        <p>
+            Free to mirror, redistribute, repost, quote, transform, and build on. Attribution is welcome
+            but not required. Do not imply that CivicBrands has endorsed a separate product or service
+            unless we have said so directly.
+        </p>
+        <p>
+            If you mirror the data, keep a visible correction path. A copy without one can leave
+            wrong information in circulation.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="fields">
+        <h2 id="fields">What the exports include</h2>
+        <ul>
+            <li>Contact information, location, hours, languages, and the parts of the metro served.</li>
+            <li>Eligibility and practical access requirements, including appointments, documents, insurance, transportation, and other limitations when they apply.</li>
+            <li><strong>practicalNotes:</strong> plain-language guidance that helps someone decide whether to call, go, or keep looking.</li>
+            <li><strong>immigrationDocumentsRequired:</strong> <code>false</code> when the listing says immigration-status documents are not required; otherwise blank.</li>
+            <li><strong>emergency:</strong> a crisis or urgent-contact entry. Call ahead when possible unless immediate danger makes that impossible.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="changes">
+        <h2 id="changes">How corrections reach the exports</h2>
+        <p>
+            Corrections flow into the directory and its downloadable copies together. Urgent
+            corrections go first.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="corrections">
+        <h2 id="corrections">Corrections</h2>
+        <p>
+            If a number fails, a service turns people away, a requirement changed, or a mirrored copy
+            is wrong, send it through <a href="/kc/suggest">Suggest / correct</a>. Anonymous reports
+            are welcome.
+        </p>
+    </section>
+</KCLayout>

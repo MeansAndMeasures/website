@@ -1,0 +1,78 @@
+---
+// Readability controls bar — KC section only.
+// Persists choices to localStorage; applies via data attributes on <body>.
+---
+
+<div class="kc-readability" role="group" aria-label="Reading preferences">
+    <span class="kc-readability__label">Reading:</span>
+
+    <button type="button" data-kc-size="md" aria-pressed="true">Normal</button>
+    <button type="button" data-kc-size="lg" aria-pressed="false">Larger</button>
+    <button type="button" data-kc-size="xl" aria-pressed="false">Largest</button>
+
+    <span aria-hidden="true">·</span>
+
+    <button type="button" data-kc-contrast="normal" aria-pressed="true">Normal contrast</button>
+    <button type="button" data-kc-contrast="high" aria-pressed="false">High contrast</button>
+
+    <span aria-hidden="true">·</span>
+
+    <button type="button" data-kc-spacing="normal" aria-pressed="true">Normal spacing</button>
+    <button type="button" data-kc-spacing="loose" aria-pressed="false">Loose spacing</button>
+
+    <span aria-hidden="true">·</span>
+
+    <button type="button" data-kc-print>Print this page</button>
+</div>
+
+<script is:inline>
+    (function () {
+        const KEYS = ["size", "contrast", "spacing"];
+        const body = document.body;
+
+        function apply(group, value) {
+            body.dataset["kc" + group.charAt(0).toUpperCase() + group.slice(1)] = value;
+            document.querySelectorAll(`.kc-readability [data-kc-${group}]`).forEach(function (btn) {
+                btn.setAttribute("aria-pressed", btn.dataset["kc" + group.charAt(0).toUpperCase() + group.slice(1)] === value ? "true" : "false");
+            });
+            try {
+                localStorage.setItem("kc-readability-" + group, value);
+            } catch (e) { /* ignore */ }
+        }
+
+        KEYS.forEach(function (group) {
+            try {
+                const stored = localStorage.getItem("kc-readability-" + group);
+                if (stored) apply(group, stored);
+            } catch (e) { /* ignore */ }
+
+            document.querySelectorAll(`.kc-readability [data-kc-${group}]`).forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    apply(group, btn.dataset["kc" + group.charAt(0).toUpperCase() + group.slice(1)]);
+                });
+            });
+        });
+
+        const printBtn = document.querySelector("[data-kc-print]");
+        if (printBtn) {
+            printBtn.addEventListener("click", function () {
+                window.print();
+            });
+        }
+
+        document.querySelectorAll(".service-card__copy").forEach(function (btn) {
+            btn.addEventListener("click", async function () {
+                const value = btn.getAttribute("data-copy");
+                if (!value) return;
+                try {
+                    await navigator.clipboard.writeText(value);
+                    const original = btn.textContent;
+                    btn.textContent = "Copied";
+                    setTimeout(function () { btn.textContent = original; }, 1800);
+                } catch (e) {
+                    /* ignore */
+                }
+            });
+        });
+    })();
+</script>

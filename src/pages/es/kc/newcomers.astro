@@ -1,0 +1,112 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Recién llegados — KC"
+    description="Si acaba de llegar a Kansas City — visitante, refugiado, nuevo vecino — esta es la orientación que nos hubiera gustado tener."
+    noReferrer={true}
+    lang="es"
+>
+    <KCLanguageSwitcher currentLang="es" enPath="/kc/newcomers" esPath="/es/kc/newcomers" />
+
+    <p class="kc-eyebrow">Recién llegados</p>
+    <h1>Si acaba de llegar.</h1>
+    <p class="kc-lede">
+        Kansas City son dos estados y al menos nueve condados unidos por una línea estatal.
+        Parece una sola ciudad; no funciona como una. Si acaba de llegar — para una semana,
+        para un trabajo, o porque tuvo que irse de algún lugar — esta página es para orientarse.
+    </p>
+
+    <section class="kc-section">
+        <h2>Si algo está mal ahora mismo</h2>
+        <div class="kc-urgent">
+            <p>Emergencia: <a class="kc-urgent__phone" href="tel:911">911</a> — ambos estados. Llame o envíe mensaje.</p>
+            <p>Crisis de salud mental: <a href="tel:988">988</a> (llame o envíe mensaje). Presione 2 para español.</p>
+            <p>No sabe qué necesita: <a href="tel:211">211</a> (MO y KS tienen los suyos).</p>
+            <p>El <a href="/es/kc/crisis">directorio completo de crisis</a> tiene más.</p>
+        </div>
+    </section>
+
+    <section class="kc-section">
+        <h2>La línea estatal es real</h2>
+        <p>
+            Puede estar en una acera en Missouri y al cruzar la calle estar en Kansas. State Line Road
+            es la línea literal en gran parte del área metropolitana. Esto importa porque:
+        </p>
+        <ul>
+            <li>Policía, tribunales, impuestos y beneficios cambian al instante al cruzar.</li>
+            <li>SNAP (cupones de alimentos) es "MO DSS" en Missouri y "KS DCF" en Kansas.
+                Solo puede tener beneficios en un estado a la vez, y debe ser residente allí.</li>
+            <li>Medicaid es "MO HealthNet" en Missouri y "KanCare" en Kansas. Kansas no expandió
+                Medicaid; los requisitos allí son más estrictos.</li>
+            <li>La mayoría de las compañías de servicios, bibliotecas y autobuses cruzan ambos lados — pero no todos.</li>
+        </ul>
+        <p>
+            Cuando alguien le hable de un servicio, pregunte de qué estado. "Kansas City" casi siempre
+            significa Kansas City, Missouri, a menos que digan KCK (Kansas City, Kansas — una ciudad diferente).
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Acceso al idioma</h2>
+        <p>
+            Muchos proveedores de servicios usan intérpretes por teléfono (LanguageLine o similar) gratis si lo pide.
+            No necesita traer su propio traductor. Frases útiles:
+        </p>
+        <ul>
+            <li>"Necesito un intérprete en español." — la mayoría de clínicas, tribunales y llamadas al 911 lo conseguirán.</li>
+            <li>"I need an interpreter in Spanish." — la misma frase en inglés.</li>
+        </ul>
+        <p>
+            Para servicios de refugiados y recién llegados, comience por la
+            <a href="https://www.rescue.org/united-states/kansas-city-mo" rel="noopener noreferrer">oficina del International Rescue Committee (IRC) en KC</a>,
+            los <a href="https://www.dontacostas.org/" rel="noopener noreferrer">Don Bosco Centers</a>, o
+            <a href="https://www.elcentroinc.com/" rel="noopener noreferrer">El Centro (lado de Kansas)</a>.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Si está de visita</h2>
+        <p>
+            El área metropolitana está diseñada para autos. Los autobuses (RideKC) cruzan la línea estatal.
+            El tranvía del centro es gratis. Uber y Lyft funcionan normalmente. Si no tiene auto y no
+            está cerca del centro, planee más tiempo del que cree — los autobuses pasan con poca frecuencia.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Si está aquí por la Copa Mundial (a partir de junio de 2026)</h2>
+        <p>
+            KC hospedará seis partidos de la Copa Mundial Masculina de la FIFA a partir de junio de 2026
+            en el Estadio Arrowhead. La <a href="/es/kc/worldcup">página de la Copa Mundial</a> tiene
+            navegación, transporte y acceso al idioma.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Si llegó hace poco y se está instalando</h2>
+        <ul>
+            <li><strong>Comida:</strong> Harvesters administra el banco regional de alimentos. Las despensas le atienden con papeles mínimos. Ver <a href="/kc/food">comida</a>.</li>
+            <li><strong>Salud:</strong> KC Care Clinic, Samuel Rodgers y Swope Health son federalmente calificadas (escala móvil, sin seguro OK). Ver <a href="/kc/healthcare">salud</a>.</li>
+            <li><strong>Vivienda:</strong> Los derechos del inquilino son diferentes en MO vs. KS. KC Tenants (816-533-5435) es el defensor más fuerte en Missouri. Ver <a href="/kc/housing">vivienda</a>.</li>
+            <li><strong>Legal:</strong> Legal Aid of Western Missouri y Kansas Legal Services no requieren estatus migratorio para tomar un caso. Ver <a href="/kc/legal">legal</a>.</li>
+            <li><strong>Bibliotecas:</strong> Tarjeta gratis, notario gratis, fax gratis, a menudo fotos de pasaporte gratis. Ver <a href="/kc/libraries">bibliotecas</a>.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section">
+        <h2>Algunos derechos importantes</h2>
+        <ul>
+            <li>Puede estar en una biblioteca pública, en una acera pública, en un parque público sin identificación.</li>
+            <li>No tiene que responder preguntas de oficiales de inmigración sin un abogado. El número de un abogado de inmigración es más útil que el de un traductor.</li>
+            <li>El 911 envía policía, paramédicos o bomberos. Si no quiere policía, pida "solo paramédicos" — a veces funciona, a veces no.</li>
+            <li>Escuelas, hospitales y FQHCs no son actualmente usados por inmigración como sitios rutinarios de detención. Esto es política, no ley, y ha cambiado en el pasado.</li>
+        </ul>
+        <p class="kc-note">
+            Nada de esto es consejo legal. Si tiene una pregunta específica, la
+            <a href="/kc/legal">página legal</a> tiene ayuda legal gratuita sin requisito de estatus.
+        </p>
+    </section>
+</KCLayout>

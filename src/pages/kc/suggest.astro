@@ -1,0 +1,174 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+
+const CATEGORIES = [
+    "crisis", "food", "housing", "healthcare", "legal", "utilities",
+    "mental-health", "immigration", "reentry", "domestic-violence",
+    "youth", "seniors", "veterans", "lgbtq", "transit", "government"
+];
+
+const flagSlug = Astro.url.searchParams.get("flag") ?? "";
+const initialType = flagSlug ? "correct" : "suggest";
+---
+
+<KCLayout
+    title="Suggest or correct a resource — KC"
+    description="Add a service we missed, flag a number that no longer works, contribute a translation, or tell us about something the directory should reflect."
+>
+    <p class="kc-eyebrow">Suggest / correct</p>
+    <h1>Tell us what we missed.</h1>
+    <p class="kc-lede">
+        This directory is built by the people who use it. If a service is wrong, missing, or no longer
+        operating, the most useful thing you can do is tell us. We will not publish your name without
+        permission. Anonymous reports are welcome and useful.
+    </p>
+
+    {flagSlug && (
+        <p class="kc-note kc-note--strong">
+            You're flagging: <strong>{flagSlug}</strong>. Tell us what's wrong below.
+        </p>
+    )}
+
+    <form id="kc-suggest-form" class="intake-form" novalidate>
+        <div class="field">
+            <label for="type">What kind of contribution is this?</label>
+            <select id="type" name="type">
+                <option value="suggest" selected={initialType === "suggest"}>Suggest a new resource</option>
+                <option value="correct" selected={initialType === "correct"}>Flag a correction or outdated entry</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="orgName">Name of the organization or service</label>
+            <input type="text" id="orgName" name="orgName" maxlength="200" autocomplete="off" />
+        </div>
+
+        <div class="field">
+            <label for="url">Website or social link (optional)</label>
+            <input type="url" id="url" name="url" maxlength="400" autocomplete="off" />
+        </div>
+
+        <div class="field">
+            <label for="category">Category (closest fit)</label>
+            <select id="category" name="category">
+                <option value="">Choose one</option>
+                {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="description">
+                What should we know? (Phone, address, hours, what to expect, what to know before you go.
+                If correcting: what's wrong?)
+            </label>
+            <textarea id="description" name="description" rows="6" maxlength="4000"></textarea>
+        </div>
+
+        <div class="field">
+            <label>
+                <input type="checkbox" id="urgent" name="urgent" /> This is urgent — a critical number stopped working, or someone is being turned away.
+            </label>
+        </div>
+
+        <div class="field">
+            <label for="translationContribution">
+                Contributing a translation? Paste your translated text here (any language).
+            </label>
+            <textarea id="translationContribution" name="translationContribution" rows="4" maxlength="4000"></textarea>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid color-mix(in srgb, #463a6b 30%, transparent); margin: 1.62rem 0;" />
+
+        <div class="field">
+            <label for="submitterName">Your name (optional — we don't share it)</label>
+            <input type="text" id="submitterName" name="submitterName" maxlength="160" autocomplete="name" />
+        </div>
+
+        <div class="field">
+            <label for="submitterContact">Email or phone (optional — only if you want a follow-up)</label>
+            <input type="text" id="submitterContact" name="submitterContact" maxlength="240" autocomplete="email" />
+        </div>
+
+        <div class="field field--hidden" aria-hidden="true">
+            <label for="company">Company (leave blank)</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button type="submit">Send</button>
+        <p class="form-status" id="kc-suggest-status" aria-live="polite"></p>
+    </form>
+
+    <section class="kc-section">
+        <h2>What we do with submissions</h2>
+        <ul>
+            <li>We read every one. A volunteer reviews before adding to the directory.</li>
+            <li>We do not publish your name or contact info without explicit permission.</li>
+            <li>Urgent reports (a critical number stopped working, a service is turning people away) go to the top of the queue.</li>
+            <li>Translations contributed here may be used to improve the Spanish-language pages or to start a new language.</li>
+            <li>We may follow up with a question before a change appears.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="privacy-note">
+        <h2 id="privacy-note">What we store</h2>
+        <p>
+            When you submit this form, we store: what you wrote, the time you sent it, your IP address,
+            and your browser user-agent string. Cloudflare (our hosting provider) sees the request in
+            transit. We do not run third-party analytics or trackers on this site.
+        </p>
+        <p>
+            We retain submissions only as long as needed to review and update the directory. We do not
+            sell or share submissions. If you want yours deleted after we review it,
+            <a href="mailto:privacy@mail.civicbrands.org">email us</a> with the approximate time you sent it.
+            See the <a href="/privacy">site-wide privacy policy</a> and the
+            <a href="/kc/about">KC directory About page</a> for the longer version.
+        </p>
+    </section>
+</KCLayout>
+
+<script is:inline>
+    (function () {
+        const form = document.getElementById("kc-suggest-form");
+        const status = document.getElementById("kc-suggest-status");
+        if (!form) return;
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            if (status) status.textContent = "Sending…";
+            const submitBtn = form.querySelector("button[type='submit']");
+            if (submitBtn) submitBtn.disabled = true;
+
+            const data = {
+                type: form.type.value,
+                orgName: form.orgName.value,
+                url: form.url.value,
+                category: form.category.value,
+                description: form.description.value,
+                urgent: form.urgent.checked,
+                translationContribution: form.translationContribution.value,
+                submitterName: form.submitterName.value,
+                submitterContact: form.submitterContact.value,
+                company: form.company.value
+            };
+
+            try {
+                const res = await fetch("/api/kc-suggest", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                const json = await res.json();
+                if (res.ok && json.ok) {
+                    if (status) status.textContent = "Got it. Thank you.";
+                    form.reset();
+                } else {
+                    if (status) status.textContent = json.error || "Something went wrong. Try again, or email corrections@mail.civicbrands.org.";
+                }
+            } catch (e) {
+                if (status) status.textContent = "Network error. Try again, or email corrections@mail.civicbrands.org.";
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
+        });
+    })();
+</script>

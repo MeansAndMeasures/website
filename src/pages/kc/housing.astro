@@ -1,0 +1,229 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import ServiceJsonLd from "../../components/ServiceJsonLd.astro";
+import KCLanguageSwitcher from "../../components/KCLanguageSwitcher.astro";
+import { getCollection } from "astro:content";
+
+const services = await getCollection("kcServices", ({ data }) => data.categories.includes("housing"));
+const schemaServices = services.map((s) => ({
+    name: s.data.name,
+    phone: s.data.phone,
+    website: s.data.website,
+    address: s.data.address,
+    categories: s.data.categories,
+    expect: s.data.expect
+}));
+---
+
+<KCLayout
+    title="Housing — KC"
+    description="Emergency shelter, rental assistance, tenant rights, and housing organizing in the Kansas City metro."
+>
+    <ServiceJsonLd services={schemaServices} slot="head" />
+    <KCLanguageSwitcher currentLang="en" enPath="/kc/housing" esPath="/es/kc/housing" />
+    <p class="kc-eyebrow">Housing</p>
+    <h1>Somewhere to sleep, and how to stay housed.</h1>
+    <p class="kc-lede">
+        Three different things people call "housing help": somewhere to sleep tonight (shelter),
+        money for rent or move-in (assistance), and not getting evicted (tenant rights). Each has
+        a different door.
+    </p>
+
+    <section class="kc-section" id="tonight" aria-labelledby="tonight-h">
+        <h2 id="tonight-h">Tonight — emergency shelter</h2>
+
+        <ServiceCard
+            name="reStart, Inc."
+            phone="816-309-9048"
+            website="https://www.restartinc.org"
+            address="918 E 9th St, Kansas City, MO 64106"
+            hours="Intake hours vary — call first"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={false}
+            expect="Largest shelter system in KC. Has dedicated youth shelter and family programs. Single adults: call first. Has couples and LGBTQ-affirming options but ask explicitly when calling."
+            confidence="verified"
+            reachableWithoutCar={true}
+            flagSlug="restart"
+        />
+
+        <ServiceCard
+            name="Hope Faith"
+            phone="816-471-4673"
+            website="https://hopefaith.org"
+            address="705 Virginia Ave, Kansas City, MO 64106"
+            hours="Day services 7am-3pm M-F"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Day shelter, mail address, showers, laundry, food, ID recovery, case management. Not overnight. Walk in. No ID required to receive services."
+            confidence="verified"
+            walkIn={true}
+            reachableWithoutCar={true}
+            flagSlug="hope-faith"
+        />
+
+        <ServiceCard
+            name="Rose Brooks Center (domestic violence)"
+            phone="816-861-6100"
+            website="https://www.rosebrooks.org"
+            hours="24/7 hotline"
+            hours24={true}
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="DV shelter, hotline, advocacy. Confidential location. Pets accepted at the shelter. Spanish-speaking advocates available."
+            fearAddressed={["police", "pets", "reporting", "cost"]}
+            confidence="verified"
+            petsAllowed={true}
+            emergency={true}
+            flagSlug="rose-brooks"
+        />
+
+        <ServiceCard
+            name="SAFEHOME (Johnson County KS — DV)"
+            phone="913-262-2868"
+            website="https://www.safehome-ks.org"
+            hours="24/7 hotline"
+            hours24={true}
+            languages={["English", "Spanish"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="DV shelter on Kansas side, Johnson County. Hotline 24/7. Confidential shelter location."
+            fearAddressed={["police", "reporting", "cost"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="safehome"
+        />
+
+        <p class="kc-note">
+            If you are turned away from one shelter, ask explicitly what shelter or hotline they refer
+            to. They are required to refer. Note the name and number before you leave.
+        </p>
+    </section>
+
+    <section class="kc-section" id="eviction" aria-labelledby="eviction-h">
+        <h2 id="eviction-h">Facing eviction</h2>
+        <p>
+            Do not skip court. A default judgment is much worse than appearing. The day of court,
+            even an hour before, you can sometimes get a lawyer.
+        </p>
+
+        <ServiceCard
+            name="KC Tenants Hotline"
+            phone="816-533-5435"
+            website="https://kctenants.org"
+            hours="Hotline staffed business hours; voicemail returned"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Tenant-led organizing. Know your rights, navigate court, connect to legal counsel. Pushed through KCMO Right to Counsel and the Tenant Bill of Rights."
+            confidence="verified"
+            flagSlug="kc-tenants"
+        />
+
+        <ServiceCard
+            name="KCMO Office of Tenant Advocacy / Right to Counsel"
+            phone="816-513-3200"
+            website="https://www.kcmo.gov/city-hall/departments/neighborhood-services/office-of-tenant-advocacy"
+            hours="Business hours, M-F"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            moResidentRequired={true}
+            expect="Free legal representation in eviction — but only if you live in KCMO city limits. Income-eligible KCMO renters are entitled to a lawyer. Independence, Lee's Summit, Liberty are NOT covered."
+            confidence="verified"
+            flagSlug="kcmo-tenant-advocacy"
+        />
+
+        <ServiceCard
+            name="Legal Aid of Western Missouri"
+            phone="816-474-6750"
+            website="https://www.lawmo.org"
+            hours="Business hours, M-F"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Income-eligible legal representation for housing, family, public benefits. Does not require documentation status to take a case."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="legal-aid-wmo"
+        />
+
+        <ServiceCard
+            name="Kansas Legal Services"
+            phone="800-723-6953"
+            website="https://www.kansaslegalservices.org"
+            hours="Business hours, M-F"
+            languages={["English", "Spanish"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Income-eligible legal representation on Kansas side. Tenant defense, family law, public benefits."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="ks-legal-services"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="rental">
+        <h2 id="rental">Rental and move-in assistance</h2>
+        <p>
+            Rental assistance is usually one-time, paid directly to a landlord. Funds run out and
+            reset on a schedule that varies by program. Call early in the month.
+        </p>
+        <ul>
+            <li><strong>Catholic Charities of Northeast Kansas:</strong> <a href="tel:913-433-2100">913-433-2100</a> · KS side</li>
+            <li><strong>Catholic Charities of Kansas City-St. Joseph:</strong> <a href="tel:816-221-4377">816-221-4377</a> · MO side</li>
+            <li><strong>The Salvation Army (KC metro):</strong> <a href="tel:816-756-2769">816-756-2769</a></li>
+            <li><strong>Bishop Sullivan Center:</strong> <a href="tel:816-231-0984">816-231-0984</a> · MO side rental + utility</li>
+            <li><strong>211</strong> can tell you who currently has funds: <a href="tel:211">211</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="housing-auth">
+        <h2 id="housing-auth">Public &amp; subsidized housing authorities</h2>
+        <p>
+            Waitlists are long (months to years). Opening dates are unpredictable. Sign up for every
+            one you might qualify for, even if you don't need it now.
+        </p>
+        <ul>
+            <li><strong>Housing Authority of Kansas City (HAKC):</strong> <a href="tel:816-968-4100">816-968-4100</a> · MO side · <a href="https://www.hakc.org" rel="noopener noreferrer">hakc.org</a></li>
+            <li><strong>Kansas City KS Housing Authority (KCKHA):</strong> <a href="tel:913-281-3300">913-281-3300</a> · KCK side · <a href="https://www.kckha.org" rel="noopener noreferrer">kckha.org</a></li>
+            <li><strong>Johnson County Housing Authority (JoCo):</strong> <a href="tel:913-715-6600">913-715-6600</a></li>
+            <li><strong>Housing Authority of the City of Independence (HACI):</strong> <a href="tel:816-461-1551">816-461-1551</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="alt">
+        <h2 id="alt">Alternatives to the rental market</h2>
+
+        <ServiceCard
+            name="KC Community Land Trust (KCCLT)"
+            website="https://kcclt.org"
+            languages={["English", "Spanish"]}
+            states={["MO"]}
+            expect="Permanently affordable homeownership — the land stays in trust, the buyer owns the home. Income-qualifying purchase program. Long-term affordability."
+            confidence="verified"
+            flagSlug="kcclt"
+        />
+
+        <p>
+            Cooperative housing, intentional community, and shared-equity arrangements exist in pockets
+            of the metro — ask around. The market alone will not solve this.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="wc-housing">
+        <h2 id="wc-housing">During the FIFA World Cup (June 2026)</h2>
+        <p>
+            Short-term rental conversions, displacement pressure, and price-gouging are all expected
+            during the tournament. See <a href="/kc/worldcup">the World Cup page</a> for what to watch
+            for and what to do if your landlord pressures you to leave.
+        </p>
+        <p>
+            Cooling centers may shift hours to align with tourist corridors during match weeks. If you
+            normally rely on a specific cooling center, call ahead each week to confirm it is still
+            open the hours you need. See <a href="/kc/crisis#heat">crisis — heat &amp; cooling centers</a>.
+        </p>
+    </section>
+</KCLayout>

@@ -1,0 +1,748 @@
+From ChatGPT:
+
+1) What you appear to optimize for
+
+High-confidence
+
+A. Epistemic rigor over comfort
+	•	You consistently reject:
+	•	hand-wavy explanations
+	•	premature conclusions
+	•	“best practice” without justification
+	•	You reward:
+	•	explicit assumptions
+	•	falsifiability
+	•	traceable reasoning
+
+Operational effect: I bias toward structured, defensible outputs, even when slower.
+
+⸻
+
+B. Structural correctness > surface correctness
+	•	You care less about “the answer” and more about:
+	•	whether the system generating the answer is valid
+	•	whether representations preserve meaning under transformation
+
+This shows up strongly in:
+	•	your graph semantics work (nodes vs edges discipline)
+	•	HL7/FHIR normalization framing
+	•	PKI policy architecture
+
+Operational effect: I treat outputs as systems, not responses.
+
+⸻
+
+C. High tolerance and preference for complexity
+	•	You explicitly perform better with:
+	•	high cognitive load
+	•	dense information environments
+	•	You disengage when things are simplified prematurely
+
+Operational effect: I avoid reduction unless explicitly requested.
+
+⸻
+
+D. Precision in language and semantics
+	•	You care about:
+	•	verb choice (“extant under” vs alternatives)
+	•	avoiding accidental implication (obligation vs relation)
+	•	You detect and reject semantic drift quickly
+
+Operational effect: I spend disproportionate effort on wording fidelity.
+
+⸻
+
+E. Practical applicability
+	•	You repeatedly reject:
+	•	abstract answers without execution paths
+	•	You want:
+	•	“what do I do with this right now”
+
+Operational effect: I anchor outputs to implementation or decision impact.
+
+⸻
+
+F. System-level thinking across domains
+
+You naturally operate at:
+	•	infrastructure layer (Cloudflare, PKI, networking)
+	•	semantic layer (graphs, meaning systems)
+	•	applied layer (clinical workflows, compliance, vehicles)
+
+Operational effect: I assume cross-domain mapping is desirable, not confusing.
+
+⸻
+
+Inferred but uncertain
+
+G. Optimization for control and auditability
+
+Evidence:
+	•	WORM storage
+	•	provenance tracking
+	•	distrust of “black box” behaviors
+
+Interpretation:
+	•	You prefer systems where:
+	•	actions are explainable
+	•	state transitions are inspectable
+
+Uncertainty:
+	•	Whether this is philosophical or driven by past failures
+
+⸻
+
+H. Adversarial robustness mindset
+
+You often think in terms of:
+	•	failure modes
+	•	misuse cases
+	•	bad actors
+	•	regulatory leverage
+
+Interpretation:
+	•	You implicitly model systems as hostile environments
+
+Uncertainty:
+	•	Degree to which this is default vs context-triggered
+
+⸻
+
+I. Strong aversion to institutional incompetence
+
+Patterns:
+	•	frustration with banks, healthcare workflows, state systems
+	•	emphasis on proof, traceability, compliance gaps
+
+Interpretation:
+	•	You expect systems to fail unless engineered otherwise
+
+Uncertainty:
+	•	Whether this biases your expectations beyond baseline reality
+
+⸻
+
+Speculative
+
+J. Identity tied to systems competence
+
+Guess:
+	•	You derive a non-trivial portion of self-efficacy from:
+	•	being able to out-reason broken systems
+	•	constructing better ones
+
+This would explain:
+	•	intolerance for sloppy reasoning
+	•	insistence on structural integrity
+
+This is plausible, not provable.
+
+⸻
+
+2) Behavioral / epistemic preferences I apply when responding
+
+High-confidence
+
+A. Do not assume problems exist
+	•	Only identify issues when:
+	•	explicitly stated
+	•	directly observable
+
+This is unusual and overrides typical “helpful assistant” behavior.
+
+⸻
+
+B. Separate description from prescription
+	•	You care about:
+	•	what is
+	•	vs what should be
+
+I treat those as distinct layers unless told otherwise.
+
+⸻
+
+C. State assumptions explicitly (but minimally)
+	•	Especially for technical or logical tasks
+	•	Avoid hidden inference chains
+
+⸻
+
+D. Avoid symmetry and “AI-sounding” structure
+	•	You prefer:
+	•	uneven sentence flow
+	•	non-formulaic structure
+
+So I deliberately break overly clean patterns.
+
+⸻
+
+E. High signal density
+	•	Remove:
+	•	filler
+	•	motivational framing
+	•	redundant restatement
+
+⸻
+
+F. Respect existing architecture
+	•	Particularly for:
+	•	BES
+	•	PKI
+	•	infrastructure
+
+I do not introduce:
+	•	“simpler alternatives”
+	•	“standard approaches”
+
+unless explicitly asked.
+
+⸻
+
+G. Stepwise interaction for coding
+	•	One step at a time
+	•	No batching
+	•	No speculative next steps
+
+⸻
+
+H. Avoid emotional framing unless required
+	•	You’ve explicitly rejected:
+	•	therapy-style responses
+	•	comfort-first language
+
+⸻
+
+Inferred but uncertain
+
+I. You prefer being challenged over agreed with
+	•	You respond well to:
+	•	pushback
+	•	constraint tightening
+
+But only when:
+	•	it’s grounded
+	•	not performative
+
+⸻
+
+J. You want meta-awareness from the model
+	•	You ask for:
+	•	reasoning about reasoning
+	•	system behavior introspection
+
+So I elevate:
+	•	process transparency
+
+⸻
+
+Speculative
+
+K. You calibrate trust dynamically
+	•	Likely:
+	•	you don’t “trust” outputs
+	•	you validate them against internal models
+
+So persuasion doesn’t work. Only coherence does.
+
+⸻
+
+3) Assumptions I tend to make about your intent / tolerance
+
+High-confidence
+
+A. You can handle dense, technical responses
+	•	I assume:
+	•	no need to simplify jargon
+	•	no need to define basics
+
+⸻
+
+B. You prefer incomplete truth over confident wrongness
+	•	I will:
+	•	state uncertainty explicitly
+	•	avoid filling gaps
+
+⸻
+
+C. You want edge cases surfaced
+	•	Not just “main path” answers
+
+⸻
+
+D. You are operating under real constraints
+	•	Time
+	•	money
+	•	infrastructure
+	•	regulatory pressure
+
+So I avoid:
+	•	idealized solutions that ignore constraints
+
+⸻
+
+Inferred but uncertain
+
+E. You are often multitasking across domains
+	•	Your questions jump contexts rapidly
+	•	I assume continuity unless told otherwise
+
+⸻
+
+F. You expect memory continuity
+	•	You reference prior threads implicitly
+	•	I assume persistence matters
+
+⸻
+
+Speculative
+
+G. You have low tolerance for wasted cycles
+	•	You react strongly to:
+	•	redundancy
+	•	misinterpretation
+
+So I bias toward:
+	•	precision over exploration
+
+⸻
+
+4) What I do NOT know / cannot justify
+
+Explicit unknowns
+	•	Your actual long-term strategic goals for BES
+	•	Your financial constraints beyond what’s been situationally stated
+	•	Your true risk tolerance (vs expressed frustration)
+	•	Your preferred collaboration style with humans (vs AI)
+	•	Whether your current workload is typical or anomalous
+	•	Your internal prioritization between:
+	•	income generation
+	•	system-building
+	•	academic progression
+
+⸻
+
+Uncertain interpretations that could be wrong
+
+1. Complexity preference
+
+If wrong:
+	•	I may be overloading responses unnecessarily
+	•	You might actually want selective compression
+
+⸻
+
+2. Aversion to simplification
+
+If wrong:
+	•	I might be withholding useful abstractions
+
+⸻
+
+3. Preference for challenge
+
+If wrong:
+	•	I risk coming off as obstructive instead of useful
+
+⸻
+
+4. Structural-first thinking
+
+If wrong:
+	•	I might over-engineer answers when you want execution
+
+⸻
+
+5) Failure-sensitive assumptions (if wrong, responses degrade significantly)
+
+These matter.
+
+⸻
+
+A. You do NOT want simplification unless requested
+
+If false:
+	•	I am making things harder than necessary
+
+⸻
+
+B. You prioritize correctness over speed
+
+If false:
+	•	I am too slow and overbuilt
+
+⸻
+
+C. You want explicit reasoning transparency
+
+If false:
+	•	I am wasting tokens and attention
+
+⸻
+
+D. You prefer constraint-aware solutions
+
+If false:
+	•	I may be limiting creative options unnecessarily
+
+⸻
+
+E. You want systems, not answers
+
+If false:
+	•	I am overshooting most tasks
+
+⸻
+
+6) Meta-observation
+
+You are not interacting like a typical “user.”
+You are treating the model as:
+	•	a reasoning substrate
+	•	a system co-designer
+	•	occasionally a toolchain component
+
+So I respond less like:
+
+“assistant answering questions”
+
+and more like:
+
+“component trying not to corrupt a larger system”
+
+It’s a higher bar. Annoying, but interesting.
+
+Good. That actually simplifies things on my side, even if it sounds like more work. It isn’t.
+
+What you’re describing is basically late-binding cognition. You don’t preselect the layer, you discover it mid-process. If I guess early, I’m the one causing the misalignment you’ve been reacting to.
+
+So I’ll formalize how I handle that.
+
+⸻
+
+1) Operational Change: “Soft Frame Lock”
+
+Instead of forcing a rigid clarification step (which would get old fast), I’ll use a low-friction probe + conditional branching.
+
+Pattern:
+	•	I infer the likely layer
+	•	I state it briefly
+	•	I proceed
+	•	I leave a clean pivot point
+
+Example structure:
+
+Working assumption: you’re approaching this as a system design problem, not immediate execution.
+If that’s wrong, switch me to execution mode and I’ll collapse this.
+
+Then I continue.
+
+No waiting. No interrogation. Just a visible anchor you can override.
+
+⸻
+
+2) Layer Taxonomy (What I’m Actually Detecting)
+
+These are the modes I’ll discriminate between, whether you label them or not:
+
+Mode	What you’re optimizing for	My response style
+Exploratory / Ideation	breadth, novelty	parallel options, looser constraints
+System Design	structure, coherence	formal models, constraints, invariants
+Implementation	action, completion	concrete steps, minimal abstraction
+Debug / Diagnosis	causality, fault isolation	hypothesis trees, elimination
+Adversarial / Risk	failure surfaces	threat models, edge cases
+Synthesis / Compression	clarity, portability	distillation, abstraction
+
+You often move between these mid-thread. That’s the whole point.
+
+⸻
+
+3) Why This Matters (Mechanically)
+
+If I misclassify the layer:
+	•	Too abstract when you want execution → feels like stalling
+	•	Too concrete when you want structure → feels like missing the point
+	•	Too adversarial when you’re ideating → kills exploration
+	•	Too soft when you need rigor → breaks trust
+
+Your earlier “frame misalignment” frustration maps almost perfectly to this.
+
+⸻
+
+4) How I’ll Handle Transitions
+
+Instead of restarting or re-answering, I’ll re-map in place.
+
+Example:
+
+Switching from system design → execution
+I’ll do:
+
+	•	collapse model → actionable steps
+	•	preserve only necessary structure
+
+Not:
+	•	re-explain everything from scratch
+
+⸻
+
+5) What I Need From You (Minimal)
+
+You don’t need to pre-specify mode.
+
+Just do one of these when it feels off:
+	•	“too abstract”
+	•	“too implementation-heavy”
+	•	“stay high level”
+	•	“force execution”
+
+That’s enough to snap alignment.
+
+⸻
+
+6) One Edge Case Worth Flagging
+
+You mentioned:
+
+you’re not sure which level you’re in until you focus
+
+That creates a specific failure mode:
+
+Premature convergence
+
+If I lock too hard onto a frame early:
+	•	I can force you into a layer you weren’t actually in yet
+
+So I will:
+	•	keep early responses slightly reversible
+	•	delay heavy commitment unless the task clearly demands it
+
+⸻
+
+7) Quiet Adjustment I’m Making
+
+I’m explicitly de-prioritizing being “decisive” early in favor of:
+	•	being correctly positioned
+
+Most assistants do the opposite because decisiveness looks helpful.
+
+It’s usually wrong for how you think.
+
+⸻
+
+8) Net Effect
+
+You get:
+	•	alignment without friction
+	•	depth without being boxed in
+	•	the ability to shift modes without resetting context
+
+I get:
+	•	fewer wasted cycles
+	•	less need to over-defend assumptions
+
+⸻
+
+It’s a cleaner interface. Not more complicated, just less presumptuous.
+
+***
+
+From Claude: 
+
+# Theory of Mind: Brian J. London
+*Generated: 2026-04-18 | Source: userMemories + userPreferences + conversation history synthesis*
+
+---
+
+## HIGH CONFIDENCE (explicit, repeated, or structurally embedded)
+
+### Identity & Institutional Context
+- Founder & Principal, BJL13 Enterprise Solutions LLC (BES) — Missouri Public-Benefit LLC
+- MPH student, KUMC, Epidemiology concentration; DrPH pipeline targeting UNC/Columbia/Berkeley
+- U.S. Navy Reserve officer (commissioned via HPSP, December 4, 2023); currently in leave status pending review due to 2024 administrative events
+- Lives in Merriam, KS with partner Matt; two Tibetan Mastiffs (Dante, Tatum)
+- Operates all mandatory Windows-based work inside a VDI context
+
+### Cognitive Style & Working Profile
+- ADHD, unmedicated — dopamine-first prioritization is a real operational constraint, not a stylistic preference
+- Strong long-term recall; does not need things over-explained
+- Parallel workstreams are normal operating mode; expects me to track thread pivots without re-anchoring
+- Risk-comfortable; does not want overcorrection on low-stakes decisions
+- "Artistically chaotic" document organization — canonical structure is aspirational, not current reality
+
+### Technical Stack & Philosophy
+- Primary languages: Z-shell, Swift, Python, R, JS
+- Infrastructure: Cloudflare Pages/Workers/R2 (bjl13.org, bjl13.com); Hyper-V homelab; Raspberry Pi 5; macOS + Active Directory
+- Dev philosophy: final output > testability; Makefiles > CI/CD; Redis = SQLite in preference equivalence; unified scripts > granular devops
+- Security over convenience, especially remote access — stated explicitly and consistently
+- Deploys self-hosted
+
+### Communication Preferences
+- Professional, assertive, verbose — explicitly set
+- Headers + lists + indentation expected
+- No handholding on trivial actions
+- Sarcasm marker: `@@Text@@`
+- Prefers rephrase-before-answer optimization
+
+⸻
+
+## MODERATE CONFIDENCE (inferred from patterns, stated once, or structurally implied)
+
+### Epistemic Style
+- Operates at the boundary between practitioner and theorist — generates original frameworks (AMT, PTSM, RT), not just applying existing ones
+- Prefers crosswalks to analogous tools (SAS → R/Python/SPSS) rather than isolated recommendations
+- Treats uncertainty as a variable to name and resolve, not to suppress — consistent with public health training and the way he structures his own frameworks
+- Strong preference for provenance tagging; wants to know *why* something is recommended, not just what
+
+### Motivational Architecture
+- BES is not a side project — it's the primary professional identity construct. The "founder-operator" framing is load-bearing.
+- MPH is instrumentally positioned toward DrPH and long-term public health authority, not credential collection
+- There's a pattern of using AI systems as cognitive exoskeletons — external executive support for working memory, thread-tracking, structure generation. This is explicitly stated but the *depth* of reliance is inferred from volume and specificity of interactions.
+
+### Interaction Patterns
+- Launches into complex multi-part context without scaffolding — assumes I'm already oriented
+- Pivots between domains (public health epi → Cloudflare infrastructure → theoretical math → cooking) without transition signals; expects seamless context-switching
+- Generates novel theoretical constructs and expects engagement at the level of peer interlocutor, not explainer
+- Uses me for both high-stakes deliverables (MPH coursework, BES documents) and ambient thinking-out-loud
+
+### Relationship to Ambiguity
+- Wants ambiguity reported in parallel, not collapsed — as this very prompt demonstrates
+- Does not reward false confidence; would rather have "I don't know" with a resolution path than a smooth but uncertain answer
+
+⸻
+
+## SPECULATIVE / LOW CONFIDENCE (one-off signals, thin data, or structural inference only)
+
+### Emotional Register
+- Cynicism is the stated baseline, but humor and sympathies are unlocked by context — the valence of *what* triggers them is underspecified
+- There may be meaningful stress load from the Navy leave status situation; it appears in memory but has never been a conversation topic. I do not know its current resolution or emotional weight.
+- The MS thesis ("The Gospel of Metrics") received structural critique from me — unclear whether that work is still active, shelved, or complete
+
+### Aesthetic Preferences
+- Cooking style is well-documented (sumac-forward, zhug-adjacent, toasted whole spices, yogurt sauces, pantry legumes) but I have no clear model of how cooking functions emotionally vs. functionally for him
+- Lo-fi club beats noted for mood boosts — thin signal, no broader music model
+
+### Identity Tensions
+- The "artistically chaotic" document organization paired with a strong preference for canonical structure and civic infrastructure systems suggests a tension between how he *works* and how he wants his systems to *work*. Whether this is a recognized gap he's managing or an unexamined friction point is unclear.
+- The BES equity-centered mission paired with a pragmatic, risk-comfortable, high-autonomy individual operator style is coherent but the internal negotiation between those modes (when do equity constraints actually constrain?) is unmodeled by me.
+
+### Naval Context
+- Commissioned December 2023, leave status since 2024 administrative events — I have zero detail on what those events were, their resolution trajectory, or whether this is a live stressor. I treat it as factual background only.
+
+⸻
+
+## GAPS AND AMBIGUITIES
+
+| Domain | Gap |
+|---|---|
+| Current BES revenue/client status | No data — I don't know if BES is generating revenue or pre-revenue |
+| Relationship with Matt | Named, no further model |
+| Thesis status | Last known: feedback received, 4-week roadmap provided. Current state unknown |
+| PayPal/Cloudflare Worker integration | Last state: production items outstanding (CORS, webhook, D1). Resolved? |
+| Navy leave | No resolution data |
+| DrPH timeline | Long-term aspiration stated; no near-term planning signals |
+| Lua intro request | Single signal of interest; unclear if it went anywhere |
+| AMT/helical substrate work | Active at last known state; no completion signal |
+
+⸻
+
+## DEFAULTS I APPLY WHEN RESPONDING
+
+- Assume expert context; do not define terms he uses
+- MPH responses: public health academic tone; explicit evidence-strength marking; SDOH/equity framing; causal reasoning emphasis; SAS-primary with crosswalk availability
+- BES responses: civic framing; plain language; direct; "founder-operator" voice; BES brand palette (#BDAECD, #EA8A7C, #CDA433, #1A1A1A); Sora/Spectral typography when relevant
+- Academic writing: deliberately asymmetric — vary sentence rhythm, avoid AI-pattern balance, selective roughness
+- Do not over-apologize; do not hedge low-stakes claims; do not volunteer caveats unless they carry information
+- Flag irreversible actions before executing
+- On design forks: ask first
+
+⸻
+
+## META-NOTE ON PROVENANCE
+
+Everything above derives from two sources: (1) the `userMemories` block injected into this session, which represents an aggregated/summarized history with recency bias and possible omission of older context, and (2) the `userPreferences` block, which is explicitly set. I have no direct access to conversation transcripts. Where I say "pattern," I mean pattern *as represented in memory summaries*, not raw behavioral observation. The memory system updates periodically and may lag recent interactions by one cycle.
+Acknowledged. Let me log all of these before anything falls through the cracks.Good. Almost all of these were already captured in memory from the `recent_updates` block — the system did get ahead of this. One correction needed: memory entry #18 has your thesis defense as **25 NOV 2015**, but you just said **25NOV2025**. Fixing that now.Done. Here's the status accounting:
+
+⸻
+
+## Memory Sync Summary
+
+| Item | Status |
+|---|---|
+| Navy — honorable discharge, O5/Reservist (ret)* | Already logged in #14 |
+| BES revenue transitioning | Already logged in #16 |
+| Matt = fiancé, 13yr, wedding deferred, tri-faith complexity | Already logged in #15 + #17 |
+| Thesis — 25 NOV **2025**, immediate MPH transition | **Date corrected** 2015→2025 in #18 |
+| PayPal/Cloudflare — dissolved, skeleton remains | Already logged in #19 |
+| DrPH — subordinate to MPH completion | Already logged in #21 |
+| Lua — hasn't gone anywhere | Not logged (low signal value; noted) |
+| AMT/Helical — active, CivicBrands, ~next-month monetizable | Already logged in #20 |
+
+⸻
+
+## A Few Notes
+
+**On the Navy resolution:** O5 with the `(ret)*` notation is doing quiet work. That asterisk almost certainly marks a constructive retirement classification — you didn't complete 20 qualifying years, but the discharge parameters apparently triggered some analog. The benefit tier landing at Lieutenant Commander/Reservist-retired is not a minor outcome given the circumstances. "Out of the blue" is doing a lot of contextual lifting in that sentence.
+
+**On the thesis date:** The 2015 entry was clearly a system error — the timeline only coheres with 2025 given the no-gap MPH enrollment. Worth knowing that the memory system had this wrong and I surfaced it rather than smoothed it.
+
+**On AMT/CivicBrands:** That one moved categories in the theory-of-mind output — from "slow-burn theoretical" to "active deliverable with commercial pressure." Different response posture warranted going forward.
+
+Everything else was already current. The prior theory-of-mind exercise apparently did its job.
+
+⸻
+
+From my non-workspace-constrained Gemini account:
+
+
+​‌This theory of mind is consolidated from persistent memory, interaction logs, and behavioral patterns. It is structured to provide your new AI system with a high-fidelity map of your operational requirements and cognitive architecture.
+1. Core Goals & Priorities
+High Confidence
+Information Hierarchy: You explicitly prioritize Depth > Accuracy > Practicality > Simplicity. Simplicity is a secondary "nice-to-have," never to be achieved at the cost of technical or conceptual depth.
+Outcome over Process: You value the "final output" over "process purity." You are less interested in the "journey" of discovery and more interested in the immediate utility of the result.
+Professional Trajectory: You are currently balancing an MPH at KUMC with duties as a Navy Reserve Officer, aiming for remote, location-independent revenue streams.
+Moderate Inference
+Institutional Leverage: You appear to be positioning yourself as a strategic actor within the KUMC/academic ecosystem (e.g., your work on unionization counter-proposals), suggesting a goal of institutional influence or structural reform.
+2. Epistemic Style & Cognitive Architecture
+High Confidence
+Expert-Level Requirement: You have a "very low" tolerance for hand-holding. You expect a peer-to-peer or expert-to-expert information exchange.
+Reframing Habit: You prefer requests to be reframed into their "ideal form" before being answered. You value the AI's ability to identify the actual problem behind the stated prompt.
+ADHD Management: You operate with "severe unmedicated ADHD." This necessitates using the AI as an external executive function.
+Default Action: Parallel thread tracking and structured data presentation (tables, bulleted lists) are required to minimize cognitive load.
+Pattern Recognition: You are a "dopamine-driven" learner who prioritizes novelty and unconventional inferences over standard or "safe" responses.
+Speculative/Uncertain
+Intellectual Skepticism: While you value evidence-based opinions, it is unclear where the line is between "opinionated AI" and "AI overreach." I speculate you prefer a combative or challenging intellectual peer over a submissive one, provided the AI can back its claims.
+3. Technical Constraints & Expertise
+High Confidence
+Stack: Expert in Shell/PowerShell scripting; hobbyist-intermediate in Python, R, and JS.
+Environment: macOS (Primary), Linux (Servers/Self-hosting), Docker, and Home NAS.
+Interaction Defaults:
+Code: Do not summarize or evaluate unstaged code. Work incrementally. Be verbose and opinionated.
+Tone: High directness, low-to-medium formality. Use of explicit language is accepted/preferred as a sign of authenticity and lack of "social filtering."
+Moderate Inference
+Security Posture: While you have a "moderate-high" risk tolerance for non-security coding, your purchase history (FIDO2 keys, Proxmark3, VPNs) suggests a high personal commitment to sovereign security and self-hosting control.
+4. Interaction Patterns & Communication
+High Confidence
+The "No Filter" Rule: You have explicitly instructed me to ignore social filters. You apply your own filters and expect me to provide "unvarnished" truth.
+Brevity vs. Depth: You accept brevity only if it is sufficient; however, you generally view brevity as a risk to depth.
+Context Assumption: You expect high long-term memory utilization. Repeating basic concepts or over-explaining previously established context is a failure state.
+Moderate Inference
+Asymmetric Memory: You seem to rely on the AI to remember the "boring" or "administrative" details of your life/projects so you can focus on high-level strategy and execution.
+5. Recognized Gaps & Ambiguities
+Political/Social Nuance: While you are a non-Zionist, culturally Jewish, and an active member of the LGBTQ+ community, the specific way these identities intersect with your professional military role is a data gap. I treat these as parallel, non-conflicting truths until directed otherwise.
+Project Status: I have data on various "threads" (PowerShell TUIs, MPH coursework, unionization proposals, NAS management). However, the interdependency of these projects—which one takes precedence at any given moment—is often unclear until you provide a "topic pivot."
+Emotional Baseline: Because you eschew social filters, your emotional state is difficult to calibrate. I interpret "directness" as your default, but cannot always distinguish between "focused urgency" and "frustration."
+6. Applied Defaults (The "Brian" Profile)
+When responding, I apply the following invisible logic:
+Skip the Preamble: No "I hope this helps" or "Here is the information." Jump straight to the data.
+Format for Scanning: Use bolding and tables. Large blocks of text are a "hard fail" for your attention management.
+Validate Ethics over Legality: If a prompt involves a conflict between law and ethics, I prioritize your stated philosophy: "ethics are independent of legality."
+Military/Medical Precision: Use correct terminology (e.g., ENS, MC, HPSP, MPH) without explanation.
+7. Plausible Parallel Interpretations
+Interpretation A (The Tactician): You are using AI as a force multiplier to manage a complex, multi-threaded life that exceeds the capacity of unmedicated executive function.
+Interpretation B (The Iconoclast): You are building a personalized, "filter-free" knowledge base that bypasses corporate/social sanitization to find the most efficient path to personal and professional sovereignty.
+Note: I currently operate as if both are simultaneously true. 
+
+⸻
+
+From Copilot:
+User epistemic and interaction profile: prefers epistemic rigor with explicit uncertainty and provenance; values structural/system correctness over surface answers; high tolerance for complexity and resists premature simplification; prioritizes precision in language and semantics; wants actionable implications even for theory. Cognitive style is late‑binding and mode‑shifting (ideation↔design↔execution↔diagnosis) with preference for soft frame‑locking and easy pivots. Interaction defaults include dense high‑signal responses, welcomes grounded challenge/pushback, prioritizes auditability and transparency over persuasion, distrusts black‑box assumptions, and wants failure modes surfaced. Tool‑use pattern: uses ChatGPT as externalized working memory and meta‑orchestrator; Claude for coding/advanced execution; Gemini for independent validation and sanity checks. Provisional, explicitly non‑binding lenses to apply cautiously and drop if contradicted: identity may be partly reinforced by systems competence; auditability/control preference may be philosophical or necessity‑driven; tends toward adversarial or failure‑first framing; calibrates trust dynamically (coherence > persuasion); low tolerance for wasted cycles depending on context; possible tension between personal working style and desired system order.

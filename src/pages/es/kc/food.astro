@@ -1,0 +1,129 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Comida — KC"
+    description="Despensas, comidas calientes, SNAP y redes de ayuda mutua de comida en el área metropolitana de Kansas City."
+    lang="es"
+>
+    <KCLanguageSwitcher currentLang="es" enPath="/kc/food" esPath="/es/kc/food" />
+
+    <p class="kc-eyebrow">Comida</p>
+    <h1>Comida hoy, y este mes.</h1>
+    <p class="kc-lede">
+        Hay tres tipos de ayuda con comida en el área metropolitana: despensas (alimentos para llevar a casa),
+        comidas calientes (para comer ahora), y beneficios (SNAP — cupones de alimentos). La mayoría de las
+        despensas le atienden con papeles mínimos. La mayoría de las comidas calientes son sin cita previa.
+        SNAP requiere más.
+    </p>
+
+    <section class="kc-section">
+        <h2>Comida esta noche</h2>
+
+        <ServiceCard
+            name="Localizador de despensas Harvesters"
+            phone="816-929-3000"
+            website="https://www.harvesters.org/find-food"
+            hours="El localizador está en línea 24/7; las despensas varían"
+            languages={["Inglés", "Español"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Use el localizador en harvesters.org — ingrese su código postal y vea qué está abierto. Harvesters provee a la mayoría de las despensas del área. Cada despensa fija sus propias reglas; la mayoría requiere papeles mínimos."
+            confidence="verified"
+            flagSlug="harvesters"
+        />
+
+        <ServiceCard
+            name="Thelma's Kitchen / Reconciliation Services"
+            phone="816-931-4751"
+            address="1006 E Linwood Blvd, Kansas City, MO 64109"
+            hours="Almuerzo de lunes a viernes; despensa con cita"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Almuerzo caliente con pago según pueda. Nadie es rechazado por falta de dinero. La despensa sirve a los vecindarios del corredor Linwood/Troost. También ofrece salud mental, recuperación de identificación y administración de casos."
+            confidence="verified"
+            reachableWithoutCar={true}
+            nearestBusRoute="RideKC Ruta 71 (Troost MAX) en Linwood"
+            walkIn={true}
+            flagSlug="reconciliation-services"
+        />
+
+        <ServiceCard
+            name="KC Mutual Aid"
+            website="https://linktr.ee/kcmutualaid"
+            hours="Red comunitaria — varía según la solicitud"
+            languages={["Inglés", "Español"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Red comunitaria — no es caridad. Solicite comida, suministros, transporte a través del linktree. No requieren prueba de necesidad, ni documentación, no reportan a nadie."
+            fearAddressed={["paperwork", "cost", "immigration", "reporting", "religion"]}
+            confidence="verified"
+            flagSlug="kc-mutual-aid"
+        />
+
+        <ServiceCard
+            name="Chosen Family Mutual Aid KC"
+            website="https://linktr.ee/chosenfamilykc"
+            hours="Red comunitaria"
+            languages={["Inglés"]}
+            states={["MO", "KS"]}
+            statusNeutral={true}
+            expect="Red de ayuda mutua dirigida por personas queer/trans. Comida, vivienda, suministros, navegación del cuidado."
+            fearAddressed={["paperwork", "cost", "religion", "reporting"]}
+            confidence="verified"
+            flagSlug="chosen-family-kc"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>SNAP (cupones de alimentos) — diferente en cada estado</h2>
+        <p>
+            SNAP es administrado por cada estado por separado. Debe solicitar en el estado donde vive.
+            No puede tenerlo en ambos estados. Los requisitos, papeles y tiempo de procesamiento son diferentes.
+        </p>
+
+        <h3>Missouri — MO DSS</h3>
+        <ul>
+            <li>Solicitar en línea: <a href="https://mydss.mo.gov/" rel="noopener noreferrer">mydss.mo.gov</a></li>
+            <li>División de Apoyo Familiar: <a href="tel:855-373-4636">855-373-4636</a></li>
+            <li>Puede ser aprobado en 30 días; SNAP de emergencia en 7 días si califica.</li>
+        </ul>
+
+        <h3>Kansas — KS DCF</h3>
+        <ul>
+            <li>Solicitar en línea: <a href="https://www.dcf.ks.gov/services/ees/" rel="noopener noreferrer">dcf.ks.gov</a></li>
+            <li>Centro de Servicio DCF: <a href="tel:1-888-369-4777">1-888-369-4777</a></li>
+            <li>Kansas tiene requisitos adicionales de trabajo para adultos no ancianos y no discapacitados — pregunte sobre las exenciones.</li>
+        </ul>
+
+        <p class="kc-note">
+            Los límites de ingreso y las reglas cambian. Si lo niegan, pida el cálculo por escrito y llame al
+            <a href="tel:211">211</a> para ayuda con la apelación.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>WIC — para embarazadas, posparto, bebés, niños menores de 5 años</h2>
+        <ul>
+            <li>Missouri WIC: <a href="tel:1-800-392-8209">1-800-392-8209</a> · <a href="https://health.mo.gov/living/families/wic/" rel="noopener noreferrer">health.mo.gov/wic</a></li>
+            <li>Kansas WIC: <a href="tel:1-800-332-6262">1-800-332-6262</a> · <a href="https://www.kansaswic.org/" rel="noopener noreferrer">kansaswic.org</a></li>
+        </ul>
+        <p>
+            WIC no usa la misma prueba de ingresos que SNAP — los límites son más altos. Muchas personas
+            que creen no calificar, en realidad sí califican.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Comida desde las bibliotecas</h2>
+        <p>
+            El Equipo de Recursos Comunitarios de la Biblioteca Pública de Kansas City, en la Sucursal Central
+            (14 W 10th St), mantiene un mapa actualizado de comida gratis y conecta a las personas con despensas,
+            comidas calientes y beneficios — en persona. No requieren tarjeta de biblioteca. Entre sin cita.
+        </p>
+    </section>
+</KCLayout>

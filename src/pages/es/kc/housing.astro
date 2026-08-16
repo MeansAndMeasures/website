@@ -1,0 +1,210 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Vivienda — KC"
+    description="Refugio de emergencia, ayuda con renta, derechos del inquilino y organización por la vivienda en el área metropolitana de Kansas City."
+    lang="es"
+>
+    <KCLanguageSwitcher currentLang="es" enPath="/kc/housing" esPath="/es/kc/housing" />
+
+    <p class="kc-eyebrow">Vivienda</p>
+    <h1>Un lugar dónde dormir, y cómo mantenerse en su vivienda.</h1>
+    <p class="kc-lede">
+        Tres cosas diferentes que la gente llama "ayuda con la vivienda": un lugar dónde dormir esta noche
+        (refugio), dinero para renta o mudanza (asistencia), y no ser desalojado (derechos del inquilino).
+        Cada una tiene una puerta diferente.
+    </p>
+
+    <section class="kc-section" id="tonight">
+        <h2>Esta noche — refugio de emergencia</h2>
+
+        <ServiceCard
+            name="reStart, Inc."
+            phone="816-309-9048"
+            website="https://www.restartinc.org"
+            address="918 E 9th St, Kansas City, MO 64106"
+            hours="Horarios de admisión varían — llame primero"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={false}
+            expect="El sistema de refugios más grande de KCMO. Tiene refugio juvenil dedicado y programas familiares. Adultos solteros: llame primero. Tienen opciones para parejas y opciones afirmativas para LGBTQ pero pregunte explícitamente al llamar."
+            confidence="verified"
+            reachableWithoutCar={true}
+            walkIn={false}
+            appointmentRequired={true}
+            flagSlug="restart"
+        />
+
+        <ServiceCard
+            name="Hope Faith"
+            phone="816-471-4673"
+            website="https://hopefaith.org"
+            address="705 Virginia Ave, Kansas City, MO 64106"
+            hours="Servicios diurnos 7am-3pm L-V"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Refugio diurno, dirección postal, duchas, lavandería, comida, recuperación de identificación, administración de casos. No es para pernoctar. Entre sin cita. No requieren identificación para recibir servicios."
+            confidence="verified"
+            walkIn={true}
+            reachableWithoutCar={true}
+            flagSlug="hope-faith"
+        />
+
+        <ServiceCard
+            name="Rose Brooks Center (violencia doméstica)"
+            phone="816-861-6100"
+            website="https://www.rosebrooks.org"
+            hours="Línea telefónica 24/7"
+            hours24={true}
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Refugio para DV, línea telefónica, defensa. Ubicación confidencial. Aceptan mascotas en el refugio — poco común. Defensoras hispanohablantes disponibles."
+            fearAddressed={["police", "pets", "reporting", "cost"]}
+            confidence="verified"
+            petsAllowed={true}
+            emergency={true}
+            flagSlug="rose-brooks"
+        />
+
+        <ServiceCard
+            name="SAFEHOME (Condado Johnson KS — DV)"
+            phone="913-262-2868"
+            website="https://www.safehome-ks.org"
+            hours="Línea telefónica 24/7"
+            hours24={true}
+            languages={["Inglés", "Español"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Refugio para DV del lado de Kansas, Condado Johnson. Línea telefónica 24/7. Ubicación confidencial del refugio."
+            fearAddressed={["police", "reporting", "cost"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="safehome"
+        />
+
+        <p class="kc-note">
+            Si un refugio le rechaza, pida explícitamente a qué refugio o línea telefónica le refieren.
+            Están obligados a referir. Anote el nombre y número antes de salir.
+        </p>
+    </section>
+
+    <section class="kc-section" id="eviction">
+        <h2>Enfrentando desalojo</h2>
+        <p>
+            No falte a la corte. Una sentencia por incomparecencia es mucho peor que aparecer. El día de
+            la corte, incluso una hora antes, a veces puede conseguir un abogado.
+        </p>
+
+        <ServiceCard
+            name="Línea telefónica de KC Tenants"
+            phone="816-533-5435"
+            website="https://kctenants.org"
+            hours="Línea atendida en horario laboral; mensajes devueltos"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Organización dirigida por inquilinos. Conozca sus derechos, navegue la corte, conéctese con asesoría legal. Empujaron a KCMO a aprobar el Derecho a Abogado y la Carta de Derechos del Inquilino."
+            confidence="verified"
+            flagSlug="kc-tenants"
+        />
+
+        <ServiceCard
+            name="Oficina de Defensa del Inquilino de KCMO / Derecho a Abogado"
+            phone="816-513-3200"
+            website="https://www.kcmo.gov/city-hall/departments/neighborhood-services/office-of-tenant-advocacy"
+            hours="Horario laboral, L-V"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            moResidentRequired={true}
+            expect="Representación legal gratuita en desalojo — pero solo si vive dentro de los límites de la ciudad de KCMO. Inquilinos de KCMO con ingresos elegibles tienen derecho a un abogado. Independence, Lee's Summit, Liberty NO están cubiertos."
+            confidence="verified"
+            flagSlug="kcmo-tenant-advocacy"
+        />
+
+        <ServiceCard
+            name="Legal Aid of Western Missouri"
+            phone="816-474-6750"
+            website="https://www.lawmo.org"
+            hours="Horario laboral, L-V"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Representación legal para personas con ingresos elegibles — vivienda, familia, beneficios públicos. No requiere estatus migratorio para tomar el caso."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="legal-aid-wmo"
+        />
+
+        <ServiceCard
+            name="Kansas Legal Services"
+            phone="800-723-6953"
+            website="https://www.kansaslegalservices.org"
+            hours="Horario laboral, L-V"
+            languages={["Inglés", "Español"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Representación legal para personas con ingresos elegibles del lado de Kansas. Defensa de inquilinos, derecho familiar, beneficios públicos."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="ks-legal-services"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Ayuda con renta y mudanza</h2>
+        <p>
+            La ayuda con renta es usualmente una sola vez, pagada directamente al arrendador. Los fondos
+            se agotan y se restablecen en un horario que varía. Llame temprano en el mes.
+        </p>
+        <ul>
+            <li><strong>Catholic Charities of Northeast Kansas:</strong> <a href="tel:913-433-2100">913-433-2100</a> · lado KS</li>
+            <li><strong>Catholic Charities of Kansas City-St. Joseph:</strong> <a href="tel:816-221-4377">816-221-4377</a> · lado MO</li>
+            <li><strong>The Salvation Army (área KC):</strong> <a href="tel:816-756-2769">816-756-2769</a></li>
+            <li><strong>Bishop Sullivan Center:</strong> <a href="tel:816-231-0984">816-231-0984</a> · renta + servicios públicos, lado MO</li>
+            <li><strong>211</strong> puede decirle quién tiene fondos ahora: <a href="tel:211">211</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section">
+        <h2>Autoridades de vivienda pública y subsidiada</h2>
+        <p>
+            Las listas de espera son largas (meses a años). Las fechas de apertura son impredecibles.
+            Inscríbase en todas las que pueda calificar, incluso si no lo necesita ahora.
+        </p>
+        <ul>
+            <li><strong>Housing Authority of Kansas City (HAKC):</strong> <a href="tel:816-968-4100">816-968-4100</a> · lado MO · <a href="https://www.hakc.org" rel="noopener noreferrer">hakc.org</a></li>
+            <li><strong>Kansas City KS Housing Authority (KCKHA):</strong> <a href="tel:913-281-3300">913-281-3300</a> · KCK · <a href="https://www.kckha.org" rel="noopener noreferrer">kckha.org</a></li>
+            <li><strong>Johnson County Housing Authority (JoCo):</strong> <a href="tel:913-715-6600">913-715-6600</a></li>
+            <li><strong>Housing Authority of Independence (HACI):</strong> <a href="tel:816-461-1551">816-461-1551</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section">
+        <h2>Alternativas al mercado de alquiler</h2>
+
+        <ServiceCard
+            name="KC Community Land Trust (KCCLT)"
+            website="https://kcclt.org"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            expect="Propiedad de vivienda permanentemente asequible — el terreno permanece en fideicomiso, el comprador es dueño de la casa. Programa de compra calificado por ingresos. Asequibilidad a largo plazo."
+            confidence="verified"
+            flagSlug="kcclt"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Durante la Copa Mundial de la FIFA (junio de 2026)</h2>
+        <p>
+            Se esperan conversiones a alquileres turísticos, presión de desplazamiento y precios abusivos
+            durante el torneo. Ver <a href="/es/kc/worldcup">la página de la Copa Mundial</a> para qué
+            vigilar y qué hacer si su arrendador le presiona para que se vaya.
+        </p>
+    </section>
+</KCLayout>

@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+        title="Contact — CivicBrands"
+        description="Contact and coordination information for CivicBrands."
+>
+    <section class="section">
+        <p class="eyebrow">Contact</p>
+
+        <div class="measure">
+            <h1>Contact</h1>
+
+            <p>
+                For work, research, procurement, or document-related inquiries, use the contact pathway designated for the relevant engagement.
+            </p>
+
+            <dl class="entry-meta">
+                <dt>General</dt>
+                <dd><a href="mailto:contact@mail.civicbrands.org">contact@mail.civicbrands.org</a></dd>
+
+                <dt>Procurement</dt>
+                <dd><a href="mailto:procurement@mail.civicbrands.org">procurement@mail.civicbrands.org</a></dd>
+
+                <dt>Phone</dt>
+                <dd><a href="tel:+18163063481">816-306-3481</a></dd>
+            </dl>
+
+            <form
+                    class="intake-form"
+                    id="intake-form"
+                    action="/api/intake"
+                    method="post"
+            >
+                <div class="field field--hidden">
+                    <label for="company">Company</label>
+                    <input id="company" name="company" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" autocomplete="name" />
+                </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" />
+                </div>
+
+                <div class="field">
+                    <label for="topic">Topic</label>
+                    <select id="topic" name="topic">
+                        <option value="General inquiry">General inquiry</option>
+                        <option value="Public comment">Public comment</option>
+                        <option value="Research or artifact">Research or artifact</option>
+                        <option value="Work inquiry">Work inquiry</option>
+                        <option value="Procurement">Procurement</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="8" required></textarea>
+                </div>
+
+                <button type="submit">Submit intake</button>
+
+                <p class="form-status" id="intake-status" aria-live="polite"></p>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        const form = document.querySelector("#intake-form");
+        const status = document.querySelector("#intake-status");
+
+        form?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const data = new FormData(form);
+            const submitButton = form.querySelector("button[type='submit']");
+
+            if (status) {
+                status.textContent = "Submitting.";
+            }
+
+            submitButton?.setAttribute("disabled", "true");
+
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: data.get("name"),
+                        email: data.get("email"),
+                        topic: data.get("topic"),
+                        message: data.get("message"),
+                        company: data.get("company")
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.ok) {
+                    throw new Error(result.error || "Submission failed.");
+                }
+
+                form.reset();
+
+                if (status) {
+                    status.textContent = "Submission received.";
+                }
+            } catch (error) {
+                if (status) {
+                    status.textContent = error instanceof Error
+                        ? error.message
+                        : "Submission failed.";
+                }
+            } finally {
+                submitButton?.removeAttribute("disabled");
+            }
+        });
+    </script>
+</BaseLayout>

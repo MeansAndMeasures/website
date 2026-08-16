@@ -1,0 +1,294 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import KCLanguageSwitcher from "../../components/KCLanguageSwitcher.astro";
+import ServiceJsonLd from "../../components/ServiceJsonLd.astro";
+import { getCollection } from "astro:content";
+
+const emergencyServices = await getCollection("kcServices", ({ data }) => data.emergency === true);
+
+const schemaServices = emergencyServices.map((s) => ({
+    name: s.data.name,
+    phone: s.data.phone,
+    website: s.data.website,
+    address: s.data.address,
+    categories: s.data.categories,
+    expect: s.data.expect
+}));
+---
+
+<KCLayout
+    title="Need Help Now — Kansas City"
+    description="Crisis numbers and immediate help for the Kansas City metro, both states."
+    noReferrer={true}
+>
+    <ServiceJsonLd services={schemaServices} slot="head" />
+    <KCLanguageSwitcher currentLang="en" enPath="/kc/crisis" esPath="/es/kc/crisis" />
+
+    <p class="kc-eyebrow">Crisis &amp; immediate help</p>
+    <h1>Need help right now.</h1>
+    <p class="kc-lede">
+        These numbers are answered around the clock and do not turn people away for lack of papers,
+        insurance, or sobriety. If a number stops working, tell us — there is a button at the bottom of every card.
+    </p>
+
+    <div class="kc-urgent">
+        <h2>Immediate danger</h2>
+        <p><a class="kc-urgent__phone" href="tel:911">911</a></p>
+        <p>
+            Text 911 if you cannot speak. Note: SMS does <strong>not</strong> automatically transmit your location.
+            Lead your first message with where you are.
+        </p>
+        <p class="kc-note kc-note--strong">
+            911 dispatches police, paramedics, or fire. If your concern is mental health and a police response
+            could make things worse, call <a href="tel:988">988</a> or a crisis line below instead — they are
+            not first responders.
+        </p>
+    </div>
+
+    <section class="kc-section" aria-labelledby="for-someone">
+        <h2 id="for-someone">If this is for someone else</h2>
+        <p>
+            You can call any of these numbers on behalf of another person. Counselors will not require their
+            consent to talk. Be honest about what you're seeing. If the person is in front of you and
+            unwilling, ask the counselor what they recommend before doing anything.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="crisis-lines">
+        <h2 id="crisis-lines">Crisis lines — no gating on status, insurance, or sobriety</h2>
+
+        <ServiceCard
+            name="988 Suicide & Crisis Lifeline"
+            phone="988"
+            sms="988"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish", "240+ via interpreter"]}
+            statusNeutral={true}
+            expect="Call or text 988. For Spanish call 988 and press 2, or text AYUDA to 988. Counselors are trained listeners — they will not automatically dispatch police."
+            fearAddressed={["police", "cost", "paperwork", "reporting"]}
+            confidence="verified"
+            lastKnownGood="Confirmed operating as of May 2026"
+            emergency={true}
+            flagSlug="988"
+        >
+            <p class="kc-note">
+                The "Press 3" LGBTQ+ specialized option was defunded by the federal government on July 17, 2025.
+                For LGBTQ+ crisis support, contact the Trevor Project or Trans Lifeline (below).
+            </p>
+        </ServiceCard>
+
+        <ServiceCard
+            name="Crisis Text Line"
+            sms="741741"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish"]}
+            statusNeutral={true}
+            expect="Text HOME to 741741. Free on major U.S. carriers. Useful if you cannot speak out loud or do not want to."
+            fearAddressed={["police", "cost", "paperwork", "reporting"]}
+            confidence="verified"
+            lastKnownGood="Confirmed operating as of May 2026"
+            emergency={true}
+            flagSlug="crisis-text-line"
+        />
+
+        <ServiceCard
+            name="SAMHSA Disaster Distress Helpline"
+            phone="1-800-985-5990"
+            sms="1-800-985-5990"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish", "100+ via interpreter"]}
+            statusNeutral={true}
+            expect="Trained for distress related to natural disasters, mass violence, fires, public-health emergencies. For Spanish press 2."
+            fearAddressed={["cost", "paperwork", "reporting"]}
+            confidence="verified"
+            lastKnownGood="Confirmed operating as of May 2026"
+            emergency={true}
+            flagSlug="samhsa-ddh"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="lgbtq">
+        <h2 id="lgbtq">LGBTQ+ specialized</h2>
+        <p>
+            Federal defunding shut down the 988 "Press 3" line on July 17, 2025. These two filled the gap.
+        </p>
+
+        <ServiceCard
+            name="The Trevor Project"
+            phone="1-866-488-7386"
+            sms="678678"
+            website="https://www.thetrevorproject.org"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish"]}
+            statusNeutral={true}
+            expect="Call 1-866-488-7386, or text START to 678678. Counselors are trained in LGBTQ+ youth crisis."
+            fearAddressed={["religion", "reporting", "cost"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="trevor"
+        />
+
+        <ServiceCard
+            name="Trans Lifeline"
+            phone="877-565-8860"
+            website="https://translifeline.org"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish"]}
+            statusNeutral={true}
+            expect="Peer support staffed by trans people. They will not dispatch police or emergency services without your explicit consent — a difference from most other lines."
+            fearAddressed={["police", "religion", "reporting", "cost"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="trans-lifeline"
+        />
+
+        <p>
+            For ongoing community support beyond a crisis call, see
+            <a href="https://linktr.ee/chosenfamilykc" rel="noopener noreferrer">Chosen Family Mutual Aid KC</a>.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="veterans">
+        <h2 id="veterans">Veterans — any discharge, any era</h2>
+        <p>
+            Discharge characterization is not a barrier. You do not have to be enrolled with the VA.
+            Family and friends can call too.
+        </p>
+
+        <ServiceCard
+            name="Veterans Crisis Line"
+            phone="988"
+            sms="838255"
+            website="https://www.veteranscrisisline.net"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish"]}
+            statusNeutral={true}
+            expect="Call 988 and press 1, or text 838255. Counselors are veterans or trained in military culture."
+            fearAddressed={["police", "cost", "paperwork", "reporting"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="veterans-crisis"
+        />
+
+        <ServiceCard
+            name="Veterans Community Project (KC)"
+            phone="816-599-6503"
+            website="https://www.veteranscommunityproject.org"
+            address="8825 Troost Ave, Kansas City, MO 64131"
+            hours="Outreach center hours vary — call first"
+            languages={["English"]}
+            states={["MO"]}
+            statusNeutral={true}
+            veteranOnly={true}
+            expect="Tiny-home village plus an outreach center for VA paperwork, ID recovery, benefits, and basic needs. Any veteran, any discharge."
+            fearAddressed={["paperwork", "cost", "reporting"]}
+            confidence="verified"
+            reachableWithoutCar={true}
+            nearestBusRoute="RideKC Route 71 (Troost MAX)"
+            petsAllowed={true}
+            flagSlug="vcp-kc"
+        />
+
+        <p>
+            National Call Center for Homeless Veterans: <a href="tel:1-877-424-3838">1-877-424-3838</a> (24/7).
+            KC Vet Center: <a href="tel:816-922-5300">816-922-5300</a> at 4800 Main St Ste 107, KCMO.
+            Readjustment counseling — discharge status not a bar.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="information">
+        <h2 id="information">Information &amp; referral (211)</h2>
+        <p>
+            211 will not solve a problem on the call. They will tell you what is open and accepting people.
+            The Missouri-side and Kansas-side 211s are separate.
+        </p>
+
+        <ServiceCard
+            name="211 Missouri"
+            phone="211"
+            website="https://www.uwgkc.org/211"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish", "interpreter on call"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Dial 211 in Missouri. Direct line: 816-474-5112. Referrals for food, rent, utilities, mental health, healthcare."
+            fearAddressed={["cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="211-mo"
+        />
+
+        <ServiceCard
+            name="211 Kansas"
+            phone="211"
+            sms="898-211"
+            website="https://211kansas.org"
+            hours="Phone 24/7 · SMS Mon-Fri 7am-7pm"
+            languages={["English", "Spanish"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Dial 211 in Kansas. To text, send your ZIP to 898-211 — that line is staffed weekdays only."
+            fearAddressed={["cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="211-ks"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="heat">
+        <h2 id="heat">Heat &amp; cooling centers</h2>
+        <p>
+            KC summers are dangerous. Heat index above 105°F is common from June through September.
+            The combination of heat, humidity, and concrete makes heat illness one of the metro's
+            quiet public health emergencies — and gets worse during World Cup weeks when tourist
+            corridors absorb more public attention than residential ones.
+        </p>
+        <ul>
+            <li><strong>KCMO Cooling Centers:</strong> KCMO opens designated cooling centers at recreation centers and libraries when heat index hits the threshold. Locations posted at <a href="https://www.kcmo.gov" rel="noopener noreferrer">kcmo.gov</a>; or call <a href="tel:311">311</a>.</li>
+            <li><strong>Jackson County / Wyandotte / Johnson:</strong> similar programs activated by county health departments. Call <a href="tel:211">211</a> for the closest open center to you.</li>
+            <li><strong>Libraries during normal hours:</strong> the cheapest cooling center we have — open, air-conditioned, no purchase required, restrooms, water fountains. See <a href="/kc/libraries">libraries</a>.</li>
+            <li><strong>Hope Faith day shelter:</strong> <a href="tel:816-471-4673">816-471-4673</a> — air-conditioned day services M-F 7am-3pm.</li>
+            <li><strong>Salvation Army Operation Heat Wave:</strong> distributes fans and bottled water during heat advisories. Call <a href="tel:816-756-2769">816-756-2769</a>.</li>
+        </ul>
+        <p class="kc-note kc-note--strong">
+            Signs of heat illness: cramps, heavy sweating then stopping sweating, confusion, vomiting,
+            very high body temperature. Call <a href="tel:911">911</a> for heat stroke. Move to shade or
+            air conditioning, hydrate, cool the body with water on skin.
+        </p>
+        <p>
+            During the FIFA World Cup (June 2026 onward), confirm cooling center hours each week —
+            schedules sometimes shift to align with tourist routes rather than residential need.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="next">
+        <h2 id="next">Once you've made the call</h2>
+        <p>
+            If you need food, shelter, healthcare, legal help, utilities, or any longer-running support after this,
+            keep going:
+        </p>
+        <ul>
+            <li><a href="/kc/food">Food — pantries and meals, MO + KS</a></li>
+            <li><a href="/kc/housing">Housing — emergency shelter and rental help</a></li>
+            <li><a href="/kc/healthcare">Healthcare — free clinics, street medicine, FQHCs</a></li>
+            <li><a href="/kc/legal">Legal aid — tenants, immigration, reentry</a></li>
+            <li><a href="/kc/utilities">Utility shutoffs — LIHEAP, LIEAP, payment plans</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section">
+        <p class="kc-note">
+            Plain-text version: <a href="/kc/crisis.txt">crisis.txt</a> · JSON: <a href="/kc/crisis.json">crisis.json</a>
+        </p>
+        <p>
+            If a number listed above stops working, or you know one we missed,
+            <a href="/kc/suggest">tell us</a>.
+        </p>
+    </section>
+</KCLayout>

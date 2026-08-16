@@ -1,0 +1,48 @@
+{
+  "id": "did:web:civicbrands.org",
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    {
+      "@base": "did:web:civicbrands.org"
+    }
+  ],
+  "service": [
+    {
+      "id": "#linkeddomains",
+      "type": "LinkedDomains",
+      "serviceEndpoint": {
+        "origins": [
+          "https://civicbrands.org/"
+        ]
+      }
+    },
+    {
+      "id": "#hub",
+      "type": "IdentityHub",
+      "serviceEndpoint": {
+        "instances": [
+          "https://hub.did.msidentity.com/v1.0/e43b17bc-0a1e-43ff-81fb-e26cdfbf30c1"
+        ]
+      }
+    }
+  ],
+  "verificationMethod": [
+    {
+      "id": "#fdb844bc44ba4434a8689a07d3c29ab2vcSigningKey-2df2a",
+      "controller": "did:web:civicbrands.org",
+      "type": "JsonWebKey2020",
+      "publicKeyJwk": {
+        "crv": "P-256",
+        "kty": "EC",
+        "x": "aPwWGpHvTQXjGaPcMDm6QLx_z40gZ0ZBpBwQKrUDD5k",
+        "y": "Z-GpUHH-TfXarYE7lh3lKT9QEydDTLTzg4EagQFu0Yo"
+      }
+    }
+  ],
+  "authentication": [
+    "#fdb844bc44ba4434a8689a07d3c29ab2vcSigningKey-2df2a"
+  ],
+  "assertionMethod": [
+    "#fdb844bc44ba4434a8689a07d3c29ab2vcSigningKey-2df2a"
+  ]
+}

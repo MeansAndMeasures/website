@@ -1,0 +1,131 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import KCLanguageSwitcher from "../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Newcomers — KC"
+    description="If you just arrived in Kansas City — visitor, refugee, new neighbor — here is the orientation we wish we had."
+    noReferrer={true}
+>
+    <KCLanguageSwitcher currentLang="en" enPath="/kc/newcomers" esPath="/es/kc/newcomers" />
+
+    <p class="kc-eyebrow">Newcomers</p>
+    <h1>If you just got here.</h1>
+    <p class="kc-lede">
+        Kansas City is two states and at least nine counties stitched together along a state line.
+        It looks like one city; it does not act like one. If you just arrived — whether for a week,
+        for a job, or because you had to leave somewhere — this page is for getting your footing.
+    </p>
+
+    <section class="kc-section" aria-labelledby="urgent">
+        <h2 id="urgent">If something is wrong right now</h2>
+        <div class="kc-urgent">
+            <p>Emergency: <a class="kc-urgent__phone" href="tel:911">911</a> — both states. Call or text.</p>
+            <p>Mental health crisis: <a href="tel:988">988</a> (call or text). Spanish: press 2.</p>
+            <p>Don't know what you need: <a href="tel:211">211</a> (MO and KS each have their own).</p>
+            <p>The full <a href="/kc/crisis">crisis directory</a> has more.</p>
+        </div>
+    </section>
+
+    <section class="kc-section" aria-labelledby="state-line">
+        <h2 id="state-line">The state line is real</h2>
+        <p>
+            You can be on a sidewalk in Missouri and across the street in Kansas. State Line Road
+            is the literal line for much of the metro. This matters because:
+        </p>
+        <ul>
+            <li>Police, courts, taxes, and benefits change instantly across that line.</li>
+            <li>SNAP (food stamps) is "MO DSS" on the Missouri side and "KS DCF" on the Kansas side.
+                You can only have benefits in one state at a time, and you have to be a resident there.</li>
+            <li>Medicaid is "MO HealthNet" in Missouri and "KanCare" in Kansas. Kansas did not expand
+                Medicaid; eligibility there is narrower.</li>
+            <li>Most utility companies, libraries, and bus systems span both — but not all.</li>
+        </ul>
+        <p>
+            When someone tells you about a service, ask which state. "Kansas City" almost always
+            means Kansas City, Missouri unless someone says KCK (Kansas City, Kansas — a different city).
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="language">
+        <h2 id="language">Language access</h2>
+        <p>
+            Many service providers will use a phone interpreter (LanguageLine or similar) for free if you
+            ask. You do not need to bring your own translator. Useful phrases:
+        </p>
+        <ul>
+            <li>"I need an interpreter in [language]." — most clinics, courts, and 911 calls will get one.</li>
+            <li>"Necesito un intérprete en español." — same in Spanish.</li>
+        </ul>
+        <p>
+            Spanish-speakers: most of this directory has a Spanish version — use the language toggle at the top of each KC page.
+            Para más recursos: <a href="/es/kc/crisis">Crisis en español</a>.
+        </p>
+        <p>
+            For refugee and recent-arrival services, the
+            <a href="https://www.rescue.org/united-states/kansas-city-mo" rel="noopener noreferrer">International Rescue Committee (IRC) KC office</a>,
+            <a href="https://www.dontacostas.org/" rel="noopener noreferrer">Don Bosco Centers</a>, and
+            <a href="https://www.elcentroinc.com/" rel="noopener noreferrer">El Centro (Kansas side)</a> are starting points.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="visiting">
+        <h2 id="visiting">If you are visiting</h2>
+        <p>
+            The metro is car-shaped. Buses (RideKC) cross the state line. The downtown streetcar is free.
+            Uber and Lyft work normally. If you don't have a car and are not near downtown,
+            allow more time than you'd expect — bus headways are long.
+        </p>
+        <p>
+            "Downtown" usually means the financial district north of Crown Center. "The Plaza" is the
+            shopping district around 47th Street. "Crossroads" is the arts district south of downtown.
+            "Westport" is the bar district. Most tourist guides will route you to those neighborhoods
+            and to the BBQ restaurants — they are real, but the metro extends much further.
+        </p>
+        <p>
+            18th &amp; Vine is the historic Black district — home of jazz and the Negro Leagues Baseball
+            Museum. The Bruce R. Watkins Cultural Heritage Center is also there. The neighborhood was
+            cut up by I-70 in the 1950s — a fact worth knowing about why the area looks the way it does.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="worldcup">
+        <h2 id="worldcup">If you're here for the World Cup (June 2026 onward)</h2>
+        <p>
+            KC is hosting six FIFA Men's World Cup matches starting in June 2026 at Arrowhead Stadium.
+            If you are arriving for a match: <a href="/kc/worldcup">the World Cup page</a> has the
+            navigation, transit, and language info. If you live here and the tournament is making things
+            harder — same page, second half.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="recent-arrival">
+        <h2 id="recent-arrival">If you arrived recently and are settling in</h2>
+        <p>
+            The basics, by category:
+        </p>
+        <ul>
+            <li><strong>Food:</strong> Harvesters runs the regional food bank. Pantries take you with minimal paperwork. See <a href="/kc/food">food</a>.</li>
+            <li><strong>Healthcare:</strong> KC Care Clinic, Samuel Rodgers, and Swope Health are federally qualified (sliding-scale, no insurance OK). See <a href="/kc/healthcare">healthcare</a>.</li>
+            <li><strong>Housing:</strong> Tenant rights differ in MO vs. KS. KC Tenants (816-533-5435) is the strongest advocate on the Missouri side. See <a href="/kc/housing">housing</a>.</li>
+            <li><strong>Legal:</strong> Legal Aid of Western Missouri and Kansas Legal Services do not require documentation status to take a case. See <a href="/kc/legal">legal</a>.</li>
+            <li><strong>Libraries:</strong> Free library cards, free notary, free fax, often free passport photos. See <a href="/kc/libraries">libraries</a>.</li>
+            <li><strong>Schools:</strong> School district by where you sleep, not where you work. The metro has 30+ school districts.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="rights">
+        <h2 id="rights">A few things to know about your rights</h2>
+        <ul>
+            <li>You can be in a public library, on a public sidewalk, in a public park without ID.</li>
+            <li>You do not have to answer questions from immigration officers without a lawyer. The number of an immigration lawyer is more useful than the number of a translator.</li>
+            <li>911 will dispatch police, paramedics, or fire. If you do not want police, ask for "paramedics only" — sometimes this works, sometimes not.</li>
+            <li>Schools, hospitals, and FQHCs are not currently used by immigration enforcement as routine pick-up sites. This is policy, not law, and it has changed in the past.</li>
+        </ul>
+        <p class="kc-note">
+            None of this is legal advice. If you have a specific question, the
+            <a href="/kc/legal">legal page</a> has free legal help that does not gate by status.
+        </p>
+    </section>
+</KCLayout>

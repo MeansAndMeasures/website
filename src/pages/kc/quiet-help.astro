@@ -1,0 +1,82 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+---
+
+<KCLayout
+    title="Reference — KC"
+    description="Reference list."
+    noReferrer={true}
+    showSubnav={false}
+    robots="noindex,nofollow"
+>
+    <p class="kc-eyebrow">Reference</p>
+    <h1>A reference list.</h1>
+    <p class="kc-lede">
+        The same numbers as the main directory, kept here under a less searchable name in case
+        searching the obvious word would be unsafe for you to do.
+    </p>
+
+    <div class="kc-urgent">
+        <p><a class="kc-urgent__phone" href="tel:911">911</a> — emergency, both states. Call or text.</p>
+    </div>
+
+    <ServiceCard
+        name="Talk line A"
+        phone="988"
+        sms="988"
+        hours="24/7"
+        hours24={true}
+        statusNeutral={true}
+        expect="Call or text. For Spanish call 988 and press 2, or text AYUDA. Counselors will not automatically dispatch police."
+        confidence="verified"
+        emergency={true}
+    />
+
+    <ServiceCard
+        name="Text-only line"
+        sms="741741"
+        hours="24/7"
+        hours24={true}
+        statusNeutral={true}
+        expect="Text HOME to 741741. Free on major U.S. carriers."
+        confidence="verified"
+        emergency={true}
+    />
+
+    <ServiceCard
+        name="Trans peer support"
+        phone="877-565-8860"
+        hours="24/7"
+        hours24={true}
+        statusNeutral={true}
+        expect="They will not call emergency services on you without your explicit consent."
+        confidence="verified"
+        emergency={true}
+    />
+
+    <ServiceCard
+        name="Veterans"
+        phone="988"
+        sms="838255"
+        hours="24/7"
+        hours24={true}
+        statusNeutral={true}
+        expect="Call 988 and press 1, or text 838255. Any veteran, any discharge type."
+        confidence="verified"
+        emergency={true}
+    />
+
+    <p class="kc-note">
+        The full directory with shelters, food, legal help, and clinics is at the main page when it's safe to look.
+    </p>
+</KCLayout>
+
+<script is:inline>
+    // Replace history entry so the "back" button does not return here.
+    if (window.history && window.history.replaceState) {
+        try {
+            window.history.replaceState({}, document.title, "/");
+        } catch (e) { /* ignore */ }
+    }
+</script>

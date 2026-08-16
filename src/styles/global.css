@@ -1,0 +1,1222 @@
+/* =========================================
+   ROOT
+========================================= */
+html {
+    font-size: 20px; /* 1rem = 20px */
+    color: #0f1a2c;
+    background: #f2ede2;
+
+    /* Width-aware type scale. Viewport height made tall phones render
+       headings at near-desktop sizes. */
+    --type-display: clamp(2.75rem, calc(1.6rem + 5.5vw), 7.6rem);
+    --type-h1: clamp(2rem, calc(1rem + 4vw), 4.5rem);
+    --type-h2: clamp(1.55rem, calc(1rem + 2.5vw), 3rem);
+    --type-h3: clamp(1.3rem, calc(1rem + 1.5vw), 2rem);
+    --type-h4: clamp(1.1rem, calc(0.95rem + 0.8vw), 1.45rem);
+
+    /* Shared spatial system. */
+    --page-max: 70rem;
+    --page-gutter: clamp(1.2rem, 5vw, 3.6rem);
+    --content-measure: 66ch;
+    --kc-max: 60rem;
+    --section-space: clamp(2.43rem, 6vw, 5.67rem);
+    --section-space-compact: clamp(1.62rem, 3vw, 3.24rem);
+}
+
+/* =========================================
+   BODY TEXT
+========================================= */
+body {
+    font-family: "Spectral", serif;
+    font-size: 1rem;      /* 20px */
+    line-height: 1.62;
+    font-weight: 400;
+    margin: 0;
+    color: #0f1a2c;
+    background: #f2ede2;
+}
+
+::selection {
+    color: #f2ede2;
+    background: #463a6b;
+}
+
+p + p {
+    margin-top: 2.16em;
+}
+
+ul,
+ol {
+    margin-block: 1.33em;
+    padding-inline-start: 1.62em;
+}
+
+li + li {
+    margin-top: 0.81em;
+}
+
+/* =========================================
+   MEASURE UTILITY
+========================================= */
+.measure {
+    width: min(100%, var(--content-measure));
+    margin-inline: auto;
+}
+
+.measure--centered {
+    margin-inline: auto;
+}
+
+/* =========================================
+   HERO OBJECT
+========================================= */
+.hero-title {
+    font-family: "Sora", sans-serif;
+    font-size: var(--type-display);
+    line-height: 0.98;
+    max-width: 12ch;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+    padding-block: clamp(1.62rem, 8vh, 5.67rem);
+    margin: 0 0 0 auto;
+    text-align: right;
+    color: #0f1a2c;
+}
+
+/* =========================================
+   CONTENT HEADING OBJECTS
+========================================= */
+h1 {
+    font-family: "Sora", sans-serif;
+    font-size: var(--type-h1);
+    line-height: 1.1;
+    margin-top: 3.24rem; /* 2x base rhythm */
+    margin-bottom: 0.81rem; /* 0.5x base rhythm */
+}
+
+h2 {
+    font-family: "Sora", sans-serif;
+    font-size: var(--type-h2);
+    line-height: 1.2;
+    margin-top: 2.43rem; /* 1.5x base rhythm */
+    margin-bottom: 0.81rem;
+}
+
+h3 {
+    font-family: "Sora", sans-serif;
+    font-size: var(--type-h3);
+    line-height: 1.3;
+    margin-top: 2.16rem; /* Matches p + p gap perfectly */
+    margin-bottom: 0.81rem;
+}
+
+h4 {
+    font-family: "Sora", sans-serif;
+    font-size: var(--type-h4);
+    line-height: 1.4;
+    margin-top: 1.62rem; /* 1x base rhythm */
+    margin-bottom: 0.81rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+.card-title,
+.service-card__name {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+}
+
+/* =========================================
+   CAPTION / EYEBROW OBJECT
+========================================= */
+.caption,
+.eyebrow {
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0 0 0.81rem;
+    color: #6a5a95;
+}
+
+/* =========================================
+   SECTION OBJECT
+========================================= */
+.section {
+    box-sizing: border-box;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
+    margin-inline: auto;
+    padding-block: var(--section-space);
+    padding-inline: 0;
+    background: var(--section-bg, transparent);
+}
+
+a {
+    color: inherit;
+    text-decoration-color: #c9482f;
+    text-decoration-thickness: 0.045em;
+    text-underline-offset: 0.18em;
+}
+
+a:hover {
+    color: #463a6b;
+}
+
+.section--compact {
+    padding-block: var(--section-space-compact);
+}
+
+/* =========================================
+   GRID CONTAINER
+========================================= */
+.grid {
+    width: 100%;
+    margin-inline: auto;
+    display: grid;
+    gap: 2vw;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(8rem, 16%, 20rem), 1fr));
+    align-items: start;
+    justify-items: stretch;
+}
+
+/* =========================================
+   CARD TITLE OBJECT
+========================================= */
+.card-title {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1rem, 2.4vw, 1.35rem);
+    line-height: 1.215;
+    margin: 0;
+}
+
+/* =========================================
+   CTA OBJECT
+========================================= */
+.cta-title {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1.1;
+    max-width: 33ch;
+    margin-inline: auto;
+    margin-bottom: 1.62rem;
+}
+/* =========================================
+   SITE CHROME
+========================================= */
+
+.site-header,
+.site-footer {
+    border-block: 1px solid #463a6b;
+}
+
+.site-header__inner,
+.site-footer__inner {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
+    margin-inline: auto;
+
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: clamp(1.62rem, 5vw, 4.86rem);
+}
+
+.site-header__inner {
+    padding-block: 0.81rem;
+}
+
+.site-header__mark {
+    font-family: "Sora", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-header__mark img {
+    display: block;
+    width: auto;
+    height: 2.2rem;
+}
+
+.site-header__diamond {
+    color: #c9482f;
+    font-size: 0.72em;
+    line-height: 1;
+    transform: translateY(-0.02em);
+}
+
+.site-header__nav,
+.site-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    column-gap: clamp(1rem, 2.4vw, 1.62rem);
+    row-gap: 0.35rem;
+
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.25;
+}
+
+.site-header__nav a,
+.site-footer__nav a {
+    color: inherit;
+    text-decoration-thickness: 0.045em;
+    text-underline-offset: 0.18em;
+}
+
+.site-header__nav a[aria-current="page"] {
+    text-decoration-thickness: 0.09em;
+}
+
+.site-footer {
+    border-top: 1px solid #463a6b;
+    border-bottom: 0;
+}
+
+.site-footer__inner {
+    padding-block: 1.62rem;
+}
+
+.site-footer__meta {
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.25;
+}
+
+.site-footer__meta p {
+    margin: 0;
+}
+
+.site-footer__meta p + p {
+    margin-top: 0.4rem;
+}
+
+.site-footer__meta a {
+    text-decoration-color: #7a8aa3;
+}
+
+/* =========================================
+   ENTRY OBJECTS
+========================================= */
+
+.entry-list {
+    margin-top: 2.43rem;
+}
+
+.entry-meta {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 1.2rem;
+    row-gap: 0.45rem;
+    margin-block: 1.62rem 2.43rem;
+    padding-block: 0.81rem;
+    border-block: 1px solid color-mix(in srgb, #463a6b 58%, transparent);
+
+    font-size: 0.82rem;
+    line-height: 1.35;
+    background: color-mix(in srgb, #e5ddc9 42%, transparent);
+}
+
+.entry-meta dt {
+    font-family: "Spectral SC", serif;
+    letter-spacing: 0;
+}
+
+.entry-meta dd {
+    min-width: 0;
+    margin: 0;
+}
+
+.entry-meta a {
+    overflow-wrap: anywhere;
+}
+
+.intake-form {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2.43rem;
+}
+
+.field {
+    display: grid;
+    gap: 0.3rem;
+}
+
+.field--hidden {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.field label {
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.25;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #463a6b;
+    border-radius: 0;
+    padding: 0.55rem 0.65rem;
+    color: inherit;
+    background: color-mix(in srgb, #f2ede2 88%, white);
+    font: inherit;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: 0.12rem solid #c9482f;
+    outline-offset: 0.12rem;
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.intake-form button {
+    justify-self: start;
+    border: 1px solid #463a6b;
+    border-radius: 0;
+    padding: 0.55rem 0.8rem;
+    color: inherit;
+    background: transparent;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    cursor: pointer;
+}
+
+.intake-form button:hover,
+.intake-form button:focus-visible {
+    background: #e5ddc9;
+}
+
+.intake-form button:disabled {
+    cursor: wait;
+    opacity: 0.62;
+}
+
+.form-status {
+    min-height: 1.35em;
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.25;
+}
+
+.intake-output {
+    overflow: auto;
+    max-height: 32rem;
+    margin-top: 1.62rem;
+    padding: 0.81rem;
+    border: 1px solid #463a6b;
+    background: color-mix(in srgb, #e5ddc9 38%, transparent);
+    font-size: 0.72rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+}
+
+.document-action {
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.25;
+}
+
+.asset-list {
+    padding-inline-start: 0;
+    list-style: none;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.35;
+}
+
+.asset-list li + li {
+    margin-top: 0.45rem;
+}
+
+.brand-document {
+    border-block: 1px solid #463a6b;
+    background: #f2ede2;
+}
+
+.brand-document iframe {
+    display: block;
+    width: 100%;
+    min-height: min(76rem, 82vh);
+    border: 0;
+    background: #f2ede2;
+}
+
+/* =========================================
+   HOMEPAGE
+========================================= */
+
+.homepage-hero {
+    min-height: clamp(28rem, 68vh, 40rem);
+    display: grid;
+    align-content: end;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
+    margin-inline: auto;
+    padding-inline: 0;
+    padding-block: clamp(3.24rem, 9vh, 6.48rem) clamp(2.43rem, 7vh, 4.86rem);
+}
+
+.homepage-hero__kicker,
+.homepage-hero__summary {
+    width: min(100%, 66ch);
+}
+
+.homepage-routing {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid #463a6b;
+}
+
+.section--routing {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
+    margin-inline: auto;
+    padding-inline: 0;
+    padding-block: 0 clamp(3.24rem, 7vh, 5.67rem);
+}
+
+.section--routing > .eyebrow {
+    margin-bottom: 1.62rem;
+}
+
+.route-panel {
+    min-height: 11rem;
+    padding: 1.2rem 1rem 1.62rem 0;
+    border-bottom: 1px solid #463a6b;
+
+    color: inherit;
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.route-panel:hover,
+.route-panel:focus-visible {
+    background: color-mix(in srgb, #e5ddc9 54%, transparent);
+}
+
+.route-panel:focus-visible {
+    outline: 0.1rem solid #c9482f;
+    outline-offset: 0.2rem;
+}
+
+.route-panel__meta {
+    margin-top: 1rem;
+    font-family: "Spectral SC", serif;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    color: #6a5a95;
+}
+
+.system-grid,
+.capability-list,
+.update-list,
+.status-list,
+.sitemap-list {
+    margin-top: 2.43rem;
+}
+
+.capability-list,
+.update-list,
+.status-list,
+.sitemap-list {
+    width: 100%;
+    margin-inline: auto;
+    display: grid;
+    gap: 1.62rem;
+}
+
+.capability-list,
+.status-list,
+.sitemap-list {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.update-list {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: var(--content-measure);
+}
+
+.capability-list section,
+.update-list article,
+.status-list section,
+.sitemap-list__section {
+    border-top: 1px solid color-mix(in srgb, #463a6b 58%, transparent);
+    padding-top: 1.2rem;
+}
+
+.capability-list h2,
+.update-list h2,
+.status-list h2,
+.sitemap-list h2 {
+    font-size: clamp(1.35rem, calc(1.1rem + 1vw), 2.4rem);
+    margin-top: 0;
+}
+
+.sitemap-list ul {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.sitemap-list li + li {
+    margin-top: 0.45rem;
+}
+
+/* =========================================
+   KC SECTION — HEADER VARIANTS
+========================================= */
+
+/* Quiet "KC" link on non-KC pages — matches other nav items. */
+.site-header__kclink {
+    color: inherit;
+}
+
+/* Loud "Need Help Now" only on KC pages. */
+.site-header__needhelp,
+.site-footer__needhelp {
+    color: #c9482f;
+    font-weight: 700;
+    text-decoration-thickness: 0.09em;
+}
+
+.site-header__escape {
+    border: 1px solid #c9482f;
+    background: #c9482f;
+    color: #f2ede2;
+    padding: 0.32rem 0.65rem;
+    border-radius: 0;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.site-header__escape:hover,
+.site-header__escape:focus-visible {
+    background: #0f1a2c;
+    border-color: #0f1a2c;
+    outline: none;
+}
+
+/* =========================================
+   KC SECTION — LAYOUT
+========================================= */
+
+.kc {
+    box-sizing: border-box;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--kc-max));
+    margin-inline: auto;
+    padding-block: clamp(1.62rem, 4vh, 3.24rem);
+    padding-inline: 0;
+}
+
+.kc-eyebrow {
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    color: #c9482f;
+    letter-spacing: 0;
+    margin: 0 0 0.81rem;
+}
+
+.kc h1 {
+    margin-top: 1.62rem;
+}
+
+.kc-lede {
+    font-size: 1.18rem;
+    line-height: 1.55;
+    max-width: 60ch;
+    margin: 1.62rem auto 2.43rem;
+}
+
+.kc-section {
+    margin-block: 2.43rem;
+    padding-block: 1.62rem;
+    border-top: 1px solid color-mix(in srgb, #463a6b 50%, transparent);
+}
+
+.kc-section:first-of-type {
+    border-top: 0;
+}
+
+/* =========================================
+   KC SERVICE CARDS
+========================================= */
+
+.service-card {
+    margin-block: 1.62rem;
+    padding: 1.2rem;
+    border: 1px solid color-mix(in srgb, #463a6b 60%, transparent);
+    background: color-mix(in srgb, #e5ddc9 24%, transparent);
+}
+
+.service-card[data-emergency="true"] {
+    border-color: #c9482f;
+    border-width: 2px;
+    background: color-mix(in srgb, #c9482f 8%, #f2ede2);
+}
+
+.service-card__name {
+    font-family: "Sora", sans-serif;
+    font-size: 1.35rem;
+    margin: 0 0 0.45rem;
+    line-height: 1.25;
+}
+
+.service-card__contact {
+    margin: 0.45rem 0;
+    font-family: "Spectral SC", serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.service-card__contact li {
+    margin: 0;
+}
+
+.service-card__contact a {
+    text-decoration-thickness: 0.09em;
+    overflow-wrap: anywhere;
+}
+
+.service-card__phone {
+    display: inline-block;
+    padding: 0.65rem 0.9rem;
+    margin-block: 0.45rem;
+    background: #c9482f;
+    color: #f2ede2 !important;
+    font-family: "Sora", sans-serif;
+    font-size: 1.18rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: 1px solid #c9482f;
+}
+
+.service-card__phone:hover,
+.service-card__phone:focus-visible {
+    color: #f2ede2 !important;
+    background: #0f1a2c;
+    border-color: #0f1a2c;
+    outline: none;
+}
+
+.service-card__copy {
+    margin-inline-start: 0.45rem;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid #463a6b;
+    background: transparent;
+    font-family: "Spectral SC", serif;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+    cursor: pointer;
+    color: inherit;
+}
+
+.service-card__copy:hover,
+.service-card__copy:focus-visible {
+    background: #e5ddc9;
+}
+
+.service-card__access {
+    margin: 0.81rem 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.service-card__expect {
+    margin: 0.81rem 0;
+    line-height: 1.55;
+}
+
+.service-card__correction {
+    font-family: "Spectral SC", serif;
+    font-size: 0.72rem;
+    color: #7a8aa3;
+    letter-spacing: 0;
+    margin: 0.81rem 0 0;
+}
+
+.service-card details summary {
+    cursor: pointer;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    margin-block: 0.45rem;
+}
+
+/* =========================================
+   KC TRIAGE ROW
+========================================= */
+
+.kc-triage {
+    margin-block: 2.43rem;
+    padding: 1.62rem;
+    border: 2px solid #c9482f;
+    background: color-mix(in srgb, #c9482f 6%, #f2ede2);
+}
+
+.kc-triage h2 {
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.kc-triage__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 0.81rem;
+    margin-block: 1.2rem;
+}
+
+.kc-triage__option {
+    display: block;
+    padding: 1rem;
+    border: 1px solid #463a6b;
+    background: #f2ede2;
+    color: inherit;
+    text-decoration: none;
+    font-family: "Sora", sans-serif;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.kc-triage__option:hover,
+.kc-triage__option:focus-visible {
+    background: #e5ddc9;
+    outline: 0.1rem solid #c9482f;
+    outline-offset: 0.1rem;
+}
+
+/* =========================================
+   KC READABILITY CONTROLS
+========================================= */
+
+.kc-readability {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+    margin-block: 0.81rem;
+    padding: 0.65rem;
+    border: 1px solid color-mix(in srgb, #463a6b 40%, transparent);
+    background: color-mix(in srgb, #e5ddc9 24%, transparent);
+    font-family: "Spectral SC", serif;
+    font-size: 0.72rem;
+}
+
+.kc-readability__label {
+    font-weight: 600;
+    margin-inline-end: 0.45rem;
+}
+
+.kc-readability button {
+    padding: 0.32rem 0.65rem;
+    border: 1px solid #463a6b;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.kc-readability button:hover,
+.kc-readability button:focus-visible,
+.kc-readability button[aria-pressed="true"] {
+    background: #463a6b;
+    color: #f2ede2;
+}
+
+body[data-kc-size="lg"] {
+    font-size: 1.18rem;
+}
+
+body[data-kc-size="xl"] {
+    font-size: 1.35rem;
+}
+
+body[data-kc-contrast="high"] {
+    background: #ffffff;
+    color: #000000;
+}
+
+body[data-kc-contrast="high"] .service-card {
+    background: #ffffff;
+    border-color: #000000;
+    color: #000000;
+}
+
+body[data-kc-contrast="high"] .service-card__phone {
+    background: #000000;
+    border-color: #000000;
+}
+
+body[data-kc-spacing="loose"] {
+    line-height: 1.85;
+}
+
+/* =========================================
+   KC LANGUAGE SWITCHER
+========================================= */
+
+.kc-lang {
+    display: flex;
+    gap: 0.45rem;
+    margin-block: 0.81rem;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+}
+
+.kc-lang a {
+    padding: 0.18rem 0.45rem;
+    border: 1px solid #463a6b;
+    text-decoration: none;
+    color: inherit;
+}
+
+.kc-lang a[aria-current="true"] {
+    background: #463a6b;
+    color: #f2ede2;
+}
+
+.kc-lang-banner {
+    margin-block: 1rem;
+    padding: 0.81rem 1rem;
+    border: 1px dashed #c9482f;
+    background: color-mix(in srgb, #c9482f 6%, #f2ede2);
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+}
+
+/* =========================================
+   KC URGENT BLOCK (for "right now" sections)
+========================================= */
+
+.kc-urgent {
+    margin-block: 1.62rem;
+    padding: 1.2rem;
+    border-left: 4px solid #c9482f;
+    background: color-mix(in srgb, #c9482f 4%, #f2ede2);
+}
+
+.kc-urgent h2,
+.kc-urgent h3 {
+    margin-top: 0;
+}
+
+.kc-urgent__phone {
+    display: inline-block;
+    font-family: "Sora", sans-serif;
+    font-size: 2.16rem;
+    font-weight: 600;
+    line-height: 1.1;
+    text-decoration: none;
+    color: #c9482f;
+}
+
+.kc-urgent__phone:hover {
+    color: #0f1a2c;
+}
+
+.kc-note {
+    margin: 0.81rem 0;
+    padding: 0.65rem 0.9rem;
+    border-left: 3px solid #7a8aa3;
+    background: color-mix(in srgb, #7a8aa3 8%, transparent);
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.kc-note--strong {
+    border-left-color: #c9482f;
+    background: color-mix(in srgb, #c9482f 6%, transparent);
+}
+
+/* =========================================
+   KC NAV SUBHEAD
+========================================= */
+
+.kc-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.9rem;
+    margin-block: 1.62rem;
+    font-family: "Spectral SC", serif;
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.kc-subnav a {
+    text-decoration-color: #c9482f;
+}
+
+.kc-subnav a[aria-current="page"] {
+    text-decoration-thickness: 0.12em;
+    font-weight: 700;
+}
+
+/* =========================================
+   KC SEARCH / FILTER
+========================================= */
+
+.kc-search {
+    margin-block: 1.62rem;
+    display: grid;
+    gap: 0.81rem;
+}
+
+.kc-search input[type="search"] {
+    padding: 0.65rem;
+    border: 1px solid #463a6b;
+    background: color-mix(in srgb, #f2ede2 88%, white);
+    font: inherit;
+}
+
+.kc-search input[type="search"]:focus {
+    outline: 0.12rem solid #c9482f;
+    outline-offset: 0.12rem;
+}
+
+.kc-search__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    font-family: "Spectral SC", serif;
+    font-size: 0.72rem;
+}
+
+.kc-search__chip {
+    padding: 0.32rem 0.65rem;
+    border: 1px solid #463a6b;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.kc-search__chip[aria-pressed="true"] {
+    background: #463a6b;
+    color: #f2ede2;
+}
+
+/* =========================================
+   KC PRINT
+========================================= */
+
+/* =========================================
+   WCAG AA — CONTRAST & FOCUS ADJUSTMENTS
+========================================= */
+
+/* Skip-to-main link: hidden until focused. */
+.skip-link {
+    position: absolute;
+    left: 0.45rem;
+    top: -3rem;
+    padding: 0.45rem 0.81rem;
+    background: #0f1a2c;
+    color: #f2ede2;
+    font-family: "Spectral SC", serif;
+    font-size: 0.9rem;
+    z-index: 1000;
+    transition: top 0.15s ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: 0.45rem;
+    outline: 0.12rem solid #c9482f;
+    outline-offset: 0.12rem;
+}
+
+/* Small-text uses of the brand red darkened to meet 4.5:1. */
+.kc-eyebrow,
+.site-header__needhelp,
+.site-footer__needhelp {
+    color: #a8351e;
+}
+
+/* Muted correction path — was #7a8aa3 (3.00:1), now passes. */
+.service-card__correction {
+    color: #566375;
+}
+
+/* Escape button: was 0.8rem regular (fails 4.5:1). Now bold + larger for 3:1 large-text threshold. */
+.site-header__escape {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+/* Universal :focus-visible for KC interactive elements. */
+.kc-search__chip:focus-visible,
+.kc-triage__option:focus-visible,
+.service-card__copy:focus-visible,
+.service-card__phone:focus-visible,
+.kc-readability button:focus-visible,
+.kc-lang a:focus-visible {
+    outline: 0.15rem solid #c9482f;
+    outline-offset: 0.18rem;
+}
+
+/* Make the site-header nav links + Subnav links have visible focus. */
+.site-header__nav a:focus-visible,
+.site-footer__nav a:focus-visible,
+.kc-subnav a:focus-visible {
+    outline: 0.12rem solid #c9482f;
+    outline-offset: 0.18rem;
+}
+
+/* Service card details/summary disclosure widgets. */
+.service-card details summary:focus-visible {
+    outline: 0.12rem solid #c9482f;
+    outline-offset: 0.18rem;
+}
+
+@media print {
+    .site-header,
+    .site-footer,
+    .kc-readability,
+    .kc-lang,
+    .kc-search,
+    .kc-triage,
+    .service-card__copy,
+    .site-header__escape {
+        display: none !important;
+    }
+
+    body {
+        font-size: 11pt;
+        background: white;
+        color: black;
+    }
+
+    .service-card {
+        page-break-inside: avoid;
+        border: 1px solid black;
+        background: white;
+    }
+
+    .service-card__phone {
+        background: white;
+        color: black !important;
+        border: 1px solid black;
+        text-decoration: none;
+    }
+
+    a {
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body:not([data-kc-contrast="high"]) {
+        --kc-bg: #1c1c20;
+        --kc-fg: #f0e6d3;
+    }
+}
+
+@media (max-width: 760px) {
+    html {
+        font-size: 18px;
+    }
+
+    .site-header__inner {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0.81rem;
+    }
+
+    .site-header__nav {
+        justify-content: flex-start;
+        column-gap: 1.2rem;
+    }
+
+    .site-footer__inner {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+        gap: 1.2rem;
+    }
+
+    .site-footer__nav {
+        justify-content: flex-start;
+    }
+
+    .hero-title {
+        max-width: none;
+        white-space: normal;
+        text-align: left;
+        margin-left: 0;
+    }
+
+    .homepage-hero {
+        min-height: auto;
+        padding-block: 3.24rem;
+    }
+
+    .homepage-routing {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .route-panel {
+        min-height: 8.5rem;
+        padding-block: 1rem 1.2rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .section,
+    .homepage-hero,
+    .section--routing,
+    .site-header__inner,
+    .site-footer__inner,
+    .grid {
+        width: auto;
+        margin-inline: 0;
+    }
+
+    .section,
+    .homepage-hero,
+    .section--routing,
+    .site-header__inner,
+    .site-footer__inner {
+        padding-inline: 1.2rem;
+    }
+
+    .homepage-routing {
+        grid-template-columns: 1fr;
+    }
+
+    .route-panel {
+        min-height: auto;
+        gap: 1.62rem;
+        padding-right: 0;
+    }
+}

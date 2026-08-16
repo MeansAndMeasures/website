@@ -1,0 +1,29 @@
+{
+
+  "linkset": [
+
+    {
+
+      "anchor": "https://civicbrands.org/kc",
+
+      "service-desc": [
+
+        {
+
+          "href": "https://civicbrands.org/kc/services.json"
+
+        },
+
+        {
+
+          "href": "https://civicbrands.org/kc/crisis.json"
+
+        }
+
+      ]
+
+    }
+
+  ]
+
+}

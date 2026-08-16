@@ -1,0 +1,191 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import ServiceJsonLd from "../../components/ServiceJsonLd.astro";
+import { getCollection } from "astro:content";
+
+const services = await getCollection("kcServices", ({ data }) => data.categories.includes("veterans"));
+const schemaServices = services.map((s) => ({
+    name: s.data.name,
+    phone: s.data.phone,
+    website: s.data.website,
+    address: s.data.address,
+    categories: s.data.categories,
+    expect: s.data.expect
+}));
+---
+
+<KCLayout
+    title="Veterans — KC"
+    description="Veterans Crisis Line, VA navigation, KC Vet Center, Veterans Community Project, and the housing + benefits paths most relevant to KC-metro veterans regardless of discharge."
+>
+    <ServiceJsonLd services={schemaServices} slot="head" />
+
+    <p class="kc-eyebrow">Veterans</p>
+    <h1>Any veteran, any discharge, any era.</h1>
+    <p class="kc-lede">
+        The most common reason veterans do not get the help they earned: they assume their discharge
+        type disqualifies them, or that they need to be enrolled with the VA first. Neither is true
+        for the services on this page. Crisis support, peer support, basic-needs navigation, and
+        readjustment counseling are open to any veteran. The VA disability and pension systems do
+        gate on discharge type — but the front door to "talking to someone who knows the territory"
+        does not.
+    </p>
+
+    <section class="kc-section" aria-labelledby="urgent">
+        <h2 id="urgent">If you need help right now</h2>
+
+        <ServiceCard
+            name="Veterans Crisis Line"
+            phone="988"
+            sms="838255"
+            website="https://www.veteranscrisisline.net"
+            hours="24/7"
+            hours24={true}
+            languages={["English", "Spanish"]}
+            statusNeutral={true}
+            expect="Call 988 and press 1, or text 838255. Counselors are veterans or trained in military culture. Family and friends can call on behalf of a veteran they're worried about."
+            fearAddressed={["police", "cost", "paperwork", "reporting"]}
+            confidence="verified"
+            emergency={true}
+            flagSlug="veterans-crisis"
+        />
+
+        <p>
+            National Call Center for Homeless Veterans:
+            <a href="tel:1-877-424-3838">1-877-424-3838</a> (24/7). Crisis chat at
+            <a href="https://www.veteranscrisisline.net/get-help-now/chat/" rel="noopener noreferrer">veteranscrisisline.net/chat</a>.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="kc-orgs">
+        <h2 id="kc-orgs">In-person KC: housing, navigation, services</h2>
+
+        <ServiceCard
+            name="Veterans Community Project (KC)"
+            phone="816-599-6503"
+            website="https://www.veteranscommunityproject.org"
+            address="8825 Troost Ave, Kansas City, MO 64131"
+            hours="Outreach center hours vary — call first"
+            languages={["English"]}
+            states={["MO"]}
+            statusNeutral={true}
+            veteranOnly={true}
+            expect="Tiny-home village for veterans experiencing homelessness, plus an outreach center that helps with VA paperwork, ID recovery, benefits, and basic needs. Discharge status is not a barrier."
+            fearAddressed={["paperwork", "cost", "reporting"]}
+            confidence="verified"
+            reachableWithoutCar={true}
+            nearestBusRoute="RideKC Route 71 (Troost MAX)"
+            petsAllowed={true}
+            flagSlug="vcp-kc"
+        />
+
+        <ServiceCard
+            name="KC Vet Center"
+            phone="816-922-5300"
+            website="https://www.va.gov/find-locations/facility/vc_0743"
+            address="4800 Main St Ste 107, Kansas City, MO 64112"
+            hours="Monday-Friday business hours; some evening"
+            languages={["English"]}
+            states={["MO"]}
+            statusNeutral={true}
+            veteranOnly={true}
+            expect="Readjustment counseling for any veteran. Discharge characterization is NOT a bar. Free. Vet Center records are kept separate from main VA medical records — useful if you do not want a permanent VA mental-health record."
+            fearAddressed={["paperwork", "cost", "reporting"]}
+            confidence="verified"
+            flagSlug="kc-vet-center"
+        />
+    </section>
+
+    <section class="kc-section" aria-labelledby="discharge">
+        <h2 id="discharge">"My discharge wasn't honorable"</h2>
+        <p>
+            Discharge type is a barrier to some VA benefits — but not all. And the type itself can sometimes be upgraded.
+        </p>
+        <ul>
+            <li><strong>Crisis services, Vet Centers, VCP, the National Call Center for Homeless Veterans:</strong> open regardless of discharge.</li>
+            <li><strong>VA healthcare:</strong> typically requires "Honorable" or "General Under Honorable" — but the VA has a "Character of Discharge" review process that can change this.</li>
+            <li><strong>VA disability + pension:</strong> generally requires Honorable or General. OTH (Other Than Honorable) often blocks these, BUT can be reviewed.</li>
+            <li><strong>GI Bill:</strong> usually Honorable.</li>
+        </ul>
+        <p>
+            <strong>Upgrading a discharge:</strong> if you believe your discharge was unjust — particularly if related to combat trauma, MST (military sexual trauma), TBI, or being LGBTQ+ pre-2011 — you can apply for an upgrade through the Discharge Review Board (DRB) or the Board for Correction of Military Records (BCMR). Free legal help is available:
+        </p>
+        <ul>
+            <li><strong>Swords to Plowshares:</strong> national, free representation — <a href="https://www.swords-to-plowshares.org" rel="noopener noreferrer">swords-to-plowshares.org</a></li>
+            <li><strong>Veterans Legal Services Clinic (Yale):</strong> <a href="https://law.yale.edu/studying-law-yale/clinical-and-experiential-learning/our-clinics/veterans-legal-services-clinic" rel="noopener noreferrer">law.yale.edu/vlsc</a></li>
+            <li><strong>National Veterans Legal Services Program:</strong> <a href="https://www.nvlsp.org" rel="noopener noreferrer">nvlsp.org</a></li>
+        </ul>
+        <p class="kc-note">
+            Connection to combat trauma or MST is often relevant evidence for an upgrade. Do not assume "OTH" is final.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="va-enroll">
+        <h2 id="va-enroll">VA enrollment + benefits navigation</h2>
+        <ul>
+            <li><strong>Kansas City VA Medical Center:</strong> <a href="tel:816-861-4700">816-861-4700</a>, 4801 E Linwood Blvd, KCMO 64128</li>
+            <li><strong>Honor Annex Outpatient (KCK):</strong> part of the KC VA system</li>
+            <li><strong>Eligibility:</strong> apply at <a href="https://www.va.gov/health-care/apply/application/introduction" rel="noopener noreferrer">va.gov/health-care/apply</a></li>
+            <li><strong>If your application is denied:</strong> request the denial in writing and appeal. Discharge character can be reviewed under "Character of Discharge."</li>
+            <li><strong>County Veterans Service Officers (VSOs):</strong> free help filing for benefits. Jackson County: <a href="tel:816-881-3680">816-881-3680</a>. Most other metro counties have one too — call the county's main number.</li>
+            <li><strong>National Service Organizations:</strong> American Legion, VFW, DAV, MOAA all have free benefits counselors. You don't have to be a member to get help filing.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="homeless">
+        <h2 id="homeless">If you're homeless or close to it</h2>
+        <ul>
+            <li><strong>National Call Center for Homeless Veterans:</strong> <a href="tel:1-877-424-3838">1-877-424-3838</a> (24/7)</li>
+            <li><strong>HUD-VASH vouchers:</strong> housing voucher program through the VA + HUD partnership. Apply through the KC VA's homeless veterans team.</li>
+            <li><strong>SSVF (Supportive Services for Veteran Families):</strong> short-term rental + utility help. Local providers: Catholic Charities, Volunteers of America, others. The 877 number above will route you.</li>
+            <li><strong>Veterans Community Project tiny-home village:</strong> (above). Long-term transitional housing.</li>
+            <li><strong>Veterans Treatment Court (Jackson County):</strong> alternative court for veterans with substance use or mental health issues. Diverts from traditional sentencing.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="women">
+        <h2 id="women">Women veterans</h2>
+        <p>
+            Women are the fastest-growing segment of the veteran population. The KC VA has a Women Veterans
+            Program coordinator — ask for them when you call. MST (military sexual trauma) care is available
+            free at the VA regardless of discharge status or whether you reported at the time.
+        </p>
+        <ul>
+            <li><strong>KC VA Women Veterans Program:</strong> call <a href="tel:816-861-4700">816-861-4700</a> and ask for the Women Veterans Program Manager.</li>
+            <li><strong>MST coordinator at the KC VA:</strong> separate from the Women Veterans Program. Ask for "the MST coordinator." Care is free.</li>
+            <li><strong>Service Women's Action Network (SWAN):</strong> peer support + advocacy. <a href="https://www.servicewomen.org" rel="noopener noreferrer">servicewomen.org</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="lgbtq">
+        <h2 id="lgbtq">LGBTQ+ veterans</h2>
+        <p>
+            Veterans discharged under "Don't Ask, Don't Tell" (1994-2011) or earlier policies that
+            barred LGBTQ+ service members are now generally entitled to an upgrade if their discharge
+            was related to sexual orientation or gender identity. The DOD has a streamlined process.
+        </p>
+        <ul>
+            <li><strong>Modern Military Association of America:</strong> upgrade resources + community — <a href="https://modernmilitary.org" rel="noopener noreferrer">modernmilitary.org</a></li>
+            <li><strong>Outserve / OSDN:</strong> network of LGBTQ+ active and veteran service members</li>
+            <li><strong>Crisis support for LGBTQ+ veterans:</strong> see also <a href="/kc/crisis#lgbtq">Trevor Project, Trans Lifeline</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="not-here">
+        <h2 id="not-here">If the listed services aren't what you need</h2>
+        <p>
+            Veterans use everything else on this site — food, housing, healthcare, legal aid. The
+            full directory does not require veteran status. If you'd rather not work through veteran-
+            specific orgs, every other page applies to you too.
+        </p>
+        <ul>
+            <li><a href="/kc/crisis">Crisis numbers</a></li>
+            <li><a href="/kc/food">Food</a></li>
+            <li><a href="/kc/housing">Housing</a></li>
+            <li><a href="/kc/healthcare">Healthcare</a></li>
+            <li><a href="/kc/legal">Legal aid</a></li>
+            <li><a href="/kc/directory">The full directory (search)</a></li>
+        </ul>
+    </section>
+</KCLayout>

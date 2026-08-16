@@ -1,0 +1,51 @@
+---
+import "../styles/global.css";
+
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Session Complete | CivicBrands</title>
+    <meta name="description" content="Conference session complete." />
+  </head>
+
+  <body>
+    <SiteHeader />
+
+    <main class="post-meet">
+      <section class="section">
+        <div class="measure">
+          <p class="eyebrow">Session Complete</p>
+
+          <h1>Thank you for participating.</h1>
+
+          <p>This conference session has concluded.</p>
+
+          <p>
+            If recordings, notes, follow-up materials, decisions, or future
+            actions are expected, please refer to information provided by the
+            meeting organizer.
+          </p>
+
+          <p class="caption">
+            Conferencing services are provided through Zoom.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>
+
+<style>
+  .post-meet {
+    min-height: 62vh;
+    display: grid;
+    align-content: center;
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+const options = [
+    { label: "Food tonight", href: "/kc/food" },
+    { label: "Somewhere to sleep", href: "/kc/housing#tonight" },
+    { label: "Medical care", href: "/kc/healthcare" },
+    { label: "Facing eviction", href: "/kc/housing#eviction" },
+    { label: "Mental health crisis", href: "/kc/crisis" },
+    { label: "I'm visiting and need help", href: "/kc/newcomers" },
+    { label: "Helping someone else", href: "/kc/give-help" }
+];
+---
+
+<section class="kc-triage" aria-labelledby="triage-heading">
+    <h2 id="triage-heading">What do you need right now?</h2>
+    <p>Pick the closest one. We will route you to the page that has the contact info.</p>
+    <div class="kc-triage__grid">
+        {options.map((option) => (
+            <a class="kc-triage__option" href={option.href}>{option.label}</a>
+        ))}
+    </div>
+    <p class="service-card__lkg">
+        If you are in immediate danger: <a href="tel:911">call 911</a>. If you do not know what you need: <a href="tel:211">call 211</a>.
+    </p>
+</section>

@@ -1,0 +1,125 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Ayuda legal — KC"
+    description="Asistencia legal gratuita y de bajo costo, inmigración, derechos del inquilino y apoyo de reingreso en Kansas City."
+    lang="es"
+>
+    <KCLanguageSwitcher currentLang="es" enPath="/kc/legal" esPath="/es/kc/legal" />
+
+    <p class="kc-eyebrow">Legal</p>
+    <h1>Ayuda legal gratuita o de bajo costo.</h1>
+    <p class="kc-lede">
+        La mayoría de la asistencia legal civil tiene restricciones por ingreso, pero el tope es más alto
+        de lo que la gente cree. La defensa criminal para personas que no pueden pagar un abogado la proveen
+        los defensores públicos. Inmigración, defensa de inquilinos y reingreso tienen sus propios programas.
+    </p>
+
+    <section class="kc-section">
+        <h2>Asistencia legal civil</h2>
+
+        <ServiceCard
+            name="Legal Aid of Western Missouri"
+            phone="816-474-6750"
+            website="https://www.lawmo.org"
+            languages={["Inglés", "Español"]}
+            states={["MO"]}
+            statusNeutral={true}
+            expect="Casos civiles — vivienda (desalojo), familia (custodia, DV), beneficios públicos, consumidor. No requiere estatus migratorio. Solo para personas con ingresos elegibles."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="legal-aid-wmo"
+        />
+
+        <ServiceCard
+            name="Kansas Legal Services"
+            phone="800-723-6953"
+            website="https://www.kansaslegalservices.org"
+            languages={["Inglés", "Español"]}
+            states={["KS"]}
+            statusNeutral={true}
+            expect="Casos civiles del lado de Kansas. Defensa de inquilinos, derecho familiar, consumidor, beneficios públicos. Solo para personas con ingresos elegibles."
+            fearAddressed={["immigration", "cost", "paperwork"]}
+            confidence="verified"
+            flagSlug="ks-legal-services"
+        />
+    </section>
+
+    <section class="kc-section">
+        <h2>Defensa de inquilinos (desalojo)</h2>
+        <ul>
+            <li><strong>Derecho a Abogado de KCMO:</strong> <a href="tel:816-474-5112">816-474-5112</a> · solo dentro de los límites de KCMO · representación gratuita para ingresos elegibles</li>
+            <li><strong>Línea telefónica de KC Tenants:</strong> <a href="tel:816-533-5435">816-533-5435</a> · organización + conozca sus derechos + navegación de la corte</li>
+            <li><strong>Legal Aid of Western Missouri (unidad de vivienda):</strong> <a href="tel:816-474-6750">816-474-6750</a></li>
+            <li><strong>Kansas Legal Services:</strong> <a href="tel:800-723-6953">800-723-6953</a></li>
+        </ul>
+        <p class="kc-note">
+            El día de la corte de desalojo — incluso justo antes de la audiencia — a veces hay un defensor
+            de inquilinos en el juzgado. Llegue temprano. No falte a la corte.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Inmigración</h2>
+        <ul>
+            <li><strong>Servicios Legales de Inmigración de Catholic Charities (KC):</strong> <a href="tel:816-654-1191">816-654-1191</a> · DACA, asilo, peticiones familiares, ciudadanía</li>
+            <li><strong>Jewish Vocational Service:</strong> <a href="tel:816-471-2808">816-471-2808</a> · reasentamiento de refugiados + legal de inmigración</li>
+            <li><strong>Migrant Farmworkers Assistance Fund:</strong> <a href="tel:816-994-2950">816-994-2950</a></li>
+            <li><strong>El Centro Inc. (lado KS):</strong> <a href="tel:913-677-0100">913-677-0100</a> · legal de inmigración, ESL, servicios familiares</li>
+            <li><strong>Asociación Americana de Abogados de Inmigración (AILA):</strong> <a href="https://www.ailalawyer.com" rel="noopener noreferrer">ailalawyer.com</a> · abogados privados pagados</li>
+        </ul>
+        <p class="kc-note">
+            No pague a un "notario" ni a alguien que no sea abogado para ayuda de inmigración. No pueden
+            representarle legalmente. Si alguien le pide dinero para presentar papeles, verifique que sea
+            abogado o representante acreditado por el DOJ. El servicio de referencia de AILA es una forma de verificar.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Defensa criminal y defensores públicos</h2>
+        <ul>
+            <li><strong>Defensor Público del Estado de Missouri (KC):</strong> <a href="tel:816-889-7699">816-889-7699</a> · para casos en cortes de MO cuando no puede pagar un abogado</li>
+            <li><strong>Defensor Público del Condado Wyandotte:</strong> <a href="tel:913-573-2945">913-573-2945</a></li>
+            <li><strong>Defensor Público del Condado Johnson KS:</strong> <a href="tel:913-715-3140">913-715-3140</a></li>
+            <li><strong>Defensor Público Federal (Oeste de MO):</strong> <a href="tel:816-471-8282">816-471-8282</a></li>
+            <li><strong>Defensor Público Federal (KS):</strong> <a href="tel:913-551-6712">913-551-6712</a></li>
+        </ul>
+        <p>
+            Tiene que pedir un defensor público — no se asigna automáticamente hasta la lectura de cargos.
+            Dígale a la corte en su primera comparecencia que no puede pagar un abogado.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Reingreso (después de encarcelamiento)</h2>
+        <ul>
+            <li><strong>Connections to Success:</strong> <a href="tel:816-471-7676">816-471-7676</a> · empleo y apoyo de reingreso</li>
+            <li><strong>Reaching Out From Within:</strong> apoyo de pares en MO y KS</li>
+            <li><strong>Benilde Hall:</strong> <a href="tel:816-842-5836">816-842-5836</a> · vivienda transitoria de reingreso</li>
+            <li><strong>Veteranos regresando a casa:</strong> ver <a href="/es/kc/crisis">Veterans Community Project en crisis</a></li>
+        </ul>
+        <p>
+            Borrar antecedentes — la elegibilidad varía por estado y delito. Legal Aid of Western Missouri
+            y Kansas Legal Services manejan borrado de antecedentes.
+        </p>
+    </section>
+
+    <section class="kc-section">
+        <h2>Conozca sus derechos — referencia rápida</h2>
+        <ul>
+            <li>Puede rechazar dar consentimiento para registrar su casa, su auto o su persona. "No consiento esta búsqueda" / "I do not consent to this search."</li>
+            <li>Puede preguntar "¿Estoy detenido o puedo irme?" / "Am I being detained or am I free to leave?" Si sí, váyase. Si no, puede permanecer en silencio.</li>
+            <li>Puede decir "Quiero hablar con un abogado" / "I want to speak to a lawyer" — y luego dejar de hablar.</li>
+            <li>Los oficiales de inmigración NO pueden entrar a su casa sin una orden judicial firmada por un juez (no una "orden de ICE"). Pídales ver la orden por debajo de la puerta.</li>
+            <li>No tiene que abrir la puerta a ningún oficial sin una orden judicial.</li>
+        </ul>
+        <p class="kc-note">
+            Nada de esto es consejo legal. Es un resumen. Para su situación específica, llame a uno de los
+            servicios legales listados arriba.
+        </p>
+    </section>
+</KCLayout>

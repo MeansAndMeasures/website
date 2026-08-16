@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://civicbrands.org/schemas/kc-services.v2.json",
+  "title": "Kansas City service export",
+  "type": "object",
+  "required": ["schema", "license", "count", "services"],
+  "properties": {
+    "schema": { "const": "https://civicbrands.org/schemas/kc-services.v2.json" },
+    "license": { "type": "string" },
+    "count": { "type": "integer", "minimum": 0 },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slug", "name", "categories", "relatedServices", "journeys", "practicalNotes"],
+        "properties": {
+          "slug": { "type": "string" },
+          "name": { "type": "string" },
+          "categories": { "type": "array", "items": { "type": "string" } },
+          "practicalNotes": { "type": "array", "items": { "type": "string" } },
+          "relatedServices": { "type": "array", "items": { "type": "object" } },
+          "journeys": { "type": "array", "items": { "type": "object" } }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}

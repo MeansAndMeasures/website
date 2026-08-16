@@ -1,0 +1,101 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+---
+
+<KCLayout
+    title="About this directory — KC"
+    description="Who runs the Kansas City directory, how listings are built, and how corrections are handled."
+>
+    <p class="kc-eyebrow">About this directory</p>
+    <h1>Who runs this and how it works.</h1>
+    <p class="kc-lede">
+        This directory is run by CivicBrands — a small civic-infrastructure operation in Kansas City.
+        People use this directory to make real decisions about where to call and where to go. We
+        want to be clear about who we are, how listings are built, and what we cannot promise.
+    </p>
+
+    <section class="kc-section" aria-labelledby="who">
+        <h2 id="who">Who</h2>
+        <p>
+            CivicBrands is the DBA of BJL13 Enterprise Solutions LLC, a Missouri company. The site is
+            written and maintained by CivicBrands and a rotating set of community contributors.
+            It is not a city government project, not a funded nonprofit program, and not a venture-
+            backed startup. It does not run on ads. It does not sell data. It exists because the
+            metro needs a directory like this and because no single agency was going to build one
+            that crosses the state line.
+        </p>
+        <p>
+            Reach CivicBrands directly: <a href="mailto:corrections@mail.civicbrands.org">corrections@mail.civicbrands.org</a>
+            · <a href="tel:+18163063481">816-306-3481</a>.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="listing-build">
+        <h2 id="listing-build">How listings are built</h2>
+        <p>
+            We call, visit, read public material, and listen to people who have used the service.
+            That work stays behind the page. On the page, we write the part that helps someone
+            decide whether to call, go, or keep looking.
+        </p>
+        <p>
+            Programs change without notice. Hours move. Numbers disconnect. Funding ends. Always
+            call ahead when you can.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="how-submit">
+        <h2 id="how-submit">How submissions are reviewed</h2>
+        <ul>
+            <li>Every submission goes into a private queue we review by hand.</li>
+            <li>Urgent reports — a critical number stopped working, a service is turning people away — are reviewed within 24 hours.</li>
+            <li>New service suggestions are typically reviewed within a week, often faster.</li>
+            <li>If we add an entry, we include what a person needs to decide whether to call, go, or keep looking.</li>
+            <li>We do not publish your name or contact info on the public site without your explicit permission.</li>
+            <li>We may follow up with a question, only if you provided contact info.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="cannot">
+        <h2 id="cannot">What we cannot promise</h2>
+        <ul>
+            <li>That any specific service is open right now. Hours change.</li>
+            <li>That a service will accept you when you arrive. Eligibility decisions are made by the service, not by us.</li>
+            <li>That we will catch every change as it happens. We need your help — flag anything wrong.</li>
+            <li>That a service is high-quality. We can tell you a service exists and operates; we cannot vouch for the experience of any particular interaction.</li>
+            <li>Legal or medical advice. Nothing here is legal or medical advice. We list services; we do not provide them.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="not-shared">
+        <h2 id="not-shared">What is not shared</h2>
+        <ul>
+            <li>We do not sell or share submissions with anyone, including the services they reference.</li>
+            <li>We do not share IP addresses or browser fingerprints beyond what Cloudflare requires for the request to function.</li>
+            <li>We do not use third-party analytics or trackers on this site. No Google Analytics, no Meta Pixel, no Hotjar, no cookies for tracking. See our <a href="/privacy">privacy policy</a> for the longer version.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="mirror">
+        <h2 id="mirror">Free to mirror</h2>
+        <p>
+            The directory data is free to mirror, redistribute, repost. Use the machine-readable exports
+            at <a href="/kc/services.json">services.json</a> and <a href="/kc/services.csv">services.csv</a>.
+            Crisis numbers are at <a href="/kc/crisis.txt">crisis.txt</a> and <a href="/kc/crisis.json">crisis.json</a>.
+            Attribution is welcome but not required. If you find an error in a mirrored copy, please
+            also let us know so the upstream gets corrected.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="conflict">
+        <h2 id="conflict">If something here harmed you</h2>
+        <p>
+            If you went to a service we listed and were harmed — turned away, treated badly, surveilled,
+            denied, or worse — please tell us. We need to know so we can correct the guidance, add
+            context, or remove the listing.
+        </p>
+        <p>
+            <a href="mailto:corrections@mail.civicbrands.org">corrections@mail.civicbrands.org</a>. Use <a href="/kc/suggest">the suggest form</a>
+            if you would rather not email.
+        </p>
+    </section>
+</KCLayout>

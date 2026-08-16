@@ -1,0 +1,115 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+---
+
+<KCLayout
+    title="Transit — KC"
+    description="RideKC bus, the KC Streetcar, KC Scout traffic, and what you actually need to know to get around without a car in the Kansas City metro."
+>
+    <p class="kc-eyebrow">Transit</p>
+    <h1>Moving around without a car.</h1>
+    <p class="kc-lede">
+        Kansas City is a car-shaped metro. Transit exists, works for many people, and is improving —
+        but headways are long, coverage is uneven, and the system spans two states with one operator.
+        Honest expectations help.
+    </p>
+
+    <section class="kc-section" aria-labelledby="ridekc">
+        <h2 id="ridekc">RideKC (Kansas City Area Transportation Authority)</h2>
+        <p>
+            RideKC is the brand. KCATA is the underlying agency. They run buses in KCMO, KCK,
+            Independence, Wyandotte County, parts of Johnson County, and partner with smaller
+            transit agencies elsewhere in the metro. Buses cross the state line.
+        </p>
+        <ul>
+            <li><strong>Customer service:</strong> <a href="tel:816-221-0660">816-221-0660</a></li>
+            <li><strong>Website:</strong> <a href="https://ridekc.org" rel="noopener noreferrer">ridekc.org</a></li>
+            <li><strong>Trip planning:</strong> Google Maps + Transit App (better real-time)</li>
+        </ul>
+
+        <h3>Cost</h3>
+        <p>
+            As of May 2026, KCMO bus rides are <strong>free</strong> (Zero Fare program — the
+            longest-running free transit program of any large U.S. city). Surrounding suburban
+            routes may have small fares. Confirm at <a href="https://ridekc.org" rel="noopener noreferrer">ridekc.org</a>.
+        </p>
+
+        <h3>Headways</h3>
+        <ul>
+            <li><strong>MAX (bus rapid transit)</strong> — Troost MAX (Route 71), Main MAX (Route 47), Prospect MAX (Route 75): every 10-15 minutes peak, 20-30 off-peak. The most reliable.</li>
+            <li><strong>Other routes:</strong> typically every 30 minutes; some hourly. Confirm before you depend on a route.</li>
+            <li><strong>Sundays + late evenings:</strong> reduced service. Some routes do not run.</li>
+        </ul>
+
+        <h3>Useful routes</h3>
+        <ul>
+            <li><strong>Route 71 (Troost MAX):</strong> Downtown KCMO ↔ Waldo, along Troost Avenue. Through east-of-Troost neighborhoods.</li>
+            <li><strong>Route 47 (Main MAX):</strong> Downtown ↔ UMKC ↔ Plaza ↔ Waldo, along Main Street.</li>
+            <li><strong>Route 75 (Prospect MAX):</strong> Downtown ↔ South KCMO via Prospect.</li>
+            <li><strong>Route 101 (KCMO ↔ KCI):</strong> Downtown ↔ Kansas City International Airport.</li>
+            <li><strong>Route 24 (Independence):</strong> Downtown ↔ Independence via I-70.</li>
+            <li><strong>Route 35 (KCMO ↔ KCK):</strong> Crosses the state line.</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="streetcar">
+        <h2 id="streetcar">KC Streetcar</h2>
+        <p>
+            Downtown streetcar — <strong>free</strong>, no ticket. River Market to Crown Center / Union
+            Station, with the 2025 extension south to UMKC and the Country Club Plaza. Useful for
+            downtown navigation; not useful for crossing the metro.
+        </p>
+        <ul>
+            <li><strong>Operating hours:</strong> approximately 6am-midnight weekdays, later on weekends</li>
+            <li><strong>Frequency:</strong> 10-15 minute headways</li>
+            <li><strong>Website:</strong> <a href="https://kcstreetcar.org" rel="noopener noreferrer">kcstreetcar.org</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="paratransit">
+        <h2 id="paratransit">Paratransit (ADA service)</h2>
+        <p>
+            RideKC Freedom — door-to-door service for riders with disabilities who cannot use fixed
+            routes. Requires application + ADA certification.
+        </p>
+        <ul>
+            <li>Application: <a href="https://ridekc.org/rider-guide/ada-paratransit-services" rel="noopener noreferrer">ridekc.org</a></li>
+            <li>Customer service: <a href="tel:816-842-9070">816-842-9070</a></li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="kcscout">
+        <h2 id="kcscout">KC Scout (highway data)</h2>
+        <p>
+            KC Scout is the metro's traffic management center. Their cameras and incident feed are
+            useful before driving I-70, I-35, I-435, or I-635 anywhere in the metro.
+        </p>
+        <ul>
+            <li><strong>Website:</strong> <a href="https://www.kcscout.net" rel="noopener noreferrer">kcscout.net</a></li>
+            <li><strong>Traffic cameras + incident map:</strong> live</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="other">
+        <h2 id="other">Other transit options</h2>
+        <ul>
+            <li><strong>JO (Johnson County Transit):</strong> KS-side suburban transit — <a href="https://ridekc.org/jct" rel="noopener noreferrer">ridekc.org/jct</a></li>
+            <li><strong>Independence IndeBus:</strong> local Independence service</li>
+            <li><strong>BikeKC / RideKC Bike:</strong> bike share, downtown / Plaza</li>
+            <li><strong>Greyhound / Megabus:</strong> intercity bus, Union Station</li>
+            <li><strong>Amtrak:</strong> Missouri River Runner (KC ↔ STL); SW Chief (KC ↔ Chicago, LA). Union Station.</li>
+            <li><strong>KCI airport (MCI):</strong> RideKC Route 101 from downtown, ~45 min</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="reality">
+        <h2 id="reality">What it actually feels like</h2>
+        <ul>
+            <li>If you don't have a car and don't live near a MAX route, plan an hour extra each way.</li>
+            <li>Late-night service is thin. After 11pm on most routes, you're walking, riding, or paying for a rideshare.</li>
+            <li>Crossing the state line by bus is possible (Route 35, others) but transfers can add 20-30 min.</li>
+            <li>Bus stops do not all have shelters. In summer or winter, that matters.</li>
+            <li>The Transit App (third party) often has more accurate real-time data than Google Maps for RideKC.</li>
+        </ul>
+    </section>
+</KCLayout>

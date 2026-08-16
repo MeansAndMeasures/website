@@ -1,0 +1,10 @@
+{
+  "v": "spes1",
+  "artifact": "https://assets.bjl13.org/spes.png",
+  "alg": "sha512",
+  "hash": "b415d56598ecc58abd98f92fae72af47b336d65a0671f1710c8ad743312213d991bc114c8ac8f184ec3502f2f65dded14488941557cf4c44dc6eda4b59a9456d",
+  "title": "Spes",
+  "derived_from": "Spes aeternum oritur",
+  "type": "personal heraldic achievement / identity seal",
+  "namespace": "bjl13.org"
+}

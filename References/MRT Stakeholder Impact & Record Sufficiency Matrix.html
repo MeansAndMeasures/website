@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)file:///Users/bjl/Downloads/mrt-matrix.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRT Stakeholder Impact &amp; Record Sufficiency Matrix</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0f0f0f;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --border-bright: #3d3d3d;
+    --text: #e8e8e8;
+    --text-dim: #888;
+    --text-dimmer: #555;
+    --accent: #c8a84b;
+    --accent-dim: rgba(200,168,75,0.15);
+    --y: #4caf7d;
+    --y-bg: rgba(76,175,125,0.12);
+    --n: #e05252;
+    --n-bg: rgba(224,82,82,0.12);
+    --p: #e09a2a;
+    --p-bg: rgba(224,154,42,0.12);
+    --u: #7a7a9a;
+    --u-bg: rgba(122,122,154,0.12);
+    --na: #3a3a3a;
+    --na-bg: rgba(58,58,58,0.3);
+    --cat-tribes: rgba(160,100,200,0.08);
+    --cat-community: rgba(60,130,200,0.08);
+    --cat-workers: rgba(60,180,160,0.08);
+    --cat-flood: rgba(200,80,60,0.08);
+    --cat-freight: rgba(180,140,60,0.08);
+    --cat-env: rgba(80,160,80,0.08);
+    --cat-gov: rgba(120,120,160,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 32px 24px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 8px;
+    line-height: 1.8;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .legend-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dimmer);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .badge.Y { background: var(--y-bg); color: var(--y); border: 1px solid rgba(76,175,125,0.3); }
+  .badge.N { background: var(--n-bg); color: var(--n); border: 1px solid rgba(224,82,82,0.3); }
+  .badge.P { background: var(--p-bg); color: var(--p); border: 1px solid rgba(224,154,42,0.3); }
+  .badge.U { background: var(--u-bg); color: var(--u); border: 1px solid rgba(122,122,154,0.3); }
+  .badge.NA { background: var(--na-bg); color: var(--text-dimmer); border: 1px solid var(--na); }
+
+  .filter-bar {
+    padding: 10px 24px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    border: 1px solid var(--border-bright);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    padding: 24px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+  }
+
+  thead th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  thead th:first-child {
+    border-left: none;
+  }
+
+  .cat-header td {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 12px 12px 6px;
+    color: var(--text-dimmer);
+    border-top: 1px solid var(--border);
+    border-bottom: none;
+  }
+
+  tbody tr:not(.cat-header) {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+
+  tbody tr:not(.cat-header):hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  tbody td {
+    padding: 9px 12px;
+    vertical-align: top;
+  }
+
+  .col-stakeholder {
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--text);
+    white-space: nowrap;
+    min-width: 180px;
+  }
+
+  .col-stakeholder .sub {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-weight: 400;
+    margin-top: 2px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .col-pathway {
+    font-size: 11px;
+    color: var(--text-dim);
+    min-width: 140px;
+    max-width: 180px;
+  }
+
+  .col-pathway.harm {
+    color: rgba(224,82,82,0.75);
+  }
+
+  .col-flag {
+    text-align: center;
+    min-width: 70px;
+  }
+
+  .flag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .flag.Y { background: var(--y-bg); color: var(--y); }
+  .flag.N { background: var(--n-bg); color: var(--n); }
+  .flag.P { background: var(--p-bg); color: var(--p); }
+  .flag.U { background: var(--u-bg); color: var(--u); }
+  .flag.NA { background: var(--na-bg); color: var(--text-dimmer); }
+
+  .col-risk {
+    font-size: 11px;
+    min-width: 120px;
+    max-width: 160px;
+  }
+
+  .risk-high { color: var(--n); }
+  .risk-mod { color: var(--p); }
+  .risk-low { color: var(--y); }
+  .risk-unk { color: var(--u); }
+
+  /* Category row backgrounds */
+  .cat-tribes-row td:first-child { border-left: 3px solid rgba(160,100,200,0.6); }
+  .cat-community-row td:first-child { border-left: 3px solid rgba(60,130,200,0.6); }
+  .cat-workers-row td:first-child { border-left: 3px solid rgba(60,180,160,0.6); }
+  .cat-flood-row td:first-child { border-left: 3px solid rgba(200,80,60,0.6); }
+  .cat-freight-row td:first-child { border-left: 3px solid rgba(180,140,60,0.6); }
+  .cat-env-row td:first-child { border-left: 3px solid rgba(80,160,80,0.6); }
+  .cat-gov-row td:first-child { border-left: 3px solid rgba(120,120,160,0.6); }
+
+  .footnote {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dimmer);
+    line-height: 2;
+  }
+
+  .footnote strong { color: var(--text-dim); }
+
+  .hidden { display: none; }
+
+  @media print {
+    body { background: white; color: black; }
+    .filter-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-label">Section 408 Public Record Analysis</div>
+      <h1>MRT Phase 1 — Stakeholder Impact &amp; <span>Record Sufficiency</span> Matrix</h1>
+      <div class="meta">
+        Notice No.: 408-NWK-2025-0011 &nbsp;·&nbsp; Issued: April 9, 2026 &nbsp;·&nbsp; Expires: April 24, 2026<br>
+        Requester: Port KC &nbsp;·&nbsp; Location: East Bottoms Unit Levee / Blue River Channel, Jackson Co., MO
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-label">Key:</span>
+  <span class="badge Y">Y — Present in record</span>
+  <span class="badge N">N — Absent from record</span>
+  <span class="badge P">P — Partial / implied</span>
+  <span class="badge U">U — Unknown / undisclosed</span>
+  <span class="badge NA">— Not applicable</span>
+</div>
+
+<div class="filter-bar">
+  <span class="legend-label" style="line-height:24px;">Filter:</span>
+  <button class="filter-btn active" onclick="filterRows(&#39;all&#39;, this)">All</button>
+  <button class="filter-btn" onclick="filterRows(&#39;tribes&#39;, this)">Tribal Nations</button>
+  <button class="filter-btn" onclick="filterRows(&#39;community&#39;, this)">Communities</button>
+  <button class="filter-btn" onclick="filterRows(&#39;workers&#39;, this)">Workers</button>
+  <button class="filter-btn" onclick="filterRows(&#39;flood&#39;, this)">Flood-Risk Populations</button>
+  <button class="filter-btn" onclick="filterRows(&#39;freight&#39;, this)">Freight / Transport</button>
+  <button class="filter-btn" onclick="filterRows(&#39;env&#39;, this)">Environmental Receptors</button>
+  <button class="filter-btn" onclick="filterRows(&#39;gov&#39;, this)">Agencies &amp; Governments</button>
+</div>
+
+<div class="table-wrapper">
+<table id="matrix">
+  <thead>
+    <tr>
+      <th>Population / Stakeholder</th>
+      <th>Benefit Pathway</th>
+      <th>Harm Pathway</th>
+      <th>Data Present?</th>
+      <th>Consulted?</th>
+      <th>Named but Absent?</th>
+      <th>Mitigation Present?</th>
+      <th>Residual Risk</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- TRIBAL NATIONS -->
+    <tr class="cat-header" data-cat="tribes">
+      <td colspan="8">▸ Tribal Nations</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Osage Nation<div class="sub">Aboriginal territory; MO/KS/OK</div></td>
+      <td class="col-pathway">Economic activity in ancestral corridor</td>
+      <td class="col-pathway harm">Levee/channel alteration in unceeded cultural territory; no consultation record</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — no consultation record; historic properties determination made without named tribal input</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Iowa Tribe of KS &amp; NE<div class="sub">Kansas / Nebraska</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Impacts to Blue River riparian corridor; potential cultural/burial sites undisclosed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — not individually named; generic "Indian Tribes" solicitation only</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Kickapoo Tribe in Kansas<div class="sub">Brown Co., KS</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Missouri River corridor impacts; subsistence and cultural resource exposure</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Sac &amp; Fox Nation (MO/KS/NE)<div class="sub">Multi-state aboriginal range</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Blue River / Missouri River confluence area; historic land use not evaluated</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Delaware Tribe of Indians<div class="sub">Bartlesville, OK</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Historic presence in MO/KS corridor; no individual tribal analysis disclosed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Wyandotte Nation<div class="sub">Wyandotte, OK</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Historic KC-area presence; "no historic properties" SHPO determination made without named tribal input</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — SHPO concurrence predates any disclosed tribal engagement</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Shawnee Tribe<div class="sub">Miami, OK</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Missouri River corridor; cultural and burial sites in general project area undocumented</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Miami Tribe of Oklahoma<div class="sub">Miami, OK</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Regional historic presence; no individual analysis in record</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High</td>
+    </tr>
+
+    <tr class="cat-tribes-row" data-cat="tribes">
+      <td class="col-stakeholder">Otoe-Missouria Tribe<div class="sub">Red Rock, OK</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Namesake of Missouri River; strong territorial claim; no consultation named</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — absence especially notable given project's Missouri River nexus</td>
+    </tr>
+
+    <!-- ADJACENT COMMUNITIES -->
+    <tr class="cat-header" data-cat="community">
+      <td colspan="8">▸ Communities</td>
+    </tr>
+
+    <tr class="cat-community-row" data-cat="community">
+      <td class="col-stakeholder">East Bottoms (KC, MO)<div class="sub">Adjacent residential/industrial fringe</div></td>
+      <td class="col-pathway">Potential local employment; improved freight access</td>
+      <td class="col-pathway harm">Flood-risk exposure; increased truck/freight traffic; levee integrity uncertainty during construction</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — directly adjacent to levee alteration; no community impact analysis</td>
+    </tr>
+
+    <tr class="cat-community-row" data-cat="community">
+      <td class="col-stakeholder">Historic East Side KC<div class="sub">Majority Black; environmental justice area</div></td>
+      <td class="col-pathway">Indirect economic development</td>
+      <td class="col-pathway harm">Cumulative industrial burden; no EJ analysis disclosed; induced freight traffic</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — no EJ screening; cumulative industrial burden unquantified</td>
+    </tr>
+
+    <tr class="cat-community-row" data-cat="community">
+      <td class="col-stakeholder">Argentine / Armourdale (KCK)<div class="sub">Downstream; historically flood-prone</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Downstream backwater / channel-constriction effects; no hydraulic modeling disclosed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — repeatedly flooded historically; backwater effects undisclosed</td>
+    </tr>
+
+    <tr class="cat-community-row" data-cat="community">
+      <td class="col-stakeholder">North KC (downstream MO)<div class="sub">Missouri River floodplain adjacent</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Residual flood risk from levee alteration; cumulative channel modification</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-mod">Moderate-High — depends on undisclosed hydraulic modeling</td>
+    </tr>
+
+    <!-- WORKERS -->
+    <tr class="cat-header" data-cat="workers">
+      <td colspan="8">▸ Workers</td>
+    </tr>
+
+    <tr class="cat-workers-row" data-cat="workers">
+      <td class="col-stakeholder">Construction Workers (temporary)<div class="sub">Phase 1 build-out</div></td>
+      <td class="col-pathway">Short-term employment; wages</td>
+      <td class="col-pathway harm">Levee work / trestle construction safety; hazardous site exposure; no construction safety plan in record</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-mod">Moderate — no construction safety or loading analysis disclosed</td>
+    </tr>
+
+    <tr class="cat-workers-row" data-cat="workers">
+      <td class="col-stakeholder">Terminal Operations Workers (long-term)<div class="sub">Logistics, warehousing, transloading</div></td>
+      <td class="col-pathway">Permanent employment; regional logistics wages</td>
+      <td class="col-pathway harm">Flood exposure at industrial site; residual levee risk; no long-term operations plan in record</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-unk">Unknown — buildout scope not bounded in record</td>
+    </tr>
+
+    <tr class="cat-workers-row" data-cat="workers">
+      <td class="col-stakeholder">Rail / Barge Operations Workers<div class="sub">Intermodal corridor</div></td>
+      <td class="col-pathway">Expanded intermodal capacity; employment</td>
+      <td class="col-pathway harm">Channel alteration impacts on navigation; trestle debris risk during operations</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-unk">Unknown</td>
+    </tr>
+
+    <!-- DOWNSTREAM FLOOD-RISK -->
+    <tr class="cat-header" data-cat="flood">
+      <td colspan="8">▸ Downstream Flood-Risk Populations</td>
+    </tr>
+
+    <tr class="cat-flood-row" data-cat="flood">
+      <td class="col-stakeholder">East Bottoms Floodplain Residents<div class="sub">Within / adjacent FEMA flood zone</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Levee impairment during construction; increased inundation risk; no residual-risk analysis</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — levee haul road directly affects flood protection; no geotechnical analysis disclosed</td>
+    </tr>
+
+    <tr class="cat-flood-row" data-cat="flood">
+      <td class="col-stakeholder">Downstream Agricultural Landowners<div class="sub">Missouri River corridor, MO/KS</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Backwater / channel-constriction flood stage changes; induced damages not assessed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-unk">Unknown — hydraulic modeling absent from record</td>
+    </tr>
+
+    <tr class="cat-flood-row" data-cat="flood">
+      <td class="col-stakeholder">FEMA / Local Floodplain Administrators<div class="sub">Jackson Co.; KC, MO; KCK</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">FEMA map compliance; LOMA/CLOMR implications; no coordination disclosed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-risk risk-mod">Moderate — FEMA coordination not disclosed</td>
+    </tr>
+
+    <!-- FREIGHT / TRANSPORT -->
+    <tr class="cat-header" data-cat="freight">
+      <td colspan="8">▸ Freight Corridor &amp; Transport Users</td>
+    </tr>
+
+    <tr class="cat-freight-row" data-cat="freight">
+      <td class="col-stakeholder">I-435 / Highway Users<div class="sub">Adjacent interchange; regional traffic</div></td>
+      <td class="col-pathway">Improved port access; freight efficiency</td>
+      <td class="col-pathway harm">Construction traffic impacts; haul road routing; induced truck volumes undisclosed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-mod">Moderate</td>
+    </tr>
+
+    <tr class="cat-freight-row" data-cat="freight">
+      <td class="col-stakeholder">River Barge Operators<div class="sub">Missouri River navigation</div></td>
+      <td class="col-pathway">Expanded terminal berthing</td>
+      <td class="col-pathway harm">Temporary trestle debris; channel constriction during construction; Coast Guard declined jurisdiction but navigation impacts not resolved</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-mod">Moderate — USCG declined jurisdiction; navigation analysis absent</td>
+    </tr>
+
+    <tr class="cat-freight-row" data-cat="freight">
+      <td class="col-stakeholder">Rail Operators<div class="sub">CPKC, BNSF — adjacent rail corridor</div></td>
+      <td class="col-pathway">Intermodal transloading; expanded rail-port integration</td>
+      <td class="col-pathway harm">Construction proximity to active rail; phasing conflicts undisclosed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-unk">Unknown</td>
+    </tr>
+
+    <!-- ENVIRONMENTAL RECEPTORS -->
+    <tr class="cat-header" data-cat="env">
+      <td colspan="8">▸ Environmental Receptors</td>
+    </tr>
+
+    <tr class="cat-env-row" data-cat="env">
+      <td class="col-stakeholder">Indiana Bat<div class="sub">ESA-listed; endangered</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Habitat tree clearing; seasonal window restriction Apr 1–Oct 31 implemented</td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-risk risk-mod">Moderate — seasonal clearing restriction present but habitat assessment not released</td>
+    </tr>
+
+    <tr class="cat-env-row" data-cat="env">
+      <td class="col-stakeholder">Northern Long-Eared Bat<div class="sub">ESA-listed; threatened</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Same clearing window; cumulative roost impacts not assessed</td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-risk risk-mod">Moderate</td>
+    </tr>
+
+    <tr class="cat-env-row" data-cat="env">
+      <td class="col-stakeholder">Tricolored Bat<div class="sub">ESA-listed; endangered</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Same clearing window; winter hibernaculum impacts not disclosed</td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-risk risk-mod">Moderate</td>
+    </tr>
+
+    <tr class="cat-env-row" data-cat="env">
+      <td class="col-stakeholder">Pallid Sturgeon<div class="sub">ESA-listed; endangered</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">Missouri River / Blue River channel alteration; scour, sedimentation, turbidity; no hydraulic or fish-passage analysis</td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — aquatic receptor with direct channel exposure; no scour/hydraulic analysis</td>
+    </tr>
+
+    <tr class="cat-env-row" data-cat="env">
+      <td class="col-stakeholder">Blue River Riparian Corridor<div class="sub">Aquatic / wetland habitat</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">225-ft temporary trestle; channel constriction; sedimentation; no riparian impact assessment</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-high">High — direct physical disturbance; no channel restoration plan in record</td>
+    </tr>
+
+    <tr class="cat-env-row" data-cat="env">
+      <td class="col-stakeholder">Missouri River Mainstem<div class="sub">Federally managed; navigation / ecosystem</div></td>
+      <td class="col-pathway">Port access improvement</td>
+      <td class="col-pathway harm">Cumulative channel modification; induced industrial runoff; sediment loading from haul road construction</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-unk">Unknown — no cumulative basin-level analysis</td>
+    </tr>
+
+    <!-- AGENCIES & GOVERNMENTS -->
+    <tr class="cat-header" data-cat="gov">
+      <td colspan="8">▸ Agencies &amp; Governments</td>
+    </tr>
+
+    <tr class="cat-gov-row" data-cat="gov">
+      <td class="col-stakeholder">Missouri SHPO<div class="sub">State Historic Preservation Office</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">—</td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-risk risk-low">Low — concurred Apr. 17, 2025; "no historic properties affected" (underlying docs not released)</td>
+    </tr>
+
+    <tr class="cat-gov-row" data-cat="gov">
+      <td class="col-stakeholder">USFWS<div class="sub">ESA consultation authority</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">—</td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-risk risk-mod">Moderate — "NLAA" determination implies informal consultation; no BO or concurrence letter released</td>
+    </tr>
+
+    <tr class="cat-gov-row" data-cat="gov">
+      <td class="col-stakeholder">U.S. Coast Guard<div class="sub">Navigation / RHA authority</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">—</td>
+      <td class="col-flag"><span class="flag P">P</span></td>
+      <td class="col-flag"><span class="flag Y">Y</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-flag"><span class="flag NA">—</span></td>
+      <td class="col-risk risk-mod">Moderate — declined jurisdiction; basis and scope of that determination undisclosed</td>
+    </tr>
+
+    <tr class="cat-gov-row" data-cat="gov">
+      <td class="col-stakeholder">Jackson County / KC, MO<div class="sub">Local governments; floodplain authority</div></td>
+      <td class="col-pathway">Economic development; tax base</td>
+      <td class="col-pathway harm">Emergency management exposure; infrastructure burden; no local coordination disclosed</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-mod">Moderate</td>
+    </tr>
+
+    <tr class="cat-gov-row" data-cat="gov">
+      <td class="col-stakeholder">MoDNR / MoDOT<div class="sub">State environmental / transportation</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">State environmental compliance; transportation network impacts</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-unk">Unknown</td>
+    </tr>
+
+    <tr class="cat-gov-row" data-cat="gov">
+      <td class="col-stakeholder">EPA Region 7<div class="sub">Environmental oversight; CWA authority</div></td>
+      <td class="col-pathway">—</td>
+      <td class="col-pathway harm">CWA 404 exemption may not fully cover induced runoff / sedimentation at scale</td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag U">U</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-flag"><span class="flag N">N</span></td>
+      <td class="col-risk risk-unk">Unknown — CWA 404 exemption basis not disclosed beyond conclusory statement</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="footnote">
+  <strong>Data Present:</strong> Y = analysis/data disclosed in public notice record &nbsp;·&nbsp; N = absent from record &nbsp;·&nbsp; P = partially present or implied &nbsp;·&nbsp; U = unknown / not disclosed<br>
+  <strong>Consulted:</strong> Based solely on what is stated in Public Notice 408-NWK-2025-0011 (issued April 9, 2026). Absence of disclosure ≠ absence of consultation — but the record does not permit verification.<br>
+  <strong>Named but Absent:</strong> Stakeholder class referenced generically in notice ("Indian Tribes," "local agencies") without individual identification or engagement documentation.<br>
+  <strong>Sources:</strong> USACE Public Notice 408-NWK-2025-0011; Port KC project materials (as described in notice); USFWS ESA consultation standards; NHPA Section 106 / 36 CFR 800; USACE Section 408 Policy (ER 405-1-12).<br>
+  <strong>Note:</strong> This matrix reflects gaps in the <em>public record</em> as released. It is not a determination of actual project impacts.
+</div>
+
+<script>
+function filterRows(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  
+  const rows = document.querySelectorAll('tbody tr');
+  rows.forEach(row => {
+    if (cat === 'all') {
+      row.classList.remove('hidden');
+    } else {
+      const rowCat = row.getAttribute('data-cat');
+      if (!rowCat || rowCat === cat) {
+        row.classList.remove('hidden');
+      } else {
+        row.classList.add('hidden');
+      }
+    }
+  });
+}
+</script>
+
+
+</body></html>

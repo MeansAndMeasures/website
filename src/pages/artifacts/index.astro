@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EntryList from "../../components/EntryList.astro";
+
+const entries = (await getCollection("artifacts")).sort((a, b) =>
+    (b.data.published?.getTime() ?? 0) - (a.data.published?.getTime() ?? 0)
+);
+---
+
+<BaseLayout
+        title="Artifacts — CivicBrands"
+        description="Documents, records, memoranda, and public artifacts from CivicBrands."
+>
+    <section class="section">
+        <p class="eyebrow">Artifacts</p>
+
+        <div class="measure">
+            <h1>Documents and records</h1>
+            <p>
+                Artifacts preserve documents, records, submissions, and other durable materials that make the organization inspectable over time. Public-record materials are hosted for access, citation, and institutional memory.
+            </p>
+        </div>
+
+        <EntryList
+                entries={entries}
+                basePath="/artifacts"
+                fallback="Artifact entries are being prepared for publication."
+        />
+    </section>
+</BaseLayout>

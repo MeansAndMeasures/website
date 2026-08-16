@@ -1,0 +1,109 @@
+---
+import KCLayout from "../../layouts/KCLayout.astro";
+import KCTriageRow from "../../components/KCTriageRow.astro";
+import KCLanguageSwitcher from "../../components/KCLanguageSwitcher.astro";
+---
+
+<KCLayout
+    title="Kansas City — CivicBrands"
+    description="A people-first directory of survival, support, and navigation resources for the Kansas City metro, both states."
+>
+    <KCLanguageSwitcher currentLang="en" enPath="/kc" esPath="/es/kc/newcomers" />
+
+    <p class="kc-eyebrow">Kansas City — bi-state metro</p>
+    <h1>Kansas City — the metro, both states.</h1>
+    <p class="kc-lede">
+        This is a directory built by people in this metro, for people in this metro. It covers all
+        nine of the MARC counties — five in Missouri, four in Kansas. It is not run by a city, a
+        chamber, or a foundation. It does not advertise. If a number stops working, tell us.
+    </p>
+
+    <KCTriageRow />
+
+    <section class="kc-section" aria-labelledby="what">
+        <h2 id="what">What this is</h2>
+        <p>
+            A list of where to call, where to walk in, what to expect when you get there, and what
+            you do not have to bring. We try to name uncomfortable things directly — that some
+            shelters require sobriety, that some require religion, that some separate families.
+            That information matters before you show up.
+        </p>
+        <p>
+            We include what matters before you go: whether you can walk in, what documents or
+            insurance may be required, language access, transit, and practical limitations. Details
+            change. Call ahead when you can, and use <a href="/kc/suggest">Suggest / correct</a>
+            when something no longer matches what you encounter.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="metro">
+        <h2 id="metro">The metro at a glance</h2>
+        <p>
+            "Kansas City" almost always means Kansas City, Missouri. KCK (Kansas City, Kansas) is a
+            separate city across the state line. Both sit inside a metro of around 2.4 million people
+            spread across:
+        </p>
+        <ul>
+            <li><strong>Missouri counties:</strong> Jackson, Clay, Platte, Cass, Ray</li>
+            <li><strong>Kansas counties:</strong> Wyandotte, Johnson, Leavenworth, Miami</li>
+            <li><strong>Regional planning:</strong> Mid-America Regional Council (MARC)</li>
+        </ul>
+        <p>
+            See <a href="/kc/map">map</a> for a clearer picture of who governs what, and
+            <a href="/kc/neighborhoods">neighborhoods</a> for the metro's character map.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="sections">
+        <h2 id="sections">Sections</h2>
+        <ul>
+            <li><a href="/kc/crisis">Need help now</a> — emergency numbers and crisis lines</li>
+            <li><a href="/kc/directory">Directory (search)</a> — every entry, filter by state, language, access</li>
+            <li><a href="/kc/food">Food</a> — pantries, hot meals, SNAP/WIC</li>
+            <li><a href="/kc/housing">Housing</a> — shelters, tenants' rights, rental help</li>
+            <li><a href="/kc/healthcare">Healthcare</a> — FQHCs, free clinics, street medicine</li>
+            <li><a href="/kc/legal">Legal aid</a> — civil aid, immigration, tenant defense, reentry</li>
+            <li><a href="/kc/veterans">Veterans</a> — any discharge, any era — crisis lines, KC VA, VCP, upgrades</li>
+            <li><a href="/kc/utilities">Utilities</a> — LIHEAP, LIEAP, Evergy, water, internet</li>
+            <li><a href="/kc/libraries">Libraries</a> — all the things libraries actually do</li>
+            <li><a href="/kc/transit">Transit</a> — RideKC, streetcar, KC Scout</li>
+            <li><a href="/kc/government">Government</a> — city, county, MARC, 311, elections</li>
+            <li><a href="/kc/property">Property</a> — six assessors, tax appeals, renter tools</li>
+            <li><a href="/kc/taxes">Taxes</a> — earnings tax, MO vs KS, border war</li>
+            <li><a href="/kc/data">Data</a> — open portals, MARC, public records</li>
+            <li><a href="/kc/use-the-data">Use the data</a> — exports, reuse, fields, corrections</li>
+            <li><a href="/kc/neighborhoods">Neighborhoods</a> — Troost, JoCo, 18th &amp; Vine</li>
+            <li><a href="/kc/local-knowledge">Local knowledge</a> — the unwritten orientation</li>
+            <li><a href="/kc/newcomers">Newcomers</a> — visitors and recent arrivals</li>
+            <li><a href="/kc/worldcup">World Cup 2026</a> — visitor + displacement</li>
+            <li><a href="/kc/give-help">Give help</a> — volunteer, donate</li>
+            <li><a href="/kc/suggest">Suggest / correct</a> — flag something or add a service</li>
+        </ul>
+    </section>
+
+    <section class="kc-section" aria-labelledby="machine">
+        <h2 id="machine">Machine-readable</h2>
+        <p>
+            If you run a mutual aid group, a newsroom, or a clinic and want the raw data:
+        </p>
+        <ul>
+            <li><a href="/kc/services.json">All services (JSON)</a></li>
+            <li><a href="/kc/services.csv">All services (CSV)</a></li>
+            <li><a href="/kc/crisis.txt">Crisis numbers (plain text)</a></li>
+            <li><a href="/kc/crisis.json">Crisis numbers (JSON)</a></li>
+        </ul>
+        <p>
+            Free to mirror, redistribute, repost. Corrections flow into the downloads along with
+            the directory.
+        </p>
+    </section>
+
+    <section class="kc-section" aria-labelledby="not">
+        <h2 id="not">What this is not</h2>
+        <p>
+            Not legal advice. Not medical advice. Not a city government site. Not a charity portal.
+            Not exhaustive. The information here is best-effort. Call ahead before you depend on
+            anything listed here.
+        </p>
+    </section>
+</KCLayout>

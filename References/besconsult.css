@@ -1,0 +1,150 @@
+/* =========================================
+   ROOT
+========================================= */
+html {
+  font-size: 20px; /* 1rem = 20px */
+}
+
+/* =========================================
+   BODY TEXT
+========================================= */
+body {
+  font-family: "Spectral", serif;
+  font-size: 1rem;      /* 20px */
+  line-height: 1.62;
+  font-weight: 400;
+}
+
+p + p {
+  margin-top: 2.16em;
+}
+
+ul,
+ol {
+  margin-block: 1.33em;
+  padding-inline-start: 1.62em;
+}
+
+li + li {
+  margin-top: 0.81em;
+}
+
+/* =========================================
+   MEASURE UTILITY
+========================================= */
+.measure {
+  max-width: 66ch;
+  margin-inline: 0 auto;
+}
+
+.measure--centered {
+  margin-inline: auto;
+}
+
+/* =========================================
+   HERO OBJECT
+========================================= */
+.hero-title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(4.8rem, 16vh, 9.6rem);
+  line-height: 1.08;
+  width: 80%;
+  text-align: right;
+  white-space: nowrap;
+  padding-block: calc(0.66 * 1em * 1.08);
+  margin-left: auto;
+  margin-right: 2vw;
+}
+
+/* =========================================
+   CONTENT HEADING OBJECTS
+========================================= */
+h1 {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(2.4rem, 8vh, 4.8rem);
+  line-height: 1.1; 
+  margin-top: 3.24rem; /* 2x base rhythm */
+  margin-bottom: 0.81rem; /* 0.5x base rhythm */
+}
+
+h2 {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.9rem, 6.3vh, 3.8rem);
+  line-height: 1.2;
+  margin-top: 2.43rem; /* 1.5x base rhythm */
+  margin-bottom: 0.81rem; 
+}
+
+h3 {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.5rem, 5vh, 3rem);
+  line-height: 1.3;
+  margin-top: 2.16rem; /* Matches p + p gap perfectly */
+  margin-bottom: 0.81rem;
+}
+
+h4 {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.2rem, 4vh, 2.4rem);
+  line-height: 1.4;
+  margin-top: 1.62rem; /* 1x base rhythm */
+  margin-bottom: 0.81rem;
+}
+
+/* =========================================
+   CAPTION / EYEBROW OBJECT
+========================================= */
+.caption,
+.eyebrow {
+  font-family: "Spectral SC", serif;
+  font-size: 0.8rem;
+  letter-spacing: clamp(0.05em, 0.15vw, 0.15em);
+  margin-bottom: 0.81rem;
+}
+
+/* =========================================
+   SECTION OBJECT
+========================================= */
+.section {
+  padding-block: clamp(2rem, 5vh, 4rem);
+  padding-inline: clamp(2rem, 3vw, 3rem);
+  background: var(--section-bg, transparent);
+}
+
+.section--compact {
+  padding-block: clamp(1rem, 2.5vh, 2rem);
+}
+
+/* =========================================
+   GRID CONTAINER
+========================================= */
+.grid {
+  width: clamp(66vw, 70rem, 90vw);
+  margin: auto;
+  gap: 2vw;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(8rem, 16%, 20rem), 1fr));
+  align-items: start;
+  justify-items: stretch;
+} 
+
+/* =========================================
+   CARD TITLE OBJECT
+========================================= */
+.card-title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  line-height: 1.215;
+  margin-bottom: 0.81rem;
+}
+
+/* =========================================
+   CTA OBJECT
+========================================= */
+.cta-title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.1;
+  max-width: 33ch; 
+  margin-inline: auto;
+  margin-bottom: 1.62rem;
+}

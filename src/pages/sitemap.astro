@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sections = [
+    {
+        heading: "CivicBrands",
+        links: [
+            { href: "/", label: "Home" },
+            { href: "/systems", label: "Systems" },
+            { href: "/capabilities", label: "Capabilities" },
+            { href: "/work", label: "Work" },
+            { href: "/research", label: "Research" },
+            { href: "/artifacts", label: "Artifacts" },
+            { href: "/procurement", label: "Procurement" },
+            { href: "/contact", label: "Contact" },
+            { href: "/updates", label: "Updates" },
+            { href: "/status", label: "Status" }
+        ]
+    },
+    {
+        heading: "Kansas City",
+        links: [
+            { href: "/kc", label: "KC overview" },
+            { href: "/kc/crisis", label: "Need help now" },
+            { href: "/kc/directory", label: "Directory search" },
+            { href: "/kc/food", label: "Food" },
+            { href: "/kc/housing", label: "Housing" },
+            { href: "/kc/healthcare", label: "Healthcare" },
+            { href: "/kc/legal", label: "Legal aid" },
+            { href: "/kc/veterans", label: "Veterans" },
+            { href: "/kc/utilities", label: "Utilities" },
+            { href: "/kc/libraries", label: "Libraries" },
+            { href: "/kc/transit", label: "Transit" },
+            { href: "/kc/government", label: "Government" },
+            { href: "/kc/property", label: "Property" },
+            { href: "/kc/taxes", label: "Taxes" },
+            { href: "/kc/data", label: "Data and open records" },
+            { href: "/kc/use-the-data", label: "Use the KC data" },
+            { href: "/kc/neighborhoods", label: "Neighborhoods" },
+            { href: "/kc/local-knowledge", label: "Local knowledge" },
+            { href: "/kc/newcomers", label: "Newcomers" },
+            { href: "/kc/worldcup", label: "World Cup 2026" },
+            { href: "/kc/give-help", label: "Give help" },
+            { href: "/kc/suggest", label: "Suggest or correct" },
+            { href: "/kc/about", label: "About the directory" }
+        ]
+    },
+    {
+        heading: "Spanish KC Pages",
+        links: [
+            { href: "/es/kc/newcomers", label: "Recien llegados" },
+            { href: "/es/kc/crisis", label: "Crisis" },
+            { href: "/es/kc/food", label: "Comida" },
+            { href: "/es/kc/housing", label: "Vivienda" },
+            { href: "/es/kc/healthcare", label: "Salud" },
+            { href: "/es/kc/legal", label: "Ayuda legal" },
+            { href: "/es/kc/worldcup", label: "Copa Mundial 2026" }
+        ]
+    },
+    {
+        heading: "Policy and Records",
+        links: [
+            { href: "/brand", label: "Brand authority" },
+            { href: "/privacy", label: "Privacy" },
+            { href: "/terms", label: "Terms" },
+            { href: "/legal", label: "Legal" },
+            { href: "/sitemap.xml", label: "XML sitemap" }
+        ]
+    }
+];
+---
+
+<BaseLayout
+        title="Site Map — CivicBrands"
+        description="Accessible site map for CivicBrands, the Kansas City directory, public records, and related systems."
+>
+    <section class="section">
+        <p class="eyebrow">Site Map</p>
+
+        <div class="measure">
+            <h1>Every public door.</h1>
+            <p>
+                This page is a plain list of public pages on CivicBrands. It exists for accessibility,
+                orientation, and search. If the navigation ever feels too compact, start here.
+            </p>
+        </div>
+
+        <div class="sitemap-list">
+            {sections.map((section) => (
+                <section class="sitemap-list__section" aria-labelledby={`sitemap-${section.heading.toLowerCase().replaceAll(" ", "-")}`}>
+                    <h2 id={`sitemap-${section.heading.toLowerCase().replaceAll(" ", "-")}`}>{section.heading}</h2>
+                    <ul>
+                        {section.links.map((link) => (
+                            <li><a href={link.href}>{link.label}</a></li>
+                        ))}
+                    </ul>
+                </section>
+            ))}
+        </div>
+    </section>
+</BaseLayout>

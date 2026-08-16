@@ -1,0 +1,62 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+---
+
+<KCLayout
+    title="Pending suggestions — KC"
+    description="Review pending suggestions and corrections."
+    robots="noindex,nofollow"
+    showSubnav={false}
+>
+    <p class="kc-eyebrow">Internal — review queue</p>
+    <h1>Pending suggestions.</h1>
+    <p class="kc-lede">
+        Paste the export token and pull pending suggestions. The token is set in Cloudflare Workers
+        environment as <code>KC_SUGGEST_EXPORT_TOKEN</code>. Do not share it.
+    </p>
+
+    <form id="review-form" class="intake-form" novalidate>
+        <div class="field">
+            <label for="token">Export token</label>
+            <input type="password" id="token" name="token" autocomplete="off" />
+        </div>
+        <button type="submit">Load</button>
+        <p class="form-status" id="review-status" aria-live="polite"></p>
+    </form>
+
+    <pre class="intake-output" id="review-output" hidden></pre>
+</KCLayout>
+
+<script is:inline>
+    (function () {
+        const form = document.getElementById("review-form");
+        const status = document.getElementById("review-status");
+        const output = document.getElementById("review-output");
+        if (!form) return;
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const token = form.token.value.trim();
+            if (!token) {
+                if (status) status.textContent = "Enter the token.";
+                return;
+            }
+            if (status) status.textContent = "Loading…";
+            try {
+                const res = await fetch("/api/kc-suggest/export?token=" + encodeURIComponent(token));
+                const json = await res.json();
+                if (res.ok && json.ok) {
+                    if (output) {
+                        output.hidden = false;
+                        output.textContent = JSON.stringify(json.submissions, null, 2);
+                    }
+                    if (status) status.textContent = json.submissions.length + " submission(s)";
+                } else {
+                    if (status) status.textContent = json.error || "Failed.";
+                }
+            } catch (e) {
+                if (status) status.textContent = "Network error.";
+            }
+        });
+    })();
+</script>

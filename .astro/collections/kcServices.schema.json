@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "crisis",
+          "food",
+          "housing",
+          "healthcare",
+          "legal",
+          "utilities",
+          "mental-health",
+          "immigration",
+          "reentry",
+          "domestic-violence",
+          "youth",
+          "seniors",
+          "veterans",
+          "lgbtq",
+          "transit",
+          "government"
+        ]
+      }
+    },
+    "phone": {
+      "type": "string"
+    },
+    "sms": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "hours": {
+      "type": "string"
+    },
+    "hours24": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lateNight": {
+      "default": false,
+      "type": "boolean"
+    },
+    "languages": {
+      "default": [
+        "English"
+      ],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "states": {
+      "default": [
+        "MO",
+        "KS"
+      ],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "MO",
+          "KS"
+        ]
+      }
+    },
+    "counties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "statusNeutral": {
+      "default": false,
+      "type": "boolean"
+    },
+    "eligibility": {
+      "type": "string"
+    },
+    "expect": {
+      "type": "string"
+    },
+    "fearAddressed": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "police",
+          "immigration",
+          "holds",
+          "religion",
+          "sobriety",
+          "pets",
+          "separation",
+          "paperwork",
+          "reporting",
+          "cost"
+        ]
+      }
+    },
+    "confidence": {
+      "default": "unverified",
+      "type": "string",
+      "enum": [
+        "verified",
+        "community-confirmed",
+        "legacy",
+        "unverified",
+        "seasonal"
+      ]
+    },
+    "lastKnownGood": {
+      "type": "string"
+    },
+    "walkIn": {
+      "type": "boolean"
+    },
+    "appointmentRequired": {
+      "type": "boolean"
+    },
+    "referralRequired": {
+      "type": "boolean"
+    },
+    "idRequired": {
+      "type": "boolean"
+    },
+    "insuranceRequired": {
+      "type": "boolean"
+    },
+    "moResidentRequired": {
+      "type": "boolean"
+    },
+    "ksResidentRequired": {
+      "type": "boolean"
+    },
+    "veteranOnly": {
+      "type": "boolean"
+    },
+    "genderRestrictions": {
+      "type": "string"
+    },
+    "ageRestrictions": {
+      "type": "string"
+    },
+    "familyFriendly": {
+      "type": "boolean"
+    },
+    "couplesAllowed": {
+      "type": "boolean"
+    },
+    "petsAllowed": {
+      "type": "boolean"
+    },
+    "wheelchairAccessible": {
+      "type": "boolean"
+    },
+    "soberRequired": {
+      "type": "boolean"
+    },
+    "nearestBusRoute": {
+      "type": "string"
+    },
+    "nearestMAXStop": {
+      "type": "string"
+    },
+    "reachableWithoutCar": {
+      "type": "boolean"
+    },
+    "transitNote": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "number"
+    },
+    "lng": {
+      "type": "number"
+    },
+    "emergency": {
+      "default": false,
+      "type": "boolean"
+    },
+    "audioClip": {
+      "type": "string"
+    },
+    "petFriendly": {
+      "type": "boolean"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "categories"
+  ]
+}
