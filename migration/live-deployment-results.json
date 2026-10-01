@@ -1,0 +1,302 @@
+[
+  {
+    "url": "https://meansandmeasures.com/",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/about",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/capabilities",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/systems",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/work",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/research",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/artifacts",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/brand",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/procurement",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/contact",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/updates",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/status",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/sitemap",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/privacy",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/terms",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/legal",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/about",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/crisis",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/crisis.json",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/crisis.txt",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/data",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/directory",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/food",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/give-help",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/government",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/healthcare",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/housing",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/legal",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/libraries",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/local-knowledge",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/map",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/neighborhoods",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/newcomers",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/property",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/services.csv",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/services.json",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/taxes",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/transit",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/utilities",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/use-the-data",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/veterans",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/kc/worldcup",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/es/kc/crisis",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/es/kc/food",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/es/kc/healthcare",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/es/kc/housing",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/es/kc/legal",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/es/kc/newcomers",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/es/kc/worldcup",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/work/forecast",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/work/open-cognition",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/research/abstraction-harm",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/research/situated-inference",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/artifacts/entity-records",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/artifacts/nwk-408-public-comment",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/artifacts/record-sufficiency-matrix",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/artifacts/uscis-biometrics-comment-academic",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/artifacts/uscis-biometrics-comment-civil-rights",
+    "status": "200",
+    "expectedSurface": true
+  },
+  {
+    "url": "https://meansandmeasures.com/artifacts/uscis-biometrics-comment-professional",
+    "status": "200",
+    "expectedSurface": true
+  }
+]
