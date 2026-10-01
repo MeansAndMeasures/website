@@ -13,7 +13,7 @@ tags:
 
 initiative: Forecast
 
-website: https://forecast.civicbrands.org
+website: https://forecast.meansandmeasures.com
 canonical: https://github.com/BJL13-Enterprise-Solutions/forecast
 ---
 
@@ -24,7 +24,7 @@ It ingests heterogeneous real-world data streams, validates against source-faith
 Forecast is designed as operational public information infrastructure rather than a consumer application runtime.
 
 Public surface:
-https://forecast.civicbrands.org
+https://forecast.meansandmeasures.com
 
 Current ingestion examples include:
 - METAR aviation weather observations

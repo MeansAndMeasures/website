@@ -1,0 +1,47 @@
+/* Means+Measures — semantic typography, extracted from Identity Standard v1.5.
+   Standalone entry point. Assign a role to the text's function, not its tag.
+   No universal sizes, tracking, casing, heading ladder or layout is imposed. */
+@import url("./means-measures.fonts.css");
+
+:root {
+  --mm-font-display: "Bodoni Moda", "Montserrat", serif;
+  --mm-font-institutional: "Bodoni Moda SC", "Montserrat", serif;
+  --mm-font-body: "Spectral", "Source Serif 4", "Montserrat", serif;
+  --mm-font-editorial: "Spectral SC", "Montserrat", serif;
+  --mm-font-ui: "Metrophobic", "Montserrat", sans-serif;
+  --mm-font-data: "Iosevka", monospace;
+  --mm-font-action: "Pompiere", "Metrophobic", "Montserrat", sans-serif;
+  --mm-font-detail: var(--mm-font-action);
+  --mm-font-specialty: "Montserrat", sans-serif;
+  /* Source Serif 4 is an optional locally supplied alternate, not a ninth core face. */
+  --mm-font-longform-alternate: "Source Serif 4", "Spectral", serif;
+}
+
+:where([data-mm-type], .mm-type-display, .mm-type-institutional,
+  .mm-type-body, .mm-type-editorial, .mm-type-ui, .mm-type-data,
+  .mm-type-action, .mm-type-detail, .mm-type-specialty, .mm-type-longform-alternate) {
+  font-synthesis: none;
+  font-optical-sizing: auto;
+}
+
+/* Bodoni declares. Its SC face supplies compact institutional hierarchy. */
+:where(.mm-type-display, [data-mm-type="display"]) { font-family: var(--mm-font-display); }
+:where(.mm-type-institutional, [data-mm-type="institutional"]) { font-family: var(--mm-font-institutional); }
+
+/* Spectral explains. Its SC face organizes editorial text. */
+:where(.mm-type-body, [data-mm-type="body"]) { font-family: var(--mm-font-body); }
+:where(.mm-type-editorial, [data-mm-type="editorial"]) { font-family: var(--mm-font-editorial); }
+:where(.mm-type-longform-alternate, [data-mm-type="longform-alternate"]) { font-family: var(--mm-font-longform-alternate); }
+
+/* Metrophobic operates. Interface prose may still be Spectral. */
+:where(.mm-type-ui, [data-mm-type="ui"]) { font-family: var(--mm-font-ui); }
+
+/* Iosevka measures: short exact values, identifiers, code and technical notation. */
+:where(.mm-type-data, [data-mm-type="data"]) { font-family: var(--mm-font-data); }
+
+/* Pompiere acts and annotates: short actions and human/contextual details. */
+:where(.mm-type-action, [data-mm-type="action"]) { font-family: var(--mm-font-action); }
+:where(.mm-type-detail, [data-mm-type="detail"]) { font-family: var(--mm-font-detail); }
+
+/* Montserrat catches exceptions, including unsupported glyphs in other roles. */
+:where(.mm-type-specialty, [data-mm-type="specialty"]) { font-family: var(--mm-font-specialty); }

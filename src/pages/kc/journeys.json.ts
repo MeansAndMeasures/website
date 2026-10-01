@@ -9,7 +9,7 @@ export const GET: APIRoute = async () => {
     const machine = buildKcMachine(services);
 
     return new Response(JSON.stringify({
-        schema: "https://civicbrands.org/schemas/kc-journeys.v1.json",
+        schema: "https://meansandmeasures.com/schemas/kc-journeys.v1.json",
         count: machine.publicJourneys.length,
         journeys: machine.publicJourneys
     }, null, 2), {

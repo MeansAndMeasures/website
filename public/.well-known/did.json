@@ -1,9 +1,9 @@
 {
-  "id": "did:web:civicbrands.org",
+  "id": "did:web:meansandmeasures.com",
   "@context": [
     "https://www.w3.org/ns/did/v1",
     {
-      "@base": "did:web:civicbrands.org"
+      "@base": "did:web:meansandmeasures.com"
     }
   ],
   "service": [
@@ -12,7 +12,7 @@
       "type": "LinkedDomains",
       "serviceEndpoint": {
         "origins": [
-          "https://civicbrands.org/"
+          "https://meansandmeasures.com/"
         ]
       }
     },
@@ -29,7 +29,7 @@
   "verificationMethod": [
     {
       "id": "#fdb844bc44ba4434a8689a07d3c29ab2vcSigningKey-2df2a",
-      "controller": "did:web:civicbrands.org",
+      "controller": "did:web:meansandmeasures.com",
       "type": "JsonWebKey2020",
       "publicKeyJwk": {
         "crv": "P-256",

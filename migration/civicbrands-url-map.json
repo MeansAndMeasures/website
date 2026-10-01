@@ -1,0 +1,242 @@
+[
+  {
+    "from": "https://civicbrands.org/",
+    "to": "https://meansandmeasures.com/"
+  },
+  {
+    "from": "https://civicbrands.org/about",
+    "to": "https://meansandmeasures.com/about"
+  },
+  {
+    "from": "https://civicbrands.org/capabilities",
+    "to": "https://meansandmeasures.com/capabilities"
+  },
+  {
+    "from": "https://civicbrands.org/systems",
+    "to": "https://meansandmeasures.com/systems"
+  },
+  {
+    "from": "https://civicbrands.org/work",
+    "to": "https://meansandmeasures.com/work"
+  },
+  {
+    "from": "https://civicbrands.org/research",
+    "to": "https://meansandmeasures.com/research"
+  },
+  {
+    "from": "https://civicbrands.org/artifacts",
+    "to": "https://meansandmeasures.com/artifacts"
+  },
+  {
+    "from": "https://civicbrands.org/brand",
+    "to": "https://meansandmeasures.com/brand"
+  },
+  {
+    "from": "https://civicbrands.org/procurement",
+    "to": "https://meansandmeasures.com/procurement"
+  },
+  {
+    "from": "https://civicbrands.org/contact",
+    "to": "https://meansandmeasures.com/contact"
+  },
+  {
+    "from": "https://civicbrands.org/updates",
+    "to": "https://meansandmeasures.com/updates"
+  },
+  {
+    "from": "https://civicbrands.org/status",
+    "to": "https://meansandmeasures.com/status"
+  },
+  {
+    "from": "https://civicbrands.org/sitemap",
+    "to": "https://meansandmeasures.com/sitemap"
+  },
+  {
+    "from": "https://civicbrands.org/privacy",
+    "to": "https://meansandmeasures.com/privacy"
+  },
+  {
+    "from": "https://civicbrands.org/terms",
+    "to": "https://meansandmeasures.com/terms"
+  },
+  {
+    "from": "https://civicbrands.org/legal",
+    "to": "https://meansandmeasures.com/legal"
+  },
+  {
+    "from": "https://civicbrands.org/kc",
+    "to": "https://meansandmeasures.com/kc"
+  },
+  {
+    "from": "https://civicbrands.org/kc/about",
+    "to": "https://meansandmeasures.com/kc/about"
+  },
+  {
+    "from": "https://civicbrands.org/kc/crisis",
+    "to": "https://meansandmeasures.com/kc/crisis"
+  },
+  {
+    "from": "https://civicbrands.org/kc/crisis.json",
+    "to": "https://meansandmeasures.com/kc/crisis.json"
+  },
+  {
+    "from": "https://civicbrands.org/kc/crisis.txt",
+    "to": "https://meansandmeasures.com/kc/crisis.txt"
+  },
+  {
+    "from": "https://civicbrands.org/kc/data",
+    "to": "https://meansandmeasures.com/kc/data"
+  },
+  {
+    "from": "https://civicbrands.org/kc/directory",
+    "to": "https://meansandmeasures.com/kc/directory"
+  },
+  {
+    "from": "https://civicbrands.org/kc/food",
+    "to": "https://meansandmeasures.com/kc/food"
+  },
+  {
+    "from": "https://civicbrands.org/kc/give-help",
+    "to": "https://meansandmeasures.com/kc/give-help"
+  },
+  {
+    "from": "https://civicbrands.org/kc/government",
+    "to": "https://meansandmeasures.com/kc/government"
+  },
+  {
+    "from": "https://civicbrands.org/kc/healthcare",
+    "to": "https://meansandmeasures.com/kc/healthcare"
+  },
+  {
+    "from": "https://civicbrands.org/kc/housing",
+    "to": "https://meansandmeasures.com/kc/housing"
+  },
+  {
+    "from": "https://civicbrands.org/kc/legal",
+    "to": "https://meansandmeasures.com/kc/legal"
+  },
+  {
+    "from": "https://civicbrands.org/kc/libraries",
+    "to": "https://meansandmeasures.com/kc/libraries"
+  },
+  {
+    "from": "https://civicbrands.org/kc/local-knowledge",
+    "to": "https://meansandmeasures.com/kc/local-knowledge"
+  },
+  {
+    "from": "https://civicbrands.org/kc/map",
+    "to": "https://meansandmeasures.com/kc/map"
+  },
+  {
+    "from": "https://civicbrands.org/kc/neighborhoods",
+    "to": "https://meansandmeasures.com/kc/neighborhoods"
+  },
+  {
+    "from": "https://civicbrands.org/kc/newcomers",
+    "to": "https://meansandmeasures.com/kc/newcomers"
+  },
+  {
+    "from": "https://civicbrands.org/kc/property",
+    "to": "https://meansandmeasures.com/kc/property"
+  },
+  {
+    "from": "https://civicbrands.org/kc/services.csv",
+    "to": "https://meansandmeasures.com/kc/services.csv"
+  },
+  {
+    "from": "https://civicbrands.org/kc/services.json",
+    "to": "https://meansandmeasures.com/kc/services.json"
+  },
+  {
+    "from": "https://civicbrands.org/kc/taxes",
+    "to": "https://meansandmeasures.com/kc/taxes"
+  },
+  {
+    "from": "https://civicbrands.org/kc/transit",
+    "to": "https://meansandmeasures.com/kc/transit"
+  },
+  {
+    "from": "https://civicbrands.org/kc/utilities",
+    "to": "https://meansandmeasures.com/kc/utilities"
+  },
+  {
+    "from": "https://civicbrands.org/kc/use-the-data",
+    "to": "https://meansandmeasures.com/kc/use-the-data"
+  },
+  {
+    "from": "https://civicbrands.org/kc/veterans",
+    "to": "https://meansandmeasures.com/kc/veterans"
+  },
+  {
+    "from": "https://civicbrands.org/kc/worldcup",
+    "to": "https://meansandmeasures.com/kc/worldcup"
+  },
+  {
+    "from": "https://civicbrands.org/es/kc/crisis",
+    "to": "https://meansandmeasures.com/es/kc/crisis"
+  },
+  {
+    "from": "https://civicbrands.org/es/kc/food",
+    "to": "https://meansandmeasures.com/es/kc/food"
+  },
+  {
+    "from": "https://civicbrands.org/es/kc/healthcare",
+    "to": "https://meansandmeasures.com/es/kc/healthcare"
+  },
+  {
+    "from": "https://civicbrands.org/es/kc/housing",
+    "to": "https://meansandmeasures.com/es/kc/housing"
+  },
+  {
+    "from": "https://civicbrands.org/es/kc/legal",
+    "to": "https://meansandmeasures.com/es/kc/legal"
+  },
+  {
+    "from": "https://civicbrands.org/es/kc/newcomers",
+    "to": "https://meansandmeasures.com/es/kc/newcomers"
+  },
+  {
+    "from": "https://civicbrands.org/es/kc/worldcup",
+    "to": "https://meansandmeasures.com/es/kc/worldcup"
+  },
+  {
+    "from": "https://civicbrands.org/work/forecast",
+    "to": "https://meansandmeasures.com/work/forecast"
+  },
+  {
+    "from": "https://civicbrands.org/work/open-cognition",
+    "to": "https://meansandmeasures.com/work/open-cognition"
+  },
+  {
+    "from": "https://civicbrands.org/research/abstraction-harm",
+    "to": "https://meansandmeasures.com/research/abstraction-harm"
+  },
+  {
+    "from": "https://civicbrands.org/research/situated-inference",
+    "to": "https://meansandmeasures.com/research/situated-inference"
+  },
+  {
+    "from": "https://civicbrands.org/artifacts/entity-records",
+    "to": "https://meansandmeasures.com/artifacts/entity-records"
+  },
+  {
+    "from": "https://civicbrands.org/artifacts/nwk-408-public-comment",
+    "to": "https://meansandmeasures.com/artifacts/nwk-408-public-comment"
+  },
+  {
+    "from": "https://civicbrands.org/artifacts/record-sufficiency-matrix",
+    "to": "https://meansandmeasures.com/artifacts/record-sufficiency-matrix"
+  },
+  {
+    "from": "https://civicbrands.org/artifacts/uscis-biometrics-comment-academic",
+    "to": "https://meansandmeasures.com/artifacts/uscis-biometrics-comment-academic"
+  },
+  {
+    "from": "https://civicbrands.org/artifacts/uscis-biometrics-comment-civil-rights",
+    "to": "https://meansandmeasures.com/artifacts/uscis-biometrics-comment-civil-rights"
+  },
+  {
+    "from": "https://civicbrands.org/artifacts/uscis-biometrics-comment-professional",
+    "to": "https://meansandmeasures.com/artifacts/uscis-biometrics-comment-professional"
+  }
+]

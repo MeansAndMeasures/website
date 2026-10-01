@@ -3,8 +3,8 @@
 ========================================= */
 html {
     font-size: 20px; /* 1rem = 20px */
-    color: #0f1a2c;
-    background: #f2ede2;
+    color: var(--mm-text);
+    background: var(--mm-canvas);
 
     /* Width-aware type scale. Viewport height made tall phones render
        headings at near-desktop sizes. */
@@ -27,18 +27,18 @@ html {
    BODY TEXT
 ========================================= */
 body {
-    font-family: "Spectral", serif;
+    font-family: var(--mm-font-body);
     font-size: 1rem;      /* 20px */
     line-height: 1.62;
     font-weight: 400;
     margin: 0;
-    color: #0f1a2c;
-    background: #f2ede2;
+    color: var(--mm-text);
+    background: var(--mm-canvas);
 }
 
 ::selection {
-    color: #f2ede2;
-    background: #463a6b;
+    color: var(--mm-canvas);
+    background: var(--mm-identity-institutional);
 }
 
 p + p {
@@ -71,7 +71,7 @@ li + li {
    HERO OBJECT
 ========================================= */
 .hero-title {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: var(--type-display);
     line-height: 0.98;
     max-width: 12ch;
@@ -80,14 +80,14 @@ li + li {
     padding-block: clamp(1.62rem, 8vh, 5.67rem);
     margin: 0 0 0 auto;
     text-align: right;
-    color: #0f1a2c;
+    color: var(--mm-text);
 }
 
 /* =========================================
    CONTENT HEADING OBJECTS
 ========================================= */
 h1 {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: var(--type-h1);
     line-height: 1.1;
     margin-top: 3.24rem; /* 2x base rhythm */
@@ -95,7 +95,7 @@ h1 {
 }
 
 h2 {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: var(--type-h2);
     line-height: 1.2;
     margin-top: 2.43rem; /* 1.5x base rhythm */
@@ -103,7 +103,7 @@ h2 {
 }
 
 h3 {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: var(--type-h3);
     line-height: 1.3;
     margin-top: 2.16rem; /* Matches p + p gap perfectly */
@@ -111,7 +111,7 @@ h3 {
 }
 
 h4 {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: var(--type-h4);
     line-height: 1.4;
     margin-top: 1.62rem; /* 1x base rhythm */
@@ -134,12 +134,12 @@ h4,
 ========================================= */
 .caption,
 .eyebrow {
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.2;
     margin: 0 0 0.81rem;
-    color: #6a5a95;
+    color: var(--mm-link);
 }
 
 /* =========================================
@@ -156,13 +156,13 @@ h4,
 
 a {
     color: inherit;
-    text-decoration-color: #c9482f;
+    text-decoration-color: var(--mm-action);
     text-decoration-thickness: 0.045em;
     text-underline-offset: 0.18em;
 }
 
 a:hover {
-    color: #463a6b;
+    color: var(--mm-action);
 }
 
 .section--compact {
@@ -186,7 +186,7 @@ a:hover {
    CARD TITLE OBJECT
 ========================================= */
 .card-title {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: clamp(1rem, 2.4vw, 1.35rem);
     line-height: 1.215;
     margin: 0;
@@ -196,7 +196,7 @@ a:hover {
    CTA OBJECT
 ========================================= */
 .cta-title {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: clamp(2rem, 6vw, 4rem);
     line-height: 1.1;
     max-width: 33ch;
@@ -209,7 +209,7 @@ a:hover {
 
 .site-header,
 .site-footer {
-    border-block: 1px solid #463a6b;
+    border-block: 1px solid var(--mm-action);
 }
 
 .site-header__inner,
@@ -228,7 +228,7 @@ a:hover {
 }
 
 .site-header__mark {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-weight: 600;
     text-decoration: none;
     letter-spacing: 0;
@@ -244,7 +244,7 @@ a:hover {
 }
 
 .site-header__diamond {
-    color: #c9482f;
+    color: var(--mm-action);
     font-size: 0.72em;
     line-height: 1;
     transform: translateY(-0.02em);
@@ -258,7 +258,7 @@ a:hover {
     column-gap: clamp(1rem, 2.4vw, 1.62rem);
     row-gap: 0.35rem;
 
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.25;
@@ -276,7 +276,7 @@ a:hover {
 }
 
 .site-footer {
-    border-top: 1px solid #463a6b;
+    border-top: 1px solid var(--mm-action);
     border-bottom: 0;
 }
 
@@ -286,7 +286,7 @@ a:hover {
 
 .site-footer__meta {
     margin: 0;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.25;
@@ -301,7 +301,7 @@ a:hover {
 }
 
 .site-footer__meta a {
-    text-decoration-color: #7a8aa3;
+    text-decoration-color: var(--mm-secondary);
 }
 
 /* =========================================
@@ -319,15 +319,15 @@ a:hover {
     row-gap: 0.45rem;
     margin-block: 1.62rem 2.43rem;
     padding-block: 0.81rem;
-    border-block: 1px solid color-mix(in srgb, #463a6b 58%, transparent);
+    border-block: 1px solid color-mix(in srgb, var(--mm-action) 58%, transparent);
 
     font-size: 0.82rem;
     line-height: 1.35;
-    background: color-mix(in srgb, #e5ddc9 42%, transparent);
+    background: color-mix(in srgb, var(--mm-surface) 42%, transparent);
 }
 
 .entry-meta dt {
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     letter-spacing: 0;
 }
 
@@ -360,7 +360,7 @@ a:hover {
 }
 
 .field label {
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.25;
@@ -371,18 +371,18 @@ a:hover {
 .field textarea {
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #463a6b;
+    border: 1px solid var(--mm-action);
     border-radius: 0;
     padding: 0.55rem 0.65rem;
     color: inherit;
-    background: color-mix(in srgb, #f2ede2 88%, white);
+    background: color-mix(in srgb, var(--mm-canvas) 88%, white);
     font: inherit;
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-    outline: 0.12rem solid #c9482f;
+    outline: 0.12rem solid var(--mm-focus);
     outline-offset: 0.12rem;
 }
 
@@ -392,12 +392,12 @@ a:hover {
 
 .intake-form button {
     justify-self: start;
-    border: 1px solid #463a6b;
+    border: 1px solid var(--mm-action);
     border-radius: 0;
     padding: 0.55rem 0.8rem;
     color: inherit;
     background: transparent;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     cursor: pointer;
@@ -405,7 +405,7 @@ a:hover {
 
 .intake-form button:hover,
 .intake-form button:focus-visible {
-    background: #e5ddc9;
+    background: var(--mm-surface);
 }
 
 .intake-form button:disabled {
@@ -416,7 +416,7 @@ a:hover {
 .form-status {
     min-height: 1.35em;
     margin: 0;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.25;
@@ -427,15 +427,15 @@ a:hover {
     max-height: 32rem;
     margin-top: 1.62rem;
     padding: 0.81rem;
-    border: 1px solid #463a6b;
-    background: color-mix(in srgb, #e5ddc9 38%, transparent);
+    border: 1px solid var(--mm-action);
+    background: color-mix(in srgb, var(--mm-surface) 38%, transparent);
     font-size: 0.72rem;
     line-height: 1.45;
     white-space: pre-wrap;
 }
 
 .document-action {
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.25;
@@ -444,7 +444,7 @@ a:hover {
 .asset-list {
     padding-inline-start: 0;
     list-style: none;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.35;
@@ -455,8 +455,8 @@ a:hover {
 }
 
 .brand-document {
-    border-block: 1px solid #463a6b;
-    background: #f2ede2;
+    border-block: 1px solid var(--mm-action);
+    background: var(--mm-canvas);
 }
 
 .brand-document iframe {
@@ -464,7 +464,7 @@ a:hover {
     width: 100%;
     min-height: min(76rem, 82vh);
     border: 0;
-    background: #f2ede2;
+    background: var(--mm-canvas);
 }
 
 /* =========================================
@@ -490,7 +490,7 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
-    border-top: 1px solid #463a6b;
+    border-top: 1px solid var(--mm-action);
 }
 
 .section--routing {
@@ -507,7 +507,7 @@ a:hover {
 .route-panel {
     min-height: 11rem;
     padding: 1.2rem 1rem 1.62rem 0;
-    border-bottom: 1px solid #463a6b;
+    border-bottom: 1px solid var(--mm-action);
 
     color: inherit;
     text-decoration: none;
@@ -519,20 +519,20 @@ a:hover {
 
 .route-panel:hover,
 .route-panel:focus-visible {
-    background: color-mix(in srgb, #e5ddc9 54%, transparent);
+    background: color-mix(in srgb, var(--mm-surface) 54%, transparent);
 }
 
 .route-panel:focus-visible {
-    outline: 0.1rem solid #c9482f;
+    outline: 0.1rem solid var(--mm-focus);
     outline-offset: 0.2rem;
 }
 
 .route-panel__meta {
     margin-top: 1rem;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.72rem;
     line-height: 1.25;
-    color: #6a5a95;
+    color: var(--mm-link);
 }
 
 .system-grid,
@@ -568,7 +568,7 @@ a:hover {
 .update-list article,
 .status-list section,
 .sitemap-list__section {
-    border-top: 1px solid color-mix(in srgb, #463a6b 58%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--mm-action) 58%, transparent);
     padding-top: 1.2rem;
 }
 
@@ -601,18 +601,18 @@ a:hover {
 /* Loud "Need Help Now" only on KC pages. */
 .site-header__needhelp,
 .site-footer__needhelp {
-    color: #c9482f;
+    color: var(--mm-action);
     font-weight: 700;
     text-decoration-thickness: 0.09em;
 }
 
 .site-header__escape {
-    border: 1px solid #c9482f;
-    background: #c9482f;
-    color: #f2ede2;
+    border: 1px solid var(--mm-focus);
+    background: var(--mm-surface);
+    color: var(--mm-canvas);
     padding: 0.32rem 0.65rem;
     border-radius: 0;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     letter-spacing: 0;
     line-height: 1.2;
@@ -621,8 +621,8 @@ a:hover {
 
 .site-header__escape:hover,
 .site-header__escape:focus-visible {
-    background: #0f1a2c;
-    border-color: #0f1a2c;
+    background: var(--mm-text);
+    border-color: var(--mm-text);
     outline: none;
 }
 
@@ -639,9 +639,9 @@ a:hover {
 }
 
 .kc-eyebrow {
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
-    color: #c9482f;
+    color: var(--mm-action);
     letter-spacing: 0;
     margin: 0 0 0.81rem;
 }
@@ -660,7 +660,7 @@ a:hover {
 .kc-section {
     margin-block: 2.43rem;
     padding-block: 1.62rem;
-    border-top: 1px solid color-mix(in srgb, #463a6b 50%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--mm-action) 50%, transparent);
 }
 
 .kc-section:first-of-type {
@@ -674,18 +674,18 @@ a:hover {
 .service-card {
     margin-block: 1.62rem;
     padding: 1.2rem;
-    border: 1px solid color-mix(in srgb, #463a6b 60%, transparent);
-    background: color-mix(in srgb, #e5ddc9 24%, transparent);
+    border: 1px solid color-mix(in srgb, var(--mm-action) 60%, transparent);
+    background: color-mix(in srgb, var(--mm-surface) 24%, transparent);
 }
 
 .service-card[data-emergency="true"] {
-    border-color: #c9482f;
+    border-color: var(--mm-action);
     border-width: 2px;
-    background: color-mix(in srgb, #c9482f 8%, #f2ede2);
+    background: var(--mm-surface);
 }
 
 .service-card__name {
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: 1.35rem;
     margin: 0 0 0.45rem;
     line-height: 1.25;
@@ -693,7 +693,7 @@ a:hover {
 
 .service-card__contact {
     margin: 0.45rem 0;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.95rem;
     line-height: 1.5;
     list-style: none;
@@ -713,30 +713,30 @@ a:hover {
     display: inline-block;
     padding: 0.65rem 0.9rem;
     margin-block: 0.45rem;
-    background: #c9482f;
-    color: #f2ede2 !important;
-    font-family: "Sora", sans-serif;
+    background: var(--mm-surface);
+    color: var(--mm-action) !important;
+    font-family: var(--mm-font-ui);
     font-size: 1.18rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-decoration: none;
-    border: 1px solid #c9482f;
+    border: 1px solid var(--mm-focus);
 }
 
 .service-card__phone:hover,
 .service-card__phone:focus-visible {
-    color: #f2ede2 !important;
-    background: #0f1a2c;
-    border-color: #0f1a2c;
+    color: var(--mm-action) !important;
+    background: var(--mm-text);
+    border-color: var(--mm-text);
     outline: none;
 }
 
 .service-card__copy {
     margin-inline-start: 0.45rem;
     padding: 0.45rem 0.65rem;
-    border: 1px solid #463a6b;
+    border: 1px solid var(--mm-action);
     background: transparent;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.72rem;
     letter-spacing: 0;
     cursor: pointer;
@@ -745,7 +745,7 @@ a:hover {
 
 .service-card__copy:hover,
 .service-card__copy:focus-visible {
-    background: #e5ddc9;
+    background: var(--mm-surface);
 }
 
 .service-card__access {
@@ -760,16 +760,16 @@ a:hover {
 }
 
 .service-card__correction {
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.72rem;
-    color: #7a8aa3;
+    color: var(--mm-secondary);
     letter-spacing: 0;
     margin: 0.81rem 0 0;
 }
 
 .service-card details summary {
     cursor: pointer;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     margin-block: 0.45rem;
 }
@@ -781,8 +781,8 @@ a:hover {
 .kc-triage {
     margin-block: 2.43rem;
     padding: 1.62rem;
-    border: 2px solid #c9482f;
-    background: color-mix(in srgb, #c9482f 6%, #f2ede2);
+    border: 2px solid var(--mm-focus);
+    background: color-mix(in srgb, var(--mm-focus) 6%, var(--mm-canvas));
 }
 
 .kc-triage h2 {
@@ -800,19 +800,19 @@ a:hover {
 .kc-triage__option {
     display: block;
     padding: 1rem;
-    border: 1px solid #463a6b;
-    background: #f2ede2;
+    border: 1px solid var(--mm-action);
+    background: var(--mm-canvas);
     color: inherit;
     text-decoration: none;
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: 1rem;
     line-height: 1.3;
 }
 
 .kc-triage__option:hover,
 .kc-triage__option:focus-visible {
-    background: #e5ddc9;
-    outline: 0.1rem solid #c9482f;
+    background: var(--mm-surface);
+    outline: 0.1rem solid var(--mm-focus);
     outline-offset: 0.1rem;
 }
 
@@ -827,9 +827,9 @@ a:hover {
     align-items: center;
     margin-block: 0.81rem;
     padding: 0.65rem;
-    border: 1px solid color-mix(in srgb, #463a6b 40%, transparent);
-    background: color-mix(in srgb, #e5ddc9 24%, transparent);
-    font-family: "Spectral SC", serif;
+    border: 1px solid color-mix(in srgb, var(--mm-action) 40%, transparent);
+    background: color-mix(in srgb, var(--mm-surface) 24%, transparent);
+    font-family: var(--mm-font-editorial);
     font-size: 0.72rem;
 }
 
@@ -840,7 +840,7 @@ a:hover {
 
 .kc-readability button {
     padding: 0.32rem 0.65rem;
-    border: 1px solid #463a6b;
+    border: 1px solid var(--mm-action);
     background: transparent;
     color: inherit;
     font-family: inherit;
@@ -851,8 +851,8 @@ a:hover {
 .kc-readability button:hover,
 .kc-readability button:focus-visible,
 .kc-readability button[aria-pressed="true"] {
-    background: #463a6b;
-    color: #f2ede2;
+    background: var(--mm-identity-institutional);
+    color: var(--mm-canvas);
 }
 
 body[data-kc-size="lg"] {
@@ -891,28 +891,28 @@ body[data-kc-spacing="loose"] {
     display: flex;
     gap: 0.45rem;
     margin-block: 0.81rem;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
 }
 
 .kc-lang a {
     padding: 0.18rem 0.45rem;
-    border: 1px solid #463a6b;
+    border: 1px solid var(--mm-action);
     text-decoration: none;
     color: inherit;
 }
 
 .kc-lang a[aria-current="true"] {
-    background: #463a6b;
-    color: #f2ede2;
+    background: var(--mm-identity-institutional);
+    color: var(--mm-canvas);
 }
 
 .kc-lang-banner {
     margin-block: 1rem;
     padding: 0.81rem 1rem;
-    border: 1px dashed #c9482f;
-    background: color-mix(in srgb, #c9482f 6%, #f2ede2);
-    font-family: "Spectral SC", serif;
+    border: 1px dashed var(--mm-focus);
+    background: color-mix(in srgb, var(--mm-focus) 6%, var(--mm-canvas));
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
 }
 
@@ -923,8 +923,8 @@ body[data-kc-spacing="loose"] {
 .kc-urgent {
     margin-block: 1.62rem;
     padding: 1.2rem;
-    border-left: 4px solid #c9482f;
-    background: color-mix(in srgb, #c9482f 4%, #f2ede2);
+    border-left: 4px solid var(--mm-focus);
+    background: color-mix(in srgb, var(--mm-focus) 4%, var(--mm-canvas));
 }
 
 .kc-urgent h2,
@@ -934,30 +934,30 @@ body[data-kc-spacing="loose"] {
 
 .kc-urgent__phone {
     display: inline-block;
-    font-family: "Sora", sans-serif;
+    font-family: var(--mm-font-ui);
     font-size: 2.16rem;
     font-weight: 600;
     line-height: 1.1;
     text-decoration: none;
-    color: #c9482f;
+    color: var(--mm-action);
 }
 
 .kc-urgent__phone:hover {
-    color: #0f1a2c;
+    color: var(--mm-text);
 }
 
 .kc-note {
     margin: 0.81rem 0;
     padding: 0.65rem 0.9rem;
-    border-left: 3px solid #7a8aa3;
-    background: color-mix(in srgb, #7a8aa3 8%, transparent);
+    border-left: 3px solid var(--mm-secondary);
+    background: color-mix(in srgb, var(--mm-secondary) 8%, transparent);
     font-size: 0.95rem;
     line-height: 1.55;
 }
 
 .kc-note--strong {
-    border-left-color: #c9482f;
-    background: color-mix(in srgb, #c9482f 6%, transparent);
+    border-left-color: var(--mm-action);
+    background: color-mix(in srgb, var(--mm-focus) 6%, transparent);
 }
 
 /* =========================================
@@ -969,13 +969,13 @@ body[data-kc-spacing="loose"] {
     flex-wrap: wrap;
     gap: 0.45rem 0.9rem;
     margin-block: 1.62rem;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.8rem;
     line-height: 1.35;
 }
 
 .kc-subnav a {
-    text-decoration-color: #c9482f;
+    text-decoration-color: var(--mm-action);
 }
 
 .kc-subnav a[aria-current="page"] {
@@ -995,13 +995,13 @@ body[data-kc-spacing="loose"] {
 
 .kc-search input[type="search"] {
     padding: 0.65rem;
-    border: 1px solid #463a6b;
-    background: color-mix(in srgb, #f2ede2 88%, white);
+    border: 1px solid var(--mm-action);
+    background: color-mix(in srgb, var(--mm-canvas) 88%, white);
     font: inherit;
 }
 
 .kc-search input[type="search"]:focus {
-    outline: 0.12rem solid #c9482f;
+    outline: 0.12rem solid var(--mm-focus);
     outline-offset: 0.12rem;
 }
 
@@ -1009,13 +1009,13 @@ body[data-kc-spacing="loose"] {
     display: flex;
     flex-wrap: wrap;
     gap: 0.45rem;
-    font-family: "Spectral SC", serif;
+    font-family: var(--mm-font-editorial);
     font-size: 0.72rem;
 }
 
 .kc-search__chip {
     padding: 0.32rem 0.65rem;
-    border: 1px solid #463a6b;
+    border: 1px solid var(--mm-action);
     background: transparent;
     color: inherit;
     cursor: pointer;
@@ -1024,8 +1024,8 @@ body[data-kc-spacing="loose"] {
 }
 
 .kc-search__chip[aria-pressed="true"] {
-    background: #463a6b;
-    color: #f2ede2;
+    background: var(--mm-identity-institutional);
+    color: var(--mm-canvas);
 }
 
 /* =========================================
@@ -1042,9 +1042,9 @@ body[data-kc-spacing="loose"] {
     left: 0.45rem;
     top: -3rem;
     padding: 0.45rem 0.81rem;
-    background: #0f1a2c;
-    color: #f2ede2;
-    font-family: "Spectral SC", serif;
+    background: var(--mm-text);
+    color: var(--mm-canvas);
+    font-family: var(--mm-font-editorial);
     font-size: 0.9rem;
     z-index: 1000;
     transition: top 0.15s ease;
@@ -1053,7 +1053,7 @@ body[data-kc-spacing="loose"] {
 .skip-link:focus,
 .skip-link:focus-visible {
     top: 0.45rem;
-    outline: 0.12rem solid #c9482f;
+    outline: 0.12rem solid var(--mm-focus);
     outline-offset: 0.12rem;
 }
 
@@ -1064,7 +1064,7 @@ body[data-kc-spacing="loose"] {
     color: #a8351e;
 }
 
-/* Muted correction path — was #7a8aa3 (3.00:1), now passes. */
+/* Muted correction path — was var(--mm-secondary) (3.00:1), now passes. */
 .service-card__correction {
     color: #566375;
 }
@@ -1082,7 +1082,7 @@ body[data-kc-spacing="loose"] {
 .service-card__phone:focus-visible,
 .kc-readability button:focus-visible,
 .kc-lang a:focus-visible {
-    outline: 0.15rem solid #c9482f;
+    outline: 0.15rem solid var(--mm-focus);
     outline-offset: 0.18rem;
 }
 
@@ -1090,13 +1090,13 @@ body[data-kc-spacing="loose"] {
 .site-header__nav a:focus-visible,
 .site-footer__nav a:focus-visible,
 .kc-subnav a:focus-visible {
-    outline: 0.12rem solid #c9482f;
+    outline: 0.12rem solid var(--mm-focus);
     outline-offset: 0.18rem;
 }
 
 /* Service card details/summary disclosure widgets. */
 .service-card details summary:focus-visible {
-    outline: 0.12rem solid #c9482f;
+    outline: 0.12rem solid var(--mm-focus);
     outline-offset: 0.18rem;
 }
 
@@ -1220,3 +1220,22 @@ body[data-kc-spacing="loose"] {
         padding-right: 0;
     }
 }
+
+/* Typography follows the function of each surface. */
+h1, .hero-title { font-family: var(--mm-font-display); }
+h2, h3, h4 { font-family: var(--mm-font-institutional); }
+nav, label, input, select, textarea { font-family: var(--mm-font-ui); }
+button, .document-action { font-family: var(--mm-font-action); }
+code, pre { font-family: var(--mm-font-data); }
+a { color: var(--mm-link); }
+
+.site-header__escape { color: var(--mm-action); border-color: var(--mm-action); font-family: var(--mm-font-action); }
+.site-header__needhelp, .site-footer__needhelp { color: var(--mm-action); }
+.entry-meta dt, .eyebrow { font-family: var(--mm-font-editorial); }
+time, .service-card__updated { font-family: var(--mm-font-detail); }
+.mm-type-specialty { font-family: var(--mm-font-specialty); }
+
+/* Preserve readable prose and identifiers at narrow widths without clipping. */
+p, dd, li, a, code { overflow-wrap: anywhere; }
+.entry-meta > *, .measure { min-width: 0; }
+pre { max-inline-size: 100%; overflow-x: auto; }

@@ -1,8 +1,9 @@
 ---
-const title = "404 Not Found | CivicBrands";
+const title = "404 Not Found | Means+Measures";
 ---
-<html lang="en">
+<html lang="en" class="mm">
   <head>
+    <link rel="stylesheet" href="/means-measures/means-measures.css" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
@@ -13,8 +14,8 @@ const title = "404 Not Found | CivicBrands";
   <body>
     <div class="page">
       <header>
-        <a class="brand" href="/" aria-label="CivicBrands home">
-          Civic<span class="mark">◆</span>Brands
+        <a class="brand" href="/" aria-label="Means+Measures home">
+          <img class="mm-logo" src="/means-measures/assets/means-measures-logo-wordmark.png" alt="Means+Measures" width="240" />
         </a>
         <div class="strap">Down through systems. Up through people.</div>
       </header>
@@ -27,7 +28,7 @@ const title = "404 Not Found | CivicBrands";
             The resource at this address does not exist or is no longer published here.
           </p>
           <p class="detail">
-            Check the address, return to the index, or use the links below to continue through CivicBrands.
+            Check the address, return to the index, or use the links below to continue through Means+Measures.
           </p>
 
           <nav aria-label="Useful destinations">
@@ -47,7 +48,7 @@ const title = "404 Not Found | CivicBrands";
       </main>
 
       <footer>
-        <span>© 2026 CivicBrands · For the Commons</span>
+        <span>© 2026 Means+Measures · For the Commons</span>
         <span><a href="/status/">Status</a> · <a href="/contact/">Contact</a></span>
       </footer>
     </div>
@@ -57,12 +58,12 @@ const title = "404 Not Found | CivicBrands";
 
 <style>
   :global(:root) {
-    --cb-error-bg: #f4f1e8;
-    --cb-error-fg: #151515;
-    --cb-error-muted: #5e5c55;
-    --cb-error-line: #bbb6aa;
+    --cb-error-bg: var(--mm-canvas);
+    --cb-error-fg: var(--mm-text);
+    --cb-error-muted: var(--mm-secondary);
+    --cb-error-line: var(--mm-secondary);
     --cb-error-panel: rgba(255,255,255,.28);
-    font-family: "Sora", "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--mm-font-ui);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -155,7 +156,7 @@ const title = "404 Not Found | CivicBrands";
 
   .code {
     margin: 0 0 16px;
-    font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    font-family: var(--mm-font-data);
     font-size: .82rem;
     letter-spacing: .08em;
     text-transform: uppercase;
@@ -199,7 +200,7 @@ const title = "404 Not Found | CivicBrands";
     padding-top: 24px;
     border-top: 1px solid var(--cb-error-line);
     color: var(--cb-error-muted);
-    font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    font-family: var(--mm-font-data);
     font-size: .82rem;
     line-height: 1.6;
   }

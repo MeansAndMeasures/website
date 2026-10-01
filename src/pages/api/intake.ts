@@ -3,8 +3,8 @@ import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
-const GENERIC_RECIPIENT = "contact@mail.civicbrands.org";
-const PROCUREMENT_RECIPIENT = "procurement@mail.civicbrands.org";
+const GENERIC_RECIPIENT = "contact@meansandmeasures.com";
+const PROCUREMENT_RECIPIENT = "procurement@meansandmeasures.com";
 const TOPICS = new Set([
     "General inquiry",
     "Public comment",

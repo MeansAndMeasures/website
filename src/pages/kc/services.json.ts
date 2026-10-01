@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
     const machine = buildKcMachine(services);
 
     const payload = {
-        schema: "https://civicbrands.org/schemas/kc-services.v2.json",
+        schema: "https://meansandmeasures.com/schemas/kc-services.v2.json",
         license: "Free to mirror, redistribute, repost. CC0-like. Attribution welcome, not required.",
         count: services.length,
         services: services.map((entry) => ({

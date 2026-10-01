@@ -8,6 +8,7 @@
 		"directory": "./dist/client"
 	},
 	"workers_dev": false,
+	"routes": [{ "pattern": "meansandmeasures.com", "custom_domain": true }, { "pattern": "www.meansandmeasures.com", "custom_domain": true }],
 	"preview_urls": false,
 	"d1_databases": [
 		{

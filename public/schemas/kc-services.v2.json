@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://civicbrands.org/schemas/kc-services.v2.json",
+  "$id": "https://meansandmeasures.com/schemas/kc-services.v2.json",
   "title": "Kansas City service export",
   "type": "object",
   "required": ["schema", "license", "count", "services"],
   "properties": {
-    "schema": { "const": "https://civicbrands.org/schemas/kc-services.v2.json" },
+    "schema": { "const": "https://meansandmeasures.com/schemas/kc-services.v2.json" },
     "license": { "type": "string" },
     "count": { "type": "integer", "minimum": 0 },
     "services": {

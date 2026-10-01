@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://civicbrands.org/schemas/resource-graph.v2.json",
-  "title": "CivicBrands resource graph",
+  "$id": "https://meansandmeasures.com/schemas/resource-graph.v2.json",
+  "title": "Means+Measures resource graph",
   "type": "object",
   "required": ["schema", "count", "resources", "byKey", "byUrl"],
   "properties": {
-    "schema": { "const": "https://civicbrands.org/schemas/resource-graph.v2.json" },
+    "schema": { "const": "https://meansandmeasures.com/schemas/resource-graph.v2.json" },
     "count": { "type": "integer", "minimum": 0 },
     "resources": {
       "type": "array",

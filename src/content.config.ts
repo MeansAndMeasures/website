@@ -15,7 +15,7 @@ const sharedFields = {
     ]).default("active"),
 
     tags: z.array(z.string()).default([]),
-    authors: z.array(z.string()).default(["CivicBrands"]),
+    authors: z.array(z.string()).default(["Means+Measures"]),
 
     canonical: z.string().optional(),
     website: z.string().optional(),

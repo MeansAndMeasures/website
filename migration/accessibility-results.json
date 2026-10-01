@@ -1,0 +1,356 @@
+[
+  {
+    "path": "/",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/about",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/capabilities",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/systems",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/work",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/research",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/artifacts",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/brand",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/procurement",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/contact",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/updates",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/status",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/sitemap",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/privacy",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/terms",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/legal",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/about",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/crisis",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/data",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/directory",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/food",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/give-help",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/government",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/healthcare",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/housing",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/legal",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/libraries",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/local-knowledge",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/map",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/neighborhoods",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/newcomers",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/property",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/taxes",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/transit",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/utilities",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/use-the-data",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/veterans",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/kc/worldcup",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/es/kc/crisis",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/es/kc/food",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/es/kc/healthcare",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/es/kc/housing",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/es/kc/legal",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/es/kc/newcomers",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/es/kc/worldcup",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/work/forecast",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/work/open-cognition",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/research/abstraction-harm",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/research/situated-inference",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/artifacts/entity-records",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/artifacts/nwk-408-public-comment",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/artifacts/record-sufficiency-matrix",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/artifacts/uscis-biometrics-comment-academic",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/artifacts/uscis-biometrics-comment-civil-rights",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/artifacts/uscis-biometrics-comment-professional",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/404",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/500",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  },
+  {
+    "path": "/means-measures/index.html",
+    "violations": [],
+    "horizontalOverflow": false,
+    "manualReviewRules": []
+  }
+]

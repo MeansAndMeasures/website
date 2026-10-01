@@ -68,7 +68,7 @@ export const GET: APIRoute = async () => {
         ...work.map((entry) => `work/${entry.id}`),
         ...research.map((entry) => `research/${entry.id}`),
         ...artifacts.map((entry) => `artifacts/${entry.id}`)
-    ].map((path) => `https://civicbrands.org/${path}`);
+    ].map((path) => `https://meansandmeasures.com/${path}`);
 
     return new Response(
         `<?xml version="1.0" encoding="UTF-8"?>\n` +

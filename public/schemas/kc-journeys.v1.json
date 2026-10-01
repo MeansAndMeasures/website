@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://civicbrands.org/schemas/kc-journeys.v1.json",
+  "$id": "https://meansandmeasures.com/schemas/kc-journeys.v1.json",
   "title": "Kansas City service journeys",
   "type": "object",
   "required": ["schema", "count", "journeys"],
   "properties": {
-    "schema": { "const": "https://civicbrands.org/schemas/kc-journeys.v1.json" },
+    "schema": { "const": "https://meansandmeasures.com/schemas/kc-journeys.v1.json" },
     "count": { "type": "integer", "minimum": 0 },
     "journeys": {
       "type": "array",

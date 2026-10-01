@@ -14,7 +14,7 @@ artifactType: record
 source: CivicBrands procurement file
 ---
 
-CivicBrands is the public DBA of BJL13 Enterprise Solutions LLC. This record indexes public-facing entity and procurement materials used for institutional review, vendor intake, and public inspection.
+This historical CivicBrands record is retained by Means+Measures. CivicBrands is the recorded public DBA of BJL13 Enterprise Solutions LLC. This record indexes public-facing entity and procurement materials used for institutional review, vendor intake, and public inspection.
 
 Public procurement identifiers and contact points:
 
@@ -23,7 +23,7 @@ Public procurement identifiers and contact points:
 - EIN: 39-2829761
 - Operating base: Kansas City, Missouri
 - Phone: 816-306-3481
-- Procurement contact: procurement@mail.civicbrands.org
-- General contact: contact@mail.civicbrands.org
+- Procurement contact: procurement@meansandmeasures.com
+- General contact: contact@meansandmeasures.com
 
 Supporting source materials include entity registration documents, tax identification records, domain records, and procurement-facing organizational metadata. Personal details remain off-page unless separately prepared for public release.

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Content-Signal: ai-input=yes, search=yes, ai-train=yes
-Sitemap: https://civicbrands.org/sitemap.xml
+Sitemap: https://meansandmeasures.com/sitemap.xml

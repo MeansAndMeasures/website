@@ -1,0 +1,432 @@
+{
+  "css_parse_errors": [],
+  "font_faces": [
+    {
+      "family": "Bodoni Moda",
+      "file": "bodoni-moda.woff",
+      "weight": "400 900",
+      "style": "normal",
+      "internal_family": "Bodoni Moda",
+      "glyphs": 428,
+      "axes": {
+        "wght": [
+          400.0,
+          900.0
+        ],
+        "opsz": [
+          6.0,
+          96.0
+        ]
+      }
+    },
+    {
+      "family": "Bodoni Moda",
+      "file": "bodoni-moda-italic.woff",
+      "weight": "400 900",
+      "style": "italic",
+      "internal_family": "Bodoni Moda",
+      "glyphs": 428,
+      "axes": {
+        "wght": [
+          400.0,
+          900.0
+        ],
+        "opsz": [
+          6.0,
+          96.0
+        ]
+      }
+    },
+    {
+      "family": "Bodoni Moda SC",
+      "file": "bodoni-moda-sc.woff",
+      "weight": "400 900",
+      "style": "normal",
+      "internal_family": "Bodoni Moda SC",
+      "glyphs": 428,
+      "axes": {
+        "wght": [
+          400.0,
+          900.0
+        ],
+        "opsz": [
+          6.0,
+          96.0
+        ]
+      }
+    },
+    {
+      "family": "Bodoni Moda SC",
+      "file": "bodoni-moda-sc-italic.woff",
+      "weight": "400 900",
+      "style": "italic",
+      "internal_family": "Bodoni Moda SC",
+      "glyphs": 428,
+      "axes": {
+        "wght": [
+          400.0,
+          900.0
+        ],
+        "opsz": [
+          6.0,
+          96.0
+        ]
+      }
+    },
+    {
+      "family": "Montserrat",
+      "file": "montserrat.woff",
+      "weight": "100 900",
+      "style": "normal",
+      "internal_family": "Montserrat Thin",
+      "glyphs": 1312,
+      "axes": {
+        "wght": [
+          100.0,
+          900.0
+        ]
+      }
+    },
+    {
+      "family": "Montserrat",
+      "file": "montserrat-italic.woff",
+      "weight": "100 900",
+      "style": "italic",
+      "internal_family": "Montserrat Thin",
+      "glyphs": 1312,
+      "axes": {
+        "wght": [
+          100.0,
+          900.0
+        ]
+      }
+    },
+    {
+      "family": "Metrophobic",
+      "file": "metrophobic.woff",
+      "weight": "400",
+      "style": "normal",
+      "internal_family": "Metrophobic",
+      "glyphs": 575,
+      "axes": {}
+    },
+    {
+      "family": "Pompiere",
+      "file": "pompiere.woff",
+      "weight": "400",
+      "style": "normal",
+      "internal_family": "Pompiere ",
+      "glyphs": 260,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-bold.woff",
+      "weight": "700",
+      "style": "normal",
+      "internal_family": "Spectral",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-bolditalic.woff",
+      "weight": "700",
+      "style": "italic",
+      "internal_family": "Spectral",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-extrabold.woff",
+      "weight": "800",
+      "style": "normal",
+      "internal_family": "Spectral ExtraBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-extrabolditalic.woff",
+      "weight": "800",
+      "style": "italic",
+      "internal_family": "Spectral ExtraBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-extralight.woff",
+      "weight": "200",
+      "style": "normal",
+      "internal_family": "Spectral ExtraLight",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-extralightitalic.woff",
+      "weight": "200",
+      "style": "italic",
+      "internal_family": "Spectral ExtraLight",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-italic.woff",
+      "weight": "400",
+      "style": "italic",
+      "internal_family": "Spectral",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-light.woff",
+      "weight": "300",
+      "style": "normal",
+      "internal_family": "Spectral Light",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-lightitalic.woff",
+      "weight": "300",
+      "style": "italic",
+      "internal_family": "Spectral Light",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-medium.woff",
+      "weight": "500",
+      "style": "normal",
+      "internal_family": "Spectral Medium",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-mediumitalic.woff",
+      "weight": "500",
+      "style": "italic",
+      "internal_family": "Spectral Medium",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-regular.woff",
+      "weight": "400",
+      "style": "normal",
+      "internal_family": "Spectral",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-semibold.woff",
+      "weight": "600",
+      "style": "normal",
+      "internal_family": "Spectral SemiBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral",
+      "file": "spectral-semibolditalic.woff",
+      "weight": "600",
+      "style": "italic",
+      "internal_family": "Spectral SemiBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-bold.woff",
+      "weight": "700",
+      "style": "normal",
+      "internal_family": "Spectral SC",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-bolditalic.woff",
+      "weight": "700",
+      "style": "italic",
+      "internal_family": "Spectral SC",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-extrabold.woff",
+      "weight": "800",
+      "style": "normal",
+      "internal_family": "Spectral SC ExtraBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-extrabolditalic.woff",
+      "weight": "800",
+      "style": "italic",
+      "internal_family": "Spectral SC ExtraBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-extralight.woff",
+      "weight": "200",
+      "style": "normal",
+      "internal_family": "Spectral SC ExtraLight",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-extralightitalic.woff",
+      "weight": "200",
+      "style": "italic",
+      "internal_family": "Spectral SC ExtraLight",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-italic.woff",
+      "weight": "400",
+      "style": "italic",
+      "internal_family": "Spectral SC",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-light.woff",
+      "weight": "300",
+      "style": "normal",
+      "internal_family": "Spectral SC Light",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-lightitalic.woff",
+      "weight": "300",
+      "style": "italic",
+      "internal_family": "Spectral SC Light",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-medium.woff",
+      "weight": "500",
+      "style": "normal",
+      "internal_family": "Spectral SC Medium",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-mediumitalic.woff",
+      "weight": "500",
+      "style": "italic",
+      "internal_family": "Spectral SC Medium",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-regular.woff",
+      "weight": "400",
+      "style": "normal",
+      "internal_family": "Spectral SC",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-semibold.woff",
+      "weight": "600",
+      "style": "normal",
+      "internal_family": "Spectral SC SemiBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Spectral SC",
+      "file": "spectralsc-semibolditalic.woff",
+      "weight": "600",
+      "style": "italic",
+      "internal_family": "Spectral SC SemiBold",
+      "glyphs": 878,
+      "axes": {}
+    },
+    {
+      "family": "Iosevka",
+      "file": "iosevka-regular.woff",
+      "weight": "400",
+      "style": "normal",
+      "internal_family": "Iosevka",
+      "glyphs": 7582,
+      "axes": {}
+    },
+    {
+      "family": "Iosevka",
+      "file": "iosevka-italic.woff",
+      "weight": "400",
+      "style": "italic",
+      "internal_family": "Iosevka",
+      "glyphs": 7582,
+      "axes": {}
+    },
+    {
+      "family": "Iosevka",
+      "file": "iosevka-bold.woff",
+      "weight": "700",
+      "style": "normal",
+      "internal_family": "Iosevka",
+      "glyphs": 7582,
+      "axes": {}
+    },
+    {
+      "family": "Iosevka",
+      "file": "iosevka-bolditalic.woff",
+      "weight": "700",
+      "style": "italic",
+      "internal_family": "Iosevka",
+      "glyphs": 7582,
+      "axes": {}
+    }
+  ],
+  "logo_sha256": "562b856278e187135ca2c2f8659d490db21c06329e94b1473da8c3dcfaf8a013",
+  "logo_matches_supplied_original": true,
+  "contrast_ratios": {
+    "light text on #f4f7f8": 12.22,
+    "light secondary on #f4f7f8": 5.89,
+    "light action on #f4f7f8": 5.66,
+    "light link on #f4f7f8": 5.09,
+    "light focus on #f4f7f8": 2.35,
+    "light text on #faf3e7": 11.93,
+    "light secondary on #faf3e7": 5.75,
+    "light action on #faf3e7": 5.53,
+    "light link on #faf3e7": 4.96,
+    "light focus on #faf3e7": 2.3,
+    "dark text on #2b2f33": 13.49,
+    "dark secondary on #2b2f33": 5.46,
+    "dark action on #2b2f33": 6.53,
+    "dark link on #2b2f33": 6.62,
+    "dark focus on #2b2f33": 5.32
+  },
+  "browser_verified": false,
+  "browser_note": "Local specimen blocked by browser URL security policy. No visual/runtime verification claimed."
+}

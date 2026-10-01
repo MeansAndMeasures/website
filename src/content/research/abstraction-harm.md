@@ -15,7 +15,7 @@ tags:
 
 Abstraction harm occurs when a system's representation of a person, event, community, or decision becomes operationally stronger than the reality it is supposed to describe.
 
-CivicBrands uses this frame to evaluate infrastructure, records, interfaces, procurement systems, and AI-mediated workflows.
+Means+Measures uses this frame to evaluate infrastructure, records, interfaces, procurement systems, and AI-mediated workflows.
 
 The core diagnostic questions are:
 

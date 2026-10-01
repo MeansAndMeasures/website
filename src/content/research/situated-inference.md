@@ -14,7 +14,7 @@ tags:
 
 Situated inference treats interpretation as an operation performed inside context rather than a detached extraction of meaning.
 
-The frame is useful for CivicBrands because institutional systems routinely convert situated human realities into portable abstractions: cases, forms, scores, tickets, records, eligibility states, and compliance categories.
+The frame is useful for Means+Measures because institutional systems routinely convert situated human realities into portable abstractions: cases, forms, scores, tickets, records, eligibility states, and compliance categories.
 
 The analytical concern is not abstraction by itself. The concern is whether abstraction preserves enough context for affected people to remain legible, contestable, and meaningfully represented.
 

@@ -201,7 +201,7 @@ export async function getResourceGraph() {
 
   return {
 
-    schema: "https://civicbrands.org/schemas/resource-graph.v2.json",
+    schema: "https://meansandmeasures.com/schemas/resource-graph.v2.json",
 
     count: resources.length,
 

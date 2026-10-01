@@ -1,5 +1,5 @@
-Contact: mailto:disclosure@mail.civicbrands.org
+Contact: mailto:disclosure@meansandmeasures.com
 Expires: 2026-12-31T23:59:00Z
-Encryption: https://civicbrands.org/.well-known/CivicBrands_Security_Disclosures<disclosures@mail.civicbrands.org>(9222C51D9DB55B9F)_pub.asc'
-Encryption: https://keys.openpgp.org/search?q=disclosures@mail.civicbrands.org
-Canonical: https://civicbrands.org/.well-known/security.txt
+Encryption: https://meansandmeasures.com/.well-known/Means+Measures_Security_Disclosures<disclosures@meansandmeasures.com>(9222C51D9DB55B9F)_pub.asc'
+Encryption: https://keys.openpgp.org/search?q=disclosures@meansandmeasures.com
+Canonical: https://meansandmeasures.com/.well-known/security.txt

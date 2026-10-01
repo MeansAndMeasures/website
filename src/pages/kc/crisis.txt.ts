@@ -24,7 +24,7 @@ export const GET: APIRoute = async () => {
         lines.push("");
     }
 
-    lines.push("Full directory: https://civicbrands.org/kc/crisis");
+    lines.push("Full directory: https://meansandmeasures.com/kc/crisis");
     lines.push("");
 
     return new Response(lines.join("\n"), {

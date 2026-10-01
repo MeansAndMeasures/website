@@ -1,0 +1,129 @@
+/* Means+Measures — reusable CSS foundation, release 1.0.0.
+   Source: Means-Measures-Identity-Standard-v1.5.pdf.
+   Current logo authority: supplied M+MLogo.png, confirmed 2026-09-24.
+   Usage: load this file and add class="mm" to the desired root.
+   Typography remains explicit. No blanket body/heading/control font mapping. */
+@import url("./means-measures.typography.css");
+
+:root {
+  /* Protected identity colors. Historic labels are not a semantic taxonomy. */
+  --mm-identity-technical: #828a90;
+  --mm-identity-institutional: #293044;
+  --mm-identity-interface: #e5b52d;
+
+  /* Exact published light operational tokens. */
+  --mm-light-canvas: #f4f7f8;
+  --mm-light-surface: #faf3e7;
+  --mm-light-text: #263238;
+  --mm-light-secondary: #5b6067;
+  --mm-light-action: #006d75;
+  --mm-light-link: #127290;
+
+  /* Dark surface/text/secondary/action recovered from the PDF's swatches.
+     Dark canvas uses the surface value as an implementation default. */
+  --mm-dark-canvas: #2b2f33;
+  --mm-dark-surface: #2b2f33;
+  --mm-dark-text: #ffffff;
+  --mm-dark-secondary: #9aa7ac;
+  --mm-dark-action: #26c6da;
+  --mm-dark-link: #4fc3e8;
+
+  --mm-palette-focus: #ff7f00;
+  --mm-palette-success: #2e7d32;
+  --mm-palette-info: #8a4b00;
+  --mm-palette-warning: #c2185b;
+  --mm-palette-error: #ff0000;
+}
+
+/* Explicit light default; dark is opt-in, including nested themed regions. */
+:where(.mm, [data-mm-theme="light"]) {
+  color-scheme: light;
+  --mm-canvas: var(--mm-light-canvas);
+  --mm-surface: var(--mm-light-surface);
+  --mm-text: var(--mm-light-text);
+  --mm-secondary: var(--mm-light-secondary);
+  --mm-action: var(--mm-light-action);
+  --mm-link: var(--mm-light-link);
+  --mm-focus: var(--mm-palette-focus);
+  --mm-success: var(--mm-palette-success);
+  --mm-info: var(--mm-palette-info);
+  --mm-warning: var(--mm-palette-warning);
+  --mm-error: var(--mm-palette-error);
+  /* Implementation alias for visible functional boundaries, not a new brand color. */
+  --mm-control-border: var(--mm-secondary);
+  color: var(--mm-text);
+  background-color: var(--mm-canvas);
+}
+
+:where([data-mm-theme="dark"]) {
+  color-scheme: dark;
+  --mm-canvas: var(--mm-dark-canvas);
+  --mm-surface: var(--mm-dark-surface);
+  --mm-text: var(--mm-dark-text);
+  --mm-secondary: var(--mm-dark-secondary);
+  --mm-action: var(--mm-dark-action);
+  --mm-link: var(--mm-dark-link);
+  --mm-focus: var(--mm-palette-focus);
+  --mm-success: var(--mm-palette-success);
+  --mm-info: var(--mm-palette-info);
+  --mm-warning: var(--mm-palette-warning);
+  --mm-error: var(--mm-palette-error);
+  --mm-control-border: var(--mm-secondary);
+  color: var(--mm-text);
+  background-color: var(--mm-canvas);
+}
+
+:where(.mm-surface) { color: var(--mm-text); background-color: var(--mm-surface); }
+:where(.mm-secondary) { color: var(--mm-secondary); }
+:where(.mm-link) { color: var(--mm-link); text-decoration: underline; text-underline-offset: .16em; }
+
+/* Action is foreground/outline only. Never an action-colored button fill. */
+:where(.mm-action) {
+  color: var(--mm-action);
+  background: transparent;
+  border: 1px solid currentColor;
+}
+
+/* Orange remains the focus outline. A separate text-colored outer ring supplies
+   a high-contrast boundary where the exact orange fails 3:1 on a light surface.
+   Sizes below are implementation defaults, overridable by the consuming app. */
+:where(.mm :is(a, button, input, select, textarea, summary, [tabindex]), .mm-focusable):focus-visible {
+  outline: 3px solid var(--mm-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--mm-surface), 0 0 0 8px var(--mm-text);
+}
+
+/* Status text remains readable in both themes. Color is supplemental decoration;
+   include a visible status name/icon in the markup. No implied ARIA/live behavior. */
+:where(.mm-status) { color: var(--mm-text); border-inline-start: 3px solid var(--mm-status-color, var(--mm-control-border)); }
+:where(.mm-status[data-mm-status="success"]) { --mm-status-color: var(--mm-success); }
+:where(.mm-status[data-mm-status="info"]) { --mm-status-color: var(--mm-info); }
+:where(.mm-status[data-mm-status="warning"]) { --mm-status-color: var(--mm-warning); }
+:where(.mm-status[data-mm-status="error"]) { --mm-status-color: var(--mm-error); }
+
+/* Use the supplied artwork as an actual <img> with meaningful alt text.
+   The file is unchanged: no re-typesetting, recoloring, filtering or background
+   removal. Its cream pixels are not a declaration of a required logo background.
+   Width and surrounding clear space are chosen for the actual composition. */
+:where(img.mm-logo) { display: block; max-inline-size: 100%; block-size: auto; object-fit: contain; }
+
+@media (forced-colors: active) {
+  :where(.mm, [data-mm-theme]) {
+    --mm-canvas: Canvas;
+    --mm-surface: Canvas;
+    --mm-text: CanvasText;
+    --mm-secondary: CanvasText;
+    --mm-control-border: ButtonText;
+    --mm-link: LinkText;
+    --mm-action: ButtonText;
+    --mm-focus: Highlight;
+    --mm-success: CanvasText;
+    --mm-info: CanvasText;
+    --mm-warning: CanvasText;
+    --mm-error: CanvasText;
+  }
+  :where(.mm :is(a, button, input, select, textarea, summary, [tabindex]), .mm-focusable):focus-visible {
+    outline-color: Highlight;
+    box-shadow: none;
+  }
+}

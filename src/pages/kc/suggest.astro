@@ -119,7 +119,7 @@ const initialType = flagSlug ? "correct" : "suggest";
         <p>
             We retain submissions only as long as needed to review and update the directory. We do not
             sell or share submissions. If you want yours deleted after we review it,
-            <a href="mailto:privacy@mail.civicbrands.org">email us</a> with the approximate time you sent it.
+            <a href="mailto:privacy@meansandmeasures.com">email us</a> with the approximate time you sent it.
             See the <a href="/privacy">site-wide privacy policy</a> and the
             <a href="/kc/about">KC directory About page</a> for the longer version.
         </p>
@@ -162,10 +162,10 @@ const initialType = flagSlug ? "correct" : "suggest";
                     if (status) status.textContent = "Got it. Thank you.";
                     form.reset();
                 } else {
-                    if (status) status.textContent = json.error || "Something went wrong. Try again, or email corrections@mail.civicbrands.org.";
+                    if (status) status.textContent = json.error || "Something went wrong. Try again, or email corrections@meansandmeasures.com.";
                 }
             } catch (e) {
-                if (status) status.textContent = "Network error. Try again, or email corrections@mail.civicbrands.org.";
+                if (status) status.textContent = "Network error. Try again, or email corrections@meansandmeasures.com.";
             } finally {
                 if (submitBtn) submitBtn.disabled = false;
             }
