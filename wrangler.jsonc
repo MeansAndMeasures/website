@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "civicbrands-website",
+	"name": "meansandmeasures-website",
 	"compatibility_date": "2026-05-15",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
@@ -13,8 +13,8 @@
 	"d1_databases": [
 		{
 			"binding": "INTAKE_DB",
-			"database_name": "civicbrands-intake",
-			"database_id": "49b49947-10c8-45b4-a494-d37414ff4f88",
+			"database_name": "meansandmeasures-intake",
+			"database_id": "0a0d04a8-e4ec-4e70-818c-73a472506e3e",
 			"migrations_dir": "migrations"
 		}
 	],
