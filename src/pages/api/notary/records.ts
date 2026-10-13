@@ -62,7 +62,7 @@ function accessIdentity(request: Request) {
     const email = clean(request.headers.get("cf-access-authenticated-user-email"), 320);
     const assertion = clean(request.headers.get("cf-access-jwt-assertion"), 16000);
     if (!email || !assertion) return null;
-    return email;
+    return email.toLowerCase();
 }
 
 function authHeaders(request: Request) {
@@ -108,7 +108,7 @@ async function consumeRequestId(db: D1Database, workspaceHash: string, requestId
     }
 }
 
-async function requireSignedRequest(request: Request, db: D1Database, bodyHash: string) {
+async function requireSignedRequest(request: Request, db: D1Database, bodyHash: string, identity: string) {
     const headers = authHeaders(request);
     if (!headers.workspaceHash || !headers.requestId || !headers.timestamp || !headers.signature) {
         return { ok: false as const, response: json({ ok: false, error: "Signed request headers are required." }, 401) };
@@ -120,13 +120,17 @@ async function requireSignedRequest(request: Request, db: D1Database, bodyHash: 
     }
 
     const row = await db.prepare(`
-        SELECT public_key_jwk
+        SELECT public_key_jwk, owner_identity
         FROM notary_workspaces
         WHERE workspace_hash = ?
-    `).bind(headers.workspaceHash).first<{ public_key_jwk: string }>();
+    `).bind(headers.workspaceHash).first<{ public_key_jwk: string; owner_identity: string | null }>();
 
     if (!row) {
         return { ok: false as const, response: json({ ok: false, error: "Unknown notary workspace." }, 401) };
+    }
+
+    if (!row.owner_identity || row.owner_identity !== identity) {
+        return { ok: false as const, response: json({ ok: false, error: "This journal key is not authorized for the authenticated owner." }, 403) };
     }
 
     let publicKeyJwk: JsonWebKey;
@@ -162,7 +166,7 @@ export const GET: APIRoute = async ({ request }) => {
     const db = notaryEnv.INTAKE_DB;
     if (!db) return json({ ok: false, error: "Notary storage is unavailable." }, 503);
 
-    const auth = await requireSignedRequest(request, db, await sha256(""));
+    const auth = await requireSignedRequest(request, db, await sha256(""), identity);
     if (!auth.ok) return auth.response;
 
     const result = await db.prepare(`
@@ -215,19 +219,23 @@ export const POST: APIRoute = async ({ request }) => {
         }
 
         const existing = await db.prepare(`
-            SELECT public_key_jwk FROM notary_workspaces WHERE workspace_hash = ?
-        `).bind(workspaceHash).first<{ public_key_jwk: string }>();
+            SELECT public_key_jwk, owner_identity FROM notary_workspaces WHERE workspace_hash = ?
+        `).bind(workspaceHash).first<{ public_key_jwk: string; owner_identity: string | null }>();
 
         const serializedKey = JSON.stringify(body.publicKeyJwk);
         if (existing && existing.public_key_jwk !== serializedKey) {
             return json({ ok: false, error: "Workspace is already bound to another signing key." }, 409);
         }
 
+        if (existing && existing.owner_identity !== identity) {
+            return json({ ok: false, error: "Workspace belongs to another identity or requires an explicit owner migration." }, 403);
+        }
+
         if (!existing) {
             await db.prepare(`
-                INSERT INTO notary_workspaces (workspace_hash, public_key_jwk, last_seen_at)
-                VALUES (?, ?, CURRENT_TIMESTAMP)
-            `).bind(workspaceHash, serializedKey).run();
+                INSERT INTO notary_workspaces (workspace_hash, public_key_jwk, owner_identity, last_seen_at)
+                VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+            `).bind(workspaceHash, serializedKey, identity).run();
         }
 
         if (!(await consumeRequestId(db, workspaceHash, headers.requestId, headers.timestamp))) {
@@ -241,7 +249,7 @@ export const POST: APIRoute = async ({ request }) => {
         return json({ ok: false, error: "Unsupported notary action." }, 400);
     }
 
-    const auth = await requireSignedRequest(request, db, bodyHash);
+    const auth = await requireSignedRequest(request, db, bodyHash, identity);
     if (!auth.ok) return auth.response;
 
     const recordId = clean(body.recordId, 128);
