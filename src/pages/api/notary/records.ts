@@ -58,11 +58,30 @@ async function sha256(value: string) {
     return bytesToHex(await crypto.subtle.digest("SHA-256", textEncoder.encode(value)));
 }
 
-function accessIdentity(request: Request) {
-    const email = clean(request.headers.get("cf-access-authenticated-user-email"), 320);
-    const assertion = clean(request.headers.get("cf-access-jwt-assertion"), 16000);
-    if (!email || !assertion) return null;
-    return email.toLowerCase();
+const ACCESS_ISSUER = "https://civicbrands.cloudflareaccess.com";
+const ACCESS_API_AUD = "792d260d41bb7a2dfe92d7d7d550fbc1ab11c4a33893b1c1d91a38800e002a9d";
+async function accessIdentity(request: Request): Promise<string | null> {
+    const token = request.headers.get("cf-access-jwt-assertion");
+    if (!token) return null;
+    try {
+        const parts = token.split(".");
+        if (parts.length !== 3) return null;
+        const header = JSON.parse(new TextDecoder().decode(base64UrlToBytes(parts[0])));
+        const claims = JSON.parse(new TextDecoder().decode(base64UrlToBytes(parts[1])));
+        if (header.alg !== "RS256" || typeof header.kid !== "string") return null;
+        if (claims.iss !== ACCESS_ISSUER || !Array.isArray(claims.aud) || !claims.aud.includes(ACCESS_API_AUD)) return null;
+        const now = Math.floor(Date.now() / 1000);
+        if (typeof claims.exp !== "number" || claims.exp <= now || typeof claims.iat !== "number" || claims.iat > now + 60) return null;
+        if (typeof claims.email !== "string" || claims.email.toLowerCase() !== "brian@meansandmeasures.com") return null;
+        const certs = await fetch(ACCESS_ISSUER + "/cdn-cgi/access/certs");
+        if (!certs.ok) return null;
+        const jwks = await certs.json() as { keys?: JsonWebKey[] };
+        const jwk = jwks.keys?.find((key) => key.kid === header.kid);
+        if (!jwk) return null;
+        const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
+        const valid = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, base64UrlToBytes(parts[2]), textEncoder.encode(parts[0] + "." + parts[1]));
+        return valid ? claims.email.toLowerCase() : null;
+    } catch { return null; }
 }
 
 function authHeaders(request: Request) {
@@ -157,7 +176,7 @@ async function requireSignedRequest(request: Request, db: D1Database, bodyHash: 
 }
 
 export const GET: APIRoute = async ({ request }) => {
-    const identity = accessIdentity(request);
+    const identity = await accessIdentity(request);
     if (!identity) {
         return json({ ok: false, error: "Cloudflare Access authentication is required." }, 401);
     }
@@ -182,7 +201,7 @@ export const GET: APIRoute = async ({ request }) => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
-    const identity = accessIdentity(request);
+    const identity = await accessIdentity(request);
     if (!identity) {
         return json({ ok: false, error: "Cloudflare Access authentication is required." }, 401);
     }
