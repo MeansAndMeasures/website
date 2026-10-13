@@ -174,7 +174,7 @@ export const GET: APIRoute = async ({ request }) => {
                paper_copy_sha256, idempotency_key, created_at
         FROM notary_journal_records
         WHERE workspace_hash = ?
-        ORDER BY created_at DESC
+        ORDER BY rowid DESC
         LIMIT 500
     `).bind(auth.workspaceHash).all();
 
@@ -265,16 +265,16 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const existing = await db.prepare(`
-        SELECT record_id, entry_hash, body_sha256
+        SELECT record_id, entry_hash, body_sha256, previous_hash, paper_copy_sha256, saved_at
         FROM notary_journal_records
         WHERE workspace_hash = ? AND idempotency_key = ?
-    `).bind(auth.workspaceHash, idempotencyKey).first<{ record_id: string; entry_hash: string; body_sha256: string }>();
+    `).bind(auth.workspaceHash, idempotencyKey).first<{ record_id: string; entry_hash: string; body_sha256: string; previous_hash: string; paper_copy_sha256: string; saved_at: string }>();
 
     if (existing) {
         if (existing.body_sha256 !== bodyHash) {
             return json({ ok: false, error: "Idempotency key was reused with a different payload." }, 409);
         }
-        return json({ ok: true, idempotent: true, recordId: existing.record_id, entryHash: existing.entry_hash });
+        return json({ ok: true, idempotent: true, recordId: existing.record_id, entryHash: existing.entry_hash, previousHash: existing.previous_hash, paperCopySha256: existing.paper_copy_sha256, savedAt: existing.saved_at });
     }
 
     const head = await db.prepare(`
@@ -329,5 +329,5 @@ export const POST: APIRoute = async ({ request }) => {
         return json({ ok: false, error: "Journal append conflicted with the current chain." }, 409);
     }
 
-    return json({ ok: true, recordId, entryHash, previousHash, paperCopySha256 });
+    return json({ ok: true, recordId, entryHash, previousHash, paperCopySha256, savedAt });
 };
