@@ -89,7 +89,7 @@
   <section class="panel history">
     <h2>3. Kansas Journal History</h2>
     <p class="muted">Cloudflare D1 is the encrypted canonical backend. This browser keeps a decrypted local cache for continuity and export. Clearing the cache does not delete the cloud journal.</p>
-    <div class="actions left"><button id="syncBtn" type="button">Verify & sync</button><button id="exportJsonBtn" type="button">Export JSON</button><button id="exportCsvBtn" type="button">Export CSV</button><button id="clearLedgerBtn" class="danger" type="button">Clear local cache</button></div>
+    <div class="actions left"><button id="exportRecoveryBtn" type="button">Export encrypted recovery bundle</button><label>Import recovery bundle <input id="importRecoveryFile" type="file" accept=".json,application/json"></label><button id="syncBtn" type="button">Verify & sync</button><button id="exportJsonBtn" type="button">Export JSON</button><button id="exportCsvBtn" type="button">Export CSV</button><button id="clearLedgerBtn" class="danger" type="button">Clear local cache</button></div>
     <div id="ledgerContainer"></div>
   </section>
 </main>
