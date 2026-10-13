@@ -198,6 +198,7 @@ export const GET: APIRoute = async ({ request }) => {
     `).bind(auth.workspaceHash).all();
 
     const records = result.results ?? [];
+    if (records.length === 10000) return json({ ok: false, error: "Journal exceeds current verification window; pagination is required before use." }, 409);
     for (let i = records.length - 1; i >= 0; i--) {
         const record = records[i] as { previous_hash: string; entry_hash: string; record_id: string; saved_at: string; iv: string; ciphertext: string; paper_copy_sha256: string; body_sha256?: string };
         const previous = i === records.length - 1 ? "GENESIS" : (records[i + 1] as { entry_hash: string }).entry_hash;
@@ -241,8 +242,12 @@ export const POST: APIRoute = async ({ request }) => {
             return json({ ok: false, error: "Registration timestamp is outside the allowed window." }, 401);
         }
 
+        if (!body.publicKeyJwk || typeof body.publicKeyJwk !== "object") return json({ ok: false, error: "Missing public signing key." }, 400);
+        if (await sha256(JSON.stringify(body.publicKeyJwk)) !== workspaceHash) return json({ ok: false, error: "Workspace identifier does not match signing key." }, 400);
         const canonical = canonicalRequest(request, headers.timestamp, headers.requestId, bodyHash);
-        if (!(await verifySignature(body.publicKeyJwk, headers.signature, canonical))) {
+        let validRegistration = false;
+        try { validRegistration = await verifySignature(body.publicKeyJwk, headers.signature, canonical); } catch { return json({ ok: false, error: "Invalid registration key or signature." }, 400); }
+        if (!validRegistration) {
             return json({ ok: false, error: "Workspace key proof failed." }, 401);
         }
 
@@ -309,7 +314,7 @@ export const POST: APIRoute = async ({ request }) => {
         SELECT entry_hash
         FROM notary_journal_records
         WHERE workspace_hash = ?
-        ORDER BY created_at DESC
+        ORDER BY rowid DESC
         LIMIT 1
     `).bind(auth.workspaceHash).first<{ entry_hash: string }>();
 
