@@ -1,0 +1,325 @@
+import type { APIRoute } from "astro";
+import { env } from "cloudflare:workers";
+
+export const prerender = false;
+
+interface NotaryEnv {
+    INTAKE_DB?: D1Database;
+}
+
+interface RegisterPayload {
+    action: "register";
+    workspaceHash: string;
+    publicKeyJwk: JsonWebKey;
+}
+
+interface RecordPayload {
+    action: "append";
+    recordId: string;
+    savedAt: string;
+    previousHash: string;
+    iv: string;
+    ciphertext: string;
+    paperCopySha256: string;
+    idempotencyKey: string;
+}
+
+const textEncoder = new TextEncoder();
+const FIVE_MINUTES = 5 * 60 * 1000;
+
+function json(body: Record<string, unknown>, status = 200) {
+    return new Response(JSON.stringify(body), {
+        status,
+        headers: {
+            "content-type": "application/json; charset=utf-8",
+            "cache-control": "no-store"
+        }
+    });
+}
+
+function clean(value: unknown, limit: number) {
+    return String(value ?? "").trim().slice(0, limit);
+}
+
+function base64UrlToBytes(value: string) {
+    const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "=");
+    const binary = atob(padded);
+    return Uint8Array.from(binary, (c) => c.charCodeAt(0));
+}
+
+function bytesToHex(bytes: ArrayBuffer) {
+    return Array.from(new Uint8Array(bytes))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+}
+
+async function sha256(value: string) {
+    return bytesToHex(await crypto.subtle.digest("SHA-256", textEncoder.encode(value)));
+}
+
+function accessIdentity(request: Request) {
+    const email = clean(request.headers.get("cf-access-authenticated-user-email"), 320);
+    const assertion = clean(request.headers.get("cf-access-jwt-assertion"), 16000);
+    if (!email || !assertion) return null;
+    return email;
+}
+
+function authHeaders(request: Request) {
+    return {
+        workspaceHash: clean(request.headers.get("x-mm-workspace"), 128),
+        requestId: clean(request.headers.get("x-mm-request-id"), 128),
+        timestamp: clean(request.headers.get("x-mm-timestamp"), 64),
+        signature: clean(request.headers.get("x-mm-signature"), 2048)
+    };
+}
+
+function canonicalRequest(request: Request, timestamp: string, requestId: string, bodyHash: string) {
+    const url = new URL(request.url);
+    return [request.method.toUpperCase(), url.pathname, timestamp, requestId, bodyHash].join("\n");
+}
+
+async function verifySignature(publicKeyJwk: JsonWebKey, signature: string, canonical: string) {
+    const key = await crypto.subtle.importKey(
+        "jwk",
+        publicKeyJwk,
+        { name: "ECDSA", namedCurve: "P-256" },
+        false,
+        ["verify"]
+    );
+
+    return crypto.subtle.verify(
+        { name: "ECDSA", hash: "SHA-256" },
+        key,
+        base64UrlToBytes(signature),
+        textEncoder.encode(canonical)
+    );
+}
+
+async function consumeRequestId(db: D1Database, workspaceHash: string, requestId: string, timestamp: string) {
+    try {
+        await db.prepare(`
+            INSERT INTO notary_auth_requests (workspace_hash, request_id, request_timestamp)
+            VALUES (?, ?, ?)
+        `).bind(workspaceHash, requestId, timestamp).run();
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+async function requireSignedRequest(request: Request, db: D1Database, bodyHash: string) {
+    const headers = authHeaders(request);
+    if (!headers.workspaceHash || !headers.requestId || !headers.timestamp || !headers.signature) {
+        return { ok: false as const, response: json({ ok: false, error: "Signed request headers are required." }, 401) };
+    }
+
+    const timestampMs = Date.parse(headers.timestamp);
+    if (!Number.isFinite(timestampMs) || Math.abs(Date.now() - timestampMs) > FIVE_MINUTES) {
+        return { ok: false as const, response: json({ ok: false, error: "Request timestamp is outside the allowed window." }, 401) };
+    }
+
+    const row = await db.prepare(`
+        SELECT public_key_jwk
+        FROM notary_workspaces
+        WHERE workspace_hash = ?
+    `).bind(headers.workspaceHash).first<{ public_key_jwk: string }>();
+
+    if (!row) {
+        return { ok: false as const, response: json({ ok: false, error: "Unknown notary workspace." }, 401) };
+    }
+
+    let publicKeyJwk: JsonWebKey;
+    try {
+        publicKeyJwk = JSON.parse(row.public_key_jwk);
+    } catch {
+        return { ok: false as const, response: json({ ok: false, error: "Workspace key is invalid." }, 500) };
+    }
+
+    const canonical = canonicalRequest(request, headers.timestamp, headers.requestId, bodyHash);
+    if (!(await verifySignature(publicKeyJwk, headers.signature, canonical))) {
+        return { ok: false as const, response: json({ ok: false, error: "Request signature verification failed." }, 401) };
+    }
+
+    if (!(await consumeRequestId(db, headers.workspaceHash, headers.requestId, headers.timestamp))) {
+        return { ok: false as const, response: json({ ok: false, error: "Request replay detected." }, 409) };
+    }
+
+    await db.prepare(`
+        UPDATE notary_workspaces SET last_seen_at = CURRENT_TIMESTAMP WHERE workspace_hash = ?
+    `).bind(headers.workspaceHash).run();
+
+    return { ok: true as const, workspaceHash: headers.workspaceHash };
+}
+
+export const GET: APIRoute = async ({ request }) => {
+    const identity = accessIdentity(request);
+    if (!identity) {
+        return json({ ok: false, error: "Cloudflare Access authentication is required." }, 401);
+    }
+
+    const notaryEnv = env as unknown as NotaryEnv;
+    const db = notaryEnv.INTAKE_DB;
+    if (!db) return json({ ok: false, error: "Notary storage is unavailable." }, 503);
+
+    const auth = await requireSignedRequest(request, db, await sha256(""));
+    if (!auth.ok) return auth.response;
+
+    const result = await db.prepare(`
+        SELECT record_id, saved_at, entry_hash, previous_hash, iv, ciphertext,
+               paper_copy_sha256, idempotency_key, created_at
+        FROM notary_journal_records
+        WHERE workspace_hash = ?
+        ORDER BY created_at DESC
+        LIMIT 500
+    `).bind(auth.workspaceHash).all();
+
+    return json({ ok: true, records: result.results ?? [] });
+};
+
+export const POST: APIRoute = async ({ request }) => {
+    const identity = accessIdentity(request);
+    if (!identity) {
+        return json({ ok: false, error: "Cloudflare Access authentication is required." }, 401);
+    }
+
+    const notaryEnv = env as unknown as NotaryEnv;
+    const db = notaryEnv.INTAKE_DB;
+    if (!db) return json({ ok: false, error: "Notary storage is unavailable." }, 503);
+
+    const rawBody = await request.text();
+    const bodyHash = await sha256(rawBody);
+
+    let body: RegisterPayload | RecordPayload;
+    try {
+        body = JSON.parse(rawBody);
+    } catch {
+        return json({ ok: false, error: "Invalid JSON payload." }, 400);
+    }
+
+    if (body.action === "register") {
+        const workspaceHash = clean(body.workspaceHash, 128);
+        const headers = authHeaders(request);
+        if (!workspaceHash || headers.workspaceHash !== workspaceHash || !headers.requestId || !headers.timestamp || !headers.signature) {
+            return json({ ok: false, error: "Workspace registration headers are incomplete." }, 400);
+        }
+
+        const timestampMs = Date.parse(headers.timestamp);
+        if (!Number.isFinite(timestampMs) || Math.abs(Date.now() - timestampMs) > FIVE_MINUTES) {
+            return json({ ok: false, error: "Registration timestamp is outside the allowed window." }, 401);
+        }
+
+        const canonical = canonicalRequest(request, headers.timestamp, headers.requestId, bodyHash);
+        if (!(await verifySignature(body.publicKeyJwk, headers.signature, canonical))) {
+            return json({ ok: false, error: "Workspace key proof failed." }, 401);
+        }
+
+        const existing = await db.prepare(`
+            SELECT public_key_jwk FROM notary_workspaces WHERE workspace_hash = ?
+        `).bind(workspaceHash).first<{ public_key_jwk: string }>();
+
+        const serializedKey = JSON.stringify(body.publicKeyJwk);
+        if (existing && existing.public_key_jwk !== serializedKey) {
+            return json({ ok: false, error: "Workspace is already bound to another signing key." }, 409);
+        }
+
+        if (!existing) {
+            await db.prepare(`
+                INSERT INTO notary_workspaces (workspace_hash, public_key_jwk, last_seen_at)
+                VALUES (?, ?, CURRENT_TIMESTAMP)
+            `).bind(workspaceHash, serializedKey).run();
+        }
+
+        if (!(await consumeRequestId(db, workspaceHash, headers.requestId, headers.timestamp))) {
+            return json({ ok: false, error: "Registration replay detected." }, 409);
+        }
+
+        return json({ ok: true, workspaceHash });
+    }
+
+    if (body.action !== "append") {
+        return json({ ok: false, error: "Unsupported notary action." }, 400);
+    }
+
+    const auth = await requireSignedRequest(request, db, bodyHash);
+    if (!auth.ok) return auth.response;
+
+    const recordId = clean(body.recordId, 128);
+    const savedAt = clean(body.savedAt, 64);
+    const previousHash = clean(body.previousHash, 128);
+    const iv = clean(body.iv, 256);
+    const ciphertext = clean(body.ciphertext, 1_500_000);
+    const paperCopySha256 = clean(body.paperCopySha256, 128);
+    const idempotencyKey = clean(body.idempotencyKey, 128);
+
+    if (!recordId || !savedAt || !previousHash || !iv || !ciphertext || !paperCopySha256 || !idempotencyKey) {
+        return json({ ok: false, error: "Notary record payload is incomplete." }, 400);
+    }
+
+    const existing = await db.prepare(`
+        SELECT record_id, entry_hash, body_sha256
+        FROM notary_journal_records
+        WHERE workspace_hash = ? AND idempotency_key = ?
+    `).bind(auth.workspaceHash, idempotencyKey).first<{ record_id: string; entry_hash: string; body_sha256: string }>();
+
+    if (existing) {
+        if (existing.body_sha256 !== bodyHash) {
+            return json({ ok: false, error: "Idempotency key was reused with a different payload." }, 409);
+        }
+        return json({ ok: true, idempotent: true, recordId: existing.record_id, entryHash: existing.entry_hash });
+    }
+
+    const head = await db.prepare(`
+        SELECT entry_hash
+        FROM notary_journal_records
+        WHERE workspace_hash = ?
+        ORDER BY created_at DESC
+        LIMIT 1
+    `).bind(auth.workspaceHash).first<{ entry_hash: string }>();
+
+    const expectedPrevious = head?.entry_hash ?? "GENESIS";
+    if (previousHash !== expectedPrevious) {
+        return json({
+            ok: false,
+            error: "Journal head changed. Refresh before sealing this act.",
+            expectedPreviousHash: expectedPrevious
+        }, 409);
+    }
+
+    const entryHash = await sha256([
+        auth.workspaceHash,
+        recordId,
+        savedAt,
+        previousHash,
+        iv,
+        ciphertext,
+        paperCopySha256,
+        bodyHash
+    ].join("|"));
+
+    try {
+        await db.prepare(`
+            INSERT INTO notary_journal_records (
+                workspace_hash, record_id, saved_at, entry_hash, previous_hash,
+                iv, ciphertext, idempotency_key, body_sha256, paper_copy_sha256,
+                access_identity
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `).bind(
+            auth.workspaceHash,
+            recordId,
+            savedAt,
+            entryHash,
+            previousHash,
+            iv,
+            ciphertext,
+            idempotencyKey,
+            bodyHash,
+            paperCopySha256,
+            identity
+        ).run();
+    } catch {
+        return json({ ok: false, error: "Journal append conflicted with the current chain." }, 409);
+    }
+
+    return json({ ok: true, recordId, entryHash, previousHash, paperCopySha256 });
+};
