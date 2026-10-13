@@ -20,3 +20,22 @@ jobs:
       - run: npm ci
       - run: node --check public/notary/app.js
       - run: npm run build
+
+  deploy:
+    needs: verify
+    if: github.ref == 'refs/heads/Prime' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy Cloudflare Worker
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: dcd87bec1efac6b2926f8e162268b446
