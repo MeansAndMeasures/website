@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Means+Measures Kansas Notary Journal</title>
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/notary/styles.css">
+</head>
+<body>
+<main class="shell">
+  <header class="mast">
+    <div>
+      <div class="eyebrow">Means+Measures / Kansas</div>
+      <h1>Notary Journal & Certificate Workspace</h1>
+      <p>Contemporaneous journal capture, Kansas certificate rendering, encrypted Cloudflare persistence, signed requests, idempotent sealing, and paper-record output.</p>
+    </div>
+    <div class="brand">MEANS+MEASURES<span>Kansas notarial records</span></div>
+  </header>
+
+  <section class="notice">
+    Kansas-specific workstation. Electronic journal records are encrypted in the browser before Cloudflare storage and must remain capable of production in tangible form. If a tangible journal is maintained, Kansas requires one permanent bound register with numbered pages. Optional credential images and drawn signatures remain in this browser and are not uploaded.
+  </section>
+
+  <section class="profile" aria-label="Commissioned notary profile">
+    <div><b>Commissioned notary</b><span>Brian J. London</span></div>
+    <div><b>Commission number</b><span>1123867</span></div>
+    <div><b>Appointment expires</b><span>September 11, 2028</span></div>
+    <div><b>Workspace</b><span>Means+Measures</span></div>
+  </section>
+
+  <div class="columns">
+    <section class="panel">
+      <h2>1. Journal Entry</h2>
+      <div class="form-grid">
+        <label>Sequential entry ID<input id="entryNum" placeholder="e.g. 2026-042"></label>
+        <label>Date & local time of act<input id="entryTime" type="datetime-local"></label>
+        <label>Notarial act<select id="actSelect"><option value="Acknowledgment">Acknowledgment</option><option value="Jurat">Verification on oath or affirmation / Jurat</option><option value="SignatureWitness">Witnessing or attesting a signature</option><option value="CertifiedCopy">Certifying or attesting a copy</option></select></label>
+        <label>Fee charged ($)<input id="fee" type="number" step="0.01" min="0" placeholder="0.00"></label>
+        <label class="wide">Record / document description<input id="docDesc" placeholder="Affidavit, deed, POA, record copy, etc."></label>
+        <label>Individual full legal name<input id="signerName"></label>
+        <label>Individual address<input id="signerAddr" placeholder="Street, City, State ZIP"></label>
+        <label>Kansas county<input id="county" value="Johnson"></label>
+        <label>Notary name / title<input id="notaryName" value="Brian J. London, Notary Public, State of Kansas"></label>
+        <label>Appointment expires<input id="commissionExpires" type="date" value="2028-09-11"></label>
+        <label>Commission number<input id="commissionNumber" value="1123867"></label>
+        <label>Identity basis<select id="idMethod"><option>Satisfactory evidence: government identification credential</option><option>Personal knowledge</option><option>Credible witness</option><option>Not applicable</option></select></label>
+        <label>Credential type<input id="idType" placeholder="Kansas driver's license, passport, etc."></label>
+        <label>Credential issuer<input id="idIssuer" placeholder="Kansas DOR, U.S. Dept. of State, etc."></label>
+        <label>Credential issue date<input id="idIssued" type="date"></label>
+        <label>Credential expiration date<input id="idExpires" type="date"></label>
+        <label class="wide">Credential reference<input id="idRef" placeholder="Optional partial reference"></label>
+
+        <div class="wide capture-grid">
+          <div class="capture">
+            <b>PDF417 / 2-D barcode</b>
+            <input id="barcodeImage" type="file" accept="image/*" capture="environment">
+            <button id="scanBarcodeBtn" type="button">Scan image</button>
+            <p>Browser BarcodeDetector when available.</p>
+          </div>
+          <div class="capture">
+            <b>Decoded barcode text</b>
+            <textarea id="barcodeText" rows="5"></textarea>
+            <div class="button-row"><button id="parseBarcodeBtn" type="button">Parse AAMVA</button><button id="clearBarcodeBtn" type="button">Clear</button></div>
+          </div>
+        </div>
+
+        <div class="wide capture-grid">
+          <div class="capture"><b>Optional ID front, local only</b><input id="camFront" type="file" accept="image/*" capture="environment"></div>
+          <div class="capture"><b>Optional ID reverse, local only</b><input id="camBack" type="file" accept="image/*" capture="environment"></div>
+        </div>
+
+        <div><span class="label">Signer signature, local only</span><div class="signature"><canvas id="canvasSigner"></canvas></div><button id="clearSigner" type="button" class="text-button">Clear signature</button></div>
+        <div><span class="label">Notary verification mark, local only</span><div class="signature"><canvas id="canvasNotary"></canvas></div><button id="clearNotary" type="button" class="text-button">Clear mark</button></div>
+        <label class="wide">Journal notes<textarea id="notes" rows="3"></textarea></label>
+      </div>
+      <div id="statusLine" class="status" role="status"></div>
+      <div class="actions"><button id="newEntryBtn" type="button">New / clear</button><button id="saveEntryBtn" class="primary" type="button">Authenticate, Seal & Log</button></div>
+    </section>
+
+    <section class="panel">
+      <h2>2. Kansas Certificate</h2>
+      <div id="printArea" class="paper"><div id="certRenderZone"></div></div>
+      <div class="actions"><button id="printBtn" class="dark" type="button">Print / save certificate</button><button id="printJournalBtn" type="button" disabled>Print journal record</button></div>
+    </section>
+  </div>
+
+  <section class="panel history">
+    <h2>3. Kansas Journal History</h2>
+    <p class="muted">Cloudflare D1 is the encrypted canonical backend. This browser keeps a decrypted local cache for continuity and export. Clearing the cache does not delete the cloud journal.</p>
+    <div class="actions left"><button id="syncBtn" type="button">Verify & sync</button><button id="exportJsonBtn" type="button">Export JSON</button><button id="exportCsvBtn" type="button">Export CSV</button><button id="clearLedgerBtn" class="danger" type="button">Clear local cache</button></div>
+    <div id="ledgerContainer"></div>
+  </section>
+</main>
+<div id="journalPrintArea" class="journal-print" aria-hidden="true"></div>
+<script src="/notary/app.js" defer></script>
+</body>
+</html>
