@@ -1,0 +1,22 @@
+name: Verify Kansas Notary Journal
+on:
+  push:
+    branches: [Prime]
+    paths:
+      - 'public/notary/**'
+      - 'src/pages/api/notary/**'
+      - 'migrations/**'
+      - '.github/workflows/notary-verify.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: node --check public/notary/app.js
+      - run: npm run build
