@@ -297,6 +297,9 @@ export const POST: APIRoute = async ({ request }) => {
         return json({ ok: false, error: "Notary record payload is incomplete." }, 400);
     }
 
+    if (previousHash !== "GENESIS" && !/^[a-f0-9]{64}$/.test(previousHash)) return json({ ok: false, error: "Invalid previous journal hash." }, 400);
+    if (!/^[a-f0-9]{64}$/.test(paperCopySha256) || !/^[A-Za-z0-9_-]{12,256}$/.test(iv)) return json({ ok: false, error: "Invalid integrity or encryption fields." }, 400);
+
     const existing = await db.prepare(`
         SELECT record_id, entry_hash, body_sha256, previous_hash, paper_copy_sha256, saved_at
         FROM notary_journal_records
