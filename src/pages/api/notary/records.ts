@@ -190,7 +190,7 @@ export const GET: APIRoute = async ({ request }) => {
 
     const result = await db.prepare(`
         SELECT record_id, saved_at, entry_hash, previous_hash, iv, ciphertext,
-               paper_copy_sha256, idempotency_key, created_at
+               paper_copy_sha256, idempotency_key, body_sha256, created_at
         FROM notary_journal_records
         WHERE workspace_hash = ?
         ORDER BY rowid DESC
@@ -202,6 +202,9 @@ export const GET: APIRoute = async ({ request }) => {
         const record = records[i] as { previous_hash: string; entry_hash: string; record_id: string; saved_at: string; iv: string; ciphertext: string; paper_copy_sha256: string; body_sha256?: string };
         const previous = i === records.length - 1 ? "GENESIS" : (records[i + 1] as { entry_hash: string }).entry_hash;
         if (record.previous_hash !== previous) return json({ ok: false, error: "Journal hash-chain continuity verification failed." }, 409);
+        if (!record.body_sha256) return json({ ok: false, error: "Journal record missing integrity digest." }, 409);
+        const expected = await sha256([auth.workspaceHash,record.record_id,record.saved_at,record.previous_hash,record.iv,record.ciphertext,record.paper_copy_sha256,record.body_sha256].join("|"));
+        if (expected !== record.entry_hash) return json({ ok: false, error: "Journal record integrity verification failed." }, 409);
     }
     return json({ ok: true, records });
 };
