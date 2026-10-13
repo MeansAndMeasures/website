@@ -194,10 +194,16 @@ export const GET: APIRoute = async ({ request }) => {
         FROM notary_journal_records
         WHERE workspace_hash = ?
         ORDER BY rowid DESC
-        LIMIT 500
+        LIMIT 10000
     `).bind(auth.workspaceHash).all();
 
-    return json({ ok: true, records: result.results ?? [] });
+    const records = result.results ?? [];
+    for (let i = records.length - 1; i >= 0; i--) {
+        const record = records[i] as { previous_hash: string; entry_hash: string; record_id: string; saved_at: string; iv: string; ciphertext: string; paper_copy_sha256: string; body_sha256?: string };
+        const previous = i === records.length - 1 ? "GENESIS" : (records[i + 1] as { entry_hash: string }).entry_hash;
+        if (record.previous_hash !== previous) return json({ ok: false, error: "Journal hash-chain continuity verification failed." }, 409);
+    }
+    return json({ ok: true, records });
 };
 
 export const POST: APIRoute = async ({ request }) => {
