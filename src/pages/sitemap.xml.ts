@@ -9,6 +9,7 @@ export const GET: APIRoute = async () => {
         "about",
         "capabilities",
         "systems",
+        "civicnavigator",
         "work",
         "research",
         "artifacts",
