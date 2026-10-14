@@ -1,11 +1,12 @@
 /* Means+Measures — semantic typography, extracted from Identity Standard v1.5.
+   Display and institutional roles amended to Spectral Semibold on 2026-10-14.
    Standalone entry point. Assign a role to the text's function, not its tag.
    No universal sizes, tracking, casing, heading ladder or layout is imposed. */
 @import url("./means-measures.fonts.css");
 
 :root {
-  --mm-font-display: "Bodoni Moda", "Montserrat", serif;
-  --mm-font-institutional: "Bodoni Moda SC", "Montserrat", serif;
+  --mm-font-display: "Spectral", "Source Serif 4", "Montserrat", serif;
+  --mm-font-institutional: "Spectral SC", "Montserrat", serif;
   --mm-font-body: "Spectral", "Source Serif 4", "Montserrat", serif;
   --mm-font-editorial: "Spectral SC", "Montserrat", serif;
   --mm-font-ui: "Metrophobic", "Montserrat", sans-serif;
@@ -24,9 +25,9 @@
   font-optical-sizing: auto;
 }
 
-/* Bodoni declares. Its SC face supplies compact institutional hierarchy. */
-:where(.mm-type-display, [data-mm-type="display"]) { font-family: var(--mm-font-display); }
-:where(.mm-type-institutional, [data-mm-type="institutional"]) { font-family: var(--mm-font-institutional); }
+/* Spectral Semibold declares; Spectral SC Semibold supplies institutional hierarchy. */
+:where(.mm-type-display, [data-mm-type="display"]) { font-family: var(--mm-font-display); font-weight: 600; }
+:where(.mm-type-institutional, [data-mm-type="institutional"]) { font-family: var(--mm-font-institutional); font-weight: 600; }
 
 /* Spectral explains. Its SC face organizes editorial text. */
 :where(.mm-type-body, [data-mm-type="body"]) { font-family: var(--mm-font-body); }

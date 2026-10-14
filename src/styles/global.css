@@ -1222,8 +1222,8 @@ body[data-kc-spacing="loose"] {
 }
 
 /* Typography follows the function of each surface. */
-h1, .hero-title { font-family: var(--mm-font-display); }
-h2, h3, h4 { font-family: var(--mm-font-institutional); }
+h1, .hero-title { font-family: var(--mm-font-display); font-weight: 600; }
+h2, h3, h4, .card-title { font-family: var(--mm-font-institutional); font-weight: 600; }
 nav, label, input, select, textarea { font-family: var(--mm-font-ui); }
 button, .document-action { font-family: var(--mm-font-action); }
 code, pre { font-family: var(--mm-font-data); }

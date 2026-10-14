@@ -28,8 +28,8 @@ Open `index.html` to explore the specimen, switch themes, and see the sample int
 
 | Class | Attribute equivalent | Face / function |
 |---|---|---|
-| `mm-type-display` | `data-mm-type="display"` | Bodoni Moda Variable / institutional display |
-| `mm-type-institutional` | `data-mm-type="institutional"` | Bodoni Moda SC / compact institutional hierarchy |
+| `mm-type-display` | `data-mm-type="display"` | Spectral Semibold (600) / institutional display |
+| `mm-type-institutional` | `data-mm-type="institutional"` | Spectral SC Semibold (600) / compact institutional hierarchy |
 | `mm-type-body` | `data-mm-type="body"` | Spectral / sustained reading |
 | `mm-type-editorial` | `data-mm-type="editorial"` | Spectral SC / editorial organization |
 | `mm-type-ui` | `data-mm-type="ui"` | Metrophobic / operating and navigating |
@@ -76,3 +76,5 @@ See `validation.json` for CSS parsing, local asset resolution, font metadata/wei
 - `assets/`: unchanged official logo and wordmark.
 - `fonts/`, `font-manifest.json`, `licenses/`: bundled webfonts and provenance.
 - `validation.json`: completed static checks and explicit verification limits.
+
+Display and institutional roles were amended on October 14, 2026 to Spectral Semibold and Spectral SC Semibold for stroke legibility. Bundled Bodoni files remain historical assets and are no longer assigned to these roles.
