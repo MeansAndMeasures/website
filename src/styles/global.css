@@ -471,6 +471,12 @@ a:hover {
    HOMEPAGE
 ========================================= */
 
+.homepage-hero__plus {
+    /* Restored 2026-10-16; original styling was never committed. Operational token only. */
+    color: var(--mm-secondary);
+    font-weight: 400;
+}
+
 .homepage-hero {
     min-height: clamp(28rem, 68vh, 40rem);
     display: grid;
