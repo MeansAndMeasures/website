@@ -149,3 +149,5 @@ Node_modules*
 .backups
 .wrangler
 .idea
+
+.ds_store

@@ -471,13 +471,29 @@ a:hover {
    HOMEPAGE
 ========================================= */
 
+.homepage-hero .hero-title {
+    color: var(--mm-identity-institutional);
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-synthesis: none;
+    max-width: 100%;
+    font-size: min(10cqi, 7.6rem);
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+.homepage-hero__name {
+    display: inline-block;
+    white-space: nowrap;
+}
+
 .homepage-hero__plus {
-    /* Restored 2026-10-16; original styling was never committed. Operational token only. */
-    color: var(--mm-secondary);
-    font-weight: 400;
+    color: var(--mm-identity-interface);
+    font-weight: inherit;
 }
 
 .homepage-hero {
+    container-type: inline-size;
     min-height: clamp(28rem, 68vh, 40rem);
     display: grid;
     align-content: end;
