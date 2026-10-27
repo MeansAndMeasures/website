@@ -131,6 +131,7 @@ declare module 'astro:content' {
   data: InferEntrySchema<"artifacts">;
   rendered?: RenderedContent;
   filePath?: string;
+  digest?: string | number;
 }>;
 "kcServices": Record<string, {
   id: string;
@@ -139,6 +140,7 @@ declare module 'astro:content' {
   data: InferEntrySchema<"kcServices">;
   rendered?: RenderedContent;
   filePath?: string;
+  digest?: string | number;
 }>;
 "research": Record<string, {
   id: string;
@@ -147,6 +149,7 @@ declare module 'astro:content' {
   data: InferEntrySchema<"research">;
   rendered?: RenderedContent;
   filePath?: string;
+  digest?: string | number;
 }>;
 "work": Record<string, {
   id: string;
@@ -155,6 +158,7 @@ declare module 'astro:content' {
   data: InferEntrySchema<"work">;
   rendered?: RenderedContent;
   filePath?: string;
+  digest?: string | number;
 }>;
 
 	};
