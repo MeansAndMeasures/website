@@ -52,11 +52,18 @@ const isKcSection = pathname === "/kc" || pathname.startsWith("/kc/") || pathnam
             if (!button) return;
 
             const escape = function () {
-                try {
-                    sessionStorage.clear();
-                    localStorage.clear();
-                } catch (e) {
-                    /* storage may be unavailable; continue */
+                // KC preferences share this origin with the notary journal.
+                // Only remove KC-owned keys; journal identity and pending seals must survive.
+                for (const name of ["sessionStorage", "localStorage"]) {
+                    try {
+                        const storage = window[name];
+                        for (let index = storage.length - 1; index >= 0; index--) {
+                            const key = storage.key(index);
+                            if (key && key.startsWith("kc-")) storage.removeItem(key);
+                        }
+                    } catch (e) {
+                        /* storage may be unavailable; continue leaving */
+                    }
                 }
                 window.location.replace("https://www.google.com");
             };
