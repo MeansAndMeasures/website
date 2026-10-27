@@ -1,0 +1,89 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import { getCollection } from "astro:content";
+import { buildKcMachine } from "../../../lib/kcMachine";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    const services = await getCollection("kcServices");
+    const machine = buildKcMachine(services);
+    const serviceBySlug = new Map(services.map((service) => [service.id, service]));
+
+    return machine.publicJourneys.map((journey) => ({
+        params: { id: journey.id },
+        props: { journey, serviceBySlug }
+    }));
+}
+
+const { journey, serviceBySlug } = Astro.props;
+---
+
+<KCLayout
+    title={`${journey.title} — KC`}
+    description={journey.summary}
+>
+    <p class="kc-eyebrow">Step by step</p>
+    <h1>{journey.title}</h1>
+    <p class="kc-lede">{journey.question}</p>
+    <p>{journey.summary}</p>
+
+    <ol class="kc-journey-steps">
+        {journey.steps.map((step, index) => (
+            <li>
+                <section class="kc-section" id={step.id} aria-labelledby={`${step.id}-h`}>
+                    <h2 id={`${step.id}-h`}>Step {index + 1}: {step.title}</h2>
+                    <p>{step.guidance}</p>
+                    <p><a href={step.href}>More on this topic</a></p>
+
+                    {step.serviceSlugs.map((slug) => {
+                        const s = serviceBySlug.get(slug)!;
+                        return (
+                            <ServiceCard
+                                name={s.data.name}
+                                phone={s.data.phone}
+                                sms={s.data.sms}
+                                website={s.data.website}
+                                address={s.data.address}
+                                hours={s.data.hours}
+                                hours24={s.data.hours24}
+                                languages={s.data.languages}
+                                states={s.data.states}
+                                statusNeutral={s.data.statusNeutral}
+                                expect={s.data.expect}
+                                fearAddressed={s.data.fearAddressed}
+                                confidence={s.data.confidence}
+                                lastKnownGood={s.data.lastKnownGood}
+                                nearestBusRoute={s.data.nearestBusRoute}
+                                reachableWithoutCar={s.data.reachableWithoutCar}
+                                walkIn={s.data.walkIn}
+                                veteranOnly={s.data.veteranOnly}
+                                petsAllowed={s.data.petsAllowed}
+                                emergency={s.data.emergency}
+                                flagSlug={slug}
+                            />
+                        );
+                    })}
+                </section>
+            </li>
+        ))}
+    </ol>
+
+    <p>
+        <a href="/kc/journeys">All step-by-step guides</a> ·
+        <a href="/kc/directory">Search the full directory</a> ·
+        <a href="/kc/suggest">Suggest / correct</a>
+    </p>
+    <p>
+        Machine-readable: <a href="/kc/journeys.json">all journeys (JSON)</a>. Not legal or medical
+        advice. Call ahead before you depend on anything listed here.
+    </p>
+</KCLayout>
+
+<style>
+    .kc-journey-steps {
+        list-style: none;
+        padding-left: 0;
+    }
+</style>

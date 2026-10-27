@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { kcJourneys } from "../data/kcMachine";
 
 export const prerender = true;
 
@@ -32,6 +33,7 @@ export const GET: APIRoute = async () => {
         "kc/government",
         "kc/healthcare",
         "kc/housing",
+        "kc/journeys",
         "kc/legal",
         "kc/libraries",
         "kc/local-knowledge",
@@ -79,6 +81,7 @@ export const GET: APIRoute = async () => {
 
     const urls = [...new Set([
         ...staticPaths,
+        ...kcJourneys.map((journey) => `kc/journeys/${journey.id}`),
         ...work.map((entry) => `work/${entry.id}`),
         ...research.map((entry) => `research/${entry.id}`),
         ...artifacts.map((entry) => `artifacts/${entry.id}`)

@@ -1,0 +1,30 @@
+---
+import KCLayout from "../../../layouts/KCLayout.astro";
+import { kcJourneys } from "../../../data/kcMachine";
+
+export const prerender = true;
+---
+
+<KCLayout
+    title="Step-by-step guides — KC"
+    description="Short, ordered routes through common Kansas City problems: eviction, leaving a hospital, starting without documents, and helping someone sleeping outside."
+>
+    <p class="kc-eyebrow">Step by step</p>
+    <h1>Where to start, and what comes next.</h1>
+    <p class="kc-lede">
+        Each guide takes one situation and puts the first calls in order. Every step links to
+        listings in the directory.
+    </p>
+
+    <ul>
+        {kcJourneys.map((journey) => (
+            <li>
+                <a href={`/kc/journeys/${journey.id}`}>{journey.title}</a> — {journey.question}
+            </li>
+        ))}
+    </ul>
+
+    <p>
+        Machine-readable: <a href="/kc/journeys.json">journeys (JSON)</a>.
+    </p>
+</KCLayout>
