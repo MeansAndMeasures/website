@@ -1,5 +1,6 @@
 ---
 import KCLayout from "../../../layouts/KCLayout.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
 import ServiceCard from "../../../components/ServiceCard.astro";
 import { getCollection } from "astro:content";
 import { buildKcMachine } from "../../../lib/kcMachine";
@@ -24,6 +25,12 @@ const { journey, serviceBySlug } = Astro.props;
     title={`${journey.title} — KC`}
     description={journey.summary}
 >
+    <KCLanguageSwitcher
+        currentLang="en"
+        enPath={`/kc/journeys/${journey.id}`}
+        esPath={`/es/kc/journeys/${journey.id}`}
+    />
+
     <p class="kc-eyebrow">Step by step</p>
     <h1>{journey.title}</h1>
     <p class="kc-lede">{journey.question}</p>

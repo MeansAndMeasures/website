@@ -1,5 +1,6 @@
 ---
 import KCLayout from "../../../layouts/KCLayout.astro";
+import KCLanguageSwitcher from "../../../components/KCLanguageSwitcher.astro";
 import { kcJourneys } from "../../../data/kcMachine";
 
 export const prerender = true;
@@ -9,6 +10,8 @@ export const prerender = true;
     title="Step-by-step guides — KC"
     description="Short, ordered routes through common Kansas City problems: eviction, leaving a hospital, starting without documents, and helping someone sleeping outside."
 >
+    <KCLanguageSwitcher currentLang="en" enPath="/kc/journeys" esPath="/es/kc/journeys" />
+
     <p class="kc-eyebrow">Step by step</p>
     <h1>Where to start, and what comes next.</h1>
     <p class="kc-lede">
