@@ -103,3 +103,20 @@ test('repaired KC links point at the verified official pages', () => {
     assert.equal(site('sojourner-clinic'), 'https://www.sojournerhealthclinic.com/');
     assert.equal(site('salvation-army-kc'), 'https://www.salvationarmyusa.org/usa-central-territory/kansas-and-western-missouri/');
 });
+
+test('Cabot Westside and IRC entries carry the facts verified on their official pages', () => {
+    const field = (slug, key) => read(`src/content/kc-services/${slug}.md`).match(new RegExp(`^${key}: (.*)$`, 'm'))?.[1];
+    assert.equal(field('cabot-westside', 'website'), '"https://samrodgers.org/contact-us/"');
+    assert.equal(field('cabot-westside', 'phone'), '"816-471-0900"');
+    assert.equal(field('cabot-westside', 'address'), '"2121 Summit St, Kansas City, MO 64108"');
+    assert.match(field('cabot-westside', 'name'), /Samuel U\. Rodgers Health Center/);
+    assert.equal(field('cabot-westside', 'statusNeutral'), undefined, 'unverified immigration-status claim must not return');
+    assert.equal(field('irc-kc', 'website'), '"https://www.rescue.org/united-states/kansas-city-ks"');
+    assert.equal(field('irc-kc', 'phone'), '"913-558-1659"');
+    assert.equal(field('irc-kc', 'states'), '["KS"]');
+    assert.equal(field('irc-kc', 'ksResidentRequired'), 'true');
+    assert.equal(field('irc-kc', 'fearAddressed'), undefined);
+    for (const page of ['src/pages/kc/give-help.astro', 'src/pages/kc/newcomers.astro', 'src/pages/es/kc/newcomers.astro']) {
+        assert.doesNotMatch(read(page), /rescue\.org\/united-states\/kansas-city-mo/, page);
+    }
+});
