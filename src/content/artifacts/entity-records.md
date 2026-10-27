@@ -1,7 +1,8 @@
 ---
-title: CivicBrands Entity Records
-summary: Public-facing entity and procurement records for CivicBrands, a DBA of BJL13 Enterprise Solutions LLC.
+title: Means+Measures Entity Records
+summary: Current Means and Measures LLC procurement context and preserved historical CivicBrands entity records.
 published: 2026-03-03
+updated: 2026-10-27
 status: active
 
 tags:
@@ -14,12 +15,14 @@ artifactType: record
 source: CivicBrands procurement file
 ---
 
-This historical CivicBrands record is retained by Means+Measures. CivicBrands is the recorded public DBA of BJL13 Enterprise Solutions LLC. This record indexes public-facing entity and procurement materials used for institutional review, vendor intake, and public inspection.
+Means+Measures is the public name of Means and Measures LLC. Current institutional materials are available from [Procurement](/procurement), including the refreshed capability packet, statement, and principal biography.
 
-Public procurement identifiers and contact points:
+Historical CivicBrands records are retained for provenance. Those source records identify CivicBrands as a public DBA of BJL13 Enterprise Solutions LLC; they have not been altered to assert that they originally recorded the current legal name.
+
+Historical entity identifiers and current contact points:
 
 - DBA: CivicBrands
-- Legal entity: BJL13 Enterprise Solutions LLC
+- Legal entity named in the historical source: BJL13 Enterprise Solutions LLC
 - EIN: 39-2829761
 - Operating base: Kansas City, Missouri
 - Phone: 816-306-3481
