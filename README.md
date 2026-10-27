@@ -19,7 +19,7 @@ Cloudflare Workers; `wrangler.jsonc` targets `meansandmeasures.com` and
 
 ## Development and checks
 
-Use Node.js with npm. Install locked dependencies with `npm ci`; build-tool
+Use Node.js 24 or a newer supported even-numbered release with npm. Install locked dependencies with `npm ci`; build-tool
 script approvals are in `.npmrc`. `npm run dev` serves the local site at port 4321.
 `npm run build` generates the production Worker and assets; `npm run preview`
 previews the built application. `node --test tests/*.test.mjs` runs departure

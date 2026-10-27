@@ -6,6 +6,12 @@ on:
       - 'public/notary/**'
       - 'src/pages/api/notary/**'
       - 'migrations/**'
+      - 'src/components/SiteHeader.astro'
+      - 'src/pages/api/intake/**'
+      - 'src/pages/api/intake.ts'
+      - 'tests/**'
+      - 'package*.json'
+      - 'wrangler.jsonc'
       - '.github/workflows/notary-verify.yml'
   workflow_dispatch:
 jobs:
@@ -15,10 +21,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+          check-latest: true
           cache: npm
       - run: npm ci
       - run: node --check public/notary/app.js
+      - run: node --test tests/*.test.mjs
       - run: npm run build
 
   deploy:
@@ -30,7 +38,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+          check-latest: true
           cache: npm
       - run: npm ci
       - run: npm run build
