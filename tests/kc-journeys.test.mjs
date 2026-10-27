@@ -96,3 +96,10 @@ test('Spanish journey pages exist, link both languages, and are in sitemaps with
     assert.match(sitemap, /`journeys\/\$\{journey\.id\}`/);
     assert.match(read('src/pages/sitemap.astro'), /\/es\/kc\/journeys"/);
 });
+
+test('repaired KC links point at the verified official pages', () => {
+    const site = slug => read(`src/content/kc-services/${slug}.md`).match(/^website: "(.*)"/m)[1];
+    assert.equal(site('jaydoc-clinic'), 'https://www.kumc.edu/school-of-medicine/patient-care/student-run-clinics/jaydoc-free-clinic.html');
+    assert.equal(site('sojourner-clinic'), 'https://www.sojournerhealthclinic.com/');
+    assert.equal(site('salvation-army-kc'), 'https://www.salvationarmyusa.org/usa-central-territory/kansas-and-western-missouri/');
+});
