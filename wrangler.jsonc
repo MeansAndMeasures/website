@@ -10,6 +10,10 @@
 	"workers_dev": false,
 	"routes": [{ "pattern": "meansandmeasures.com", "custom_domain": true }, { "pattern": "www.meansandmeasures.com", "custom_domain": true }],
 	"preview_urls": false,
+	"send_email": [{
+		"name": "INTAKE_EMAIL",
+		"allowed_destination_addresses": ["contact@meansandmeasures.com", "procurement@meansandmeasures.com"]
+	}],
 	"d1_databases": [
 		{
 			"binding": "INTAKE_DB",

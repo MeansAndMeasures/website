@@ -21,9 +21,7 @@ interface IntakePayload {
     company?: string;
 }
 
-interface IntakeEnv {
-    INTAKE_DB?: D1Database;
-}
+type IntakeEnv = Partial<Pick<Cloudflare.Env, "INTAKE_DB" | "INTAKE_EMAIL">>;
 
 function jsonResponse(body: Record<string, unknown>, status = 200) {
     return new Response(JSON.stringify(body), {
@@ -54,7 +52,7 @@ async function saveSubmission(payload: {
         return false;
     }
 
-    await intakeEnv.INTAKE_DB
+    const result = await intakeEnv.INTAKE_DB
         .prepare(`
             INSERT INTO intake_submissions (
                 submitted_at,
@@ -64,9 +62,10 @@ async function saveSubmission(payload: {
                 topic,
                 message,
                 user_agent,
-                remote_address
+                remote_address,
+                email_status
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')
         `)
         .bind(
             payload.submittedAt,
@@ -80,7 +79,7 @@ async function saveSubmission(payload: {
         )
         .run();
 
-    return true;
+    return result.meta.last_row_id;
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -122,11 +121,11 @@ export const POST: APIRoute = async ({ request }) => {
     };
 
     try {
-        const delivered = await saveSubmission(deliveryPayload);
+        const submissionId = await saveSubmission(deliveryPayload);
 
-        if (!delivered) {
+        if (!submissionId) {
             if (import.meta.env.DEV) {
-                console.info("[intake:dry-run]", deliveryPayload);
+                console.info("[intake:dry-run] No storage binding; no message stored or emailed.");
                 return jsonResponse({ ok: true });
             }
 
@@ -134,6 +133,42 @@ export const POST: APIRoute = async ({ request }) => {
                 ok: false,
                 error: "Submission storage is temporarily unavailable."
             }, 503);
+        }
+
+        const intakeEnv = env as unknown as IntakeEnv;
+        let messageId: string;
+        try {
+            if (!intakeEnv.INTAKE_EMAIL) throw new Error("Email binding unavailable");
+            const text = [
+                `Website intake #${submissionId}`,
+                `Received: ${deliveryPayload.submittedAt}`,
+                `Topic: ${topic}`,
+                `Name: ${name || "Not provided"}`,
+                `Reply email: ${email || "Not provided"}`,
+                "", message
+            ].join("\n");
+            const escaped = text.replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]!));
+            const receipt = await intakeEnv.INTAKE_EMAIL.send({
+                from: { email: "website@contact.meansandmeasures.com", name: "Means+Measures website" },
+                to: recipient,
+                subject: `Website intake: ${topic} (#${submissionId})`,
+                ...(email ? { replyTo: email } : {}),
+                text,
+                html: `<pre style="white-space:pre-wrap;font:inherit">${escaped}</pre>`
+            });
+            messageId = receipt.messageId;
+        } catch {
+            await intakeEnv.INTAKE_DB!.prepare("UPDATE intake_submissions SET email_status = 'failed' WHERE id = ?").bind(submissionId).run();
+            console.error("[intake:email-failed] submission", submissionId);
+            // The durable submission remains available to the intake export/review process.
+            return jsonResponse({ ok: true, notified: false }, 202);
+        }
+        try {
+            await intakeEnv.INTAKE_DB!.prepare("UPDATE intake_submissions SET email_status = 'sent', email_message_id = ?, email_sent_at = ? WHERE id = ?")
+                .bind(messageId, new Date().toISOString(), submissionId).run();
+        } catch {
+            // Do not tell a person to resubmit a message already stored and emailed.
+            console.error("[intake:email-receipt-save-failed] submission", submissionId);
         }
     } catch {
         return jsonResponse({

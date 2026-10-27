@@ -12,7 +12,8 @@ function jsonResponse(body: Record<string, unknown>, status = 200) {
     return new Response(JSON.stringify(body), {
         status,
         headers: {
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "cache-control": "no-store"
         }
     });
 }
@@ -41,7 +42,10 @@ export const GET: APIRoute = async ({ request }) => {
                 topic,
                 message,
                 user_agent AS userAgent,
-                remote_address AS remoteAddress
+                remote_address AS remoteAddress,
+                email_status AS emailStatus,
+                email_message_id AS emailMessageId,
+                email_sent_at AS emailSentAt
             FROM intake_submissions
             ORDER BY submitted_at DESC
             LIMIT 250
