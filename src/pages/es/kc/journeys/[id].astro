@@ -1,0 +1,119 @@
+---
+import KCLayout from "../../../../layouts/KCLayout.astro";
+import ServiceCard from "../../../../components/ServiceCard.astro";
+import KCLanguageSwitcher from "../../../../components/KCLanguageSwitcher.astro";
+import { getCollection } from "astro:content";
+import { buildKcMachine } from "../../../../lib/kcMachine";
+import { kcJourneysEs, spanishHref } from "../../../../data/kcJourneysEs";
+import { kcServicesEs } from "../../../../data/kcServicesEs";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    const services = await getCollection("kcServices");
+    const machine = buildKcMachine(services);
+    const serviceBySlug = new Map(services.map((service) => [service.id, service]));
+
+    return machine.publicJourneys.map((journey) => {
+        const text = kcJourneysEs[journey.id];
+        if (!text) throw new Error(`Missing Spanish translation for KC journey: ${journey.id}`);
+        return {
+            params: { id: journey.id },
+            props: { journey, text, serviceBySlug }
+        };
+    });
+}
+
+const { journey, text, serviceBySlug } = Astro.props;
+---
+
+<KCLayout
+    title={`${text.title} — KC`}
+    description={text.summary}
+    lang="es"
+>
+    <KCLanguageSwitcher
+        currentLang="es"
+        enPath={`/kc/journeys/${journey.id}`}
+        esPath={`/es/kc/journeys/${journey.id}`}
+    />
+
+    <p class="kc-eyebrow">Paso a paso</p>
+    <h1>{text.title}</h1>
+    <p class="kc-lede">{text.question}</p>
+    <p>{text.summary}</p>
+
+    <ol class="kc-journey-steps">
+        {journey.steps.map((step, index) => {
+            const stepText = text.steps[step.id];
+            if (!stepText) throw new Error(`Missing Spanish text for ${journey.id}/${step.id}`);
+            const link = spanishHref(step.href);
+            return (
+                <li>
+                    <section class="kc-section" id={step.id} aria-labelledby={`${step.id}-h`}>
+                        <h2 id={`${step.id}-h`}>Paso {index + 1}: {stepText.title}</h2>
+                        <p>{stepText.guidance}</p>
+                        <p>
+                            <a href={link.href} lang={link.spanish ? undefined : "en"}>
+                                Más sobre este tema{link.spanish ? "" : " (página en inglés)"}
+                            </a>
+                        </p>
+
+                        {step.serviceSlugs.map((slug) => {
+                            const s = serviceBySlug.get(slug)!;
+                            const es = kcServicesEs[slug];
+                            return (
+                                <ServiceCard
+                                    name={es?.name ?? s.data.name}
+                                    phone={s.data.phone}
+                                    sms={s.data.sms}
+                                    website={s.data.website}
+                                    address={s.data.address}
+                                    hours={es?.hours}
+                                    hours24={s.data.hours24}
+                                    languages={s.data.languages}
+                                    states={s.data.states}
+                                    statusNeutral={s.data.statusNeutral}
+                                    expect={es?.expect}
+                                    fearAddressed={s.data.fearAddressed}
+                                    confidence={s.data.confidence}
+                                    nearestBusRoute={s.data.nearestBusRoute}
+                                    reachableWithoutCar={s.data.reachableWithoutCar}
+                                    walkIn={s.data.walkIn}
+                                    veteranOnly={s.data.veteranOnly}
+                                    petsAllowed={s.data.petsAllowed}
+                                    emergency={s.data.emergency}
+                                    flagSlug={slug}
+                                >
+                                    {!es?.expect && (
+                                        <p class="service-card__expect">
+                                            La descripción y el horario de este servicio están disponibles solo en inglés en el
+                                            <a href={`/kc/directory?service=${encodeURIComponent(slug)}`} lang="en">directorio</a>.
+                                        </p>
+                                    )}
+                                </ServiceCard>
+                            );
+                        })}
+                    </section>
+                </li>
+            );
+        })}
+    </ol>
+
+    <p>
+        <a href="/es/kc/journeys">Todas las guías paso a paso</a> ·
+        <a href="/kc/directory" lang="en">Buscar en el directorio completo (en inglés)</a> ·
+        <a href="/kc/suggest" lang="en">Sugerir o corregir (en inglés)</a>
+    </p>
+    <p>
+        Esto no es asesoría legal ni médica. Llame antes de depender de cualquier información
+        que aparece aquí.
+    </p>
+</KCLayout>
+
+<style>
+    .kc-journey-steps {
+        list-style: none;
+        padding-left: 0;
+    }
+</style>

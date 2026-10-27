@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { kcJourneys } from "../data/kcMachine";
 
 export const prerender = true;
 
@@ -32,6 +33,7 @@ export const GET: APIRoute = async () => {
         "kc/government",
         "kc/healthcare",
         "kc/housing",
+        "kc/journeys",
         "kc/legal",
         "kc/libraries",
         "kc/local-knowledge",
@@ -49,6 +51,7 @@ export const GET: APIRoute = async () => {
         "es/kc/food",
         "es/kc/healthcare",
         "es/kc/housing",
+        "es/kc/journeys",
         "es/kc/legal",
         "es/kc/newcomers",
         "es/kc/worldcup"
@@ -62,7 +65,8 @@ export const GET: APIRoute = async () => {
 
     const origin = "https://meansandmeasures.com";
     const translatedPages = [
-        "crisis", "food", "healthcare", "housing", "legal", "newcomers", "worldcup"
+        "crisis", "food", "healthcare", "housing", "legal", "newcomers", "worldcup",
+        "journeys", ...kcJourneys.map((journey) => `journeys/${journey.id}`)
     ];
     const alternates = new Map<string, { en: string; es: string }>();
     for (const page of translatedPages) {
@@ -79,6 +83,8 @@ export const GET: APIRoute = async () => {
 
     const urls = [...new Set([
         ...staticPaths,
+        ...kcJourneys.map((journey) => `kc/journeys/${journey.id}`),
+        ...kcJourneys.map((journey) => `es/kc/journeys/${journey.id}`),
         ...work.map((entry) => `work/${entry.id}`),
         ...research.map((entry) => `research/${entry.id}`),
         ...artifacts.map((entry) => `artifacts/${entry.id}`)

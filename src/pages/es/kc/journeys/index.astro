@@ -1,0 +1,35 @@
+---
+import KCLayout from "../../../../layouts/KCLayout.astro";
+import KCLanguageSwitcher from "../../../../components/KCLanguageSwitcher.astro";
+import { kcJourneys } from "../../../../data/kcMachine";
+import { kcJourneysEs } from "../../../../data/kcJourneysEs";
+
+export const prerender = true;
+---
+
+<KCLayout
+    title="Guías paso a paso — KC"
+    description="Rutas cortas y ordenadas para problemas comunes en Kansas City: desalojo, salida del hospital, empezar sin documentos y ayudar a alguien que duerme afuera."
+    lang="es"
+>
+    <KCLanguageSwitcher currentLang="es" enPath="/kc/journeys" esPath="/es/kc/journeys" />
+
+    <p class="kc-eyebrow">Paso a paso</p>
+    <h1>Por dónde empezar y qué sigue.</h1>
+    <p class="kc-lede">
+        Cada guía toma una situación y pone en orden las primeras llamadas. Cada paso enlaza con
+        servicios del directorio.
+    </p>
+
+    <ul>
+        {kcJourneys.map((journey) => (
+            <li>
+                <a href={`/es/kc/journeys/${journey.id}`}>{kcJourneysEs[journey.id].title}</a> — {kcJourneysEs[journey.id].question}
+            </li>
+        ))}
+    </ul>
+
+    <p>
+        Datos legibles por máquina (en inglés): <a href="/kc/journeys.json" lang="en">journeys (JSON)</a>.
+    </p>
+</KCLayout>
