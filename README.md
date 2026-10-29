@@ -19,11 +19,15 @@ Cloudflare Workers; `wrangler.jsonc` targets `meansandmeasures.com` and
 
 ## Development and checks
 
-Use Node.js 24 or a newer supported even-numbered release with npm. Install locked dependencies with `npm ci`; build-tool
-script approvals are in `.npmrc`. `npm run dev` serves the local site at port 4321.
-`npm run build` generates the production Worker and assets; `npm run preview`
-previews the built application. `node --test tests/*.test.mjs` runs departure
-and intake regressions. `node --check public/notary/app.js` checks journal syntax.
+Use Node.js 24 or a newer supported even-numbered release with npm. 
+Install locked dependencies with `npm ci`; 
+build-tool
+script approvals are in `.npmrc`. 
+`npm run dev` serves the local site at port 4321.
+`npm run build` generates the production Worker and assets; 
+`npm run preview` previews the built application. 
+`node --test tests/*.test.mjs` runs departure and intake regressions. 
+`node --check public/notary/app.js` checks journal syntax.
 
 After changing bindings, run
 `npx wrangler types src/worker-configuration.d.ts --include-runtime false`.
@@ -49,11 +53,11 @@ returns the latest 250 submissions with notification status. Keep exports privat
 KC suggestions have a separate export token and review workflow.
 
 ## Notary journal
+[![Verify Kansas Notary Journal](https://github.com/MeansAndMeasures/website/actions/workflows/notary-verify.yml/badge.svg)](https://github.com/MeansAndMeasures/website/actions/workflows/notary-verify.yml)
 
-`public/notary/` contains the browser UI; `/api/notary/records` stores encrypted
-records in D1. Cloudflare Access login, the API's verified identity, workspace
-signatures and journal encryption serve different purposes. Preserve the browser's
-IndexedDB keys and recovery bundle; a login alone does not recover encryption keys.
+`public/notary/` contains the browser UI; 
+`/api/notary/records` stores encrypted records in D1. 
+Cloudflare Access login, the API's verified identity, workspace signatures and journal encryption serve different purposes. Preserve the browser's IndexedDB keys and recovery bundle; a login alone does not recover encryption keys.
 KC departure only removes `kc-` preference keys and preserves journal state.
 Journal migrations are `0003`–`0005`; verify production migration state before use.
 
