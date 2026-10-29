@@ -1,6 +1,6 @@
 # Site layout and brand page on Design System 2.0.0
 
-Hub item: WEB-040 (see `/Users/bjl/MeansAndMeasures/TODO.md`). Branch: `site/v2-layout-brand`, based on `Prime` at `a0325be`. Not merged, not deployed.
+Hub item: WEB-040 (see `TODO.md` in the iCloud hub root (`/Users/bjl/Library/Mobile Documents/com~apple~CloudDocs/MeansAndMeasures`)). Branch: `site/v2-layout-brand`, based on `Prime` at `a0325be`. Not merged, not deployed.
 
 ## What changed (2026-10-28)
 
