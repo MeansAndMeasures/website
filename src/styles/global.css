@@ -1,295 +1,451 @@
-/* =========================================
-   ROOT
-========================================= */
-html {
-    font-size: 20px; /* 1rem = 20px */
-    color: var(--mm-text);
-    background: var(--mm-canvas);
+/* =========================================================================
+   Means+Measures website — layout, type mapping and site chrome.
+   Built on the Design System package, release 2.0.0
+   (/means-measures/means-measures.css). Token values come from that package;
+   this file decides how the site uses them.
 
-    /* Width-aware type scale. Viewport height made tall phones render
-       headings at near-desktop sizes. */
-    --type-display: clamp(2.75rem, calc(1.6rem + 5.5vw), 7.6rem);
-    --type-h1: clamp(2rem, calc(1rem + 4vw), 4.5rem);
-    --type-h2: clamp(1.55rem, calc(1rem + 2.5vw), 3rem);
-    --type-h3: clamp(1.3rem, calc(1rem + 1.5vw), 2rem);
-    --type-h4: clamp(1.1rem, calc(0.95rem + 0.8vw), 1.45rem);
+   Rules this layer keeps:
+   - The root font size stays at the browser default. Package sizes are rem.
+   - One content edge. Eyebrows, titles, prose and grids share the left edge
+     of the page container; nothing is centred inside a wider column.
+   - Spectral SC (real small caps) is used only for eyebrows. Navigation,
+     labels and controls are Metrophobic; headings are Spectral SemiBold.
+   - Identity colors never appear as text or interface.
+   - Words are never broken mid-word to fit a column; columns are sized to
+     hold their longest word, including the business name.
+   ========================================================================= */
 
-    /* Shared spatial system. */
-    --page-max: 70rem;
-    --page-gutter: clamp(1.2rem, 5vw, 3.6rem);
-    --content-measure: 66ch;
-    --kc-max: 60rem;
-    --section-space: clamp(2.43rem, 6vw, 5.67rem);
-    --section-space-compact: clamp(1.62rem, 3vw, 3.24rem);
+:root {
+    --page-max: 76rem;                                  /* 1216px content width */
+    --gutter: clamp(1.25rem, 0.45rem + 3.2vw, 3rem);    /* 20px → 48px page edge */
+    --measure: 42rem;                                   /* prose column, ~68ch at body size */
+    --rule: color-mix(in srgb, var(--mm-secondary) 32%, transparent);
 }
 
 /* =========================================
-   BODY TEXT
+   BASE
 ========================================= */
-body {
-    font-family: var(--mm-font-body);
-    font-size: 1rem;      /* 20px */
-    line-height: 1.62;
-    font-weight: 400;
-    margin: 0;
+html {
     color: var(--mm-text);
     background: var(--mm-canvas);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--mm-font-body);
+    font-weight: 500;
+    font-size: var(--mm-size-body);
+    line-height: 1.3;
+    font-optical-sizing: auto;
+    color: var(--mm-text);
+    background: var(--mm-canvas);
+    hyphens: manual;
+    overflow-wrap: break-word;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 ::selection {
     color: var(--mm-canvas);
-    background: var(--mm-identity-institutional);
+    background: var(--mm-text);
 }
 
-p + p {
-    margin-top: 2.16em;
+p {
+    margin-block: 0 var(--mm-space-4);
+}
+
+p:last-child {
+    margin-block-end: 0;
 }
 
 ul,
 ol {
-    margin-block: 1.33em;
-    padding-inline-start: 1.62em;
+    margin-block: 0 var(--mm-space-4);
+    padding-inline-start: 1.25em;
 }
 
 li + li {
-    margin-top: 0.81em;
+    margin-top: var(--mm-space-2);
+}
+
+strong,
+b {
+    font-weight: 600;
+}
+
+a {
+    color: var(--mm-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.16em;
+}
+
+a:hover {
+    text-decoration-thickness: 0.12em;
+}
+
+code,
+pre,
+kbd,
+samp {
+    font-family: var(--mm-font-data);
+    font-size: 0.9em;
+}
+
+pre {
+    max-inline-size: 100%;
+    overflow-x: auto;
+}
+
+img {
+    max-inline-size: 100%;
+    height: auto;
 }
 
 /* =========================================
-   MEASURE UTILITY
+   HEADINGS
+   h1 is the display role. h2–h4 use the same face at section scale.
 ========================================= */
-.measure {
-    width: min(100%, var(--content-measure));
-    margin-inline: auto;
-}
-
-.measure--centered {
-    margin-inline: auto;
-}
-
-/* =========================================
-   HERO OBJECT
-========================================= */
-.hero-title {
-    font-family: var(--mm-font-ui);
-    font-size: var(--type-display);
-    line-height: 0.98;
-    max-width: 12ch;
-    overflow-wrap: break-word;
-    text-wrap: balance;
-    padding-block: clamp(1.62rem, 8vh, 5.67rem);
-    margin: 0 0 0 auto;
-    text-align: right;
-    color: var(--mm-text);
-}
-
-/* =========================================
-   CONTENT HEADING OBJECTS
-========================================= */
-h1 {
-    font-family: var(--mm-font-ui);
-    font-size: var(--type-h1);
-    line-height: 1.1;
-    margin-top: 3.24rem; /* 2x base rhythm */
-    margin-bottom: 0.81rem; /* 0.5x base rhythm */
-}
-
-h2 {
-    font-family: var(--mm-font-ui);
-    font-size: var(--type-h2);
-    line-height: 1.2;
-    margin-top: 2.43rem; /* 1.5x base rhythm */
-    margin-bottom: 0.81rem;
-}
-
-h3 {
-    font-family: var(--mm-font-ui);
-    font-size: var(--type-h3);
-    line-height: 1.3;
-    margin-top: 2.16rem; /* Matches p + p gap perfectly */
-    margin-bottom: 0.81rem;
-}
-
-h4 {
-    font-family: var(--mm-font-ui);
-    font-size: var(--type-h4);
-    line-height: 1.4;
-    margin-top: 1.62rem; /* 1x base rhythm */
-    margin-bottom: 0.81rem;
-}
-
 h1,
 h2,
 h3,
 h4,
-.card-title,
-.service-card__name {
-    max-width: 100%;
-    overflow-wrap: break-word;
+.card-title {
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-synthesis: none;
     text-wrap: balance;
+    overflow-wrap: normal;
+    color: var(--mm-text);
 }
 
-/* =========================================
-   CAPTION / EYEBROW OBJECT
-========================================= */
-.caption,
-.eyebrow {
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
+h1,
+.hero-title {
+    font-size: var(--mm-size-display);
+    line-height: 1.07;
+    max-inline-size: 20ch;
+    margin: 0 0 var(--mm-space-5);
+}
+
+h2 {
+    font-size: clamp(1.5rem, 1.08rem + 1.05vw, 2.125rem);   /* 24px → 34px */
+    line-height: 1.15;
+    max-inline-size: 30ch;
+    margin: var(--mm-space-6) 0 var(--mm-space-3);
+}
+
+h3 {
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);    /* 20px → 24px */
     line-height: 1.2;
-    margin: 0 0 0.81rem;
-    color: var(--mm-link);
+    margin: var(--mm-space-5) 0 var(--mm-space-2);
+}
+
+h4 {
+    font-size: var(--mm-size-body);
+    line-height: 1.3;
+    margin: var(--mm-space-4) 0 var(--mm-space-2);
+}
+
+.card-title {
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
+    line-height: 1.2;
+    margin: 0 0 var(--mm-space-2);
+}
+
+:is(h1, h2, h3, h4):first-child {
+    margin-top: 0;
+}
+
+/* Eyebrows: the institutional role. The only Spectral SC on the site. */
+.eyebrow,
+.caption {
+    font-family: var(--mm-font-institutional);
+    font-weight: 600;
+    font-size: var(--mm-size-institutional);
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--mm-secondary);
+    margin: 0 0 var(--mm-space-3);
+}
+
+/* Identity graphic: a solid gold bar under a declaration.
+   Online use spans 100% of the text column (Design System 2.0.0). */
+.gold-bar {
+    display: block;
+    inline-size: 100%;
+    max-inline-size: var(--measure);
+    block-size: 0.375rem;
+    margin: 0 0 var(--mm-space-5);
+    border: 0;
+    background: var(--mm-identity-interface);
 }
 
 /* =========================================
-   SECTION OBJECT
+   LAYOUT
 ========================================= */
-.section {
+.section,
+.homepage-hero,
+.section--routing,
+.site-header__inner,
+.site-footer__inner {
     box-sizing: border-box;
-    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
+    width: min(100% - 2 * var(--gutter), var(--page-max));
     margin-inline: auto;
-    padding-block: var(--section-space);
-    padding-inline: 0;
-    background: var(--section-bg, transparent);
 }
 
-a {
-    color: inherit;
-    text-decoration-color: var(--mm-action);
-    text-decoration-thickness: 0.045em;
-    text-underline-offset: 0.18em;
-}
-
-a:hover {
-    color: var(--mm-action);
+.section {
+    padding-block: var(--mm-space-7) 0;
 }
 
 .section--compact {
-    padding-block: var(--section-space-compact);
+    padding-block-start: var(--mm-space-6);
 }
 
-/* =========================================
-   GRID CONTAINER
-========================================= */
-.grid {
-    width: 100%;
-    margin-inline: auto;
+main > .section:last-child,
+main > .section--routing:last-child {
+    padding-block-end: var(--mm-space-7);
+}
+
+.measure {
+    max-inline-size: var(--measure);
+    min-width: 0;
+}
+
+.measure--centered {
+    margin-inline: 0;
+}
+
+/* Card grids. Minimum column width holds the longest heading word
+   at card-title size, so no title is broken or hyphenated. */
+.grid,
+.homepage-routing,
+.system-grid,
+.capability-list,
+.status-list,
+.sitemap-list {
     display: grid;
-    gap: 2vw;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(8rem, 16%, 20rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+    gap: var(--mm-space-5) var(--mm-space-6);
     align-items: start;
-    justify-items: stretch;
+    margin-top: var(--mm-space-6);
 }
 
-/* =========================================
-   CARD TITLE OBJECT
-========================================= */
-.card-title {
+.grid > *,
+.capability-list > section,
+.status-list > section,
+.sitemap-list__section {
+    min-width: 0;
+    padding-top: var(--mm-space-4);
+    border-top: 1px solid var(--rule);
+}
+
+.capability-list h2,
+.status-list h2,
+.sitemap-list h2,
+.update-list h2 {
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
+    line-height: 1.2;
+    margin: 0 0 var(--mm-space-3);
+}
+
+.update-list {
+    display: grid;
+    gap: var(--mm-space-5);
+    max-inline-size: var(--measure);
+    margin-top: var(--mm-space-6);
+}
+
+.update-list article {
+    padding-top: var(--mm-space-4);
+    border-top: 1px solid var(--rule);
+}
+
+.sitemap-list ul {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+/* Linked cards: the whole panel is the link; text inside is not underlined. */
+.route-panel,
+.grid > a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.route-panel p:not(.eyebrow),
+.grid > a p {
+    color: var(--mm-secondary);
+}
+
+.route-panel .card-title,
+.grid > a .card-title {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.16em;
+    transition: text-decoration-color 0.12s ease;
+}
+
+.route-panel:hover .card-title,
+.grid > a:hover .card-title {
+    text-decoration-color: currentColor;
+}
+
+.route-panel:hover,
+.grid > a:hover {
+    border-top-color: var(--mm-text);
+}
+
+.route-panel__meta {
+    margin-top: var(--mm-space-3);
     font-family: var(--mm-font-ui);
-    font-size: clamp(1rem, 2.4vw, 1.35rem);
-    line-height: 1.215;
-    margin: 0;
+    font-size: var(--mm-size-ui);
+    color: var(--mm-secondary);
 }
 
 /* =========================================
-   CTA OBJECT
+   HOMEPAGE
 ========================================= */
-.cta-title {
-    font-family: var(--mm-font-ui);
-    font-size: clamp(2rem, 6vw, 4rem);
-    line-height: 1.1;
-    max-width: 33ch;
-    margin-inline: auto;
-    margin-bottom: 1.62rem;
+.homepage-hero {
+    container-type: inline-size;
+    padding-block: var(--mm-space-7) var(--mm-space-6);
 }
+
+/* WEB-035 (Brian, 2026-10-27): one line at every width, navy words, gold plus,
+   size proportional to the container. Capped so the hero no longer fills the
+   first screen. This is a deliberate identity treatment of the name, an exception
+   to the Design System rule that identity colors are non-text. */
+.homepage-hero .hero-title {
+    max-inline-size: none;
+    margin-bottom: var(--mm-space-5);
+    font-size: min(11.5cqi, 6rem);
+    line-height: 1.05;
+    white-space: nowrap;
+    color: var(--mm-identity-institutional);
+}
+
+.homepage-hero__name {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.homepage-hero__plus {
+    color: var(--mm-identity-interface);
+}
+
+.homepage-hero__summary {
+    max-inline-size: var(--measure);
+}
+
+.homepage-hero__summary p {
+    font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
+    line-height: 1.35;
+}
+
+.section--routing {
+    padding-block: var(--mm-space-5) var(--mm-space-7);
+}
+
+.section--routing > .eyebrow {
+    margin-bottom: 0;
+}
+
 /* =========================================
-   SITE CHROME
+   SITE HEADER
+   A full-width surface band; its content shares the page edge.
 ========================================= */
-
-.site-header,
-.site-footer {
-    border-block: 1px solid var(--mm-action);
-}
-
-.site-header__inner,
-.site-footer__inner {
-    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
-    margin-inline: auto;
-
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: clamp(1.62rem, 5vw, 4.86rem);
+.site-header {
+    background: var(--mm-surface);
+    box-shadow: var(--mm-shadow-edge);
+    position: relative;
+    z-index: 10;
 }
 
 .site-header__inner {
-    padding-block: 0.81rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--mm-space-3) var(--mm-space-6);
+    padding-block: var(--mm-space-3);
 }
 
 .site-header__mark {
-    font-family: var(--mm-font-ui);
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0;
-    white-space: nowrap;
     display: inline-flex;
     align-items: center;
+    flex: none;
+    text-decoration: none;
 }
 
 .site-header__mark img {
     display: block;
     width: auto;
-    height: 2.2rem;
-}
-
-.site-header__diamond {
-    color: var(--mm-action);
-    font-size: 0.72em;
-    line-height: 1;
-    transform: translateY(-0.02em);
+    height: 3rem;
 }
 
 .site-header__nav,
 .site-footer__nav {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
-    column-gap: clamp(1rem, 2.4vw, 1.62rem);
-    row-gap: 0.35rem;
+    align-items: center;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+}
 
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
-    line-height: 1.25;
+.site-header__nav {
+    justify-content: flex-end;
+    gap: var(--mm-space-1) var(--mm-space-5);
 }
 
 .site-header__nav a,
 .site-footer__nav a {
-    color: inherit;
-    text-decoration-thickness: 0.045em;
-    text-underline-offset: 0.18em;
+    color: var(--mm-text);
+    text-decoration-line: none;
+    padding-block: var(--mm-space-1);
+}
+
+.site-header__nav a:hover,
+.site-footer__nav a:hover {
+    text-decoration-line: underline;
 }
 
 .site-header__nav a[aria-current="page"] {
-    text-decoration-thickness: 0.09em;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.12em;
+    text-decoration-color: var(--mm-action);
 }
 
+.site-header__kclink {
+    color: inherit;
+}
+
+/* =========================================
+   SITE FOOTER
+   Same band as the header; always sits at the foot of the viewport.
+========================================= */
 .site-footer {
-    border-top: 1px solid var(--mm-action);
-    border-bottom: 0;
+    margin-top: var(--mm-space-7);
+    background: var(--mm-surface);
+    box-shadow: inset 0 1px 0 var(--rule);
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    line-height: 1.5;
 }
 
 .site-footer__inner {
-    padding-block: 1.62rem;
-}
-
-.site-footer__meta {
-    margin: 0;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
-    line-height: 1.25;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: var(--mm-space-5) var(--mm-space-7);
+    padding-block: var(--mm-space-6);
 }
 
 .site-footer__meta p {
@@ -297,38 +453,45 @@ a:hover {
 }
 
 .site-footer__meta p + p {
-    margin-top: 0.4rem;
+    margin-top: var(--mm-space-1);
 }
 
 .site-footer__meta a {
-    text-decoration-color: var(--mm-secondary);
+    color: var(--mm-text);
+}
+
+.site-footer__nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: var(--mm-space-1) var(--mm-space-5);
+    align-content: start;
 }
 
 /* =========================================
-   ENTRY OBJECTS
+   ENTRY META (definition lists of facts)
+   Surface component: surface color, radius-md, space-4 padding, edge shadow.
 ========================================= */
-
 .entry-list {
-    margin-top: 2.43rem;
+    margin-top: var(--mm-space-6);
 }
 
 .entry-meta {
     display: grid;
     grid-template-columns: max-content minmax(0, 1fr);
-    column-gap: 1.2rem;
-    row-gap: 0.45rem;
-    margin-block: 1.62rem 2.43rem;
-    padding-block: 0.81rem;
-    border-block: 1px solid color-mix(in srgb, var(--mm-action) 58%, transparent);
-
-    font-size: 0.82rem;
+    gap: var(--mm-space-2) var(--mm-space-5);
+    margin-block: var(--mm-space-5) var(--mm-space-6);
+    padding: var(--mm-space-4);
+    background: var(--mm-surface);
+    border-radius: var(--mm-radius-md);
+    box-shadow: var(--mm-shadow-edge);
     line-height: 1.35;
-    background: color-mix(in srgb, var(--mm-surface) 42%, transparent);
 }
 
 .entry-meta dt {
-    font-family: var(--mm-font-editorial);
-    letter-spacing: 0;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    line-height: 1.6;
+    color: var(--mm-secondary);
 }
 
 .entry-meta dd {
@@ -336,19 +499,33 @@ a:hover {
     margin: 0;
 }
 
-.entry-meta a {
+.entry-meta dd a {
     overflow-wrap: anywhere;
 }
 
+@media (max-width: 30rem) {
+    .entry-meta {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .entry-meta dd + dt {
+        margin-top: var(--mm-space-3);
+    }
+}
+
+/* =========================================
+   FORMS AND ACTIONS
+========================================= */
 .intake-form {
     display: grid;
-    gap: 1rem;
-    margin-top: 2.43rem;
+    gap: var(--mm-space-4);
+    margin-top: var(--mm-space-6);
 }
 
 .field {
     display: grid;
-    gap: 0.3rem;
+    gap: var(--mm-space-1);
 }
 
 .field--hidden {
@@ -359,11 +536,17 @@ a:hover {
     overflow: hidden;
 }
 
+label,
 .field label {
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
-    line-height: 1.25;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+}
+
+input,
+select,
+textarea {
+    font-family: var(--mm-font-ui);
 }
 
 .field input,
@@ -371,245 +554,125 @@ a:hover {
 .field textarea {
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid var(--mm-action);
-    border-radius: 0;
-    padding: 0.55rem 0.65rem;
-    color: inherit;
-    background: color-mix(in srgb, var(--mm-canvas) 88%, white);
-    font: inherit;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-    outline: 0.12rem solid var(--mm-focus);
-    outline-offset: 0.12rem;
+    padding: var(--mm-space-3);
+    border: 1px solid var(--mm-control-border);
+    border-radius: var(--mm-radius-sm);
+    color: var(--mm-text);
+    background: var(--mm-surface);
+    font-size: var(--mm-size-ui);
 }
 
 .field textarea {
     resize: vertical;
+    font-family: var(--mm-font-body);
+    font-size: var(--mm-size-body);
+}
+
+/* Action component: outlined, never filled. */
+button,
+.intake-form button {
+    font-family: var(--mm-font-action);
+    font-weight: 600;
+    font-synthesis: weight;
+    font-size: var(--mm-size-action);
+    line-height: 1.2;
+    padding: var(--mm-space-2) var(--mm-space-4);
+    color: var(--mm-action);
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: var(--mm-radius-sm);
+    cursor: pointer;
 }
 
 .intake-form button {
     justify-self: start;
-    border: 1px solid var(--mm-action);
-    border-radius: 0;
-    padding: 0.55rem 0.8rem;
-    color: inherit;
-    background: transparent;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
-    cursor: pointer;
 }
 
-.intake-form button:hover,
-.intake-form button:focus-visible {
-    background: var(--mm-surface);
+button:hover {
+    box-shadow: var(--mm-shadow-raised);
 }
 
-.intake-form button:disabled {
+button:disabled {
     cursor: wait;
     opacity: 0.62;
 }
 
 .form-status {
-    min-height: 1.35em;
+    min-height: 1.4em;
     margin: 0;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
-    line-height: 1.25;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
 }
 
 .intake-output {
     overflow: auto;
     max-height: 32rem;
-    margin-top: 1.62rem;
-    padding: 0.81rem;
-    border: 1px solid var(--mm-action);
-    background: color-mix(in srgb, var(--mm-surface) 38%, transparent);
-    font-size: 0.72rem;
+    margin-top: var(--mm-space-5);
+    padding: var(--mm-space-4);
+    background: var(--mm-surface);
+    border-radius: var(--mm-radius-md);
+    box-shadow: var(--mm-shadow-edge);
+    font-family: var(--mm-font-data);
+    font-size: 0.875rem;
     line-height: 1.45;
     white-space: pre-wrap;
 }
 
 .document-action {
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
-    line-height: 1.25;
+    margin-top: var(--mm-space-5);
 }
 
 .asset-list {
     padding-inline-start: 0;
     list-style: none;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    letter-spacing: 0;
-    line-height: 1.35;
 }
 
-.asset-list li + li {
-    margin-top: 0.45rem;
-}
-
-.brand-document {
-    border-block: 1px solid var(--mm-action);
-    background: var(--mm-canvas);
-}
-
-.brand-document iframe {
-    display: block;
-    width: 100%;
-    min-height: min(76rem, 82vh);
-    border: 0;
-    background: var(--mm-canvas);
+time,
+.service-card__updated {
+    font-family: var(--mm-font-detail);
 }
 
 /* =========================================
-   HOMEPAGE
+   NARROW VIEWPORTS
 ========================================= */
+@media (max-width: 52rem) {
+    .site-header__inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.homepage-hero .hero-title {
-    color: var(--mm-identity-institutional);
-    font-family: var(--mm-font-display);
-    font-weight: 600;
-    font-synthesis: none;
-    max-width: 100%;
-    font-size: min(10cqi, 7.6rem);
-    white-space: nowrap;
-    overflow-wrap: normal;
+    .site-header__nav {
+        justify-content: flex-start;
+        gap: 0 var(--mm-space-4);
+    }
+
+    .site-header__mark img {
+        height: 2.5rem;
+    }
+
+    .site-footer__inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
 
-.homepage-hero__name {
-    display: inline-block;
-    white-space: nowrap;
+/* Skip link: hidden until focused. */
+.skip-link {
+    position: absolute;
+    left: var(--mm-space-2);
+    top: -4rem;
+    z-index: 1000;
+    padding: var(--mm-space-2) var(--mm-space-3);
+    background: var(--mm-text);
+    color: var(--mm-canvas);
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
 }
 
-.homepage-hero__plus {
-    color: var(--mm-identity-interface);
-    font-weight: inherit;
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: var(--mm-space-2);
 }
 
-.homepage-hero {
-    container-type: inline-size;
-    min-height: clamp(28rem, 68vh, 40rem);
-    display: grid;
-    align-content: end;
-    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
-    margin-inline: auto;
-    padding-inline: 0;
-    padding-block: clamp(3.24rem, 9vh, 6.48rem) clamp(2.43rem, 7vh, 4.86rem);
-}
-
-.homepage-hero__kicker,
-.homepage-hero__summary {
-    width: min(100%, 66ch);
-}
-
-.homepage-routing {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--mm-action);
-}
-
-.section--routing {
-    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max));
-    margin-inline: auto;
-    padding-inline: 0;
-    padding-block: 0 clamp(3.24rem, 7vh, 5.67rem);
-}
-
-.section--routing > .eyebrow {
-    margin-bottom: 1.62rem;
-}
-
-.route-panel {
-    min-height: 11rem;
-    padding: 1.2rem 1rem 1.62rem 0;
-    border-bottom: 1px solid var(--mm-action);
-
-    color: inherit;
-    text-decoration: none;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.route-panel:hover,
-.route-panel:focus-visible {
-    background: color-mix(in srgb, var(--mm-surface) 54%, transparent);
-}
-
-.route-panel:focus-visible {
-    outline: 0.1rem solid var(--mm-focus);
-    outline-offset: 0.2rem;
-}
-
-.route-panel__meta {
-    margin-top: 1rem;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.72rem;
-    line-height: 1.25;
-    color: var(--mm-link);
-}
-
-.system-grid,
-.capability-list,
-.update-list,
-.status-list,
-.sitemap-list {
-    margin-top: 2.43rem;
-}
-
-.capability-list,
-.update-list,
-.status-list,
-.sitemap-list {
-    width: 100%;
-    margin-inline: auto;
-    display: grid;
-    gap: 1.62rem;
-}
-
-.capability-list,
-.status-list,
-.sitemap-list {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-}
-
-.update-list {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: var(--content-measure);
-}
-
-.capability-list section,
-.update-list article,
-.status-list section,
-.sitemap-list__section {
-    border-top: 1px solid color-mix(in srgb, var(--mm-action) 58%, transparent);
-    padding-top: 1.2rem;
-}
-
-.capability-list h2,
-.update-list h2,
-.status-list h2,
-.sitemap-list h2 {
-    font-size: clamp(1.35rem, calc(1.1rem + 1vw), 2.4rem);
-    margin-top: 0;
-}
-
-.sitemap-list ul {
-    list-style: none;
-    padding-inline-start: 0;
-}
-
-.sitemap-list li + li {
-    margin-top: 0.45rem;
-}
 
 /* =========================================
    KC SECTION — HEADER VARIANTS
@@ -620,7 +683,7 @@ a:hover {
     color: inherit;
 }
 
-/* Loud "Need Help Now" only on KC pages. */
+/* Loud "Need help now" only on KC pages. */
 .site-header__needhelp,
 .site-footer__needhelp {
     color: var(--mm-action);
@@ -632,10 +695,10 @@ a:hover {
     border: 1px solid var(--mm-focus);
     background: var(--mm-surface);
     color: var(--mm-canvas);
-    padding: 0.32rem 0.65rem;
+    padding: 0.4rem 0.812rem;
     border-radius: 0;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
+    font-family: var(--mm-font-ui);
+    font-size: 1rem;
     letter-spacing: 0;
     line-height: 1.2;
     cursor: pointer;
@@ -654,35 +717,35 @@ a:hover {
 
 .kc {
     box-sizing: border-box;
-    width: min(calc(100% - (2 * var(--page-gutter))), var(--kc-max));
+    width: min(100% - 2 * var(--gutter), var(--page-max));
     margin-inline: auto;
-    padding-block: clamp(1.62rem, 4vh, 3.24rem);
+    padding-block: clamp(2.025rem, 4vh, 4.05rem);
     padding-inline: 0;
 }
 
 .kc-eyebrow {
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    color: var(--mm-action);
+    font-family: var(--mm-font-institutional);
+    font-weight: 600;
+    font-size: var(--mm-size-institutional);
+    color: var(--mm-secondary);
     letter-spacing: 0;
-    margin: 0 0 0.81rem;
+    margin: 0 0 1.013rem;
 }
 
 .kc h1 {
-    margin-top: 1.62rem;
+    margin-top: var(--mm-space-5);
 }
 
 .kc-lede {
-    font-size: 1.18rem;
-    line-height: 1.55;
-    max-width: 60ch;
-    margin: 1.62rem auto 2.43rem;
+    font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
+    line-height: 1.35;
+    margin: var(--mm-space-4) 0 var(--mm-space-6);
 }
 
 .kc-section {
-    margin-block: 2.43rem;
-    padding-block: 1.62rem;
-    border-top: 1px solid color-mix(in srgb, var(--mm-action) 50%, transparent);
+    margin-block: 3.038rem;
+    padding-block: 2.025rem;
+    border-top: 1px solid var(--rule);
 }
 
 .kc-section:first-of-type {
@@ -694,8 +757,8 @@ a:hover {
 ========================================= */
 
 .service-card {
-    margin-block: 1.62rem;
-    padding: 1.2rem;
+    margin-block: 2.025rem;
+    padding: 1.5rem;
     border: 1px solid color-mix(in srgb, var(--mm-action) 60%, transparent);
     background: color-mix(in srgb, var(--mm-surface) 24%, transparent);
 }
@@ -708,15 +771,15 @@ a:hover {
 
 .service-card__name {
     font-family: var(--mm-font-ui);
-    font-size: 1.35rem;
-    margin: 0 0 0.45rem;
+    font-size: 1.688rem;
+    margin: 0 0 0.562rem;
     line-height: 1.25;
 }
 
 .service-card__contact {
-    margin: 0.45rem 0;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.95rem;
+    margin: 0.562rem 0;
+    font-family: var(--mm-font-ui);
+    font-size: 1.188rem;
     line-height: 1.5;
     list-style: none;
     padding-inline-start: 0;
@@ -733,12 +796,12 @@ a:hover {
 
 .service-card__phone {
     display: inline-block;
-    padding: 0.65rem 0.9rem;
-    margin-block: 0.45rem;
+    padding: 0.812rem 1.125rem;
+    margin-block: 0.562rem;
     background: var(--mm-surface);
     color: var(--mm-action) !important;
     font-family: var(--mm-font-ui);
-    font-size: 1.18rem;
+    font-size: 1.475rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-decoration: none;
@@ -754,12 +817,12 @@ a:hover {
 }
 
 .service-card__copy {
-    margin-inline-start: 0.45rem;
-    padding: 0.45rem 0.65rem;
+    margin-inline-start: 0.562rem;
+    padding: 0.562rem 0.812rem;
     border: 1px solid var(--mm-action);
     background: transparent;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.72rem;
+    font-family: var(--mm-font-ui);
+    font-size: 0.9rem;
     letter-spacing: 0;
     cursor: pointer;
     color: inherit;
@@ -771,29 +834,29 @@ a:hover {
 }
 
 .service-card__access {
-    margin: 0.81rem 0;
-    font-size: 0.95rem;
+    margin: 1.013rem 0;
+    font-size: 1.188rem;
     line-height: 1.55;
 }
 
 .service-card__expect {
-    margin: 0.81rem 0;
+    margin: 1.013rem 0;
     line-height: 1.55;
 }
 
 .service-card__correction {
-    font-family: var(--mm-font-editorial);
-    font-size: 0.72rem;
+    font-family: var(--mm-font-ui);
+    font-size: 0.9rem;
     color: var(--mm-secondary);
     letter-spacing: 0;
-    margin: 0.81rem 0 0;
+    margin: 1.013rem 0 0;
 }
 
 .service-card details summary {
     cursor: pointer;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
-    margin-block: 0.45rem;
+    font-family: var(--mm-font-ui);
+    font-size: 1rem;
+    margin-block: 0.562rem;
 }
 
 /* =========================================
@@ -801,41 +864,41 @@ a:hover {
 ========================================= */
 
 .kc-triage {
-    margin-block: 2.43rem;
-    padding: 1.62rem;
+    margin-block: 3.038rem;
+    padding: 2.025rem;
     border: 2px solid var(--mm-focus);
     background: color-mix(in srgb, var(--mm-focus) 6%, var(--mm-canvas));
 }
 
 .kc-triage h2 {
     margin-top: 0;
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
 .kc-triage__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-    gap: 0.81rem;
-    margin-block: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+    gap: 1.013rem;
+    margin-block: 1.5rem;
 }
 
 .kc-triage__option {
     display: block;
-    padding: 1rem;
+    padding: 1.25rem;
     border: 1px solid var(--mm-action);
     background: var(--mm-canvas);
     color: inherit;
     text-decoration: none;
     font-family: var(--mm-font-ui);
-    font-size: 1rem;
+    font-size: 1.25rem;
     line-height: 1.3;
 }
 
 .kc-triage__option:hover,
 .kc-triage__option:focus-visible {
     background: var(--mm-surface);
-    outline: 0.1rem solid var(--mm-focus);
-    outline-offset: 0.1rem;
+    outline: 0.125rem solid var(--mm-focus);
+    outline-offset: 0.125rem;
 }
 
 /* =========================================
@@ -845,23 +908,23 @@ a:hover {
 .kc-readability {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
+    gap: 0.562rem;
     align-items: center;
-    margin-block: 0.81rem;
-    padding: 0.65rem;
+    margin-block: 1.013rem;
+    padding: 0.812rem;
     border: 1px solid color-mix(in srgb, var(--mm-action) 40%, transparent);
     background: color-mix(in srgb, var(--mm-surface) 24%, transparent);
-    font-family: var(--mm-font-editorial);
-    font-size: 0.72rem;
+    font-family: var(--mm-font-ui);
+    font-size: 0.9rem;
 }
 
 .kc-readability__label {
     font-weight: 600;
-    margin-inline-end: 0.45rem;
+    margin-inline-end: 0.562rem;
 }
 
 .kc-readability button {
-    padding: 0.32rem 0.65rem;
+    padding: 0.4rem 0.812rem;
     border: 1px solid var(--mm-action);
     background: transparent;
     color: inherit;
@@ -873,16 +936,16 @@ a:hover {
 .kc-readability button:hover,
 .kc-readability button:focus-visible,
 .kc-readability button[aria-pressed="true"] {
-    background: var(--mm-identity-institutional);
+    background: var(--mm-text);
     color: var(--mm-canvas);
 }
 
 body[data-kc-size="lg"] {
-    font-size: 1.18rem;
+    font-size: 1.475rem;
 }
 
 body[data-kc-size="xl"] {
-    font-size: 1.35rem;
+    font-size: 1.688rem;
 }
 
 body[data-kc-contrast="high"] {
@@ -911,31 +974,31 @@ body[data-kc-spacing="loose"] {
 
 .kc-lang {
     display: flex;
-    gap: 0.45rem;
-    margin-block: 0.81rem;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
+    gap: 0.562rem;
+    margin-block: 1.013rem;
+    font-family: var(--mm-font-ui);
+    font-size: 1rem;
 }
 
 .kc-lang a {
-    padding: 0.18rem 0.45rem;
+    padding: 0.225rem 0.562rem;
     border: 1px solid var(--mm-action);
     text-decoration: none;
     color: inherit;
 }
 
 .kc-lang a[aria-current="true"] {
-    background: var(--mm-identity-institutional);
+    background: var(--mm-text);
     color: var(--mm-canvas);
 }
 
 .kc-lang-banner {
-    margin-block: 1rem;
-    padding: 0.81rem 1rem;
+    margin-block: 1.25rem;
+    padding: 1.013rem 1.25rem;
     border: 1px dashed var(--mm-focus);
     background: color-mix(in srgb, var(--mm-focus) 6%, var(--mm-canvas));
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
+    font-family: var(--mm-font-ui);
+    font-size: 1rem;
 }
 
 /* =========================================
@@ -943,8 +1006,8 @@ body[data-kc-spacing="loose"] {
 ========================================= */
 
 .kc-urgent {
-    margin-block: 1.62rem;
-    padding: 1.2rem;
+    margin-block: 2.025rem;
+    padding: 1.5rem;
     border-left: 4px solid var(--mm-focus);
     background: color-mix(in srgb, var(--mm-focus) 4%, var(--mm-canvas));
 }
@@ -957,7 +1020,7 @@ body[data-kc-spacing="loose"] {
 .kc-urgent__phone {
     display: inline-block;
     font-family: var(--mm-font-ui);
-    font-size: 2.16rem;
+    font-size: 2.7rem;
     font-weight: 600;
     line-height: 1.1;
     text-decoration: none;
@@ -969,11 +1032,11 @@ body[data-kc-spacing="loose"] {
 }
 
 .kc-note {
-    margin: 0.81rem 0;
-    padding: 0.65rem 0.9rem;
+    margin: 1.013rem 0;
+    padding: 0.812rem 1.125rem;
     border-left: 3px solid var(--mm-secondary);
     background: color-mix(in srgb, var(--mm-secondary) 8%, transparent);
-    font-size: 0.95rem;
+    font-size: 1.188rem;
     line-height: 1.55;
 }
 
@@ -989,10 +1052,10 @@ body[data-kc-spacing="loose"] {
 .kc-subnav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem 0.9rem;
-    margin-block: 1.62rem;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.8rem;
+    gap: 0.562rem 1.125rem;
+    margin-block: 2.025rem;
+    font-family: var(--mm-font-ui);
+    font-size: 1rem;
     line-height: 1.35;
 }
 
@@ -1010,33 +1073,33 @@ body[data-kc-spacing="loose"] {
 ========================================= */
 
 .kc-search {
-    margin-block: 1.62rem;
+    margin-block: 2.025rem;
     display: grid;
-    gap: 0.81rem;
+    gap: 1.013rem;
 }
 
 .kc-search input[type="search"] {
-    padding: 0.65rem;
+    padding: 0.812rem;
     border: 1px solid var(--mm-action);
     background: color-mix(in srgb, var(--mm-canvas) 88%, white);
     font: inherit;
 }
 
 .kc-search input[type="search"]:focus {
-    outline: 0.12rem solid var(--mm-focus);
-    outline-offset: 0.12rem;
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.15rem;
 }
 
 .kc-search__filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
-    font-family: var(--mm-font-editorial);
-    font-size: 0.72rem;
+    gap: 0.562rem;
+    font-family: var(--mm-font-ui);
+    font-size: 0.9rem;
 }
 
 .kc-search__chip {
-    padding: 0.32rem 0.65rem;
+    padding: 0.4rem 0.812rem;
     border: 1px solid var(--mm-action);
     background: transparent;
     color: inherit;
@@ -1046,7 +1109,7 @@ body[data-kc-spacing="loose"] {
 }
 
 .kc-search__chip[aria-pressed="true"] {
-    background: var(--mm-identity-institutional);
+    background: var(--mm-text);
     color: var(--mm-canvas);
 }
 
@@ -1058,42 +1121,16 @@ body[data-kc-spacing="loose"] {
    WCAG AA — CONTRAST & FOCUS ADJUSTMENTS
 ========================================= */
 
-/* Skip-to-main link: hidden until focused. */
-.skip-link {
-    position: absolute;
-    left: 0.45rem;
-    top: -3rem;
-    padding: 0.45rem 0.81rem;
-    background: var(--mm-text);
-    color: var(--mm-canvas);
-    font-family: var(--mm-font-editorial);
-    font-size: 0.9rem;
-    z-index: 1000;
-    transition: top 0.15s ease;
-}
 
-.skip-link:focus,
-.skip-link:focus-visible {
-    top: 0.45rem;
-    outline: 0.12rem solid var(--mm-focus);
-    outline-offset: 0.12rem;
-}
-
-/* Small-text uses of the brand red darkened to meet 4.5:1. */
-.kc-eyebrow,
-.site-header__needhelp,
-.site-footer__needhelp {
-    color: #a8351e;
-}
 
 /* Muted correction path — was var(--mm-secondary) (3.00:1), now passes. */
 .service-card__correction {
     color: #566375;
 }
 
-/* Escape button: was 0.8rem regular (fails 4.5:1). Now bold + larger for 3:1 large-text threshold. */
+/* Escape button: was 1rem regular (fails 4.5:1). Now bold + larger for 3:1 large-text threshold. */
 .site-header__escape {
-    font-size: 0.95rem;
+    font-size: 1.188rem;
     font-weight: 700;
 }
 
@@ -1104,22 +1141,47 @@ body[data-kc-spacing="loose"] {
 .service-card__phone:focus-visible,
 .kc-readability button:focus-visible,
 .kc-lang a:focus-visible {
-    outline: 0.15rem solid var(--mm-focus);
-    outline-offset: 0.18rem;
+    outline: 0.188rem solid var(--mm-focus);
+    outline-offset: 0.225rem;
 }
 
 /* Make the site-header nav links + Subnav links have visible focus. */
 .site-header__nav a:focus-visible,
 .site-footer__nav a:focus-visible,
 .kc-subnav a:focus-visible {
-    outline: 0.12rem solid var(--mm-focus);
-    outline-offset: 0.18rem;
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.225rem;
 }
 
 /* Service card details/summary disclosure widgets. */
 .service-card details summary:focus-visible {
-    outline: 0.12rem solid var(--mm-focus);
-    outline-offset: 0.18rem;
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.225rem;
+}
+
+/* KC prose keeps the site measure; grids and panels use the full page width. */
+.kc :is(p, ul, ol, h1, h2, h3):not(.kc-triage *, .kc-readability *, .kc-subnav *, .kc-lang *) {
+    max-inline-size: var(--measure);
+}
+
+.kc h1 {
+    max-inline-size: 20ch;
+}
+
+/* KC chrome: escape control follows the Action component. */
+.site-header__escape {
+    color: var(--mm-action);
+    background: transparent;
+    border-color: currentColor;
+    border-radius: var(--mm-radius-sm);
+    font-family: var(--mm-font-action);
+}
+
+.site-header__escape:hover,
+.site-header__escape:focus-visible {
+    color: var(--mm-canvas);
+    background: var(--mm-text);
+    border-color: var(--mm-text);
 }
 
 @media print {
@@ -1157,107 +1219,3 @@ body[data-kc-spacing="loose"] {
         color: black;
     }
 }
-
-@media (prefers-color-scheme: dark) {
-    body:not([data-kc-contrast="high"]) {
-        --kc-bg: #1c1c20;
-        --kc-fg: #f0e6d3;
-    }
-}
-
-@media (max-width: 760px) {
-    html {
-        font-size: 18px;
-    }
-
-    .site-header__inner {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 0.81rem;
-    }
-
-    .site-header__nav {
-        justify-content: flex-start;
-        column-gap: 1.2rem;
-    }
-
-    .site-footer__inner {
-        align-items: flex-start;
-        flex-direction: column-reverse;
-        gap: 1.2rem;
-    }
-
-    .site-footer__nav {
-        justify-content: flex-start;
-    }
-
-    .hero-title {
-        max-width: none;
-        white-space: normal;
-        text-align: left;
-        margin-left: 0;
-    }
-
-    .homepage-hero {
-        min-height: auto;
-        padding-block: 3.24rem;
-    }
-
-    .homepage-routing {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .route-panel {
-        min-height: 8.5rem;
-        padding-block: 1rem 1.2rem;
-    }
-}
-
-@media (max-width: 520px) {
-    .section,
-    .homepage-hero,
-    .section--routing,
-    .site-header__inner,
-    .site-footer__inner,
-    .grid {
-        width: auto;
-        margin-inline: 0;
-    }
-
-    .section,
-    .homepage-hero,
-    .section--routing,
-    .site-header__inner,
-    .site-footer__inner {
-        padding-inline: 1.2rem;
-    }
-
-    .homepage-routing {
-        grid-template-columns: 1fr;
-    }
-
-    .route-panel {
-        min-height: auto;
-        gap: 1.62rem;
-        padding-right: 0;
-    }
-}
-
-/* Typography follows the function of each surface. */
-h1, .hero-title { font-family: var(--mm-font-display); font-weight: 600; }
-h2, h3, h4, .card-title { font-family: var(--mm-font-institutional); font-weight: 600; }
-nav, label, input, select, textarea { font-family: var(--mm-font-ui); }
-button, .document-action { font-family: var(--mm-font-action); }
-code, pre { font-family: var(--mm-font-data); }
-a { color: var(--mm-link); }
-
-.site-header__escape { color: var(--mm-action); border-color: var(--mm-action); font-family: var(--mm-font-action); }
-.site-header__needhelp, .site-footer__needhelp { color: var(--mm-action); }
-.entry-meta dt, .eyebrow { font-family: var(--mm-font-editorial); }
-time, .service-card__updated { font-family: var(--mm-font-detail); }
-.mm-type-specialty { font-family: var(--mm-font-specialty); }
-
-/* Preserve readable prose and identifiers at narrow widths without clipping. */
-p, dd, li, a, code { overflow-wrap: anywhere; }
-.entry-meta > *, .measure { min-width: 0; }
-pre { max-inline-size: 100%; overflow-x: auto; }
