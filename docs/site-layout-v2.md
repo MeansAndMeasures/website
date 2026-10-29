@@ -20,7 +20,7 @@ Commits: `6a93192` package, `12c4465` layout/chrome (+ KC normalization and WEB-
 
 ## Decisions recorded
 
-- **WEB-035 hero kept.** Navy words and gold plus on one line, as Brian specified 2026-10-27. This is an exception to the 2.0.0 rule that identity colors are non-text; it is commented as such in `global.css`. Only the size changed (now `min(11.5cqi, 6rem)`).
+- **WEB-035 hero kept.** The homepage name is the Means+Measures logotype, an identity graphic and not text (Brian, 2026-10-28), so identity navy and gold are correct there and the non-text rule is not broken. Navy words and gold plus on one line as specified 2026-10-27; only the size changed (now `min(11.5cqi, 6rem)`). The treatment is for the logotype only, not headings or other text.
 - Header shows the mark only. The wordmark is never set in live type next to it.
 - Light theme only, as before. Dark theme is opt-in per the system and not wired site-wide.
 - `/means-measures/index.html` now redirects to `/brand` so old links still land.

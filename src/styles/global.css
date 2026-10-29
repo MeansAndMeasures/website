@@ -320,10 +320,10 @@ main > .section--routing:last-child {
     padding-block: var(--mm-space-7) var(--mm-space-6);
 }
 
-/* WEB-035 (Brian, 2026-10-27): one line at every width, navy words, gold plus,
-   size proportional to the container. Capped so the hero no longer fills the
-   first screen. This is a deliberate identity treatment of the name, an exception
-   to the Design System rule that identity colors are non-text. */
+/* Homepage logotype (WEB-035, Brian, 2026-10-27): the name set as an identity
+   graphic, not text, so identity navy and gold apply. One line at every width,
+   size proportional to the container, capped so it no longer fills the first
+   screen. Do not reuse this treatment for headings or other text. */
 .homepage-hero .hero-title {
     max-inline-size: none;
     margin-bottom: var(--mm-space-5);
