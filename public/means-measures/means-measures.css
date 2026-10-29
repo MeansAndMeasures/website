@@ -1,15 +1,16 @@
-/* Means+Measures — reusable CSS foundation, release 1.0.0.
-   Source: Means-Measures-Identity-Standard-v1.5.pdf.
-   Current logo authority: supplied M+MLogo.png, confirmed 2026-09-24.
+/* Means+Measures — reusable CSS foundation, release 2.0.0.
+   Base source: Means-Measures-Identity-Standard-v1.5.pdf; 2.0.0 changes listed in README.
+   Current logo masters: means-measures-logo-symbol.png and -wordmark.png (sRGB), 2026-10-14.
    Usage: load this file and add class="mm" to the desired root.
    Typography remains explicit. No blanket body/heading/control font mapping. */
 @import url("./means-measures.typography.css");
 
 :root {
-  /* Protected identity colors. Historic labels are not a semantic taxonomy. */
+  /* Protected identity colors. Non-text, always: artwork and identity graphics only.
+     Historic labels are not a semantic taxonomy. */
   --mm-identity-technical: #828a90;
   --mm-identity-institutional: #293044;
-  --mm-identity-interface: #e5b52d;
+  --mm-identity-interface: #f5b60f; /* measured from the artwork; v1.5 published #e5b52d */
 
   /* Exact published light operational tokens. */
   --mm-light-canvas: #f4f7f8;
@@ -29,10 +30,35 @@
   --mm-dark-link: #4fc3e8;
 
   --mm-palette-focus: #ff7f00;
-  --mm-palette-success: #2e7d32;
-  --mm-palette-info: #8a4b00;
-  --mm-palette-warning: #c2185b;
-  --mm-palette-error: #ff0000;
+
+  /* Status colors, revised from the v1.5 published values (#2E7D32, #8A4B00, #C2185B,
+     #FF0000) for clarity. Shared OKLCH lightness per theme (dark info sits lighter, away from focus orange); light values
+     meet 3.6:1+ on canvas/surface, dark values 5.7:1+ on the dark surface. */
+  --mm-light-success: #07933b;
+  --mm-light-info: #aa6a05;
+  --mm-light-warning: #d7008e;
+  --mm-light-error: #e5011a;
+  --mm-dark-success: #57ce70;
+  --mm-dark-info: #ffbc64;
+  --mm-dark-warning: #fe7fc0;
+  --mm-dark-error: #fe8b7f;
+
+  /* Spacing: 4px grid; steps 3–8 fluid between a 650px and 1280px viewport. */
+  --mm-space-1: 0.25rem;
+  --mm-space-2: 0.5rem;
+  --mm-space-3: clamp(0.75rem, 0.492rem + 0.635vw, 1rem); /* 12px → 16px */
+  --mm-space-4: clamp(1rem, 0.484rem + 1.27vw, 1.5rem); /* 16px → 24px */
+  --mm-space-5: clamp(1.5rem, 0.984rem + 1.27vw, 2rem); /* 24px → 32px */
+  --mm-space-6: clamp(2rem, 0.968rem + 2.54vw, 3rem); /* 32px → 48px */
+  --mm-space-7: clamp(3rem, 1.452rem + 3.81vw, 4.5rem); /* 48px → 72px */
+  --mm-space-8: clamp(4rem, 0.905rem + 7.619vw, 7rem); /* 64px → 112px */
+
+  /* Radius: em-based, so a corner scales with the text of the element it rounds.
+     Nested boxes: set --mm-radius-outer and --mm-radius-gap on the inner element;
+     --mm-radius-inner keeps the corners concentric. */
+  --mm-radius-none: 0;
+  --mm-radius-sm: 0.125em;
+  --mm-radius-md: 0.2em;
 }
 
 /* Explicit light default; dark is opt-in, including nested themed regions. */
@@ -45,12 +71,16 @@
   --mm-action: var(--mm-light-action);
   --mm-link: var(--mm-light-link);
   --mm-focus: var(--mm-palette-focus);
-  --mm-success: var(--mm-palette-success);
-  --mm-info: var(--mm-palette-info);
-  --mm-warning: var(--mm-palette-warning);
-  --mm-error: var(--mm-palette-error);
+  --mm-success: var(--mm-light-success);
+  --mm-info: var(--mm-light-info);
+  --mm-warning: var(--mm-light-warning);
+  --mm-error: var(--mm-light-error);
   /* Implementation alias for visible functional boundaries, not a new brand color. */
   --mm-control-border: var(--mm-secondary);
+  --mm-shadow-none: none;
+  --mm-shadow-edge: 0 1px 0 rgba(38, 50, 56, 0.14);
+  --mm-shadow-raised: 0 1px 0 rgba(38, 50, 56, 0.14), 0 2px 6px rgba(38, 50, 56, 0.10);
+  --mm-shadow-overlay: 0 2px 0 rgba(38, 50, 56, 0.12), 0 12px 32px rgba(38, 50, 56, 0.16);
   color: var(--mm-text);
   background-color: var(--mm-canvas);
 }
@@ -64,11 +94,15 @@
   --mm-action: var(--mm-dark-action);
   --mm-link: var(--mm-dark-link);
   --mm-focus: var(--mm-palette-focus);
-  --mm-success: var(--mm-palette-success);
-  --mm-info: var(--mm-palette-info);
-  --mm-warning: var(--mm-palette-warning);
-  --mm-error: var(--mm-palette-error);
+  --mm-success: var(--mm-dark-success);
+  --mm-info: var(--mm-dark-info);
+  --mm-warning: var(--mm-dark-warning);
+  --mm-error: var(--mm-dark-error);
   --mm-control-border: var(--mm-secondary);
+  --mm-shadow-none: none;
+  --mm-shadow-edge: 0 1px 0 rgba(0, 0, 0, 0.45);
+  --mm-shadow-raised: 0 1px 0 rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.35);
+  --mm-shadow-overlay: 0 2px 0 rgba(0, 0, 0, 0.5), 0 12px 32px rgba(0, 0, 0, 0.5);
   color: var(--mm-text);
   background-color: var(--mm-canvas);
 }
@@ -82,6 +116,19 @@
   color: var(--mm-action);
   background: transparent;
   border: 1px solid currentColor;
+  border-radius: var(--mm-radius-sm);
+}
+
+/* Shadows: a hard ledge first, soft falloff only when raised or floating. */
+:where(.mm-shadow-none) { box-shadow: var(--mm-shadow-none); }
+:where(.mm-shadow-edge) { box-shadow: var(--mm-shadow-edge); }
+:where(.mm-shadow-raised) { box-shadow: var(--mm-shadow-raised); }
+:where(.mm-shadow-overlay) { box-shadow: var(--mm-shadow-overlay); }
+
+/* Concentric nesting: inner radius = outer radius − gap, never below zero. */
+:where(.mm-radius-inner) {
+  --mm-radius-inner: max(0px, calc(var(--mm-radius-outer, 0px) - var(--mm-radius-gap, 0px)));
+  border-radius: var(--mm-radius-inner);
 }
 
 /* Orange remains the focus outline. A separate text-colored outer ring supplies
@@ -102,10 +149,17 @@
 :where(.mm-status[data-mm-status="error"]) { --mm-status-color: var(--mm-error); }
 
 /* Use the supplied artwork as an actual <img> with meaningful alt text.
-   The file is unchanged: no re-typesetting, recoloring, filtering or background
-   removal. Its cream pixels are not a declaration of a required logo background.
-   Width and surrounding clear space are chosen for the actual composition. */
+   The file is unchanged: no re-typesetting, recoloring or filtering. Light or dark grounds.
+   Width and surrounding clear space are chosen for the actual composition.
+   Optional identity-gold plates behind the transparent artwork:
+   mm-logo-plate-18 (subtle, keeps interior detail), -36 (medium), -50 (strong), -68 (heavy) and -82 (near-solid);
+   the heavier the plate, the more the silhouette leads and the plus recedes. */
 :where(img.mm-logo) { display: block; max-inline-size: 100%; block-size: auto; object-fit: contain; }
+:where(img.mm-logo-plate-36) { background-color: rgb(245 182 15 / 0.36); }
+:where(img.mm-logo-plate-50) { background-color: rgb(245 182 15 / 0.5); }
+:where(img.mm-logo-plate-18) { background-color: rgb(245 182 15 / 0.18); }
+:where(img.mm-logo-plate-68) { background-color: rgb(245 182 15 / 0.68); }
+:where(img.mm-logo-plate-82) { background-color: rgb(245 182 15 / 0.82); }
 
 @media (forced-colors: active) {
   :where(.mm, [data-mm-theme]) {
