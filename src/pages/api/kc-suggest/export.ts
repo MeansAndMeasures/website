@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import { env } from "cloudflare:workers";
-import { authorizedIdentity } from "../../../lib/websiteAuth";
 
 export const prerender = false;
 
@@ -12,7 +11,7 @@ interface SuggestEnv {
 function jsonResponse(body: Record<string, unknown>, status = 200) {
     return new Response(JSON.stringify(body), {
         status,
-        headers: { "content-type": "application/json", "cache-control": "no-store" }
+        headers: { "content-type": "application/json" }
     });
 }
 
@@ -26,7 +25,7 @@ export const GET: APIRoute = async ({ request }) => {
         return jsonResponse({ ok: false, error: "Submission storage is not configured." }, 503);
     }
 
-    if (!await authorizedIdentity(request, "suggestions") && (!suggestEnv.KC_SUGGEST_EXPORT_TOKEN || token !== suggestEnv.KC_SUGGEST_EXPORT_TOKEN)) {
+    if (!suggestEnv.KC_SUGGEST_EXPORT_TOKEN || token !== suggestEnv.KC_SUGGEST_EXPORT_TOKEN) {
         return jsonResponse({ ok: false, error: "Unauthorized." }, 401);
     }
 

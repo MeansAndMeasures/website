@@ -44,28 +44,9 @@ Migration `0006_intake_email.sql` adds notification status, message ID and times
 An email failure retains the submission and records `failed`; HTTP 202 acknowledges
 durable receipt. Automatic email retries are not implemented. Review pending/failed
 notifications through the authenticated export or D1, and follow up manually.
-`GET /api/intake/export` accepts the shared owner session or `Authorization: Bearer INTAKE_EXPORT_TOKEN` and
+`GET /api/intake/export` requires `Authorization: Bearer INTAKE_EXPORT_TOKEN` and
 returns the latest 250 submissions with notification status. Keep exports private.
-KC suggestions use the same owner session, with a separate legacy export token for automation.
-
-## Shared website sign-in
-
-`/account/` is the private workspace; `/auth/login?returnTo=/notary/` is the public
-sign-in entry. The website Access application uses the existing notary API audience
-and protects the workspace, journal UI/API, and `/api/auth/session`. Both website
-hostnames belong to this one application. The deployed application ID, audience, destinations and owner policy are recorded
-in `config/website-access.json`; this file contains no credentials and is a
-readback reference, not an automatic deployment script. `src/lib/websiteAuth.ts` verifies signed
-Access assertions and owns the permission map. The current owner retains journal,
-intake, suggestions, connection and CivicNavigator permissions. Never infer journal ownership from
-a different upstream subject or change the stored workspace identity during login.
-
-Private export handlers accept the shared identity as well as their existing
-export tokens for automation. Export routes remain outside the edge login gate so
-existing bearer-token jobs continue working; origin authorization is mandatory.
-The private workspace renders their results without exposing export tokens.
-`/api/auth/session` returns only the verified subject, email, permissions and expiry;
-it never returns credentials. Public site pages and intake submission stay public.
+KC suggestions have a separate export token and review workflow.
 
 ## Notary journal
 

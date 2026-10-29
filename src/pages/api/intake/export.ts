@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import { env } from "cloudflare:workers";
-import { authorizedIdentity } from "../../../lib/websiteAuth";
 
 export const prerender = false;
 
@@ -28,7 +27,7 @@ export const GET: APIRoute = async ({ request }) => {
         return jsonResponse({ ok: false, error: "Submission storage is not configured." }, 503);
     }
 
-    if (!await authorizedIdentity(request, "intake") && (!intakeEnv.INTAKE_EXPORT_TOKEN || token !== intakeEnv.INTAKE_EXPORT_TOKEN)) {
+    if (!intakeEnv.INTAKE_EXPORT_TOKEN || token !== intakeEnv.INTAKE_EXPORT_TOKEN) {
         return jsonResponse({ ok: false, error: "Unauthorized." }, 401);
     }
 
