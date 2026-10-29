@@ -1,37 +1,8 @@
-/* Means+Measures webfonts. Full glyph sets; no external font service.
-   Names, real weights and styles retained. See licenses/. */
-
-@font-face {
-  font-family: "Bodoni Moda";
-  src: url("./fonts/bodoni-moda.woff") format("woff");
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Bodoni Moda";
-  src: url("./fonts/bodoni-moda-italic.woff") format("woff");
-  font-style: italic;
-  font-weight: 400 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Bodoni Moda SC";
-  src: url("./fonts/bodoni-moda-sc.woff") format("woff");
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Bodoni Moda SC";
-  src: url("./fonts/bodoni-moda-sc-italic.woff") format("woff");
-  font-style: italic;
-  font-weight: 400 900;
-  font-display: swap;
-}
+/* Means+Measures webfonts, release 2.0.0. Full glyph sets; no external font service.
+   Only the weights the type roles use are declared (trimmed in 2.0.0); with font
+   synthesis off, a heavier request falls back to the nearest declared weight.
+   Paths are relative to this package's fonts/ folder. OFL 1.1 license and
+   copyright notices are embedded in each font. */
 
 @font-face {
   font-family: "Montserrat";
@@ -67,73 +38,9 @@
 
 @font-face {
   font-family: "Spectral";
-  src: url("./fonts/spectral-bold.woff") format("woff");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("./fonts/spectral-bolditalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("./fonts/spectral-extrabold.woff") format("woff");
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("./fonts/spectral-extrabolditalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("./fonts/spectral-extralight.woff") format("woff");
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("./fonts/spectral-extralightitalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 200;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
   src: url("./fonts/spectral-italic.woff") format("woff");
   font-style: italic;
   font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("./fonts/spectral-light.woff") format("woff");
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("./fonts/spectral-lightitalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 300;
   font-display: swap;
 }
 
@@ -179,89 +86,9 @@
 
 @font-face {
   font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-bold.woff") format("woff");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-bolditalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-extrabold.woff") format("woff");
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-extrabolditalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-extralight.woff") format("woff");
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-extralightitalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 200;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
   src: url("./fonts/spectralsc-italic.woff") format("woff");
   font-style: italic;
   font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-light.woff") format("woff");
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-lightitalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-medium.woff") format("woff");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Spectral SC";
-  src: url("./fonts/spectralsc-mediumitalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 500;
   font-display: swap;
 }
 
@@ -296,28 +123,3 @@
   font-weight: 400;
   font-display: swap;
 }
-
-@font-face {
-  font-family: "Iosevka";
-  src: url("./fonts/iosevka-italic.woff") format("woff");
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Iosevka";
-  src: url("./fonts/iosevka-bold.woff") format("woff");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Iosevka";
-  src: url("./fonts/iosevka-bolditalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-}
-
