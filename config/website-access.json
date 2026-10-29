@@ -1,0 +1,65 @@
+{
+  "account_id": "dcd87bec1efac6b2926f8e162268b446",
+  "application_id": "f5314e9e-d722-46da-b8a7-f0ba52c8cb5d",
+  "audience": "792d260d41bb7a2dfe92d7d7d550fbc1ab11c4a33893b1c1d91a38800e002a9d",
+  "issuer": "https://civicbrands.cloudflareaccess.com",
+  "configuration": {
+    "name": "Means+Measures Website",
+    "type": "self_hosted",
+    "domain": "meansandmeasures.com/account",
+    "destinations": [
+      {
+        "type": "public",
+        "uri": "meansandmeasures.com/account"
+      },
+      {
+        "type": "public",
+        "uri": "meansandmeasures.com/notary"
+      },
+      {
+        "type": "public",
+        "uri": "meansandmeasures.com/api/notary"
+      },
+      {
+        "type": "public",
+        "uri": "meansandmeasures.com/api/auth"
+      },
+      {
+        "type": "public",
+        "uri": "www.meansandmeasures.com/account"
+      },
+      {
+        "type": "public",
+        "uri": "www.meansandmeasures.com/notary"
+      },
+      {
+        "type": "public",
+        "uri": "www.meansandmeasures.com/api/notary"
+      },
+      {
+        "type": "public",
+        "uri": "www.meansandmeasures.com/api/auth"
+      }
+    ],
+    "session_duration": "8h",
+    "http_only_cookie_attribute": true,
+    "allowed_idps": [],
+    "policies": [
+      {
+        "id": "85d9ed74-7a6d-48a4-8cc8-928458938aa7",
+        "name": "Website owner",
+        "decision": "allow",
+        "include": [
+          {
+            "email": {
+              "email": "brian@meansandmeasures.com"
+            }
+          }
+        ],
+        "exclude": [],
+        "require": [],
+        "precedence": 1
+      }
+    ]
+  }
+}

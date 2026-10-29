@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { env } from "cloudflare:workers";
+import { authorizedIdentity } from "../../../lib/websiteAuth";
 
 export const prerender = false;
 
@@ -58,30 +59,8 @@ async function sha256(value: string) {
     return bytesToHex(await crypto.subtle.digest("SHA-256", textEncoder.encode(value)));
 }
 
-const ACCESS_ISSUER = "https://civicbrands.cloudflareaccess.com";
-const ACCESS_API_AUD = "792d260d41bb7a2dfe92d7d7d550fbc1ab11c4a33893b1c1d91a38800e002a9d";
 async function accessIdentity(request: Request): Promise<string | null> {
-    const token = request.headers.get("cf-access-jwt-assertion");
-    if (!token) return null;
-    try {
-        const parts = token.split(".");
-        if (parts.length !== 3) return null;
-        const header = JSON.parse(new TextDecoder().decode(base64UrlToBytes(parts[0])));
-        const claims = JSON.parse(new TextDecoder().decode(base64UrlToBytes(parts[1])));
-        if (header.alg !== "RS256" || typeof header.kid !== "string") return null;
-        if (claims.iss !== ACCESS_ISSUER || !Array.isArray(claims.aud) || !claims.aud.includes(ACCESS_API_AUD)) return null;
-        const now = Math.floor(Date.now() / 1000);
-        if (typeof claims.exp !== "number" || claims.exp <= now || typeof claims.iat !== "number" || claims.iat > now + 60) return null;
-        if (typeof claims.email !== "string" || claims.email.toLowerCase() !== "brian@meansandmeasures.com") return null;
-        const certs = await fetch(ACCESS_ISSUER + "/cdn-cgi/access/certs");
-        if (!certs.ok) return null;
-        const jwks = await certs.json() as { keys?: JsonWebKey[] };
-        const jwk = jwks.keys?.find((key) => key.kid === header.kid);
-        if (!jwk) return null;
-        const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
-        const valid = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, base64UrlToBytes(parts[2]), textEncoder.encode(parts[0] + "." + parts[1]));
-        return valid ? claims.email.toLowerCase() : null;
-    } catch { return null; }
+    return (await authorizedIdentity(request, "journal"))?.email ?? null;
 }
 
 function authHeaders(request: Request) {
