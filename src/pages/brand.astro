@@ -1,47 +1,605 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const identity = [
+    { name: "Identity navy", label: "Institutional", hex: "#293044", token: "--mm-identity-institutional" },
+    { name: "Identity gray", label: "Technical", hex: "#828A90", token: "--mm-identity-technical" },
+    { name: "Identity gold", label: "Interface", hex: "#F5B60F", token: "--mm-identity-interface" },
+];
+
+const operational = [
+    { role: "Canvas", use: "Page background", light: "#F4F7F8", dark: "#2B2F33" },
+    { role: "Surface", use: "Cards, panels, header and footer", light: "#FAF3E7", dark: "#2B2F33" },
+    { role: "Text", use: "Primary text", light: "#263238", dark: "#FFFFFF" },
+    { role: "Secondary", use: "Metadata, labels, control borders", light: "#5B6067", dark: "#9AA7AC" },
+    { role: "Action", use: "Action text and outline; never a fill", light: "#006D75", dark: "#26C6DA" },
+    { role: "Link", use: "Underlined link text", light: "#127290", dark: "#4FC3E8" },
+    { role: "Focus", use: "Focus outline with a text-colored outer ring", light: "#FF7F00", dark: "#FF7F00" },
+];
+
+const status = [
+    { role: "Success", light: "#07933B", dark: "#57CE70" },
+    { role: "Info", light: "#AA6A05", dark: "#FFBC64" },
+    { role: "Warning", light: "#D7008E", dark: "#FE7FC0" },
+    { role: "Error", light: "#E5011A", dark: "#FE8B7F" },
+];
+
+const roles = [
+    { role: "display", face: "Spectral SemiBold 600", size: "40 → 70px", use: "Page and section titles", sample: "Records that remain inspectable." },
+    { role: "institutional", face: "Spectral SC SemiBold 600", size: "18 → 22px", use: "Eyebrows, categories", sample: "Procurement" },
+    { role: "body", face: "Spectral Medium 500, line height 1.3", size: "17 → 20px", use: "Sustained reading", sample: "A consequential decision should be reconstructable from the records it produced." },
+    { role: "editorial", face: "Spectral SC", size: "18 → 22px", use: "Figure labels, sources", sample: "Source: Missouri Secretary of State" },
+    { role: "ui", face: "Metrophobic", size: "15 → 16px", use: "Navigation, labels, controls", sample: "Reporting period" },
+    { role: "data", face: "Iosevka", size: "17 → 20px", use: "Exact values, identifiers, code", sample: "EIN 39-2829761 · 12.4 / 100,000" },
+    { role: "action", face: "Pompiere, synthesized 600", size: "20 → 24px", use: "Concise actions", sample: "View report" },
+    { role: "detail", face: "Pompiere", size: "17 → 20px", use: "Human and contextual notes", sample: "Updated today" },
+    { role: "specialty", face: "Montserrat", size: "17 → 20px", use: "Glyphs the others lack; last fallback", sample: "→ ✓ №" },
+];
+
+const spacing = [
+    ["space-1", "4px"], ["space-2", "8px"], ["space-3", "12 → 16px"], ["space-4", "16 → 24px"],
+    ["space-5", "24 → 32px"], ["space-6", "32 → 48px"], ["space-7", "48 → 72px"], ["space-8", "64 → 112px"],
+];
+
+const plates = [18, 36, 50, 68, 82];
 ---
 
 <BaseLayout
-        title="Brand Authority — Means+Measures"
-        description="Means+Measures brand reference, visual identity, citation guidance, and journalist-facing source material."
+        title="Brand — Means+Measures"
+        description="The Means+Measures brand reference: names, logo, color, type, spacing and components from Design System 2.0.0."
 >
     <section class="section">
-        <p class="eyebrow">Brand Authority</p>
-
+        <p class="eyebrow">Brand</p>
         <div class="measure">
-            <h1>Brand Authority</h1>
-
+            <h1>Brand reference.</h1>
             <p>
-                This page preserves the Means+Measures visual identity reference as an official public source for journalists, partners, procurement reviewers, and anyone referencing the organization.
+                The public reference for the Means+Measures identity, for journalists, partners, procurement
+                reviewers and anyone building for or citing the organization. It follows the Means+Measures
+                Design System, release 2.0.0 (14 October 2026).
             </p>
+        </div>
+        <nav class="brand-toc" aria-label="On this page">
+            <a href="#names">Names</a>
+            <a href="#logo">Logo</a>
+            <a href="#color">Color</a>
+            <a href="#type">Type</a>
+            <a href="#space">Spacing, radius, shadow</a>
+            <a href="#gold-bar">Gold bar</a>
+            <a href="#components">Components</a>
+            <a href="#use">Using the CSS</a>
+        </nav>
+    </section>
 
+    <section class="section section--compact" id="names" aria-labelledby="names-title">
+        <div class="measure">
+            <h2 id="names-title">Names</h2>
+            <dl class="entry-meta">
+                <dt>Public name</dt>
+                <dd>Means+Measures</dd>
+                <dt>Legal name</dt>
+                <dd>Means and Measures LLC</dd>
+                <dt>Historical identity</dt>
+                <dd>CivicBrands</dd>
+            </dl>
             <p>
-                Use <strong>Means+Measures</strong> as the public name and <strong>Means and Measures LLC</strong> as the legal name. The historical CivicBrands DBA record identifies BJL13 Enterprise Solutions LLC.
-            </p>
-
-            <p class="document-action">
-                <a href="/means-measures/index.html">Open the current Means+Measures identity reference</a>
+                Use <strong>Means+Measures</strong> in ordinary use, with no spaces around the plus.
+                Use <strong>Means and Measures LLC</strong> where legal form matters. The historical
+                CivicBrands DBA record identifies BJL13 Enterprise Solutions LLC.
             </p>
         </div>
     </section>
 
-    <section class="section section--compact">
+    <section class="section section--compact" id="logo" aria-labelledby="logo-title">
         <div class="measure">
-            <h2>Reference Assets</h2>
+            <h2 id="logo-title">Logo</h2>
+            <p>
+                Two masters: the mark alone, and the mark with its wordmark. Use them as images with real
+                alternative text, on light or dark grounds. Never rebuild the wordmark in live type, recolor,
+                filter, crop or trace either file. Choose size and clear space from the artwork itself; there
+                are no compact or monochrome variants.
+            </p>
+        </div>
+        <div class="brand-logos">
+            <figure class="brand-logo">
+                <div class="brand-logo__ground">
+                    <img class="mm-logo" src="/means-measures/assets/means-measures-logo-symbol.png" alt="Means+Measures mark" width="1500" height="1500" loading="lazy" />
+                </div>
+                <figcaption>On canvas</figcaption>
+            </figure>
+            <figure class="brand-logo">
+                <div class="brand-logo__ground" data-mm-theme="dark">
+                    <img class="mm-logo" src="/means-measures/assets/means-measures-logo-symbol.png" alt="Means+Measures mark on the dark surface" width="1500" height="1500" loading="lazy" />
+                </div>
+                <figcaption>On the dark surface</figcaption>
+            </figure>
+        </div>
+        <div class="measure">
+            <h3>Gold plates</h3>
+            <p>
+                Where the mark needs more separation from a dark ground, set it on an identity-gold plate.
+                Lighter plates keep the plus and bevels crisp; heavier plates make the outline read as a
+                solid silhouette.
+            </p>
+        </div>
+        <div class="brand-plates" data-mm-theme="dark">
+            {plates.map((p) => (
+                <figure>
+                    <img class={`mm-logo mm-logo-plate-${p}`} src="/means-measures/assets/means-measures-logo-symbol.png" alt={`Mark on a ${p}% gold plate`} width="1500" height="1500" loading="lazy" />
+                    <figcaption><code>mm-logo-plate-{p}</code></figcaption>
+                </figure>
+            ))}
+        </div>
+    </section>
 
+    <section class="section section--compact" id="color" aria-labelledby="color-title">
+        <div class="measure">
+            <h2 id="color-title">Color</h2>
+            <p>
+                <strong>Identity colors are never text.</strong> Navy, gray and gold belong to the logo and
+                identity graphics only: not text, links, status or interface. The historical labels are
+                names, not roles.
+            </p>
+        </div>
+        <ul class="brand-swatches" aria-label="Identity colors">
+            {identity.map((c) => (
+                <li>
+                    <span class="brand-swatch" style={`background:${c.hex}`} aria-hidden="true"></span>
+                    <span class="brand-swatch__name">{c.name}</span>
+                    <code>{c.hex}</code>
+                    <span class="brand-swatch__note">{c.label} · non-text</span>
+                </li>
+            ))}
+        </ul>
+
+        <div class="measure">
+            <h3>Operational colors</h3>
+            <p>
+                Light is the default; dark is opt-in. Action and focus are never fills. The orange focus
+                outline always carries a text-colored outer ring, because the orange alone falls below 3:1
+                on light backgrounds.
+            </p>
+        </div>
+        <div class="brand-table-wrap">
+            <table class="brand-table">
+                <thead>
+                    <tr><th scope="col">Role</th><th scope="col">Use</th><th scope="col">Light</th><th scope="col">Dark</th></tr>
+                </thead>
+                <tbody>
+                    {operational.map((c) => (
+                        <tr>
+                            <th scope="row">{c.role}</th>
+                            <td>{c.use}</td>
+                            <td><span class="brand-chip" style={`background:${c.light}`} aria-hidden="true"></span><code>{c.light}</code></td>
+                            <td><span class="brand-chip" style={`background:${c.dark}`} aria-hidden="true"></span><code>{c.dark}</code></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="measure">
+            <h3>Status colors</h3>
+            <p>
+                Status colors are border accents beside a visible label; the words carry the meaning. They are
+                not small-text colors.
+            </p>
+        </div>
+        <div class="brand-table-wrap">
+            <table class="brand-table">
+                <thead>
+                    <tr><th scope="col">Status</th><th scope="col">Light</th><th scope="col">Dark</th></tr>
+                </thead>
+                <tbody>
+                    {status.map((c) => (
+                        <tr>
+                            <th scope="row">{c.role}</th>
+                            <td><span class="brand-chip" style={`background:${c.light}`} aria-hidden="true"></span><code>{c.light}</code></td>
+                            <td><span class="brand-chip" style={`background:${c.dark}`} aria-hidden="true"></span><code>{c.dark}</code></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="section section--compact" id="type" aria-labelledby="type-title">
+        <div class="measure">
+            <h2 id="type-title">Type</h2>
+            <p>
+                Type follows function: pick a role by what the text does, not by its HTML tag. Sizes scale
+                fluidly from a 650px to a 1280px viewport. The two SC faces are real small-cap fonts; never
+                fake them with a text transform.
+            </p>
+        </div>
+        <ol class="brand-roles">
+            {roles.map((r) => (
+                <li>
+                    <div class="brand-roles__meta">
+                        <code>{r.role}</code>
+                        <span>{r.face}</span>
+                        <span>{r.size} · {r.use}</span>
+                    </div>
+                    <p class={`brand-roles__sample mm-type-${r.role}`}>{r.sample}</p>
+                </li>
+            ))}
+        </ol>
+    </section>
+
+    <section class="section section--compact" id="space" aria-labelledby="space-title">
+        <div class="measure">
+            <h2 id="space-title">Spacing, radius, shadow</h2>
+            <p>
+                Spacing sits on a 4px grid; steps 3–8 grow with the viewport like the type. Radius is
+                proportional to text: <code>radius-sm</code> (0.125em) for controls, <code>radius-md</code>
+                (0.2em) for cards, square everywhere else. Shadows are short and hard-edged, echoing the
+                bevels of the mark.
+            </p>
+        </div>
+        <ol class="brand-space" aria-label="Spacing scale">
+            {spacing.map(([name, size], i) => (
+                <li>
+                    <span class="brand-space__bar" style={`inline-size: var(--mm-${name})`} aria-hidden="true"></span>
+                    <code>{name}</code>
+                    <span>{size}</span>
+                </li>
+            ))}
+        </ol>
+        <div class="brand-shadows">
+            <div class="brand-card mm-shadow-none"><code>shadow-none</code><span>Default; flat surfaces, tables, the logo</span></div>
+            <div class="brand-card mm-shadow-edge"><code>shadow-edge</code><span>A 1px ledge; cards on canvas</span></div>
+            <div class="brand-card mm-shadow-raised"><code>shadow-raised</code><span>Above neighbours; sticky bars, hovered cards</span></div>
+            <div class="brand-card mm-shadow-overlay"><code>shadow-overlay</code><span>Menus, popovers, dialogs</span></div>
+        </div>
+    </section>
+
+    <section class="section section--compact" id="gold-bar" aria-labelledby="gold-bar-title">
+        <div class="measure">
+            <h2 id="gold-bar-title">Gold bar</h2>
+            <p>
+                A solid bar of identity gold set under a declaration to divide it from the lines that follow.
+                It is an identity graphic, not interface. Its width depends on how large the piece is seen:
+                100% of the text column for anything seen small (social posts, online graphics, cards);
+                38% of the text column, aligned to the start edge, for anything seen at full size (print and
+                full-size banners).
+            </p>
+        </div>
+        <div class="brand-bars">
+            <figure>
+                <p class="mm-type-display brand-bars__declaration">For the Commons.</p>
+                <hr class="gold-bar" aria-hidden="true" />
+                <figcaption>100% · online, social, cards</figcaption>
+            </figure>
+            <figure>
+                <p class="mm-type-display brand-bars__declaration">For the Commons.</p>
+                <hr class="gold-bar brand-bars__short" aria-hidden="true" />
+                <figcaption>38% · print and full-size banners</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section section--compact" id="components" aria-labelledby="components-title">
+        <div class="measure">
+            <h2 id="components-title">Components</h2>
+            <p>Five components, all CSS classes from the package rather than scripted widgets.</p>
+        </div>
+        <div class="brand-components">
+            <div>
+                <h3>Action</h3>
+                <p>Outlined, never filled.</p>
+                <button type="button" class="mm-action mm-type-action">View report</button>
+            </div>
+            <div>
+                <h3>Link</h3>
+                <p>Underlined, inline: read the <a href="/artifacts/record-sufficiency-matrix">record sufficiency matrix</a>.</p>
+            </div>
+            <div>
+                <h3>Status</h3>
+                <p class="mm-status brand-status" data-mm-status="success"><strong>Success.</strong> Submission received.</p>
+                <p class="mm-status brand-status" data-mm-status="warning"><strong>Warning.</strong> Hours changed this week.</p>
+            </div>
+            <div>
+                <h3>Surface</h3>
+                <div class="brand-card mm-shadow-edge"><span>Surface color, <code>radius-md</code>, <code>space-4</code> padding, <code>shadow-edge</code>.</span></div>
+            </div>
+            <div>
+                <h3>Logo</h3>
+                <p>The masters as images, optionally on a gold plate. See <a href="#logo">Logo</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--compact" id="use" aria-labelledby="use-title">
+        <div class="measure">
+            <h2 id="use-title">Using the CSS</h2>
+            <p>
+                Load <a href="/means-measures/means-measures.css"><code>means-measures.css</code></a>, put
+                <code>class="mm"</code> on the page or region, and add <code>data-mm-theme="dark"</code>
+                where dark is wanted. Apply roles with <code>mm-type-&lt;role&gt;</code> classes. For type
+                alone, load <a href="/means-measures/means-measures.typography.css"><code>means-measures.typography.css</code></a>.
+                The <a href="/means-measures/README.md">package README</a> records each value and where it came from.
+            </p>
+            <h3>Downloads</h3>
             <ul class="asset-list">
-                <li><a href="/means-measures/assets/means-measures-logo-wordmark.png">Horizontal header lockup</a></li>
+                <li><a href="/means-measures/assets/means-measures-logo-symbol.png">Mark (PNG, 1500 × 1500)</a></li>
+                <li><a href="/means-measures/assets/means-measures-logo-wordmark.png">Mark and wordmark (PNG, 1185 × 1185)</a></li>
             </ul>
+            <h3>Historical identity</h3>
+            <p><a href="/brand/civicbrands-brand-spec.html">Archived CivicBrands brand specification</a></p>
         </div>
     </section>
-
-    <section class="brand-document" aria-label="Embedded Means+Measures brand specification">
-        <iframe
-                src="/means-measures/index.html"
-                title="Means+Measures brand specification"
-                loading="lazy"
-        ></iframe>
-    </section>
-<section class="section section--compact"><div class="measure"><h2>Historical identity</h2><p><a href="/brand/civicbrands-brand-spec.html">Archived CivicBrands brand specification</a></p></div></section>
 </BaseLayout>
+
+<style>
+    .brand-toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mm-space-1) var(--mm-space-4);
+        margin-top: var(--mm-space-5);
+        font-family: var(--mm-font-ui);
+        font-size: var(--mm-size-ui);
+    }
+
+    .brand-logos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+        gap: var(--mm-space-4);
+        margin-block: var(--mm-space-5) var(--mm-space-6);
+    }
+
+    .brand-logo {
+        margin: 0;
+    }
+
+    .brand-logo__ground {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 4 / 3;
+        padding: var(--mm-space-5);
+        background: var(--mm-canvas);
+        box-shadow: inset 0 0 0 1px var(--rule);
+    }
+
+    .brand-logo__ground img {
+        max-block-size: 9rem;
+        inline-size: auto;
+    }
+
+    figcaption {
+        margin-top: var(--mm-space-2);
+        font-family: var(--mm-font-ui);
+        font-size: var(--mm-size-ui);
+        color: var(--mm-secondary);
+    }
+
+    .brand-plates {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+        gap: var(--mm-space-4);
+        margin-block: var(--mm-space-5) 0;
+        padding: var(--mm-space-5);
+        background: var(--mm-canvas);
+    }
+
+    .brand-plates figure {
+        margin: 0;
+    }
+
+    .brand-plates img {
+        inline-size: 100%;
+        padding: var(--mm-space-3);
+        box-sizing: border-box;
+    }
+
+    .brand-swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+        gap: var(--mm-space-4);
+        margin-block: var(--mm-space-5) var(--mm-space-6);
+        padding: 0;
+        list-style: none;
+    }
+
+    .brand-swatches li {
+        display: grid;
+        gap: var(--mm-space-1);
+        margin: 0;
+        font-family: var(--mm-font-ui);
+        font-size: var(--mm-size-ui);
+    }
+
+    .brand-swatch {
+        display: block;
+        block-size: 5rem;
+        margin-bottom: var(--mm-space-2);
+    }
+
+    .brand-swatch__name {
+        color: var(--mm-text);
+    }
+
+    .brand-swatch__note {
+        color: var(--mm-secondary);
+    }
+
+    .brand-table-wrap {
+        overflow-x: auto;
+        margin-block: var(--mm-space-4) var(--mm-space-6);
+    }
+
+    .brand-table {
+        inline-size: 100%;
+        max-inline-size: 56rem;
+        border-collapse: collapse;
+        font-family: var(--mm-font-ui);
+        font-size: var(--mm-size-ui);
+    }
+
+    .brand-table th,
+    .brand-table td {
+        padding: var(--mm-space-2) var(--mm-space-4) var(--mm-space-2) 0;
+        border-bottom: 1px solid var(--rule);
+        text-align: left;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .brand-table td:nth-child(2) {
+        white-space: normal;
+    }
+
+    .brand-table thead th {
+        font-weight: 400;
+        color: var(--mm-secondary);
+    }
+
+    .brand-table tbody th {
+        font-weight: 400;
+    }
+
+    .brand-chip {
+        display: inline-block;
+        inline-size: 1.25rem;
+        block-size: 1.25rem;
+        margin-inline-end: var(--mm-space-2);
+        vertical-align: -0.25rem;
+        box-shadow: inset 0 0 0 1px var(--rule);
+    }
+
+    code {
+        font-size: 0.875em;
+    }
+
+    .brand-roles {
+        margin: var(--mm-space-5) 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .brand-roles li {
+        display: grid;
+        grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+        gap: var(--mm-space-2) var(--mm-space-6);
+        align-items: baseline;
+        margin: 0;
+        padding-block: var(--mm-space-4);
+        border-top: 1px solid var(--rule);
+    }
+
+    .brand-roles__meta {
+        display: grid;
+        gap: var(--mm-space-1);
+        font-family: var(--mm-font-ui);
+        font-size: var(--mm-size-ui);
+        color: var(--mm-secondary);
+    }
+
+    .brand-roles__meta code {
+        color: var(--mm-text);
+    }
+
+    .brand-roles__sample {
+        margin: 0;
+    }
+
+    .brand-space {
+        display: grid;
+        gap: var(--mm-space-2);
+        margin: var(--mm-space-5) 0 var(--mm-space-6);
+        padding: 0;
+        list-style: none;
+        font-family: var(--mm-font-ui);
+        font-size: var(--mm-size-ui);
+    }
+
+    .brand-space li {
+        display: grid;
+        grid-template-columns: 7.5rem 6rem minmax(0, 1fr);
+        align-items: center;
+        margin: 0;
+    }
+
+    .brand-space__bar {
+        display: block;
+        block-size: 0.75rem;
+        background: var(--mm-secondary);
+    }
+
+    .brand-space li span:last-child {
+        color: var(--mm-secondary);
+    }
+
+    .brand-shadows {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+        gap: var(--mm-space-5);
+    }
+
+    .brand-card {
+        display: grid;
+        gap: var(--mm-space-1);
+        padding: var(--mm-space-4);
+        background: var(--mm-surface);
+        border-radius: var(--mm-radius-md);
+        font-family: var(--mm-font-ui);
+        font-size: var(--mm-size-ui);
+    }
+
+    .brand-card span {
+        color: var(--mm-secondary);
+    }
+
+    .brand-bars {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+        gap: var(--mm-space-6);
+        margin-top: var(--mm-space-5);
+    }
+
+    .brand-bars figure {
+        margin: 0;
+    }
+
+    .brand-bars__declaration {
+        margin: 0 0 var(--mm-space-3);
+        font-size: clamp(2rem, 1.4rem + 1.5vw, 2.75rem);
+    }
+
+    .brand-bars .gold-bar {
+        margin-bottom: var(--mm-space-2);
+    }
+
+    .brand-bars__short {
+        max-inline-size: 38%;
+    }
+
+    .brand-components {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+        gap: var(--mm-space-5) var(--mm-space-6);
+        margin-top: var(--mm-space-5);
+    }
+
+    .brand-components > div {
+        padding-top: var(--mm-space-4);
+        border-top: 1px solid var(--rule);
+    }
+
+    .brand-components h3 {
+        margin-top: 0;
+    }
+
+    .brand-status {
+        padding-inline-start: var(--mm-space-3);
+    }
+
+    @media (max-width: 40rem) {
+        .brand-roles li {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .brand-table th,
+        .brand-table td {
+            white-space: normal;
+        }
+    }
+</style>
