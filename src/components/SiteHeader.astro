@@ -1,36 +1,32 @@
 ---
 import SiteFinder from "./SiteFinder.astro";
+import { headerTitleFor, isKcPath, navFor, normalizePath } from "../data/siteRoutes";
 
-const navItems = [
-    { href: "/systems", label: "Systems" },
-    { href: "/civicnavigator", label: "CivicNavigator" },
-    { href: "/work", label: "Work" },
-    { href: "/research", label: "Research" },
-    { href: "/artifacts", label: "Artifacts" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" }
-];
+interface Props {
+    // Overrides the route table, e.g. a detail page's own title.
+    title?: string;
+}
 
-const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
-const isKcSection = pathname === "/kc" || pathname.startsWith("/kc/") || pathname.startsWith("/es/kc");
+const pathname = normalizePath(Astro.url.pathname);
+const isKcSection = isKcPath(pathname);
+const title = Astro.props.title ?? headerTitleFor(pathname);
+// The current page (or its section) is named beside the logo, not linked.
+const navItems = navFor(pathname);
 ---
 
 <header class="site-header" data-kc={isKcSection ? "true" : undefined}>
     <div class="site-header__inner">
-        <a class="site-header__mark" href="/" aria-label="Means+Measures home">
-            <img class="mm-logo" src="/means-measures/assets/web/means-measures-symbol-192.png" alt="Means+Measures" width="192" height="192" />
-        </a>
+        <div class="site-header__identity">
+            <a class="site-header__mark" href="/" aria-label="Means+Measures home">
+                <img class="mm-logo" src="/means-measures/assets/web/means-measures-symbol-192.png" alt="Means+Measures" width="192" height="192" />
+            </a>
+            <p class="site-header__title" aria-hidden={title ? undefined : "true"}>{title}</p>
+        </div>
 
         <nav class="site-header__nav" aria-label="Primary navigation">
-            {navItems.map((item) => {
-                const isCurrent = pathname === item.href;
-
-                return (
-                    <a href={item.href} aria-current={isCurrent ? "page" : undefined}>
-                        {item.label}
-                    </a>
-                );
-            })}
+            {navItems.map((item) => (
+                <a href={item.href}>{item.label}</a>
+            ))}
             {!isKcSection && (
                 <a href="/kc" class="site-header__kclink">KC</a>
             )}

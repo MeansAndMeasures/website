@@ -220,6 +220,19 @@ main > .section:last-child {
     margin-inline: 0;
 }
 
+/* Detail pages: the way back to their section, at the end of the entry. */
+.section-return {
+    margin-block-start: var(--mm-space-6);
+    padding-block-start: var(--mm-space-4);
+    border-block-start: 1px solid var(--rule);
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+}
+
+.section-return a::before {
+    content: "← " / "";
+}
+
 /* 1600px and wider: prose-only sections, and any section marked
    .section--column, sit two across instead of leaving the right half of the
    page empty. Everything else still spans the full width. Line length stays
@@ -1161,6 +1174,38 @@ span.pgp-fingerprint code {
     padding-block: var(--mm-space-3);
 }
 
+/* Logo and the current page's name. The name's row is always there, so the
+   navigation never moves when a page has no name (the homepage) or a longer
+   one; a name too long for the space ends in an ellipsis. */
+.site-header__identity {
+    display: flex;
+    align-items: center;
+    gap: var(--mm-space-4);
+    flex: 1 1 0;
+    min-inline-size: 0;
+}
+
+.site-header__title {
+    margin: 0;
+    min-inline-size: 0;
+    padding-inline-start: var(--mm-space-4);
+    border-inline-start: 1px solid var(--rule);
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.75rem);
+    line-height: 1.2;
+    color: var(--mm-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    view-transition-name: site-title;
+}
+
+.site-header__title:empty {
+    border-inline-start: 0;
+    padding-inline-start: 0;
+}
+
 .site-header__mark {
     display: inline-flex;
     align-items: center;
@@ -1185,6 +1230,7 @@ span.pgp-fingerprint code {
 }
 
 .site-header__nav {
+    flex: 0 1 auto;
     justify-content: flex-end;
     gap: var(--mm-space-1) var(--mm-space-5);
 }
@@ -1201,14 +1247,53 @@ span.pgp-fingerprint code {
     text-decoration-line: underline;
 }
 
-.site-header__nav a[aria-current="page"] {
-    text-decoration-line: underline;
-    text-decoration-thickness: 0.12em;
-    text-decoration-color: var(--mm-action);
-}
-
 .site-header__kclink {
     color: inherit;
+}
+
+/* Moving between pages: only the header's page name changes visibly. The
+   outgoing name fades out, then the incoming one fades in (250ms in all);
+   the rest of the page swaps without animation. Browsers without
+   cross-document view transitions simply change pages. */
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+}
+
+::view-transition-group(site-title) {
+    animation: none;
+}
+
+::view-transition-old(site-title),
+::view-transition-new(site-title) {
+    inline-size: auto;
+    block-size: 100%;
+}
+
+::view-transition-old(site-title) {
+    animation: site-title-out 125ms ease-in both;
+}
+
+::view-transition-new(site-title) {
+    animation: site-title-in 125ms ease-out 125ms both;
+}
+
+@keyframes site-title-out {
+    to { opacity: 0; }
+}
+
+@keyframes site-title-in {
+    from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
 }
 
 /* =========================================
@@ -1509,6 +1594,10 @@ time,
     .site-header__inner {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .site-header__identity {
+        align-self: stretch;
     }
 
     .site-header__nav {

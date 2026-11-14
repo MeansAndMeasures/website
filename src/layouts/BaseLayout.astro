@@ -8,6 +8,8 @@ interface Props {
     description?: string;
     image?: string;
     robots?: string;
+    // Name shown beside the logo; defaults to src/data/siteRoutes.ts.
+    pageTitle?: string;
 }
 
 const {
@@ -15,6 +17,7 @@ const {
     description = "Means+Measures. Equity of means, equality of measures: infrastructure, data, and analysis that keep access open and judgment on the merits.",
     image = "/social-card.png",
     robots,
+    pageTitle,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, "https://meansandmeasures.com").toString();
@@ -52,7 +55,7 @@ const imageUrl = new URL(image, "https://meansandmeasures.com").toString();
 
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<SiteHeader />
+<SiteHeader title={pageTitle} />
 <main id="main-content" tabindex="-1">
     <slot />
 </main>

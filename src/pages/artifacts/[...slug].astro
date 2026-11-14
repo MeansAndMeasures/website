@@ -25,10 +25,9 @@ const { Content } = await render(entry);
 <BaseLayout
         title={`${entry.data.title} — Means+Measures`}
         description={entry.data.summary}
+        pageTitle={entry.data.title}
 >
     <article class="section">
-        <p class="eyebrow">Artifact</p>
-
         <div class="measure">
             <h1>{entry.data.title}</h1>
 
@@ -51,6 +50,8 @@ const { Content } = await render(entry);
             />
 
             <Content />
+
+            <p class="section-return"><a href="/artifacts">Back to Artifacts</a></p>
         </div>
     </article>
 </BaseLayout>
