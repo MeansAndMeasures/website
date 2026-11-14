@@ -25,7 +25,7 @@ Historical entity identifiers and current contact points:
 - Legal entity named in the historical source: BJL13 Enterprise Solutions LLC
 - EIN: 39-2829761
 - Operating base: Kansas City, Missouri
-- Phone: 816-306-3481
+- Phone: 816-306-3481, 816-553-3700 (also text and fax)
 - Procurement contact: procurement@meansandmeasures.com
 - General contact: contact@meansandmeasures.com
 

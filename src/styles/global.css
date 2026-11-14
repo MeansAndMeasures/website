@@ -750,6 +750,28 @@ main > .section:last-child {
     color: var(--mm-secondary);
 }
 
+/* Keeps a run such as "privacy-contact@" together so an address never
+   breaks at its hyphen, where it would read as hyphenation. */
+.nobreak {
+    white-space: nowrap;
+}
+
+/* OpenPGP fingerprint: data role. Wraps only between groups. */
+.pgp-fingerprint,
+.pgp-fingerprint code {
+    font-family: var(--mm-font-data);
+    font-size: 0.875rem;
+    overflow-wrap: normal;
+}
+
+span.pgp-fingerprint {
+    color: var(--mm-secondary);
+}
+
+span.pgp-fingerprint code {
+    color: var(--mm-text);
+}
+
 /* =========================================
    FINDER
    One field that routes a need or a name to its page. Used inline on the
@@ -1168,6 +1190,10 @@ main > .section:last-child {
 
 .entry-meta dd a {
     overflow-wrap: anywhere;
+}
+
+.entry-meta dd a:has(.nobreak) {
+    overflow-wrap: normal;
 }
 
 @media (max-width: 30rem) {
