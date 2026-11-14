@@ -12,8 +12,8 @@ interface Props {
 
 const {
     title = "Means+Measures",
-    description = "Means+Measures stewards agency-enabling infrastructure.",
-    image = "/means-measures/assets/means-measures-logo-wordmark.png",
+    description = "Means+Measures. Equity of means, equality of measures: infrastructure, data, and analysis that keep access open and judgment on the merits.",
+    image = "/social-card.png",
     robots,
 } = Astro.props;
 
@@ -31,13 +31,19 @@ const imageUrl = new URL(image, "https://meansandmeasures.com").toString();
     <meta name="description" content={description} />
     {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/png" href="/means-measures/assets/means-measures-logo-wordmark.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/means-measures/assets/web/means-measures-symbol-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/means-measures/assets/web/means-measures-symbol-192.png" />
+    <link rel="apple-touch-icon" href="/means-measures/assets/web/means-measures-symbol-180.png" />
+    <meta name="theme-color" content="#faf3e7" />
     <meta property="og:site_name" content="Means+Measures" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Means+Measures. Equity of means. Equality of measures." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
