@@ -2,7 +2,7 @@
 // homepage). This is a routing aid, not a second site map: each entry carries
 // the words a person is likely to type, not a description of the page.
 //
-// Content collections (work, research, artifacts, KC services) are added at
+// Content collections (work, research, artifacts) are added at
 // build time in src/pages/find.json.ts. Add a page here only when it is a
 // place someone would ask for by name or by need.
 
@@ -19,14 +19,14 @@ export interface FinderEntry {
     urgent?: boolean;
 }
 
-// The short standing list shown before anyone types. Order is deliberate:
-// the person who needs help tonight comes before the person evaluating us.
+// The short standing list shown before anyone types. Company-level only:
+// no single project gets a standing link.
 export const standingDoors: { href: string; label: string; note: string; urgent?: boolean }[] = [
-    { href: "/kc/crisis", label: "I need help now", note: "Crisis lines and emergency numbers, Kansas City metro", urgent: true },
-    { href: "/kc", label: "Find help in Kansas City", note: "Food, housing, care, legal aid. Nine counties, both states" },
     { href: "/systems", label: "See what we have built", note: "The public systems, live and inspectable" },
     { href: "/artifacts", label: "Read the record", note: "Public comments, matrices, entity records" },
-    { href: "/procurement", label: "Work with us", note: "Entity facts, capabilities, contact" }
+    { href: "/research", label: "Read the research", note: "Analysis and writing" },
+    { href: "/procurement", label: "Work with us", note: "Entity facts, capabilities, contact" },
+    { href: "/about", label: "Who we are", note: "What Means+Measures holds to" }
 ];
 
 export const staticEntries: FinderEntry[] = [
@@ -49,36 +49,9 @@ export const staticEntries: FinderEntry[] = [
     { href: "/terms", label: "Terms", kind: "page", keywords: "terms of use conditions" },
     { href: "/legal", label: "Legal", kind: "page", keywords: "license notices legal entity llc" },
 
-    { href: "/kc/crisis", label: "Need help now", kind: "kc", urgent: true, note: "Crisis lines and emergency numbers", keywords: "crisis emergency suicide 988 911 danger hurt abuse violence unsafe overdose urgent help now scared" },
-    { href: "/kc", label: "Kansas City resource directory", kind: "kc", note: "Nine counties, both states", keywords: "kc kansas city kck metro help resources directory services" },
-    { href: "/kc/directory", label: "Search every Kansas City service", kind: "kc", note: "Filter by need, state, language, hours", keywords: "search filter list all services directory" },
-    { href: "/kc/food", label: "Food", kind: "kc", note: "Pantries, meals, food tonight", keywords: "hungry eat meal pantry groceries snap ebt food stamps wic" },
-    { href: "/kc/housing", label: "Housing", kind: "kc", note: "Shelter tonight, eviction, rent", keywords: "shelter sleep homeless eviction evicted rent landlord tenant housing bed" },
-    { href: "/kc/healthcare", label: "Healthcare", kind: "kc", note: "Clinics, free and sliding-scale care", keywords: "doctor clinic medical sick dentist dental medicine prescription uninsured insurance hospital mental health therapy" },
-    { href: "/kc/legal", label: "Legal aid", kind: "kc", note: "Free and low-cost legal help", keywords: "lawyer attorney court immigration eviction rights counsel sued" },
-    { href: "/kc/veterans", label: "Veterans", kind: "kc", note: "Any discharge, any era", keywords: "veteran va military discharge service member" },
-    { href: "/kc/utilities", label: "Utilities", kind: "kc", note: "Shutoffs, bills, assistance", keywords: "electric gas water bill shutoff disconnect liheap evergy spire heat" },
-    { href: "/kc/transit", label: "Transit", kind: "kc", note: "Getting around without a car", keywords: "bus ride kcata streetcar transportation car" },
-    { href: "/kc/libraries", label: "Libraries", kind: "kc", keywords: "library computer internet wifi printing" },
-    { href: "/kc/government", label: "Government", kind: "kc", note: "Who governs what", keywords: "city county council state office agency 311" },
-    { href: "/kc/property", label: "Property", kind: "kc", keywords: "home house deed land assessment owner" },
-    { href: "/kc/taxes", label: "Taxes", kind: "kc", keywords: "tax property tax income tax filing vita refund" },
-    { href: "/kc/newcomers", label: "New to Kansas City", kind: "kc", note: "Arriving, visiting, or resettling", keywords: "visiting new arrived immigrant refugee moved tourist" },
-    { href: "/kc/journeys", label: "Step-by-step guides", kind: "kc", note: "One situation, start to finish", keywords: "guide steps how to walkthrough journey" },
-    { href: "/kc/quiet-help", label: "Quiet help", kind: "kc", keywords: "private discreet confidential anonymous" },
-    { href: "/kc/give-help", label: "Give help", kind: "kc", note: "Helping someone else", keywords: "volunteer donate helping friend family someone else" },
-    { href: "/kc/suggest", label: "Suggest or correct a listing", kind: "kc", keywords: "wrong number closed fix correction report update suggest add" },
-    { href: "/kc/use-the-data", label: "Use the Kansas City data", kind: "kc", note: "JSON, CSV, and crisis exports, free to mirror", keywords: "api json csv export download data open reuse developer mirror" },
-    { href: "/kc/data", label: "Data and open records", kind: "kc", keywords: "open records sunshine request public data" },
-    { href: "/kc/neighborhoods", label: "Neighborhoods", kind: "kc", keywords: "neighborhood area district where" },
-    { href: "/kc/map", label: "Metro map", kind: "kc", keywords: "map counties boundaries state line" },
-    { href: "/kc/about", label: "About the directory", kind: "kc", keywords: "who runs maintained independent" },
-
-    { href: "/es/kc/crisis", label: "Necesito ayuda ahora", kind: "kc", lang: "es", urgent: true, note: "Líneas de crisis y números de emergencia", keywords: "crisis emergencia ayuda urgente peligro suicidio" },
-    { href: "/es/kc/newcomers", label: "Recién llegados", kind: "kc", lang: "es", note: "Kansas City en español", keywords: "espanol español nuevo llegar inmigrante ayuda" },
-    { href: "/es/kc/food", label: "Comida", kind: "kc", lang: "es", keywords: "comida hambre despensa alimentos comer" },
-    { href: "/es/kc/housing", label: "Vivienda", kind: "kc", lang: "es", keywords: "vivienda refugio albergue desalojo renta alquiler dormir" },
-    { href: "/es/kc/healthcare", label: "Salud", kind: "kc", lang: "es", keywords: "salud medico médico clinica clínica doctor dentista" },
-    { href: "/es/kc/legal", label: "Ayuda legal", kind: "kc", lang: "es", keywords: "abogado legal corte inmigracion inmigración derechos" },
-    { href: "/es/kc/journeys", label: "Guías paso a paso", kind: "kc", lang: "es", keywords: "guia guía pasos como cómo" }
+    // The Kansas City directory is one project. It gets one entry here, plus
+    // the crisis page; its own pages and services are found through its own
+    // search at /kc/directory, not through the company finder.
+    { href: "/kc", label: "Kansas City Metro Resource Directory", kind: "work", note: "Food, housing, care, legal aid across nine counties", keywords: "kc kck directory services help resources food housing shelter healthcare clinic legal aid veterans utilities transit comida vivienda salud ayuda" },
+    { href: "/kc/crisis", label: "Need help now", kind: "kc", urgent: true, note: "Crisis lines and emergency numbers, Kansas City metro", keywords: "crisis emergency suicide 988 911 danger urgent" }
 ];

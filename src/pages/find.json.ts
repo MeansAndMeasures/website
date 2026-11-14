@@ -5,14 +5,13 @@ import { staticEntries, type FinderEntry } from "../data/finder";
 export const prerender = true;
 
 // The finder index: hand-kept routes plus everything in the content
-// collections, so new work, research, records and KC services become
+// collections, so new work, research and records become
 // findable without touching the finder.
 export const GET: APIRoute = async () => {
-    const [work, research, artifacts, services] = await Promise.all([
+    const [work, research, artifacts] = await Promise.all([
         getCollection("work"),
         getCollection("research"),
-        getCollection("artifacts"),
-        getCollection("kcServices")
+        getCollection("artifacts")
     ]);
 
     const entries: FinderEntry[] = [
@@ -39,14 +38,6 @@ export const GET: APIRoute = async () => {
             keywords: [entry.data.artifactType, entry.data.agency, entry.data.docket, ...entry.data.tags]
                 .filter(Boolean)
                 .join(" ")
-        })),
-        ...services.map((entry) => ({
-            href: `/kc/directory?service=${encodeURIComponent(entry.id)}`,
-            label: entry.data.name,
-            note: `Kansas City service: ${entry.data.categories.join(", ").replaceAll("-", " ")}`,
-            kind: "service" as const,
-            keywords: entry.data.categories.join(" ").replaceAll("-", " "),
-            ...(entry.data.emergency ? { urgent: true } : {})
         }))
     ];
 

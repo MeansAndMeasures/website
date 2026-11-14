@@ -26,8 +26,10 @@ which is also opened from the header on every page (the Find button, or `/`).
 
 - `src/data/finder.ts`: the five standing links and the hand-kept routes, each
   with the words a person is likely to type.
-- `src/pages/find.json.ts`: prerendered index; adds work, research, artifacts
-  and KC services from the content collections automatically.
+- `src/pages/find.json.ts`: prerendered index; adds work, research and
+  artifacts from the content collections automatically. The KC directory is
+  one project: it has one entry plus the crisis page, and its own pages and
+  services are searched at `/kc/directory`, not here.
 - `public/lib/finder.js`: matching and the combobox behaviour. A static file
   because the site CSP allows only same-origin script files and no inline
   script or style. Crisis words always put `/kc/crisis` first.

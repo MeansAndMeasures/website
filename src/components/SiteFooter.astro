@@ -8,12 +8,12 @@ const groups = [
     {
         label: "Use",
         links: [
-            isKcSection
-                ? { href: "/kc/crisis", label: "Need help now", urgent: true }
-                : { href: "/kc", label: "Kansas City resources" },
+            { href: "/systems", label: "Systems" },
             { href: "/civicnavigator", label: "CivicNavigator" },
             { href: "https://forecast.meansandmeasures.com", label: "Forecast" },
-            { href: "/systems", label: "Systems" }
+            isKcSection
+                ? { href: "/kc/crisis", label: "Need help now", urgent: true }
+                : { href: "/kc", label: "KC directory" }
         ]
     },
     {

@@ -30,7 +30,7 @@ Commits: `6a93192` package, `12c4465` layout/chrome (+ KC normalization and WEB-
 Branch `site/means-measures-landing`. Tagline is now "Equity of means. Equality of measures."; "Down through systems. Up through people." stays as its own line. See README, "Homepage and finder".
 
 - Homepage rebuilt as a landing page (name-as-grid doctrine figure, finder, standing-work ledger). The 13-tile index is gone; `/sitemap` remains the full list.
-- Finder added site-wide (header Find button, `/` key, homepage, 404).
+- Finder added site-wide (header Find button, `/` key, homepage, 404). Company-level: the KC directory is one project and gets one entry plus the crisis page (Brian, 2026-11-13); no standing link favors a single project.
 - Header serves a 192px sRGB derivative of the symbol instead of the 4.6 MB master. Favicons and the social card (`public/social-card.png`) no longer point at the 6 MB wordmark. Masters are untouched.
 - `404.astro` now uses the site layout and carries the finder. `500.astro` stays standalone on purpose; strap and logo file updated.
 - About, brand (new "Lines" section), footer, metadata and the capabilities lead carry the new language.

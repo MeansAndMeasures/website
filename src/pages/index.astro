@@ -8,10 +8,10 @@ const services = await getCollection("kcServices");
 // Standing work, stated as facts that can be checked on the page each links to.
 const standing = [
     {
-        href: "/kc",
-        name: "Kansas City Metro Resource Directory",
-        fact: `${services.length} services across nine counties and two states, in English and Spanish, with open exports anyone may mirror.`,
-        state: "live"
+        href: "/civicnavigator",
+        name: "CivicNavigator",
+        fact: "Help with the letter, the form, and the next step, in the hands of the person holding the paperwork.",
+        state: "in development"
     },
     {
         href: "https://forecast.meansandmeasures.com",
@@ -20,16 +20,22 @@ const standing = [
         state: "live"
     },
     {
+        href: "/work/open-cognition",
+        name: "Open Cognition",
+        fact: "Governed memory for AI agents: immutable records, scoped references, and state changes that name who made them.",
+        state: "published"
+    },
+    {
+        href: "/kc",
+        name: "Kansas City Metro Resource Directory",
+        fact: `${services.length} services across nine counties and two states, in English and Spanish, with open exports anyone may mirror.`,
+        state: "live"
+    },
+    {
         href: "/artifacts",
         name: "Public record",
         fact: "Federal public comments on USCIS biometrics and NWK-408, and the Record Sufficiency Matrix, published so they can be checked without asking us.",
         state: "published"
-    },
-    {
-        href: "/civicnavigator",
-        name: "CivicNavigator",
-        fact: "Help with the letter, the form, and the next step, in the hands of the person holding the paperwork.",
-        state: "in development"
     }
 ];
 ---
