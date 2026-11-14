@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "meansandmeasures-website",
+	"name": "website",
 	"compatibility_date": "2026-05-15",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
