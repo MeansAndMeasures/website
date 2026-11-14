@@ -16,7 +16,7 @@
    ========================================================================= */
 
 :root {
-    --page-max: 76rem;                                  /* 1216px content width */
+    --page-max: clamp(76rem, 86vw, 128rem);             /* 1216px up to ~1440 viewports, then grows to 2048px */
     --gutter: clamp(1.25rem, 0.45rem + 3.2vw, 3rem);    /* 20px → 48px page edge */
     --measure: 42rem;                                   /* prose column, ~68ch at body size */
     --rule: color-mix(in srgb, var(--mm-secondary) 32%, transparent);
@@ -220,6 +220,54 @@ main > .section:last-child {
     margin-inline: 0;
 }
 
+/* 1600px and wider: prose-only sections, and any section marked
+   .section--column, sit two across instead of leaving the right half of the
+   page empty. Everything else still spans the full width. Line length stays
+   at --measure. */
+@media (width >= 100rem) {
+    main:has(> .section--compact, > .section--column) {
+        box-sizing: border-box;
+        width: min(100% - 2 * var(--gutter), var(--page-max));
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--mm-space-8);
+        align-content: start;
+    }
+
+    main:has(> .section--compact, > .section--column) > * {
+        grid-column: 1 / -1;
+    }
+
+    main:has(> .section--compact, > .section--column) > .section {
+        width: auto;
+        margin-inline: 0;
+    }
+
+    main:has(> .section--compact, > .section--column) > .section--compact:has(> .measure:only-child),
+    main:has(> .section--compact, > .section--column) > .section--column {
+        grid-column: auto;
+    }
+
+    /* A compact section beside the opening section starts at the same height. */
+    main > .section:not(.section--compact) + .section--compact.section--column {
+        padding-block-start: var(--mm-space-7);
+    }
+
+    /* Contact: details beside the form. */
+    .measure:has(> .intake-form) {
+        max-inline-size: none;
+        display: grid;
+        grid-template-columns: minmax(0, var(--measure)) minmax(0, var(--measure));
+        column-gap: var(--mm-space-7);
+        align-items: start;
+    }
+
+    .measure:has(> .intake-form) > :not(.entry-meta, .intake-form) {
+        grid-column: 1 / -1;
+    }
+}
+
 /* Card grids. Minimum column width holds the longest heading word
    at card-title size, so no title is broken or hyphenated. */
 .grid,
@@ -228,7 +276,7 @@ main > .section:last-child {
 .status-list,
 .sitemap-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
     gap: var(--mm-space-5) var(--mm-space-6);
     align-items: start;
     margin-top: var(--mm-space-6);
@@ -1060,7 +1108,7 @@ span.pgp-fingerprint code {
    Same band as the header; always sits at the foot of the viewport.
 ========================================= */
 .site-footer {
-    margin-top: var(--mm-space-7);
+    margin-top: var(--mm-space-6);
     background: var(--mm-surface);
     box-shadow: inset 0 1px 0 var(--rule);
     font-family: var(--mm-font-ui);
@@ -1071,8 +1119,8 @@ span.pgp-fingerprint code {
 .site-footer__inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--mm-space-5);
-    padding-block: var(--mm-space-6);
+    gap: var(--mm-space-3);
+    padding-block: var(--mm-space-5);
 }
 
 .site-footer p {
@@ -1129,6 +1177,28 @@ span.pgp-fingerprint code {
     padding-top: var(--mm-space-4);
     border-top: 1px solid var(--rule);
     color: var(--mm-secondary);
+}
+
+/* Desktop: the meta lines run across one row so the footer stays short. */
+@media (width >= 52rem) {
+    .site-footer__meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: var(--mm-space-1) var(--mm-space-5);
+    }
+
+    .site-footer__meta p + p {
+        margin-top: 0;
+    }
+
+    .site-footer__line {
+        margin-inline-end: var(--mm-space-3);
+    }
+
+    .site-footer__legal {
+        padding-top: var(--mm-space-3);
+    }
 }
 
 .site-footer__policy {
