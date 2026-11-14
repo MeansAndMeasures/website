@@ -19,7 +19,7 @@ interface Props {
 const {
     title = "Kansas City — Means+Measures",
     description = "A people-first directory of survival, support, and navigation resources for the Kansas City metro.",
-    image = "/means-measures/assets/means-measures-logo-wordmark.png",
+    image = "/social-card.png",
     robots,
     noReferrer = false,
     showSubnav = true,
@@ -42,7 +42,9 @@ const imageUrl = new URL(image, "https://meansandmeasures.com").toString();
     {robots && <meta name="robots" content={robots} />}
     {noReferrer && <meta name="referrer" content="no-referrer" />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/png" href="/means-measures/assets/means-measures-logo-wordmark.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/means-measures/assets/web/means-measures-symbol-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/means-measures/assets/web/means-measures-symbol-192.png" />
+    <link rel="apple-touch-icon" href="/means-measures/assets/web/means-measures-symbol-180.png" />
     <meta property="og:site_name" content="Means+Measures" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

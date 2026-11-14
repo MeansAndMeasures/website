@@ -17,6 +17,36 @@ Cloudflare Workers; `wrangler.jsonc` targets `meansandmeasures.com` and
 - `migrations/`: D1 schema history; `tests/`: focused Node regression checks.
 - `dist/`, `.astro/`, `.wrangler/`: generated output or local runtime state.
 
+## Homepage and finder
+
+`src/pages/index.astro` is a landing page, not an index of pages, and it is
+one screen. The name and the mark hold still while the page scrolls; the
+statement beside them crossfades in place, one per scroll step: the intro with
+the primary action, the two principles, the two directions (each draws its
+rule down or up), and the close. The halves of the tagline and a four-item
+index jump to their statement; the index line fills with progress; arrow keys
+step through. Behaviour is `public/lib/stage.js` (static file, CSP). Without
+script the statements follow one another as ordinary content. Do not add link
+lists, tiles or a search field to it.
+
+The finder (`src/components/SiteFinder.astro`) is opened from the header on
+every page (the Find button, or `/`) and sits inline on the 404 page.
+
+- `src/data/finder.ts`: the hand-kept routes, each with the words a person is
+  likely to type. The finder lists nothing until someone types.
+- `src/pages/find.json.ts`: prerendered index; adds work, research and
+  artifacts from the content collections automatically. The KC directory is
+  one project: it has one entry plus the crisis page, and its own pages and
+  services are searched at `/kc/directory`, not here.
+- `public/lib/finder.js`: matching and the combobox behaviour. A static file
+  because the site CSP allows only same-origin script files and no inline
+  script or style. Crisis words always put `/kc/crisis` first.
+- Without script the field submits to `/sitemap`. `tests/finder.test.mjs` covers the matching rules.
+
+`public/means-measures/assets/web/` holds 8-bit sRGB derivatives of the logo
+masters for the header, icons and error page. Regenerate them from the masters
+when the masters change; do not edit them by hand.
+
 ## Development and checks
 
 Use Node.js 24 or a newer supported even-numbered release with npm. 

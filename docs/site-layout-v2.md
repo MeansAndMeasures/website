@@ -25,6 +25,17 @@ Commits: `6a93192` package, `12c4465` layout/chrome (+ KC normalization and WEB-
 - Light theme only, as before. Dark theme is opt-in per the system and not wired site-wide.
 - `/means-measures/index.html` now redirects to `/brand` so old links still land.
 
+## 2026-11-13: landing page, finder, language sweep
+
+Branch `site/means-measures-landing`. Tagline is now "Equity of means. Equality of measures."; "Down through systems. Up through people." stays as its own line. See README, "Homepage and finder".
+
+- Homepage is one pinned screen (Brian, 2026-11-13: no stacked bands, no long scroll, engage the visitor). Name and mark hold still; statements crossfade in place on scroll (intro, two principles, two directions with drawn rules, close). Tagline halves and a four-item index jump between statements; index line shows progress; arrow keys step. `public/lib/stage.js`. No-script fallback: statements in normal flow. It lists no destinations and has no search field; `/sitemap` remains the full list.
+- Finder added site-wide (header Find button, `/` key, homepage, 404). Company-level: the KC directory is one project and gets one entry plus the crisis page (Brian, 2026-11-13); no standing link favors a single project.
+- Header serves a 192px sRGB derivative of the symbol instead of the 4.6 MB master. Favicons and the social card (`public/social-card.png`) no longer point at the 6 MB wordmark. Masters are untouched.
+- `404.astro` now uses the site layout and carries the finder. `500.astro` stays standalone on purpose; strap and logo file updated.
+- About, brand (new "Lines" section), footer, metadata and the capabilities lead carry the new language.
+- Not changed: phone numbers and the footer email. The site shows 816-306-3481 and info@; privacy names (816) 553-3700 for text. Brian to confirm which is current before anyone edits them.
+
 ## Open — next agent start here
 
 - [ ] **Logo masters.** The 2.0.0 sRGB masters (transparent, 8-bit) exist only in the Design System artifact's asset store, which agents cannot read. The site still serves ACEScg-era files: `public/means-measures/assets/means-measures-logo-symbol.png` is a 4.6 MB 16-bit ACEScg PNG used as a 48px header icon, and `-wordmark.png` is the opaque Adobe RGB cream version. Brian to supply `means-measures-logo-symbol.png` and `means-measures-logo-wordmark.png` (8-bit sRGB) — drop in at the same paths, no code change. Same for `public/assets/` copies used by OG/social metadata.

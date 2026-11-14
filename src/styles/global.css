@@ -192,8 +192,6 @@ h4 {
    LAYOUT
 ========================================= */
 .section,
-.homepage-hero,
-.section--routing,
 .site-header__inner,
 .site-footer__inner {
     box-sizing: border-box;
@@ -209,8 +207,7 @@ h4 {
     padding-block-start: var(--mm-space-6);
 }
 
-main > .section:last-child,
-main > .section--routing:last-child {
+main > .section:last-child {
     padding-block-end: var(--mm-space-7);
 }
 
@@ -226,7 +223,6 @@ main > .section--routing:last-child {
 /* Card grids. Minimum column width holds the longest heading word
    at card-title size, so no title is broken or hyphenated. */
 .grid,
-.homepage-routing,
 .system-grid,
 .capability-list,
 .status-list,
@@ -314,49 +310,658 @@ main > .section--routing:last-child {
 
 /* =========================================
    HOMEPAGE
+   One screen. The name and the mark hold still while the page scrolls; the
+   statement beside them changes with scroll position and crossfades in place.
+   Without script (/lib/stage.js) the statements follow one another as
+   ordinary content.
 ========================================= */
-.homepage-hero {
+.stage {
+    background: var(--mm-surface);
+}
+
+.stage__frame {
+    box-sizing: border-box;
+    width: min(100% - 2 * var(--gutter), var(--page-max));
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "identity"
+        "slides";
+    row-gap: var(--mm-space-6);
+    padding-block: var(--mm-space-7);
+}
+
+.stage__identity {
+    grid-area: identity;
     container-type: inline-size;
-    padding-block: var(--mm-space-7) var(--mm-space-6);
+    min-width: 0;
+}
+
+/* The name sets a two-column grid: each half of the tagline sits under the
+   word it belongs to. */
+.home-name {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: start;
 }
 
 /* Homepage logotype (WEB-035, Brian, 2026-10-27): the name set as an identity
-   graphic, not text, so identity navy and gold apply. One line at every width,
-   size proportional to the container, capped so it no longer fills the first
-   screen. Do not reuse this treatment for headings or other text. */
-.homepage-hero .hero-title {
+   graphic, not text, so identity navy and gold apply. One line at every width.
+   Do not reuse this treatment for headings or other text. */
+.home-name__logotype {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
     max-inline-size: none;
-    margin-bottom: var(--mm-space-5);
-    font-size: min(11.5cqi, 6rem);
+    margin: 0 0 var(--mm-space-4);
+    font-size: min(12.4cqi, 6.5rem);
     line-height: 1.05;
     white-space: nowrap;
     color: var(--mm-identity-institutional);
 }
 
-.homepage-hero__name {
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.homepage-hero__plus {
+.home-name__plus {
     color: var(--mm-identity-interface);
 }
 
-.homepage-hero__summary {
-    max-inline-size: var(--measure);
+.home-name__bar {
+    grid-column: 1 / -1;
+    max-inline-size: none;
+    margin-bottom: var(--mm-space-4);
 }
 
-.homepage-hero__summary p {
+.home-pair__head {
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--mm-text);
+    text-align: start;
+    cursor: pointer;
+    transition: opacity 0.4s ease, color 0.4s ease;
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-synthesis: none;
+    font-size: max(1.0625rem, min(3.7cqi, 1.9rem));
+    line-height: 1.15;
+    margin: 0;
+}
+
+.home-pair__head:hover {
+    box-shadow: none;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.16em;
+}
+
+/* While a principle is on screen, its half of the tagline leads and the
+   other recedes, so the name itself shows where you are. */
+.stage[data-active="1"] .home-pair__head[data-goto="2"],
+.stage[data-active="2"] .home-pair__head[data-goto="1"] {
+    opacity: 0.32;
+}
+
+.stage__mark {
+    display: none;
+}
+
+.stage__slides {
+    grid-area: slides;
+    display: grid;
+    gap: var(--mm-space-7);
+    min-width: 0;
+}
+
+.stage__slide {
+    max-inline-size: 36rem;
+}
+
+.stage__lede {
+    max-inline-size: 30rem;
+    margin: 0 0 var(--mm-space-5);
+    font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.625rem);
+    line-height: 1.3;
+}
+
+.stage__claim {
+    max-inline-size: 22ch;
+    margin: 0 0 var(--mm-space-4);
+    font-size: clamp(1.625rem, 1.15rem + 1.6vw, 2.75rem);
+    line-height: 1.1;
+}
+
+.stage__evidence {
+    max-inline-size: 30rem;
+    margin: 0;
+    color: var(--mm-secondary);
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+}
+
+.stage__exit {
+    margin: var(--mm-space-4) 0 0;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+}
+
+.stage__exit a::after {
+    content: " \2192";
+}
+
+.stage__closing {
+    max-inline-size: 26ch;
+    margin: 0 0 var(--mm-space-5);
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 1.15rem + 1.2vw, 2.375rem);
+    line-height: 1.14;
+    text-wrap: balance;
+}
+
+.stage__cue,
+.stage__index,
+.stage__track {
+    display: none;
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--mm-space-3) var(--mm-space-5);
+    margin: 0;
+}
+
+/* Action component: outlined, never filled. */
+.home-action {
+    display: inline-block;
+    padding: var(--mm-space-2) var(--mm-space-5);
+    border: 1px solid currentColor;
+    border-radius: var(--mm-radius-sm);
+    text-decoration: none;
+}
+
+.home-action:hover {
+    box-shadow: var(--mm-shadow-raised);
+}
+
+.home-actions__second {
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+}
+
+.stage a:focus-visible,
+.stage button:focus-visible {
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.2rem;
+}
+
+/* ---- Live: the frame pins and the statements share one place. ---- */
+.stage--live {
+    position: relative;
+}
+
+.stage--live .stage__frame {
+    position: sticky;
+    top: 0;
+    block-size: 100svh;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+        "identity"
+        "slides"
+        "index";
+    row-gap: var(--mm-space-5);
+    align-content: center;
+    padding-block: var(--mm-space-6);
+}
+
+/* Scroll length: one step per statement. */
+.stage--live .stage__track {
+    display: block;
+    block-size: calc(var(--stage-steps, 6) * 70svh);
+}
+
+.stage--live .stage__slides {
+    display: grid;
+    gap: 0;
+    align-items: center;
+}
+
+.stage--live .stage__slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(0.75rem);
+    pointer-events: none;
+    transition:
+        opacity 0.5s ease,
+        transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.stage--live .stage__slide[data-active] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stage--live .stage__slide {
+        transform: none;
+        transition: opacity 0.2s linear;
+    }
+
+    .stage--live .stage__slide[data-active] {
+        transition-delay: 0s;
+    }
+}
+
+.stage--live .stage__cue {
+    display: block;
+    margin: var(--mm-space-6) 0 0;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    color: var(--mm-secondary);
+}
+
+.stage--live .stage__cue::after {
+    content: " \2193";
+}
+
+/* Down and up: a rule beside the statement that draws in its direction
+   when the statement arrives. */
+.stage__slide[data-direction] {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    column-gap: var(--mm-space-5);
+}
+
+.stage__slide[data-direction] > :not(.stage__rule) {
+    grid-column: 2;
+}
+
+.stage__rule {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    position: relative;
+    display: block;
+    background: linear-gradient(var(--mm-text), var(--mm-text)) center / 0.125rem 100% no-repeat;
+}
+
+.stage__rule::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 50%;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    box-sizing: border-box;
+    border: solid var(--mm-text);
+    border-width: 0 0.125rem 0.125rem 0;
+}
+
+[data-direction="down"] .stage__rule::after {
+    inset-block-end: 0.125rem;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+[data-direction="up"] .stage__rule::after {
+    inset-block-start: 0.125rem;
+    transform: translateX(-50%) rotate(-135deg);
+}
+
+.stage--live [data-direction="down"] .stage__rule {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.9s cubic-bezier(0.5, 0, 0.2, 1) 0.25s;
+}
+
+.stage--live [data-direction="up"] .stage__rule {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 0.9s cubic-bezier(0.5, 0, 0.2, 1) 0.25s;
+}
+
+.stage--live [data-direction][data-active] .stage__rule {
+    clip-path: inset(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stage--live [data-direction] .stage__rule {
+        clip-path: none;
+        transition: none;
+    }
+}
+
+/* Index: the four statements as places on this one page, with a line that
+   fills as the visitor moves through them. */
+.stage--live .stage__index {
+    grid-area: index;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mm-space-1) var(--mm-space-5);
+    padding-top: var(--mm-space-3);
+    border-top: 1px solid var(--rule);
+}
+
+.stage__progress {
+    position: absolute;
+    inset-block-start: -1px;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 2px;
+    background: var(--mm-action);
+    transform-origin: left;
+    transform: scaleX(var(--stage-progress, 0));
+}
+
+.stage__index[hidden] {
+    display: none !important;
+}
+
+.stage__index-item {
+    padding: var(--mm-space-1) 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--mm-secondary);
+    font-family: var(--mm-font-ui);
+    font-weight: 400;
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.3em;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+.stage__index-item:hover {
+    box-shadow: none;
+    color: var(--mm-text);
+}
+
+.stage__index-item[aria-current] {
+    color: var(--mm-text);
+    text-decoration-color: var(--mm-action);
+}
+
+/* Wide: the mark holds the right side of the screen. */
+@media (min-width: 64rem) {
+    .stage__frame {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        grid-template-areas:
+            "identity mark"
+            "slides mark";
+        column-gap: var(--mm-space-7);
+    }
+
+    .stage--live .stage__frame {
+        grid-template-areas:
+            "identity mark"
+            "slides mark"
+            "index mark";
+    }
+
+    .stage__mark {
+        display: block;
+        grid-area: mark;
+        align-self: center;
+        justify-self: end;
+        inline-size: min(100%, 28rem);
+    }
+
+    .stage--live .stage__mark {
+        max-block-size: 70svh;
+        inline-size: auto;
+    }
+}
+
+/* About: the two principles as a definition list. */
+.principles {
+    margin: 0;
+}
+
+.principles dt {
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
+    line-height: 1.2;
+}
+
+.principles dd {
+    margin: var(--mm-space-1) 0 var(--mm-space-5);
     font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
     line-height: 1.35;
 }
 
-.section--routing {
-    padding-block: var(--mm-space-5) var(--mm-space-7);
+.principles dd:last-child {
+    margin-bottom: 0;
 }
 
-.section--routing > .eyebrow {
-    margin-bottom: 0;
+.error-finder {
+    max-inline-size: 30rem;
+    margin-block: var(--mm-space-6);
+}
+
+.error-machine {
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    color: var(--mm-secondary);
+}
+
+/* =========================================
+   FINDER
+   One field that routes a need or a name to its page. Used inline on the
+   homepage and in a dialog from the header on every page.
+========================================= */
+.finder {
+    box-sizing: border-box;
+    padding: var(--mm-space-5);
+    background: var(--mm-surface);
+    border-radius: var(--mm-radius-md);
+    box-shadow: var(--mm-shadow-raised);
+}
+
+.finder__label {
+    display: block;
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
+    line-height: 1.2;
+    margin: 0 0 var(--mm-space-3);
+}
+
+.finder__field {
+    display: flex;
+    gap: var(--mm-space-2);
+}
+
+.finder__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: var(--mm-space-2) var(--mm-space-3);
+    border: 1px solid var(--mm-control-border);
+    border-radius: var(--mm-radius-sm);
+    color: var(--mm-text);
+    background: var(--mm-canvas);
+    font-family: var(--mm-font-ui);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.finder__input::placeholder {
+    color: var(--mm-secondary);
+    opacity: 1;
+}
+
+.finder__go:focus-visible,
+.finder a:focus-visible,
+.finder-dialog__close:focus-visible,
+.site-header__find:focus-visible {
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.15rem;
+}
+
+.finder__go {
+    flex: none;
+}
+
+/* The field works without script (it opens the site map), but the Go button
+   only earns its space then. With script, Enter and the list do the work. */
+.has-finder .finder__go {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    padding: 0;
+    border: 0;
+}
+
+.finder__status {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.finder__list {
+    list-style: none;
+    margin: var(--mm-space-3) 0 0;
+    padding: 0;
+}
+
+.finder__list li + li,
+.finder__standing li + li {
+    margin-top: 0;
+}
+
+.finder__list[hidden],
+.finder__standing[hidden] {
+    display: none;
+}
+
+.finder__list a,
+.finder__standing a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    column-gap: var(--mm-space-3);
+    align-items: baseline;
+    padding: var(--mm-space-2) var(--mm-space-3);
+    margin-inline: calc(-1 * var(--mm-space-3));
+    border-inline-start: 0.1875rem solid transparent;
+    color: var(--mm-text);
+    text-decoration: none;
+}
+
+.finder__option-label {
+    grid-column: 1;
+    font-family: var(--mm-font-body);
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.finder__option-note {
+    grid-column: 1;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+    color: var(--mm-secondary);
+}
+
+.finder__option-kind {
+    grid-column: 2;
+    grid-row: 1;
+    font-family: var(--mm-font-data);
+    font-size: 0.8125rem;
+    color: var(--mm-secondary);
+    white-space: nowrap;
+}
+
+.finder__list a:hover,
+.finder__standing a:hover,
+.finder__option[aria-selected="true"] a {
+    border-inline-start-color: var(--mm-text);
+    background: var(--mm-canvas);
+}
+
+.finder [data-urgent="true"] .finder__option-label,
+.finder a[data-urgent="true"] .finder__option-label {
+    color: var(--mm-action);
+}
+
+.finder__empty {
+    padding-block: var(--mm-space-2);
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    color: var(--mm-secondary);
+}
+
+.finder-dialog {
+    box-sizing: border-box;
+    inline-size: min(100% - 2 * var(--gutter), 36rem);
+    max-block-size: min(100dvh - 4rem, 44rem);
+    margin-block: 4rem auto;
+    padding: 0;
+    border: 0;
+    border-radius: var(--mm-radius-md);
+    background: var(--mm-surface);
+    color: var(--mm-text);
+    box-shadow: var(--mm-shadow-overlay);
+    overflow: auto;
+}
+
+.finder-dialog::backdrop {
+    background: rgb(38 50 56 / 0.45);
+}
+
+.finder-dialog .finder {
+    box-shadow: none;
+    padding-bottom: var(--mm-space-3);
+}
+
+.finder-dialog__inner {
+    display: grid;
+}
+
+.finder-dialog__close,
+.site-header__find {
+    font-family: var(--mm-font-ui);
+    font-weight: 400;
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+    color: var(--mm-text);
+    background: transparent;
+    border: 1px solid var(--mm-control-border);
+    border-radius: var(--mm-radius-sm);
+    padding: var(--mm-space-1) var(--mm-space-3);
+}
+
+.finder-dialog__close {
+    justify-self: end;
+    margin: 0 var(--mm-space-5) var(--mm-space-4);
+}
+
+.site-header__find[hidden] {
+    display: none;
+}
+
+.site-header__find kbd {
+    margin-inline-start: var(--mm-space-2);
+    font-family: var(--mm-font-data);
+    font-size: 0.8125rem;
+    color: var(--mm-secondary);
+}
+
+@media (hover: none) {
+    .site-header__find kbd {
+        display: none;
+    }
 }
 
 /* =========================================
@@ -443,12 +1048,12 @@ main > .section--routing:last-child {
 
 .site-footer__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: var(--mm-space-5) var(--mm-space-7);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mm-space-5);
     padding-block: var(--mm-space-6);
 }
 
-.site-footer__meta p {
+.site-footer p {
     margin: 0;
 }
 
@@ -456,15 +1061,77 @@ main > .section--routing:last-child {
     margin-top: var(--mm-space-1);
 }
 
-.site-footer__meta a {
+.site-footer__line {
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.25;
+}
+
+.site-footer a {
     color: var(--mm-text);
 }
 
 .site-footer__nav {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--mm-space-5);
+    align-items: start;
+}
+
+.site-footer__label {
+    color: var(--mm-secondary);
+    margin-bottom: var(--mm-space-2);
+}
+
+.site-footer__group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-footer__group li + li {
+    margin-top: 0;
+}
+
+.site-footer__group a {
+    display: inline-block;
+}
+
+.site-footer__legal {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--mm-space-2) var(--mm-space-6);
+    padding-top: var(--mm-space-4);
+    border-top: 1px solid var(--rule);
+    color: var(--mm-secondary);
+}
+
+.site-footer__policy {
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--mm-space-1) var(--mm-space-5);
-    align-content: start;
+}
+
+.site-footer__policy a {
+    text-decoration-line: none;
+}
+
+.site-footer__policy a:hover {
+    text-decoration-line: underline;
+}
+
+.site-footer__policy a:focus-visible {
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.225rem;
+}
+
+@media (max-width: 30rem) {
+    .site-footer__nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 /* =========================================

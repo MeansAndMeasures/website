@@ -1,228 +1,37 @@
 ---
-const title = "404 Not Found | Means+Measures";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteFinder from "../components/SiteFinder.astro";
 ---
-<html lang="en" class="mm">
-  <head>
-    <link rel="stylesheet" href="/means-measures/means-measures.css" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="robots" content="noindex,follow" />
-    <meta name="theme-color" content="#111111" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <div class="page">
-      <header>
-        <a class="brand" href="/" aria-label="Means+Measures home">
-          <img class="mm-logo" src="/means-measures/assets/means-measures-logo-wordmark.png" alt="Means+Measures" width="240" />
-        </a>
-        <div class="strap">Down through systems. Up through people.</div>
-      </header>
 
-      <main>
-        <section class="error" aria-labelledby="error-title">
-          <p class="code">HTTP 404 · Not Found</p>
-          <h1 id="error-title">Not found.</h1>
-          <p class="lede">
-            The resource at this address does not exist or is no longer published here.
-          </p>
-          <p class="detail">
-            Check the address, return to the index, or use the links below to continue through Means+Measures.
-          </p>
+<BaseLayout
+        title="Not found — Means+Measures"
+        description="The page at this address does not exist or is no longer published here."
+        robots="noindex,follow"
+>
+    <section class="section" aria-labelledby="error-title">
+        <p class="eyebrow">HTTP 404</p>
 
-          <nav aria-label="Useful destinations">
-            <a href="/">Index</a>
-            <a href="/systems/">Systems</a>
-            <a href="/capabilities/">Capabilities</a>
-            <a href="/work/">Work</a>
-            <a href="/research/">Research</a>
-            <a href="/artifacts/">Artifacts</a>
-          </nav>
+        <div class="measure">
+            <h1 id="error-title">Not found.</h1>
+            <p>
+                Nothing is published at this address. It may have moved, or the link may be wrong.
+                Say what you were looking for and the finder will route you.
+            </p>
+        </div>
 
-          <p class="machine">
-            Automated clients: verify the requested URI and consult applicable discovery resources under
-            <a href="/.well-known/">/.well-known/</a>.
-          </p>
-        </section>
-      </main>
+        <div class="error-finder">
+            <SiteFinder id="error-finder" variant="inline" label="What were you looking for?" />
+        </div>
 
-      <footer>
-        <span>© 2026 Means+Measures · For the Commons</span>
-        <span><a href="/status/">Status</a> · <a href="/contact/">Contact</a></span>
-      </footer>
-    </div>
-  </body>
-</html>
-
-
-<style>
-  :global(:root) {
-    --cb-error-bg: var(--mm-canvas);
-    --cb-error-fg: var(--mm-text);
-    --cb-error-muted: var(--mm-secondary);
-    --cb-error-line: var(--mm-secondary);
-    --cb-error-panel: rgba(255,255,255,.28);
-    font-family: var(--mm-font-ui);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :global(:root) {
-      --cb-error-bg: #101010;
-      --cb-error-fg: #f2efe7;
-      --cb-error-muted: #b8b3aa;
-      --cb-error-line: #4c4943;
-      --cb-error-panel: rgba(255,255,255,.035);
-    }
-  }
-
-  :global(*) { box-sizing: border-box; }
-
-  :global(html),
-  :global(body) {
-    margin: 0;
-    min-height: 100%;
-  }
-
-  :global(body) {
-    min-height: 100vh;
-    background: var(--cb-error-bg);
-    color: var(--cb-error-fg);
-  }
-
-  a {
-    color: inherit;
-    text-decoration-thickness: 1px;
-    text-underline-offset: .18em;
-  }
-
-  a:hover { text-decoration-thickness: 2px; }
-
-  a:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 4px;
-  }
-
-  .page {
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-  }
-
-  header,
-  main,
-  footer {
-    width: min(1120px, calc(100% - 40px));
-    margin-inline: auto;
-  }
-
-  header {
-    padding: 28px 0 18px;
-    border-bottom: 1px solid var(--cb-error-line);
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  .brand {
-    font-weight: 650;
-    letter-spacing: -.02em;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .mark { padding-inline: .18em; }
-
-  .strap {
-    color: var(--cb-error-muted);
-    font-family: "Spectral", Georgia, serif;
-    font-size: .95rem;
-    text-align: right;
-  }
-
-  main {
-    display: grid;
-    align-content: center;
-    padding: clamp(64px, 10vw, 150px) 0;
-  }
-
-  .error {
-    max-width: 820px;
-    padding: clamp(28px, 5vw, 56px);
-    border: 1px solid var(--cb-error-line);
-    background: var(--cb-error-panel);
-  }
-
-  .code {
-    margin: 0 0 16px;
-    font-family: var(--mm-font-data);
-    font-size: .82rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--cb-error-muted);
-  }
-
-  h1 {
-    margin: 0;
-    font-family: "Spectral", Georgia, serif;
-    font-size: clamp(2.7rem, 7vw, 6.2rem);
-    font-weight: 500;
-    line-height: .96;
-    letter-spacing: -.045em;
-  }
-
-  .lede {
-    margin: 28px 0 0;
-    max-width: 68ch;
-    font-size: clamp(1.05rem, 2vw, 1.25rem);
-    line-height: 1.6;
-  }
-
-  .detail {
-    margin: 18px 0 0;
-    max-width: 72ch;
-    color: var(--cb-error-muted);
-    line-height: 1.65;
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 24px;
-    margin-top: 34px;
-  }
-
-  nav a { font-weight: 600; }
-
-  .machine {
-    margin-top: 38px;
-    padding-top: 24px;
-    border-top: 1px solid var(--cb-error-line);
-    color: var(--cb-error-muted);
-    font-family: var(--mm-font-data);
-    font-size: .82rem;
-    line-height: 1.6;
-  }
-
-  footer {
-    padding: 18px 0 28px;
-    border-top: 1px solid var(--cb-error-line);
-    display: flex;
-    justify-content: space-between;
-    gap: 18px 28px;
-    flex-wrap: wrap;
-    color: var(--cb-error-muted);
-    font-size: .85rem;
-  }
-
-  @media (max-width: 620px) {
-    header {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    .strap { text-align: left; }
-  }
-</style>
-
+        <div class="measure">
+            <p class="document-action">
+                If a link on this site sent you here, that is ours to fix:
+                <a href="/contact">tell us</a>. The <a href="/sitemap">site map</a> lists every public page.
+            </p>
+            <p class="error-machine">
+                Automated clients: verify the requested URI and consult the discovery resources under
+                <a href="/.well-known/api-catalog">/.well-known/api-catalog</a>.
+            </p>
+        </div>
+    </section>
+</BaseLayout>

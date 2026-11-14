@@ -1,0 +1,41 @@
+---
+// The finder: one field that routes a need or a name to its page. It lists
+// nothing until someone types. Behaviour lives in /lib/finder.js. Without
+// script, the form opens the site map.
+interface Props {
+    id: string;
+    variant?: "inline" | "dialog";
+    label?: string;
+}
+
+const { id, variant = "inline", label = "Where do you need to go?" } = Astro.props;
+---
+
+<div class="finder" data-finder={variant}>
+    <form class="finder__form" action="/sitemap" method="get" role="search" autocomplete="off">
+        <label class="finder__label" for={`${id}-input`}>{label}</label>
+        <div class="finder__field">
+            <input
+                id={`${id}-input`}
+                class="finder__input"
+                type="text"
+                name="q"
+                inputmode="search"
+                enterkeyhint="go"
+                spellcheck="false"
+                autocapitalize="off"
+                placeholder="forecast, capability statement, public comment"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-controls={`${id}-list`}
+                data-finder-input
+            />
+            <button class="finder__go" type="submit">Go</button>
+        </div>
+    </form>
+
+    <p class="finder__status" role="status" aria-live="polite" data-finder-status></p>
+
+    <ul class="finder__list" id={`${id}-list`} role="listbox" aria-label="Matches" hidden data-finder-list></ul>
+</div>

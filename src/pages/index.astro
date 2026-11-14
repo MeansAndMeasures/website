@@ -1,89 +1,115 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = await getCollection("kcServices");
+
+// One screen. The name and the mark hold still; the doctrine moves through in
+// place as the visitor scrolls, one statement at a time, each with one line of
+// evidence and one way deeper. Behaviour: /lib/stage.js. Without script the
+// statements simply follow one another down the page.
+const steps = [
+    {
+        id: "means",
+        label: "Equity of means",
+        claim: "Lack of privilege is not lack of access.",
+        evidence: `A directory of ${services.length} services across nine counties says, before you go, whether you will need ID, insurance, or an appointment.`,
+        exit: { href: "/systems", label: "See the systems" }
+    },
+    {
+        id: "measures",
+        label: "Equality of measures",
+        claim: "Impacts are judged on their own merits, not the standing of those responsible.",
+        evidence: "Our federal comments are published whole, with their sources, so they can be checked without asking us.",
+        exit: { href: "/artifacts", label: "Read the record" }
+    },
+    {
+        id: "down",
+        label: "Down through systems",
+        claim: "Institutions bear responsibility down through systems for making the means of participation accessible.",
+        evidence: "We build the parts that carry it: information people can use, records that hold up to review, and AI governance that names who decides.",
+        exit: { href: "/capabilities", label: "What we can build" }
+    },
+    {
+        id: "up",
+        label: "Up through people",
+        claim: "Authority rises up through people who question, evaluate, and hold those institutions accountable.",
+        evidence: "So the work ships open: data free to mirror, listings anyone can correct, methods and limits stated.",
+        exit: { href: "/work", label: "See the work" }
+    }
+];
+
+const total = steps.length + 2;
 ---
 
 <BaseLayout
-		title="Means+Measures"
-		description="Means+Measures builds responsibility upwards through systems and engagement upwards from the people served."
+    title="Means+Measures. Equity of means. Equality of measures."
+    description="Means+Measures builds infrastructure, data systems, and analysis that treat equity as the first requirement. Equity of means. Equality of measures."
 >
-	<section class="section homepage-hero" aria-labelledby="homepage-title">
-		<div class="homepage-hero__kicker">
-			<p class="eyebrow">Down through systems. Up through people.</p>
-		</div>
+    <section class="stage" data-stage data-steps={total} aria-labelledby="homepage-title">
+        <div class="stage__frame">
+            <div class="stage__identity">
+                <div class="home-name">
+                    <h1 id="homepage-title" class="home-name__logotype"><span class="home-name__word">Means<span class="home-name__plus">+</span></span><span class="home-name__word">Measures</span></h1>
+                    <hr class="gold-bar home-name__bar" />
+                    <button type="button" class="home-pair__head" data-goto="1">Equity of means.</button>
+                    <button type="button" class="home-pair__head" data-goto="2">Equality of measures.</button>
+                </div>
+            </div>
 
-		<h1 id="homepage-title" class="hero-title"><span class="homepage-hero__name">Means<span class="homepage-hero__plus">+</span></span><span class="homepage-hero__name">Measures</span></h1>
+            <img
+                class="mm-logo stage__mark"
+                src="/means-measures/assets/web/means-measures-symbol-960.png"
+                alt=""
+                width="960"
+                height="960"
+            />
 
-		<div class="measure homepage-hero__summary">
-			<p>
-				Means+Measures builds responsibility upwards to those in place and lifts engagement from those served. We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
-			</p>
-		</div>
-	</section>
+            <div class="stage__slides">
+                <div class="stage__slide stage__slide--intro" data-step="0">
+                    <p class="stage__lede">
+                        Infrastructure, data systems, and analysis that treat equity as the first requirement.
+                    </p>
+                    <p class="home-actions">
+                        <a class="mm-action mm-type-action home-action" href="/systems">See the work</a>
+                        <a class="home-actions__second" href="/contact">Get in touch</a>
+                    </p>
+                    <p class="stage__cue" aria-hidden="true">Scroll</p>
+                </div>
 
-	<section class="section section--routing" aria-labelledby="homepage-routing-title">
-		<p id="homepage-routing-title" class="eyebrow">Index</p>
+                {steps.map((item, index) => (
+                    <article class="stage__slide" data-step={index + 1} data-direction={item.id === "down" || item.id === "up" ? item.id : undefined} id={item.id} aria-labelledby={`claim-${item.id}`}>
+                        {(item.id === "down" || item.id === "up") && <span class="stage__rule" aria-hidden="true"></span>}
+                        <p class="eyebrow">{item.label}</p>
+                        <h2 id={`claim-${item.id}`} class="stage__claim">{item.claim}</h2>
+                        <p class="stage__evidence">{item.evidence}</p>
+                        <p class="stage__exit"><a href={item.exit.href}>{item.exit.label}</a></p>
+                    </article>
+                ))}
 
-		<div class="grid homepage-routing">
-            <a class="route-panel" href="/civicnavigator"><p class="eyebrow">CivicNavigator</p><h2 class="card-title">Civic navigation and mutual aid.</h2><p>A Means+Measures product and service in development.</p></a>
-			<a class="route-panel" href="/systems">
-				<p class="eyebrow">Systems</p>
-				<h2 class="card-title">The public infrastructure set</h2>
-			</a>
+                <div class="stage__slide stage__slide--close" data-step={total - 1}>
+                    <p class="stage__closing">
+                        We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
+                    </p>
+                    <p class="home-actions">
+                        <a class="mm-action mm-type-action home-action" href="/contact">Get in touch</a>
+                        <a class="home-actions__second" href="/procurement">Procurement and entity facts</a>
+                    </p>
+                </div>
+            </div>
 
-			<a class="route-panel" href="/capabilities">
-				<p class="eyebrow">Capabilities</p>
-				<h2 class="card-title">What Means+Measures can build</h2>
-			</a>
+            <nav class="stage__index" aria-label="On this page" hidden>
+                <span class="stage__progress" aria-hidden="true"></span>
+                {steps.map((item, index) => (
+                    <button type="button" class="stage__index-item" data-goto={index + 1}>
+                        {item.label}
+                    </button>
+                ))}
+            </nav>
+        </div>
 
-			<a class="route-panel" href="/work">
-				<p class="eyebrow">Work</p>
-				<h2 class="card-title">Representative work</h2>
-			</a>
+        <div class="stage__track" aria-hidden="true"></div>
+    </section>
 
-			<a class="route-panel" href="/research">
-				<p class="eyebrow">Research</p>
-				<h2 class="card-title">Analysis and writing</h2>
-			</a>
-
-			<a class="route-panel" href="/artifacts">
-				<p class="eyebrow">Artifacts</p>
-				<h2 class="card-title">Documents and records</h2>
-			</a>
-
-			<a class="route-panel" href="/procurement">
-				<p class="eyebrow">Procurement</p>
-				<h2 class="card-title">Entity information</h2>
-			</a>
-
-			<a class="route-panel" href="/about">
-				<p class="eyebrow">About</p>
-				<h2 class="card-title">Organization</h2>
-			</a>
-
-			<a class="route-panel" href="/contact">
-				<p class="eyebrow">Contact</p>
-				<h2 class="card-title">Get in touch</h2>
-			</a>
-
-			<a class="route-panel" href="/kc">
-				<p class="eyebrow">Kansas City</p>
-				<h2 class="card-title">Metro directory</h2>
-			</a>
-
-			<a class="route-panel" href="https://forecast.meansandmeasures.com">
-				<p class="eyebrow">Forecast</p>
-				<h2 class="card-title">Observational field infrastructure</h2>
-			</a>
-
-			<a class="route-panel" href="/updates">
-				<p class="eyebrow">Updates</p>
-				<h2 class="card-title">What changed recently</h2>
-			</a>
-
-			<a class="route-panel" href="/status">
-				<p class="eyebrow">Status</p>
-				<h2 class="card-title">Operational posture</h2>
-			</a>
-		</div>
-	</section>
+    <script is:inline type="module" src="/lib/stage.js"></script>
 </BaseLayout>
