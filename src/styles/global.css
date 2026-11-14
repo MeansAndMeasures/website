@@ -581,6 +581,27 @@ main > .section:last-child {
     --fu: calc(var(--stage-frame) / 100);
 }
 
+/* One screen: where the header, frame, and footer fit together (stage.js
+   decides and adds .stage--fit), the header and footer hold still and
+   scrolling only moves through the statements. */
+.stage--fit {
+    --stage-frame: calc(100svh - var(--stage-header, 0px) - var(--stage-footer, 0px));
+}
+
+.stage--fit .stage__frame {
+    top: var(--stage-header, 0px);
+}
+
+body:has(.stage--fit) .site-header {
+    position: sticky;
+    top: 0;
+}
+
+body:has(.stage--fit) .site-footer {
+    position: sticky;
+    bottom: 0;
+}
+
 .stage--live .stage__frame {
     block-size: var(--stage-frame);
     padding-block: min(var(--mm-space-6), calc(var(--fu) * 4.5));
@@ -639,10 +660,11 @@ main:has(> .stage--live) ~ .site-footer {
     margin-top: 0;
 }
 
-/* Scroll length: one step per statement. */
+/* Scroll length: one step between statements. The last statement arrives
+   at the end of the scroll, with nothing to scroll past after it. */
 .stage--live .stage__track {
     display: block;
-    block-size: calc(var(--stage-steps, 6) * 70svh);
+    block-size: calc((var(--stage-steps, 6) - 1) * 70svh);
 }
 
 .stage--live .stage__slides {
@@ -828,6 +850,7 @@ main:has(> .stage--live) ~ .site-footer {
             ". mark";
     }
 
+    /* The mark links to About. */
     .stage__mark {
         display: block;
         grid-area: mark;
@@ -836,7 +859,15 @@ main:has(> .stage--live) ~ .site-footer {
         inline-size: min(100%, 28rem);
     }
 
+    .stage__mark img {
+        inline-size: 100%;
+    }
+
     .stage--live .stage__mark {
+        inline-size: auto;
+    }
+
+    .stage--live .stage__mark img {
         max-block-size: calc(var(--fu) * 80);
         inline-size: auto;
     }

@@ -19,21 +19,39 @@ if (stage) {
 
     stage.classList.add("stage--live");
 
-    // The frame is sized to leave room for the footer (see global.css).
+    // The frame is sized around the header and footer (see global.css). When
+    // all three fit with the frame keeping at least two thirds of the screen,
+    // .stage--fit holds the header and footer still, so the homepage is one
+    // screen and scrolling only moves through the statements.
+    const header = document.querySelector(".site-header");
     const footer = document.querySelector(".site-footer");
-    const fitFooter = () => {
-        if (footer) stage.style.setProperty("--stage-footer", `${footer.offsetHeight}px`);
+    const fit = () => {
+        const headerHeight = header ? header.offsetHeight : 0;
+        const footerHeight = footer ? footer.offsetHeight : 0;
+        stage.style.setProperty("--stage-header", `${headerHeight}px`);
+        stage.style.setProperty("--stage-footer", `${footerHeight}px`);
+        const room = window.innerHeight - headerHeight - footerHeight;
+        stage.classList.toggle("stage--fit", room >= window.innerHeight * (2 / 3));
     };
-    fitFooter();
-    if (footer && "ResizeObserver" in window) new ResizeObserver(fitFooter).observe(footer);
+    fit();
+    if ("ResizeObserver" in window) {
+        const watch = new ResizeObserver(() => { fit(); measure(); });
+        if (header) watch.observe(header);
+        if (footer) watch.observe(footer);
+    }
     stage.style.setProperty("--stage-steps", String(count));
     if (index) index.hidden = false;
 
     let current = -1;
     let queued = false;
 
-    const stepLength = () => track.offsetHeight / count;
-    const stageTop = () => stage.getBoundingClientRect().top + window.scrollY;
+    // One step between each pair of statements; the last arrives at the end.
+    const stepLength = () => track.offsetHeight / Math.max(1, count - 1);
+    const frame = stage.querySelector(".stage__frame");
+    // Scroll position where the frame pins: the stage's top, less the frame's
+    // sticky offset (the header's height when .stage--fit holds it still).
+    const pinStart = () =>
+        stage.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(frame).top) || 0);
 
     function show(step) {
         if (step === current) return;
@@ -52,15 +70,15 @@ if (stage) {
 
     function measure() {
         queued = false;
-        const offset = window.scrollY - stageTop();
-        const progress = Math.min(1, Math.max(0, offset / (track.offsetHeight - stepLength())));
+        const offset = window.scrollY - pinStart();
+        const progress = Math.min(1, Math.max(0, offset / (track.offsetHeight || 1)));
         stage.style.setProperty("--stage-progress", progress.toFixed(4));
-        const step = Math.min(count - 1, Math.max(0, Math.floor(offset / stepLength() + 0.15)));
+        const step = Math.min(count - 1, Math.max(0, Math.round(offset / stepLength())));
         show(step);
     }
 
     function goTo(step, smooth) {
-        const top = stageTop() + step * stepLength() + 2;
+        const top = pinStart() + step * stepLength();
         window.scrollTo({ top, behavior: smooth && !reduce.matches ? "smooth" : "auto" });
     }
 
@@ -70,7 +88,7 @@ if (stage) {
         requestAnimationFrame(measure);
     }, { passive: true });
 
-    window.addEventListener("resize", measure);
+    window.addEventListener("resize", () => { fit(); measure(); });
 
     // The index and the two halves of the tagline both jump to their statement.
     jumps.forEach((item) => {
@@ -82,8 +100,8 @@ if (stage) {
         if (event.altKey || event.ctrlKey || event.metaKey) return;
         const target = event.target;
         if (target instanceof HTMLElement && /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return;
-        const box = stage.getBoundingClientRect();
-        if (box.top > 1 || box.bottom < window.innerHeight) return;
+        const offset = window.scrollY - pinStart();
+        if (offset < -1 || offset > track.offsetHeight + 1) return;
         if (event.key === "ArrowDown" || event.key === "ArrowRight") {
             if (current >= count - 1) return;
             event.preventDefault();
