@@ -3,32 +3,78 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-        title="Means+Measures"
-        description="Means+Measures builds responsibility upwards through systems and engagement upwards from the people served."
+        title="About — Means+Measures"
+        description="Means+Measures holds to two things: equity of means and equality of measures. Institutions bear responsibility down through systems; authority rises up through people."
 >
     <section class="section">
-        <p class="eyebrow">Means+Measures</p>
+        <p class="eyebrow">About</p>
 
         <h1 class="hero-title">
-            Down through systems. Up through people.
+            Equity of means. Equality of measures.
         </h1>
+        <hr class="gold-bar" />
 
         <div class="measure">
+            <dl class="principles">
+                <dt>Equity of means</dt>
+                <dd>That lack of privilege is not lack of access.</dd>
+
+                <dt>Equality of measures</dt>
+                <dd>That impacts are judged on their own merits, not the standing of those responsible.</dd>
+            </dl>
+        </div>
+    </section>
+
+    <section class="section section--compact" aria-labelledby="about-directions">
+        <div class="measure">
+            <h2 id="about-directions">Down through systems. Up through people.</h2>
+
             <p>
-                Means+Measures is the public name of Means and Measures LLC. It continues the work previously published as CivicBrands by BJL13 Enterprise Solutions LLC. The work is editorial, infrastructural, and document-forward: making systems legible enough that responsibility, consequence, and agency remain attached to the people inside them.
+                Institutions bear responsibility down through systems for making the means of participation accessible.
             </p>
 
             <p>
-                We stand with the people already doing the work. Means+Measures does not frame institutional repair as replacement or disruption for its own sake. It names what is broken without theatre and builds structures that let accountability travel upward.
+                Authority rises up through people who question, evaluate, and hold those institutions accountable.
+            </p>
+
+            <p>
+                The work follows from those two sentences. We build infrastructure, data systems, and analysis
+                that keep the way in open: directories people can use tonight, records that can be checked
+                without asking permission, and governance that leaves a decision reconstructable by the person
+                it landed on.
+            </p>
+
+            <p>
+                We stand with the people already doing the work. Means+Measures does not frame institutional repair as replacement or disruption for its own sake. It names what is broken without theatre.
+            </p>
+        </div>
+    </section>
+
+    <section class="section section--compact" aria-labelledby="about-entity">
+        <div class="measure">
+            <h2 id="about-entity">The organization</h2>
+
+            <p>
+                Means+Measures is the public name of Means and Measures LLC. It continues the work previously published as CivicBrands by BJL13 Enterprise Solutions LLC. The work is editorial, infrastructural, and document-forward.
+            </p>
+
+            <p>
+                Entity facts, identifiers, and capability documents are on the <a href="/procurement">procurement</a> page.
+                Names, logo, type, and color are on the <a href="/brand">brand reference</a>.
             </p>
         </div>
     </section>
 
     <section class="section section--compact">
         <div class="grid">
-            <a href="/work">
-                <h2 class="card-title">Work</h2>
-                <p>Representative infrastructural and analytical work.</p>
+            <a href="/systems">
+                <h2 class="card-title">Systems</h2>
+                <p>What is built and running.</p>
+            </a>
+
+            <a href="/artifacts">
+                <h2 class="card-title">Artifacts</h2>
+                <p>Documents and records.</p>
             </a>
 
             <a href="/research">
@@ -36,14 +82,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 <p>Analysis and writing.</p>
             </a>
 
-            <a href="/procurement">
-                <h2 class="card-title">Procurement</h2>
-                <p>Entity information and engagement readiness.</p>
-            </a>
-
             <a href="/contact">
                 <h2 class="card-title">Contact</h2>
-                <p>Direct inquiry and coordination pathway.</p>
+                <p>Direct inquiry and coordination.</p>
             </a>
         </div>
     </section>
