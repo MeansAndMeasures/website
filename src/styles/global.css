@@ -314,8 +314,7 @@ main > .section:last-child {
    each statement of the doctrine hangs under the word it belongs to, and the
    finder sits beside them.
 ========================================= */
-.home-name,
-.home-standing {
+.home-name {
     box-sizing: border-box;
     width: min(100% - 2 * var(--gutter), var(--page-max));
     margin-inline: auto;
@@ -518,95 +517,19 @@ main > .section:last-child {
     }
 }
 
-/* Standing work: a ledger, not a card grid. Name, fact, state. */
-.home-standing {
+.home-close {
+    box-sizing: border-box;
+    width: min(100% - 2 * var(--gutter), var(--page-max));
+    margin-inline: auto;
     padding-block: var(--mm-space-6) var(--mm-space-7);
     border-top: 1px solid var(--rule);
 }
 
-.home-ledger {
-    list-style: none;
+.home-close p {
+    max-inline-size: var(--measure);
     margin: 0;
-    padding: 0;
-}
-
-.home-ledger li + li {
-    margin-top: 0;
-}
-
-.home-ledger__row {
-    display: grid;
-    grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr) max-content;
-    gap: var(--mm-space-1) var(--mm-space-6);
-    align-items: baseline;
-    padding-block: var(--mm-space-4);
-    border-bottom: 1px solid var(--rule);
-    color: inherit;
-    text-decoration: none;
-}
-
-.home-ledger li:first-child .home-ledger__row {
-    border-top: 1px solid var(--rule);
-}
-
-.home-ledger__name {
-    font-family: var(--mm-font-display);
-    font-weight: 600;
-    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
-    line-height: 1.2;
-    text-decoration-line: underline;
-    text-decoration-color: transparent;
-    text-decoration-thickness: 0.06em;
-    text-underline-offset: 0.16em;
-    transition: text-decoration-color 0.12s ease;
-}
-
-.home-ledger__row:hover .home-ledger__name {
-    text-decoration-color: currentColor;
-}
-
-.home-ledger__row:hover {
-    border-bottom-color: var(--mm-text);
-}
-
-.home-ledger__fact {
-    color: var(--mm-secondary);
-    max-inline-size: 38rem;
-}
-
-.home-ledger__state {
-    font-family: var(--mm-font-data);
-    font-size: 0.875rem;
-    color: var(--mm-secondary);
-    white-space: nowrap;
-}
-
-.home-ledger__row:focus-visible {
-    outline: 0.15rem solid var(--mm-focus);
-    outline-offset: 0.15rem;
-}
-
-@media (max-width: 52rem) {
-    .home-ledger__row {
-        grid-template-columns: minmax(0, 1fr);
-    }
-}
-
-.home-standing__close {
-    margin-top: var(--mm-space-6);
-}
-
-.home-standing__close p:first-child {
     font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
     line-height: 1.35;
-}
-
-.home-standing__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--mm-space-2) var(--mm-space-5);
-    font-family: var(--mm-font-ui);
-    font-size: var(--mm-size-ui);
 }
 
 /* About: the two principles as a definition list. */
@@ -722,8 +645,7 @@ main > .section:last-child {
     white-space: nowrap;
 }
 
-.finder__list,
-.finder__standing {
+.finder__list {
     list-style: none;
     margin: var(--mm-space-3) 0 0;
     padding: 0;
@@ -941,8 +863,8 @@ main > .section:last-child {
 
 .site-footer__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: var(--mm-space-5) var(--mm-space-7);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mm-space-5);
     padding-block: var(--mm-space-6);
 }
 

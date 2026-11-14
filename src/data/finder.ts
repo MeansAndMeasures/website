@@ -19,16 +19,6 @@ export interface FinderEntry {
     urgent?: boolean;
 }
 
-// The short standing list shown before anyone types. Company-level only:
-// no single project gets a standing link.
-export const standingDoors: { href: string; label: string; note: string; urgent?: boolean }[] = [
-    { href: "/systems", label: "See what we have built", note: "The public systems, live and inspectable" },
-    { href: "/artifacts", label: "Read the record", note: "Public comments, matrices, entity records" },
-    { href: "/research", label: "Read the research", note: "Analysis and writing" },
-    { href: "/procurement", label: "Work with us", note: "Entity facts, capabilities, contact" },
-    { href: "/about", label: "Who we are", note: "What Means+Measures holds to" }
-];
-
 export const staticEntries: FinderEntry[] = [
     { href: "/", label: "Home", kind: "page", keywords: "start index landing" },
     { href: "/about", label: "About Means+Measures", kind: "page", note: "Who we are and what we hold to", keywords: "who company organization mission principle equity equality history civicbrands bjl13" },

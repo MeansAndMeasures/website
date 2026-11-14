@@ -24,8 +24,8 @@ its grid: the two statements of the doctrine hang under "Means+" and "Measures".
 Navigation from it runs through the finder (`src/components/SiteFinder.astro`),
 which is also opened from the header on every page (the Find button, or `/`).
 
-- `src/data/finder.ts`: the five standing links and the hand-kept routes, each
-  with the words a person is likely to type.
+- `src/data/finder.ts`: the hand-kept routes, each with the words a person is
+  likely to type. The finder lists nothing until someone types.
 - `src/pages/find.json.ts`: prerendered index; adds work, research and
   artifacts from the content collections automatically. The KC directory is
   one project: it has one entry plus the crisis page, and its own pages and
@@ -33,8 +33,7 @@ which is also opened from the header on every page (the Find button, or `/`).
 - `public/lib/finder.js`: matching and the combobox behaviour. A static file
   because the site CSP allows only same-origin script files and no inline
   script or style. Crisis words always put `/kc/crisis` first.
-- Without script the field submits to `/sitemap` and the standing links are
-  ordinary links. `tests/finder.test.mjs` covers the matching rules.
+- Without script the field submits to `/sitemap`. `tests/finder.test.mjs` covers the matching rules.
 
 `public/means-measures/assets/web/` holds 8-bit sRGB derivatives of the logo
 masters for the header, icons and error page. Regenerate them from the masters

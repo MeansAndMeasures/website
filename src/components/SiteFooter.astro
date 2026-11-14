@@ -1,42 +1,7 @@
 ---
 const year = new Date().getFullYear();
-const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
-const isKcSection = pathname === "/kc" || pathname.startsWith("/kc/") || pathname.startsWith("/es/kc");
-
-// Three short groups. The full list of pages is the site map's job.
-const groups = [
-    {
-        label: "Use",
-        links: [
-            { href: "/systems", label: "Systems" },
-            { href: "/civicnavigator", label: "CivicNavigator" },
-            { href: "https://forecast.meansandmeasures.com", label: "Forecast" },
-            isKcSection
-                ? { href: "/kc/crisis", label: "Need help now", urgent: true }
-                : { href: "/kc", label: "KC directory" }
-        ]
-    },
-    {
-        label: "Check",
-        links: [
-            { href: "/artifacts", label: "Artifacts" },
-            { href: "/research", label: "Research" },
-            { href: "/updates", label: "Updates" },
-            { href: "/status", label: "Status" }
-        ]
-    },
-    {
-        label: "Organization",
-        links: [
-            { href: "/about", label: "About" },
-            { href: "/procurement", label: "Procurement" },
-            { href: "/brand", label: "Brand" },
-            { href: "/contact", label: "Contact" }
-        ]
-    }
-];
-
 const policy = [
+    { href: "/contact", label: "Contact" },
     { href: "/sitemap", label: "Site map" },
     { href: "/privacy", label: "Privacy" },
     { href: "/terms", label: "Terms" },
@@ -52,19 +17,6 @@ const policy = [
             <p><em>For the Commons</em></p>
             <p><a href="tel:+18163063481">816-306-3481</a> · <a href="mailto:info@meansandmeasures.com">info@meansandmeasures.com</a></p>
         </div>
-
-        <nav class="site-footer__nav" aria-label="Footer navigation">
-            {groups.map((group) => (
-                <div class="site-footer__group">
-                    <p class="site-footer__label">{group.label}</p>
-                    <ul>
-                        {group.links.map((link) => (
-                            <li><a href={link.href} class={"urgent" in link && link.urgent ? "site-footer__needhelp" : undefined}>{link.label}</a></li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
-        </nav>
 
         <div class="site-footer__legal">
             <p>&copy; {year} Means+Measures · EIN 39-2829761</p>

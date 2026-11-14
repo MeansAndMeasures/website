@@ -1,43 +1,7 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteFinder from "../components/SiteFinder.astro";
 
-const services = await getCollection("kcServices");
-
-// Standing work, stated as facts that can be checked on the page each links to.
-const standing = [
-    {
-        href: "/civicnavigator",
-        name: "CivicNavigator",
-        fact: "Help with the letter, the form, and the next step, in the hands of the person holding the paperwork.",
-        state: "in development"
-    },
-    {
-        href: "https://forecast.meansandmeasures.com",
-        name: "Forecast",
-        fact: "Environmental and civic observations kept attached to their sources, at full resolution in time and place.",
-        state: "live"
-    },
-    {
-        href: "/work/open-cognition",
-        name: "Open Cognition",
-        fact: "Governed memory for AI agents: immutable records, scoped references, and state changes that name who made them.",
-        state: "published"
-    },
-    {
-        href: "/kc",
-        name: "Kansas City Metro Resource Directory",
-        fact: `${services.length} services across nine counties and two states, in English and Spanish, with open exports anyone may mirror.`,
-        state: "live"
-    },
-    {
-        href: "/artifacts",
-        name: "Public record",
-        fact: "Federal public comments on USCIS biometrics and NWK-408, and the Record Sufficiency Matrix, published so they can be checked without asking us.",
-        state: "published"
-    }
-];
 ---
 
 <BaseLayout
@@ -80,29 +44,9 @@ const standing = [
         </div>
     </section>
 
-    <section class="home-standing" aria-labelledby="home-standing-title">
-        <p id="home-standing-title" class="eyebrow">Standing work</p>
-
-        <ul class="home-ledger">
-            {standing.map((item) => (
-                <li>
-                    <a class="home-ledger__row" href={item.href}>
-                        <span class="home-ledger__name">{item.name}</span>
-                        <span class="home-ledger__fact">{item.fact}</span>
-                        <span class="home-ledger__state">{item.state}</span>
-                    </a>
-                </li>
-            ))}
-        </ul>
-
-        <div class="measure home-standing__close">
-            <p>
-                We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
-            </p>
-            <p class="home-standing__links">
-                <a href="/about">About Means+Measures</a>
-                <a href="/contact">Contact</a>
-            </p>
-        </div>
+    <section class="home-close">
+        <p>
+            We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
+        </p>
     </section>
 </BaseLayout>

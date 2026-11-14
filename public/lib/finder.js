@@ -7,9 +7,7 @@
 //   [data-finder-input]           text input, role=combobox
 //   [data-finder-list]            results list, role=listbox
 //   [data-finder-status]          polite live region
-//   [data-finder-standing]        the default links, hidden while results show
-// The page works without this file: the form submits to the site map and the
-// standing links are ordinary links.
+// The page works without this file: the form submits to the site map.
 
 const CRISIS_WORDS = [
     "crisis", "emergency", "suicide", "suicidal", "988", "911", "danger", "unsafe",
@@ -135,7 +133,6 @@ function setup(root) {
     const input = root.querySelector("[data-finder-input]");
     const list = root.querySelector("[data-finder-list]");
     const status = root.querySelector("[data-finder-status]");
-    const standing = root.querySelector("[data-finder-standing]");
     const form = root.querySelector("form");
     if (!input || !list) return;
 
@@ -164,7 +161,6 @@ function setup(root) {
 
         list.hidden = !open;
         input.setAttribute("aria-expanded", open ? "true" : "false");
-        if (standing) standing.hidden = open;
 
         if (!open) {
             if (status) status.textContent = "";
