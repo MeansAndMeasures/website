@@ -556,11 +556,15 @@ main > .section:last-child {
     position: sticky;
     top: 0;
     block-size: 100svh;
-    grid-template-rows: auto minmax(0, 1fr) auto;
+    /* Name, statement, and index sit together as one group, centred; the
+       leftover height goes above and below the group, not inside it. */
+    grid-template-rows: 1fr auto auto auto 1fr;
     grid-template-areas:
+        "."
         "identity"
         "slides"
-        "index";
+        "index"
+        ".";
     row-gap: var(--mm-space-5);
     align-content: center;
     padding-block: var(--mm-space-6);
@@ -575,7 +579,9 @@ main > .section:last-child {
 .stage--live .stage__slides {
     display: grid;
     gap: 0;
-    align-items: center;
+    /* Each statement starts under the name; the index stays put below the
+       longest one, so it doesn't move from step to step. */
+    align-items: start;
 }
 
 .stage--live .stage__slide {
@@ -746,9 +752,11 @@ main > .section:last-child {
 
     .stage--live .stage__frame {
         grid-template-areas:
+            ". mark"
             "identity mark"
             "slides mark"
-            "index mark";
+            "index mark"
+            ". mark";
     }
 
     .stage__mark {
