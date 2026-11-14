@@ -105,3 +105,16 @@ reviewed schema changes. `npm run deploy` rebuilds and deploys; bare `wrangler d
 can publish an older build. Verify affected public routes and bindings afterward.
 The existing notary GitHub workflow builds and deploys selected journal/migration
 changes on `Prime`; inspect workflow results after a matching push.
+
+### Rotate the deployment token through GitHub OAuth
+
+Use GitHub CLI's OAuth login flow and the repository script to update
+`CLOUDFLARE_API_TOKEN` without copying the token into shell history.
+
+1. Authenticate with GitHub CLI OAuth: `gh auth login`.
+2. Run `node scripts/set-cloudflare-token.mjs` from this repository root.
+3. Paste the new Cloudflare API token when prompted (input is masked).
+
+The script verifies token validity and account access before updating the
+repository secret. To target a different repository, pass `owner/name` as the
+first argument.
