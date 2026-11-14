@@ -331,8 +331,7 @@ main > .section:last-child {
     align-items: start;
 }
 
-.home-name__figure,
-.home-thesis {
+.home-name__figure {
     grid-column: 1 / 3;
     display: grid;
     grid-template-columns: subgrid;
@@ -362,75 +361,131 @@ main > .section:last-child {
 .home-name__bar {
     grid-column: 1 / -1;
     max-inline-size: none;
-    margin-bottom: var(--mm-space-5);
+    margin-bottom: var(--mm-space-4);
 }
 
-/* Everything hung under a word takes that word's width and never widens it. */
-.home-pair__side,
-.home-thesis__side,
-.home-thesis__title {
+/* Each line of the tagline takes the width of its word and never widens it. */
+.home-pair__head {
     width: 0;
     min-width: 100%;
     box-sizing: border-box;
-}
-
-.home-pair__side:first-of-type,
-.home-thesis__side--down {
-    padding-inline-end: var(--mm-space-5);
-}
-
-.home-pair__head {
     font-family: var(--mm-font-display);
     font-weight: 600;
     font-synthesis: none;
     font-size: max(1.125rem, min(3.4cqi, 1.8rem));
     line-height: 1.15;
-    margin: 0 0 var(--mm-space-2);
-}
-
-.home-pair__clause {
     margin: 0;
-    text-wrap: pretty;
 }
 
-.home-name__finder {
+.home-name__lede {
     grid-column: 1 / -1;
-    min-width: 0;
     max-inline-size: 30rem;
 }
 
-/* Thesis: two directions, each drawn as a rule with its own heading. */
-.home-thesis {
-    padding-top: var(--mm-space-5);
+.home-name__lede p:first-child {
+    font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
+    line-height: 1.35;
+    margin-bottom: var(--mm-space-4);
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--mm-space-3) var(--mm-space-5);
+    margin: 0;
+}
+
+/* Action component: outlined, never filled. */
+.home-action {
+    display: inline-block;
+    padding: var(--mm-space-2) var(--mm-space-4);
+    border: 1px solid currentColor;
+    border-radius: var(--mm-radius-sm);
+    text-decoration: none;
+}
+
+.home-action:hover {
+    box-shadow: var(--mm-shadow-raised);
+}
+
+.home-actions__second {
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+}
+
+/* Narrow: the two halves of the tagline stack. */
+@container (max-width: 26rem) {
+    .home-pair__head {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Wide: the plain statement and the action sit beside the name. */
+@media (min-width: 72rem) {
+    .home-name {
+        column-gap: 0;
+    }
+
+    .home-name__lede {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: end;
+        align-self: end;
+        inline-size: 100%;
+        max-inline-size: 24rem;
+    }
+}
+
+/* Claims: one statement, what backs it, one way deeper. */
+.home-claim,
+.home-close {
+    box-sizing: border-box;
+    width: min(100% - 2 * var(--gutter), var(--page-max));
+    margin-inline: auto;
     border-top: 1px solid var(--rule);
 }
 
-.home-thesis__title {
-    grid-column: 1 / -1;
-    max-inline-size: none;
-    margin: 0 0 var(--mm-space-5);
-    font-size: max(1.25rem, min(4.3cqi, 2.125rem));
-}
-
-.home-thesis__side {
+.home-claim {
     display: grid;
-    grid-template-columns: 0.75rem minmax(0, 1fr);
-    column-gap: var(--mm-space-3);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mm-space-3) var(--mm-space-7);
+    padding-block: var(--mm-space-6);
 }
 
-.home-thesis__side p {
+.home-claim__head .eyebrow {
     margin: 0;
-    text-wrap: pretty;
 }
 
-.home-thesis__rule {
+.home-claim__title {
+    max-inline-size: 26ch;
+    margin: 0 0 var(--mm-space-4);
+}
+
+.home-claim__body p {
+    max-inline-size: var(--measure);
+}
+
+.home-claim__exit {
+    margin-top: var(--mm-space-4);
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+}
+
+.home-claim__exit a::after {
+    content: " \2192";
+}
+
+/* The two directions carry a rule that runs the way the sentence does. */
+.home-claim__rule {
     position: relative;
-    display: block;
-    min-block-size: 3rem;
+    display: none;
+    inline-size: 0.75rem;
+    margin-top: var(--mm-space-3);
     background: linear-gradient(var(--mm-text), var(--mm-text)) center / 0.09375rem 100% no-repeat;
 }
 
-.home-thesis__rule::after {
+.home-claim__rule::after {
     content: "";
     position: absolute;
     inset-inline-start: 50%;
@@ -441,31 +496,46 @@ main > .section:last-child {
     border-width: 0 0.09375rem 0.09375rem 0;
 }
 
-.home-thesis__side--down .home-thesis__rule::after {
+[data-direction="down"] .home-claim__rule::after {
     inset-block-end: 0.0625rem;
     transform: translateX(-50%) rotate(45deg);
 }
 
-.home-thesis__side--up .home-thesis__rule::after {
+[data-direction="up"] .home-claim__rule::after {
     inset-block-start: 0.0625rem;
     transform: translateX(-50%) rotate(-135deg);
 }
 
-/* Where the browser can tie animation to scroll position, each rule draws in
-   its own direction as it enters. Elsewhere it is simply there. */
+@media (min-width: 52rem) {
+    .home-claim {
+        grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
+    }
+
+    .home-claim__head {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-claim__rule {
+        display: block;
+        flex: 1 1 auto;
+        min-block-size: 3rem;
+    }
+}
+
 @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
-        .home-thesis__rule {
+        .home-claim__rule {
             animation: linear both;
             animation-timeline: view();
-            animation-range: entry 0% entry 100%;
+            animation-range: entry 0% cover 40%;
         }
 
-        .home-thesis__side--down .home-thesis__rule {
+        [data-direction="down"] .home-claim__rule {
             animation-name: home-rule-down;
         }
 
-        .home-thesis__side--up .home-thesis__rule {
+        [data-direction="up"] .home-claim__rule {
             animation-name: home-rule-up;
         }
     }
@@ -481,53 +551,13 @@ main > .section:last-child {
     to { clip-path: inset(0); }
 }
 
-/* Narrow: statements run full width, one after the other. */
-@container (max-width: 40rem) {
-    .home-pair__side,
-    .home-thesis__side {
-        grid-column: 1 / -1;
-        padding-inline-end: 0;
-    }
-
-    .home-pair__side:first-of-type,
-    .home-thesis__side--down {
-        padding-inline-end: 0;
-        margin-bottom: var(--mm-space-5);
-    }
-
-    .home-pair__head {
-        font-size: 1.5rem;
-    }
-}
-
-/* Wide: the finder sits beside the name and both statements. */
-@media (min-width: 72rem) {
-    .home-name {
-        --name-size: 6rem;
-        column-gap: 0;
-    }
-
-    .home-name__finder {
-        grid-column: 3;
-        grid-row: 1 / span 2;
-        justify-self: end;
-        inline-size: 100%;
-        max-inline-size: 26rem;
-        margin-top: var(--mm-space-2);
-    }
-}
-
 .home-close {
-    box-sizing: border-box;
-    width: min(100% - 2 * var(--gutter), var(--page-max));
-    margin-inline: auto;
     padding-block: var(--mm-space-6) var(--mm-space-7);
-    border-top: 1px solid var(--rule);
 }
 
-.home-close p {
+.home-close p:first-child {
     max-inline-size: var(--measure);
-    margin: 0;
+    margin: 0 0 var(--mm-space-5);
     font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
     line-height: 1.35;
 }
