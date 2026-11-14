@@ -1,89 +1,102 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteFinder from "../components/SiteFinder.astro";
+
+const services = await getCollection("kcServices");
+
+// Standing work, stated as facts that can be checked on the page each links to.
+const standing = [
+    {
+        href: "/kc",
+        name: "Kansas City Metro Resource Directory",
+        fact: `${services.length} services across nine counties and two states, in English and Spanish, with open exports anyone may mirror.`,
+        state: "live"
+    },
+    {
+        href: "https://forecast.meansandmeasures.com",
+        name: "Forecast",
+        fact: "Environmental and civic observations kept attached to their sources, at full resolution in time and place.",
+        state: "live"
+    },
+    {
+        href: "/artifacts",
+        name: "Public record",
+        fact: "Federal public comments on USCIS biometrics and NWK-408, and the Record Sufficiency Matrix, published so they can be checked without asking us.",
+        state: "published"
+    },
+    {
+        href: "/civicnavigator",
+        name: "CivicNavigator",
+        fact: "Help with the letter, the form, and the next step, in the hands of the person holding the paperwork.",
+        state: "in development"
+    }
+];
 ---
 
 <BaseLayout
-		title="Means+Measures"
-		description="Means+Measures builds responsibility upwards through systems and engagement upwards from the people served."
+    title="Means+Measures. Equity of means. Equality of measures."
+    description="Equity of means: lack of privilege is not lack of access. Equality of measures: impacts are judged on their own merits, not the standing of those responsible."
 >
-	<section class="section homepage-hero" aria-labelledby="homepage-title">
-		<div class="homepage-hero__kicker">
-			<p class="eyebrow">Down through systems. Up through people.</p>
-		</div>
+    <section class="home-name" aria-labelledby="homepage-title">
+        <div class="home-name__figure">
+            <h1 id="homepage-title" class="home-name__logotype"><span class="home-name__word">Means<span class="home-name__plus">+</span></span><span class="home-name__word">Measures</span></h1>
 
-		<h1 id="homepage-title" class="hero-title"><span class="homepage-hero__name">Means<span class="homepage-hero__plus">+</span></span><span class="homepage-hero__name">Measures</span></h1>
+            <hr class="gold-bar home-name__bar" />
 
-		<div class="measure homepage-hero__summary">
-			<p>
-				Means+Measures builds responsibility upwards to those in place and lifts engagement from those served. We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
-			</p>
-		</div>
-	</section>
+            <div class="home-pair__side">
+                <p class="home-pair__head">Equity of means.</p>
+                <p class="home-pair__clause">That lack of privilege is not lack of access.</p>
+            </div>
 
-	<section class="section section--routing" aria-labelledby="homepage-routing-title">
-		<p id="homepage-routing-title" class="eyebrow">Index</p>
+            <div class="home-pair__side">
+                <p class="home-pair__head">Equality of measures.</p>
+                <p class="home-pair__clause">That impacts are judged on their own merits, not the standing of those responsible.</p>
+            </div>
+        </div>
 
-		<div class="grid homepage-routing">
-            <a class="route-panel" href="/civicnavigator"><p class="eyebrow">CivicNavigator</p><h2 class="card-title">Civic navigation and mutual aid.</h2><p>A Means+Measures product and service in development.</p></a>
-			<a class="route-panel" href="/systems">
-				<p class="eyebrow">Systems</p>
-				<h2 class="card-title">The public infrastructure set</h2>
-			</a>
+        <div class="home-name__finder">
+            <SiteFinder id="home-finder" variant="inline" />
+        </div>
 
-			<a class="route-panel" href="/capabilities">
-				<p class="eyebrow">Capabilities</p>
-				<h2 class="card-title">What Means+Measures can build</h2>
-			</a>
+        <div class="home-thesis">
+            <h2 class="home-thesis__title">Down through systems. Up through people.</h2>
 
-			<a class="route-panel" href="/work">
-				<p class="eyebrow">Work</p>
-				<h2 class="card-title">Representative work</h2>
-			</a>
+            <div class="home-thesis__side home-thesis__side--down">
+                <span class="home-thesis__rule" aria-hidden="true"></span>
+                <p>Institutions bear responsibility down through systems for making the means of participation accessible.</p>
+            </div>
 
-			<a class="route-panel" href="/research">
-				<p class="eyebrow">Research</p>
-				<h2 class="card-title">Analysis and writing</h2>
-			</a>
+            <div class="home-thesis__side home-thesis__side--up">
+                <span class="home-thesis__rule" aria-hidden="true"></span>
+                <p>Authority rises up through people who question, evaluate, and hold those institutions accountable.</p>
+            </div>
+        </div>
+    </section>
 
-			<a class="route-panel" href="/artifacts">
-				<p class="eyebrow">Artifacts</p>
-				<h2 class="card-title">Documents and records</h2>
-			</a>
+    <section class="home-standing" aria-labelledby="home-standing-title">
+        <p id="home-standing-title" class="eyebrow">Standing work</p>
 
-			<a class="route-panel" href="/procurement">
-				<p class="eyebrow">Procurement</p>
-				<h2 class="card-title">Entity information</h2>
-			</a>
+        <ul class="home-ledger">
+            {standing.map((item) => (
+                <li>
+                    <a class="home-ledger__row" href={item.href}>
+                        <span class="home-ledger__name">{item.name}</span>
+                        <span class="home-ledger__fact">{item.fact}</span>
+                        <span class="home-ledger__state">{item.state}</span>
+                    </a>
+                </li>
+            ))}
+        </ul>
 
-			<a class="route-panel" href="/about">
-				<p class="eyebrow">About</p>
-				<h2 class="card-title">Organization</h2>
-			</a>
-
-			<a class="route-panel" href="/contact">
-				<p class="eyebrow">Contact</p>
-				<h2 class="card-title">Get in touch</h2>
-			</a>
-
-			<a class="route-panel" href="/kc">
-				<p class="eyebrow">Kansas City</p>
-				<h2 class="card-title">Metro directory</h2>
-			</a>
-
-			<a class="route-panel" href="https://forecast.meansandmeasures.com">
-				<p class="eyebrow">Forecast</p>
-				<h2 class="card-title">Observational field infrastructure</h2>
-			</a>
-
-			<a class="route-panel" href="/updates">
-				<p class="eyebrow">Updates</p>
-				<h2 class="card-title">What changed recently</h2>
-			</a>
-
-			<a class="route-panel" href="/status">
-				<p class="eyebrow">Status</p>
-				<h2 class="card-title">Operational posture</h2>
-			</a>
-		</div>
-	</section>
+        <div class="measure home-standing__close">
+            <p>
+                We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
+            </p>
+            <p class="home-standing__links">
+                <a href="/about">About Means+Measures</a>
+                <a href="/contact">Contact</a>
+            </p>
+        </div>
+    </section>
 </BaseLayout>

@@ -2,30 +2,75 @@
 const year = new Date().getFullYear();
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isKcSection = pathname === "/kc" || pathname.startsWith("/kc/") || pathname.startsWith("/es/kc");
+
+// Three short groups. The full list of pages is the site map's job.
+const groups = [
+    {
+        label: "Use",
+        links: [
+            isKcSection
+                ? { href: "/kc/crisis", label: "Need help now", urgent: true }
+                : { href: "/kc", label: "Kansas City resources" },
+            { href: "/civicnavigator", label: "CivicNavigator" },
+            { href: "https://forecast.meansandmeasures.com", label: "Forecast" },
+            { href: "/systems", label: "Systems" }
+        ]
+    },
+    {
+        label: "Check",
+        links: [
+            { href: "/artifacts", label: "Artifacts" },
+            { href: "/research", label: "Research" },
+            { href: "/updates", label: "Updates" },
+            { href: "/status", label: "Status" }
+        ]
+    },
+    {
+        label: "Organization",
+        links: [
+            { href: "/about", label: "About" },
+            { href: "/procurement", label: "Procurement" },
+            { href: "/brand", label: "Brand" },
+            { href: "/contact", label: "Contact" }
+        ]
+    }
+];
+
+const policy = [
+    { href: "/sitemap", label: "Site map" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/terms", label: "Terms" },
+    { href: "/legal", label: "Legal" },
+    { href: "/api/notary/session", label: "Journal sign-in" }
+];
 ---
 
 <footer class="site-footer">
     <div class="site-footer__inner">
         <div class="site-footer__meta">
-            <p>&copy; {year} Means+Measures</p>
-            <p> <em>For the Commons</em> • EIN 39-2829761</p>
+            <p class="site-footer__line">Equity of means. Equality of measures.</p>
+            <p><em>For the Commons</em></p>
             <p><a href="tel:+18163063481">816-306-3481</a> · <a href="mailto:info@meansandmeasures.com">info@meansandmeasures.com</a></p>
         </div>
 
         <nav class="site-footer__nav" aria-label="Footer navigation">
-            {isKcSection
-                ? <a href="/kc/crisis" class="site-footer__needhelp">Need help now</a>
-                : <a href="/kc">KC resources</a>}
-            <a href="/systems">Systems</a>
-            <a href="/updates">Updates</a>
-            <a href="/status">Status</a>
-            <a href="/sitemap">Site map</a>
-            <a href="/brand">Brand</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-            <a href="/legal">Legal</a>
-            <a href="/procurement">Procurement</a>
-            <a href="/api/notary/session">Journal sign-in</a>
+            {groups.map((group) => (
+                <div class="site-footer__group">
+                    <p class="site-footer__label">{group.label}</p>
+                    <ul>
+                        {group.links.map((link) => (
+                            <li><a href={link.href} class={"urgent" in link && link.urgent ? "site-footer__needhelp" : undefined}>{link.label}</a></li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
         </nav>
+
+        <div class="site-footer__legal">
+            <p>&copy; {year} Means+Measures · EIN 39-2829761</p>
+            <nav class="site-footer__policy" aria-label="Policy and records">
+                {policy.map((link) => <a href={link.href}>{link.label}</a>)}
+            </nav>
+        </div>
     </div>
 </footer>

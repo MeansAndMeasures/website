@@ -192,8 +192,6 @@ h4 {
    LAYOUT
 ========================================= */
 .section,
-.homepage-hero,
-.section--routing,
 .site-header__inner,
 .site-footer__inner {
     box-sizing: border-box;
@@ -209,8 +207,7 @@ h4 {
     padding-block-start: var(--mm-space-6);
 }
 
-main > .section:last-child,
-main > .section--routing:last-child {
+main > .section:last-child {
     padding-block-end: var(--mm-space-7);
 }
 
@@ -226,7 +223,6 @@ main > .section--routing:last-child {
 /* Card grids. Minimum column width holds the longest heading word
    at card-title size, so no title is broken or hyphenated. */
 .grid,
-.homepage-routing,
 .system-grid,
 .capability-list,
 .status-list,
@@ -314,49 +310,551 @@ main > .section--routing:last-child {
 
 /* =========================================
    HOMEPAGE
+   The name sets the grid. "Means+" and "Measures" are the two column heads;
+   each statement of the doctrine hangs under the word it belongs to, and the
+   finder sits beside them.
 ========================================= */
-.homepage-hero {
+.home-name,
+.home-standing {
+    box-sizing: border-box;
+    width: min(100% - 2 * var(--gutter), var(--page-max));
+    margin-inline: auto;
+}
+
+.home-name {
+    --name-size: min(11.5cqi, 6rem);
     container-type: inline-size;
-    padding-block: var(--mm-space-7) var(--mm-space-6);
+    padding-block: var(--mm-space-7);
+    display: grid;
+    /* Columns one and two are exactly as wide as the two words of the name. */
+    grid-template-columns: max-content max-content minmax(0, 1fr);
+    row-gap: var(--mm-space-6);
+    align-items: start;
+}
+
+.home-name__figure,
+.home-thesis {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: subgrid;
+    min-width: 0;
 }
 
 /* Homepage logotype (WEB-035, Brian, 2026-10-27): the name set as an identity
    graphic, not text, so identity navy and gold apply. One line at every width,
-   size proportional to the container, capped so it no longer fills the first
+   size proportional to the container, capped so it does not fill the first
    screen. Do not reuse this treatment for headings or other text. */
-.homepage-hero .hero-title {
+.home-name__logotype {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
     max-inline-size: none;
-    margin-bottom: var(--mm-space-5);
+    margin: 0 0 var(--mm-space-4);
     font-size: min(11.5cqi, 6rem);
     line-height: 1.05;
     white-space: nowrap;
     color: var(--mm-identity-institutional);
 }
 
-.homepage-hero__name {
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.homepage-hero__plus {
+.home-name__plus {
     color: var(--mm-identity-interface);
 }
 
-.homepage-hero__summary {
-    max-inline-size: var(--measure);
+.home-name__bar {
+    grid-column: 1 / -1;
+    max-inline-size: none;
+    margin-bottom: var(--mm-space-5);
 }
 
-.homepage-hero__summary p {
+/* Everything hung under a word takes that word's width and never widens it. */
+.home-pair__side,
+.home-thesis__side,
+.home-thesis__title {
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.home-pair__side:first-of-type,
+.home-thesis__side--down {
+    padding-inline-end: var(--mm-space-5);
+}
+
+.home-pair__head {
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-synthesis: none;
+    font-size: max(1.125rem, min(3.4cqi, 1.8rem));
+    line-height: 1.15;
+    margin: 0 0 var(--mm-space-2);
+}
+
+.home-pair__clause {
+    margin: 0;
+    text-wrap: pretty;
+}
+
+.home-name__finder {
+    grid-column: 1 / -1;
+    min-width: 0;
+    max-inline-size: 30rem;
+}
+
+/* Thesis: two directions, each drawn as a rule with its own heading. */
+.home-thesis {
+    padding-top: var(--mm-space-5);
+    border-top: 1px solid var(--rule);
+}
+
+.home-thesis__title {
+    grid-column: 1 / -1;
+    max-inline-size: none;
+    margin: 0 0 var(--mm-space-5);
+    font-size: max(1.25rem, min(4.3cqi, 2.125rem));
+}
+
+.home-thesis__side {
+    display: grid;
+    grid-template-columns: 0.75rem minmax(0, 1fr);
+    column-gap: var(--mm-space-3);
+}
+
+.home-thesis__side p {
+    margin: 0;
+    text-wrap: pretty;
+}
+
+.home-thesis__rule {
+    position: relative;
+    display: block;
+    min-block-size: 3rem;
+    background: linear-gradient(var(--mm-text), var(--mm-text)) center / 0.09375rem 100% no-repeat;
+}
+
+.home-thesis__rule::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 50%;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    box-sizing: border-box;
+    border: solid var(--mm-text);
+    border-width: 0 0.09375rem 0.09375rem 0;
+}
+
+.home-thesis__side--down .home-thesis__rule::after {
+    inset-block-end: 0.0625rem;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.home-thesis__side--up .home-thesis__rule::after {
+    inset-block-start: 0.0625rem;
+    transform: translateX(-50%) rotate(-135deg);
+}
+
+/* Where the browser can tie animation to scroll position, each rule draws in
+   its own direction as it enters. Elsewhere it is simply there. */
+@media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+        .home-thesis__rule {
+            animation: linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 100%;
+        }
+
+        .home-thesis__side--down .home-thesis__rule {
+            animation-name: home-rule-down;
+        }
+
+        .home-thesis__side--up .home-thesis__rule {
+            animation-name: home-rule-up;
+        }
+    }
+}
+
+@keyframes home-rule-down {
+    from { clip-path: inset(0 0 100% 0); }
+    to { clip-path: inset(0); }
+}
+
+@keyframes home-rule-up {
+    from { clip-path: inset(100% 0 0 0); }
+    to { clip-path: inset(0); }
+}
+
+/* Narrow: statements run full width, one after the other. */
+@container (max-width: 40rem) {
+    .home-pair__side,
+    .home-thesis__side {
+        grid-column: 1 / -1;
+        padding-inline-end: 0;
+    }
+
+    .home-pair__side:first-of-type,
+    .home-thesis__side--down {
+        padding-inline-end: 0;
+        margin-bottom: var(--mm-space-5);
+    }
+
+    .home-pair__head {
+        font-size: 1.5rem;
+    }
+}
+
+/* Wide: the finder sits beside the name and both statements. */
+@media (min-width: 72rem) {
+    .home-name {
+        --name-size: 6rem;
+        column-gap: 0;
+    }
+
+    .home-name__finder {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+        justify-self: end;
+        inline-size: 100%;
+        max-inline-size: 26rem;
+        margin-top: var(--mm-space-2);
+    }
+}
+
+/* Standing work: a ledger, not a card grid. Name, fact, state. */
+.home-standing {
+    padding-block: var(--mm-space-6) var(--mm-space-7);
+    border-top: 1px solid var(--rule);
+}
+
+.home-ledger {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.home-ledger li + li {
+    margin-top: 0;
+}
+
+.home-ledger__row {
+    display: grid;
+    grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr) max-content;
+    gap: var(--mm-space-1) var(--mm-space-6);
+    align-items: baseline;
+    padding-block: var(--mm-space-4);
+    border-bottom: 1px solid var(--rule);
+    color: inherit;
+    text-decoration: none;
+}
+
+.home-ledger li:first-child .home-ledger__row {
+    border-top: 1px solid var(--rule);
+}
+
+.home-ledger__name {
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
+    line-height: 1.2;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.16em;
+    transition: text-decoration-color 0.12s ease;
+}
+
+.home-ledger__row:hover .home-ledger__name {
+    text-decoration-color: currentColor;
+}
+
+.home-ledger__row:hover {
+    border-bottom-color: var(--mm-text);
+}
+
+.home-ledger__fact {
+    color: var(--mm-secondary);
+    max-inline-size: 38rem;
+}
+
+.home-ledger__state {
+    font-family: var(--mm-font-data);
+    font-size: 0.875rem;
+    color: var(--mm-secondary);
+    white-space: nowrap;
+}
+
+.home-ledger__row:focus-visible {
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.15rem;
+}
+
+@media (max-width: 52rem) {
+    .home-ledger__row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.home-standing__close {
+    margin-top: var(--mm-space-6);
+}
+
+.home-standing__close p:first-child {
     font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
     line-height: 1.35;
 }
 
-.section--routing {
-    padding-block: var(--mm-space-5) var(--mm-space-7);
+.home-standing__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mm-space-2) var(--mm-space-5);
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
 }
 
-.section--routing > .eyebrow {
+/* About: the two principles as a definition list. */
+.principles {
+    margin: 0;
+}
+
+.principles dt {
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
+    line-height: 1.2;
+}
+
+.principles dd {
+    margin: var(--mm-space-1) 0 var(--mm-space-5);
+    font-size: clamp(1.1875rem, 1.03rem + 0.4vw, 1.375rem);
+    line-height: 1.35;
+}
+
+.principles dd:last-child {
     margin-bottom: 0;
+}
+
+.error-finder {
+    max-inline-size: 30rem;
+    margin-block: var(--mm-space-6);
+}
+
+.error-machine {
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    color: var(--mm-secondary);
+}
+
+/* =========================================
+   FINDER
+   One field that routes a need or a name to its page. Used inline on the
+   homepage and in a dialog from the header on every page.
+========================================= */
+.finder {
+    box-sizing: border-box;
+    padding: var(--mm-space-5);
+    background: var(--mm-surface);
+    border-radius: var(--mm-radius-md);
+    box-shadow: var(--mm-shadow-raised);
+}
+
+.finder__label {
+    display: block;
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.04rem + 0.52vw, 1.5rem);
+    line-height: 1.2;
+    margin: 0 0 var(--mm-space-3);
+}
+
+.finder__field {
+    display: flex;
+    gap: var(--mm-space-2);
+}
+
+.finder__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: var(--mm-space-2) var(--mm-space-3);
+    border: 1px solid var(--mm-control-border);
+    border-radius: var(--mm-radius-sm);
+    color: var(--mm-text);
+    background: var(--mm-canvas);
+    font-family: var(--mm-font-ui);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.finder__input::placeholder {
+    color: var(--mm-secondary);
+    opacity: 1;
+}
+
+.finder__go:focus-visible,
+.finder a:focus-visible,
+.finder-dialog__close:focus-visible,
+.site-header__find:focus-visible {
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.15rem;
+}
+
+.finder__go {
+    flex: none;
+}
+
+/* The field works without script (it opens the site map), but the Go button
+   only earns its space then. With script, Enter and the list do the work. */
+.has-finder .finder__go {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    padding: 0;
+    border: 0;
+}
+
+.finder__status {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.finder__list,
+.finder__standing {
+    list-style: none;
+    margin: var(--mm-space-3) 0 0;
+    padding: 0;
+}
+
+.finder__list li + li,
+.finder__standing li + li {
+    margin-top: 0;
+}
+
+.finder__list[hidden],
+.finder__standing[hidden] {
+    display: none;
+}
+
+.finder__list a,
+.finder__standing a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    column-gap: var(--mm-space-3);
+    align-items: baseline;
+    padding: var(--mm-space-2) var(--mm-space-3);
+    margin-inline: calc(-1 * var(--mm-space-3));
+    border-inline-start: 0.1875rem solid transparent;
+    color: var(--mm-text);
+    text-decoration: none;
+}
+
+.finder__option-label {
+    grid-column: 1;
+    font-family: var(--mm-font-body);
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.finder__option-note {
+    grid-column: 1;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+    color: var(--mm-secondary);
+}
+
+.finder__option-kind {
+    grid-column: 2;
+    grid-row: 1;
+    font-family: var(--mm-font-data);
+    font-size: 0.8125rem;
+    color: var(--mm-secondary);
+    white-space: nowrap;
+}
+
+.finder__list a:hover,
+.finder__standing a:hover,
+.finder__option[aria-selected="true"] a {
+    border-inline-start-color: var(--mm-text);
+    background: var(--mm-canvas);
+}
+
+.finder [data-urgent="true"] .finder__option-label,
+.finder a[data-urgent="true"] .finder__option-label {
+    color: var(--mm-action);
+}
+
+.finder__empty {
+    padding-block: var(--mm-space-2);
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    color: var(--mm-secondary);
+}
+
+.finder-dialog {
+    box-sizing: border-box;
+    inline-size: min(100% - 2 * var(--gutter), 36rem);
+    max-block-size: min(100dvh - 4rem, 44rem);
+    margin-block: 4rem auto;
+    padding: 0;
+    border: 0;
+    border-radius: var(--mm-radius-md);
+    background: var(--mm-surface);
+    color: var(--mm-text);
+    box-shadow: var(--mm-shadow-overlay);
+    overflow: auto;
+}
+
+.finder-dialog::backdrop {
+    background: rgb(38 50 56 / 0.45);
+}
+
+.finder-dialog .finder {
+    box-shadow: none;
+    padding-bottom: var(--mm-space-3);
+}
+
+.finder-dialog__inner {
+    display: grid;
+}
+
+.finder-dialog__close,
+.site-header__find {
+    font-family: var(--mm-font-ui);
+    font-weight: 400;
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+    color: var(--mm-text);
+    background: transparent;
+    border: 1px solid var(--mm-control-border);
+    border-radius: var(--mm-radius-sm);
+    padding: var(--mm-space-1) var(--mm-space-3);
+}
+
+.finder-dialog__close {
+    justify-self: end;
+    margin: 0 var(--mm-space-5) var(--mm-space-4);
+}
+
+.site-header__find[hidden] {
+    display: none;
+}
+
+.site-header__find kbd {
+    margin-inline-start: var(--mm-space-2);
+    font-family: var(--mm-font-data);
+    font-size: 0.8125rem;
+    color: var(--mm-secondary);
+}
+
+@media (hover: none) {
+    .site-header__find kbd {
+        display: none;
+    }
 }
 
 /* =========================================
@@ -448,7 +946,7 @@ main > .section--routing:last-child {
     padding-block: var(--mm-space-6);
 }
 
-.site-footer__meta p {
+.site-footer p {
     margin: 0;
 }
 
@@ -456,15 +954,77 @@ main > .section--routing:last-child {
     margin-top: var(--mm-space-1);
 }
 
-.site-footer__meta a {
+.site-footer__line {
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.25;
+}
+
+.site-footer a {
     color: var(--mm-text);
 }
 
 .site-footer__nav {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--mm-space-5);
+    align-items: start;
+}
+
+.site-footer__label {
+    color: var(--mm-secondary);
+    margin-bottom: var(--mm-space-2);
+}
+
+.site-footer__group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-footer__group li + li {
+    margin-top: 0;
+}
+
+.site-footer__group a {
+    display: inline-block;
+}
+
+.site-footer__legal {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--mm-space-2) var(--mm-space-6);
+    padding-top: var(--mm-space-4);
+    border-top: 1px solid var(--rule);
+    color: var(--mm-secondary);
+}
+
+.site-footer__policy {
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--mm-space-1) var(--mm-space-5);
-    align-content: start;
+}
+
+.site-footer__policy a {
+    text-decoration-line: none;
+}
+
+.site-footer__policy a:hover {
+    text-decoration-line: underline;
+}
+
+.site-footer__policy a:focus-visible {
+    outline: 0.15rem solid var(--mm-focus);
+    outline-offset: 0.225rem;
+}
+
+@media (max-width: 30rem) {
+    .site-footer__nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 /* =========================================
