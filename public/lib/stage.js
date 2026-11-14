@@ -18,6 +18,14 @@ if (stage) {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     stage.classList.add("stage--live");
+
+    // The frame is sized to leave room for the footer (see global.css).
+    const footer = document.querySelector(".site-footer");
+    const fitFooter = () => {
+        if (footer) stage.style.setProperty("--stage-footer", `${footer.offsetHeight}px`);
+    };
+    fitFooter();
+    if (footer && "ResizeObserver" in window) new ResizeObserver(fitFooter).observe(footer);
     stage.style.setProperty("--stage-steps", String(count));
     if (index) index.hidden = false;
 

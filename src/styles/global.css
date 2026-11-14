@@ -570,6 +570,75 @@ main > .section:last-child {
     padding-block: var(--mm-space-6);
 }
 
+/* The pinned frame leaves room for the footer (--stage-footer, measured by
+   /lib/stage.js), so the frame, the last statement, and the footer share one
+   screen. The frame never drops below 70% of the screen, so phones with a
+   tall footer keep readable statements. Type and spacing inside the frame
+   are sized from the frame's own height (--fu is 1% of it) as well as the
+   width, so everything scales with the screen rather than at fixed sizes. */
+.stage--live {
+    --stage-frame: max(calc(100svh - var(--stage-footer, 0px)), 70svh);
+    --fu: calc(var(--stage-frame) / 100);
+}
+
+.stage--live .stage__frame {
+    block-size: var(--stage-frame);
+    padding-block: min(var(--mm-space-6), calc(var(--fu) * 4.5));
+    row-gap: min(var(--mm-space-5), calc(var(--fu) * 3));
+}
+
+.stage--live .home-name__logotype {
+    font-size: min(12.4cqi, 6.5rem, calc(var(--fu) * 11));
+    margin-block-end: min(var(--mm-space-4), calc(var(--fu) * 2));
+}
+
+.stage--live .home-name__bar {
+    margin-block-end: min(var(--mm-space-5), calc(var(--fu) * 2.5));
+}
+
+.stage--live .stage__lede {
+    font-size: min(clamp(1.25rem, 1.05rem + 0.6vw, 1.625rem), calc(var(--fu) * 3.6));
+    margin-block-end: min(var(--mm-space-5), calc(var(--fu) * 3));
+}
+
+.stage--live .stage__claim {
+    font-size: min(clamp(1.625rem, 1.15rem + 1.6vw, 2.75rem), calc(var(--fu) * 5));
+    margin-block-end: min(var(--mm-space-4), calc(var(--fu) * 2.2));
+    /* Same column width as 22ch at full size: smaller type fits more per line. */
+    max-inline-size: calc(clamp(1.625rem, 1.15rem + 1.6vw, 2.75rem) * 11);
+}
+
+.stage--live .stage__evidence {
+    font-size: min(clamp(1.0625rem, 1rem + 0.25vw, 1.25rem), calc(var(--fu) * 2.9));
+}
+
+.stage--live .stage__closing {
+    font-size: min(clamp(1.5rem, 1.15rem + 1.2vw, 2.375rem), calc(var(--fu) * 4.6));
+    margin-block-end: min(var(--mm-space-5), calc(var(--fu) * 3));
+    max-inline-size: calc(clamp(1.5rem, 1.15rem + 1.2vw, 2.375rem) * 13);
+}
+
+.stage--live .eyebrow {
+    margin-block-end: min(var(--mm-space-3), calc(var(--fu) * 1.5));
+}
+
+/* Portrait screens: narrower columns wrap more, so the statements take a
+   slightly smaller share of the frame. */
+@media (max-aspect-ratio: 3/4) {
+    .stage--live .stage__claim {
+        font-size: min(clamp(1.625rem, 1.15rem + 1.6vw, 2.75rem), calc(var(--fu) * 4.4));
+    }
+
+    .stage--live .stage__closing {
+        font-size: min(clamp(1.5rem, 1.15rem + 1.2vw, 2.375rem), calc(var(--fu) * 4.2));
+    }
+}
+
+/* No band of page background between the stage and the footer. */
+main:has(> .stage--live) ~ .site-footer {
+    margin-top: 0;
+}
+
 /* Scroll length: one step per statement. */
 .stage--live .stage__track {
     display: block;
@@ -768,7 +837,7 @@ main > .section:last-child {
     }
 
     .stage--live .stage__mark {
-        max-block-size: 70svh;
+        max-block-size: calc(var(--fu) * 80);
         inline-size: auto;
     }
 }
@@ -1187,26 +1256,25 @@ span.pgp-fingerprint code {
     color: var(--mm-secondary);
 }
 
-/* Desktop: the meta lines run across one row so the footer stays short. */
-@media (width >= 52rem) {
-    .site-footer__meta {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: var(--mm-space-1) var(--mm-space-5);
-    }
+/* The meta lines run across a row and wrap as needed, so the footer stays
+   short at every width. */
+.site-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--mm-space-1) var(--mm-space-5);
+}
 
-    .site-footer__meta p + p {
-        margin-top: 0;
-    }
+.site-footer__meta p + p {
+    margin-top: 0;
+}
 
-    .site-footer__line {
-        margin-inline-end: var(--mm-space-3);
-    }
+.site-footer__line {
+    margin-inline-end: var(--mm-space-3);
+}
 
-    .site-footer__legal {
-        padding-top: var(--mm-space-3);
-    }
+.site-footer__legal {
+    padding-top: var(--mm-space-3);
 }
 
 .site-footer__policy {
