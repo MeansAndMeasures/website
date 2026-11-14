@@ -310,29 +310,30 @@ main > .section:last-child {
 
 /* =========================================
    HOMEPAGE
-   A landing page in four full-width grounds: the name and the mark, the two
-   principles, the two directions, the close. One idea per screen.
+   One screen. The name and the mark hold still while the page scrolls; the
+   statement beside them changes with scroll position and crossfades in place.
+   Without script (/lib/stage.js) the statements follow one another as
+   ordinary content.
 ========================================= */
-.home-hero {
+.stage {
     background: var(--mm-surface);
 }
 
-.home-hero__inner,
-.home-band__inner {
+.stage__frame {
     box-sizing: border-box;
     width: min(100% - 2 * var(--gutter), var(--page-max));
     margin-inline: auto;
-}
-
-.home-hero__inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--mm-space-6);
-    align-items: center;
+    grid-template-areas:
+        "identity"
+        "slides";
+    row-gap: var(--mm-space-6);
     padding-block: var(--mm-space-7);
 }
 
-.home-hero__text {
+.stage__identity {
+    grid-area: identity;
     container-type: inline-size;
     min-width: 0;
 }
@@ -374,6 +375,14 @@ main > .section:last-child {
     width: 0;
     min-width: 100%;
     box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--mm-text);
+    text-align: start;
+    cursor: pointer;
+    transition: opacity 0.4s ease, color 0.4s ease;
     font-family: var(--mm-font-display);
     font-weight: 600;
     font-synthesis: none;
@@ -382,17 +391,80 @@ main > .section:last-child {
     margin: 0;
 }
 
-.home-hero__lede {
+.home-pair__head:hover {
+    box-shadow: none;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.16em;
+}
+
+/* While a principle is on screen, its half of the tagline leads and the
+   other recedes, so the name itself shows where you are. */
+.stage[data-active="1"] .home-pair__head[data-goto="2"],
+.stage[data-active="2"] .home-pair__head[data-goto="1"] {
+    opacity: 0.32;
+}
+
+.stage__mark {
+    display: none;
+}
+
+.stage__slides {
+    grid-area: slides;
+    display: grid;
+    gap: var(--mm-space-7);
+    min-width: 0;
+}
+
+.stage__slide {
+    max-inline-size: 36rem;
+}
+
+.stage__lede {
     max-inline-size: 30rem;
-    margin: var(--mm-space-6) 0 var(--mm-space-5);
+    margin: 0 0 var(--mm-space-5);
     font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.625rem);
     line-height: 1.3;
 }
 
-/* The mark, large. It is the picture on this page. */
-.home-hero__mark {
-    justify-self: center;
-    inline-size: min(100%, 16rem);
+.stage__claim {
+    max-inline-size: 22ch;
+    margin: 0 0 var(--mm-space-4);
+    font-size: clamp(1.625rem, 1.15rem + 1.6vw, 2.75rem);
+    line-height: 1.1;
+}
+
+.stage__evidence {
+    max-inline-size: 30rem;
+    margin: 0;
+    color: var(--mm-secondary);
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+}
+
+.stage__exit {
+    margin: var(--mm-space-4) 0 0;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+}
+
+.stage__exit a::after {
+    content: " \2192";
+}
+
+.stage__closing {
+    max-inline-size: 26ch;
+    margin: 0 0 var(--mm-space-5);
+    font-family: var(--mm-font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 1.15rem + 1.2vw, 2.375rem);
+    line-height: 1.14;
+    text-wrap: balance;
+}
+
+.stage__cue,
+.stage__index,
+.stage__track {
+    display: none;
 }
 
 .home-actions {
@@ -421,109 +493,104 @@ main > .section:last-child {
     font-size: var(--mm-size-ui);
 }
 
-@media (min-width: 64rem) {
-    .home-hero__inner {
-        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-        gap: var(--mm-space-7);
-        min-block-size: calc(100svh - 5rem);
-        padding-block: var(--mm-space-6);
-    }
-
-    .home-hero__mark {
-        justify-self: end;
-        inline-size: min(100%, 30rem);
-    }
-}
-
-/* Bands: each a full-width ground. */
-.home-band {
-    background: var(--mm-canvas);
-    color: var(--mm-text);
-}
-
-.home-band__inner {
-    padding-block: var(--mm-space-8);
-}
-
-.home-band--dark .eyebrow {
-    color: var(--mm-secondary);
-}
-
-.home-duo {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--mm-space-7);
-}
-
-.home-duo__claim {
-    max-inline-size: 16ch;
-    margin: 0 0 var(--mm-space-5);
-    font-size: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
-    line-height: 1.08;
-}
-
-.home-duo__claim--long {
-    max-inline-size: 24ch;
-    font-size: clamp(1.625rem, 1.2rem + 1.4vw, 2.375rem);
-    line-height: 1.14;
-}
-
-.home-duo__evidence {
-    max-inline-size: 28rem;
-    margin: 0;
-    color: var(--mm-secondary);
-    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
-}
-
-.home-duo__exit {
-    margin: var(--mm-space-5) 0 0;
-    font-family: var(--mm-font-ui);
-    font-size: var(--mm-size-ui);
-}
-
-.home-duo__exit a::after {
-    content: " \2192";
-}
-
-.home-band a:focus-visible,
-.home-hero a:focus-visible {
+.stage a:focus-visible,
+.stage button:focus-visible {
     outline: 0.15rem solid var(--mm-focus);
     outline-offset: 0.2rem;
 }
 
-@media (min-width: 52rem) {
-    .home-duo {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: var(--mm-space-8);
+/* ---- Live: the frame pins and the statements share one place. ---- */
+.stage--live {
+    position: relative;
+}
+
+.stage--live .stage__frame {
+    position: sticky;
+    top: 0;
+    block-size: 100svh;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+        "identity"
+        "slides"
+        "index";
+    row-gap: var(--mm-space-5);
+    align-content: center;
+    padding-block: var(--mm-space-6);
+}
+
+/* Scroll length: one step per statement. */
+.stage--live .stage__track {
+    display: block;
+    block-size: calc(var(--stage-steps, 6) * 70svh);
+}
+
+.stage--live .stage__slides {
+    display: grid;
+    gap: 0;
+    align-items: center;
+}
+
+.stage--live .stage__slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(0.75rem);
+    pointer-events: none;
+    transition:
+        opacity 0.5s ease,
+        transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.stage--live .stage__slide[data-active] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stage--live .stage__slide {
+        transform: none;
+        transition: opacity 0.2s linear;
     }
 
-    .home-duo__side + .home-duo__side {
-        position: relative;
-    }
-
-    .home-duo:not(.home-duo--directions) .home-duo__side + .home-duo__side::before {
-        content: "";
-        position: absolute;
-        inset-block: 0;
-        inset-inline-start: calc(var(--mm-space-8) / -2);
-        border-inline-start: 1px solid var(--rule);
+    .stage--live .stage__slide[data-active] {
+        transition-delay: 0s;
     }
 }
 
-/* Directions: each side carries a rule that runs the way its sentence does. */
-.home-duo--directions .home-duo__side {
+.stage--live .stage__cue {
+    display: block;
+    margin: var(--mm-space-6) 0 0;
+    font-family: var(--mm-font-ui);
+    font-size: var(--mm-size-ui);
+    color: var(--mm-secondary);
+}
+
+.stage--live .stage__cue::after {
+    content: " \2193";
+}
+
+/* Down and up: a rule beside the statement that draws in its direction
+   when the statement arrives. */
+.stage__slide[data-direction] {
     display: grid;
     grid-template-columns: 1rem minmax(0, 1fr);
     column-gap: var(--mm-space-5);
 }
 
-.home-duo__rule {
+.stage__slide[data-direction] > :not(.stage__rule) {
+    grid-column: 2;
+}
+
+.stage__rule {
+    grid-column: 1;
+    grid-row: 1 / span 4;
     position: relative;
     display: block;
     background: linear-gradient(var(--mm-text), var(--mm-text)) center / 0.125rem 100% no-repeat;
 }
 
-.home-duo__rule::after {
+.stage__rule::after {
     content: "";
     position: absolute;
     inset-inline-start: 50%;
@@ -534,63 +601,120 @@ main > .section:last-child {
     border-width: 0 0.125rem 0.125rem 0;
 }
 
-[data-direction="down"] .home-duo__rule::after {
+[data-direction="down"] .stage__rule::after {
     inset-block-end: 0.125rem;
     transform: translateX(-50%) rotate(45deg);
 }
 
-[data-direction="up"] .home-duo__rule::after {
+[data-direction="up"] .stage__rule::after {
     inset-block-start: 0.125rem;
     transform: translateX(-50%) rotate(-135deg);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-        .home-duo__rule {
-            animation: linear both;
-            animation-timeline: view();
-            animation-range: entry 10% cover 45%;
-        }
+.stage--live [data-direction="down"] .stage__rule {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.9s cubic-bezier(0.5, 0, 0.2, 1) 0.25s;
+}
 
-        [data-direction="down"] .home-duo__rule {
-            animation-name: home-rule-down;
-        }
+.stage--live [data-direction="up"] .stage__rule {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 0.9s cubic-bezier(0.5, 0, 0.2, 1) 0.25s;
+}
 
-        [data-direction="up"] .home-duo__rule {
-            animation-name: home-rule-up;
-        }
+.stage--live [data-direction][data-active] .stage__rule {
+    clip-path: inset(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stage--live [data-direction] .stage__rule {
+        clip-path: none;
+        transition: none;
     }
 }
 
-@keyframes home-rule-down {
-    from { clip-path: inset(0 0 100% 0); }
-    to { clip-path: inset(0); }
+/* Index: the four statements as places on this one page, with a line that
+   fills as the visitor moves through them. */
+.stage--live .stage__index {
+    grid-area: index;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mm-space-1) var(--mm-space-5);
+    padding-top: var(--mm-space-3);
+    border-top: 1px solid var(--rule);
 }
 
-@keyframes home-rule-up {
-    from { clip-path: inset(100% 0 0 0); }
-    to { clip-path: inset(0); }
+.stage__progress {
+    position: absolute;
+    inset-block-start: -1px;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 2px;
+    background: var(--mm-action);
+    transform-origin: left;
+    transform: scaleX(var(--stage-progress, 0));
 }
 
-.home-close__line {
-    max-inline-size: 22ch;
-    margin: 0 0 var(--mm-space-6);
-    font-family: var(--mm-font-display);
-    font-weight: 600;
-    font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem);
-    line-height: 1.12;
-    text-wrap: balance;
+.stage__index[hidden] {
+    display: none !important;
 }
 
-@media (min-width: 52rem) {
-    .home-close__line {
-        max-inline-size: 30ch;
+.stage__index-item {
+    padding: var(--mm-space-1) 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--mm-secondary);
+    font-family: var(--mm-font-ui);
+    font-weight: 400;
+    font-size: var(--mm-size-ui);
+    line-height: 1.4;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.3em;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+.stage__index-item:hover {
+    box-shadow: none;
+    color: var(--mm-text);
+}
+
+.stage__index-item[aria-current] {
+    color: var(--mm-text);
+    text-decoration-color: var(--mm-action);
+}
+
+/* Wide: the mark holds the right side of the screen. */
+@media (min-width: 64rem) {
+    .stage__frame {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        grid-template-areas:
+            "identity mark"
+            "slides mark";
+        column-gap: var(--mm-space-7);
     }
-}
 
-/* The homepage's last band meets the footer directly. */
-main:has(> .home-close) + .site-footer {
-    margin-top: 0;
+    .stage--live .stage__frame {
+        grid-template-areas:
+            "identity mark"
+            "slides mark"
+            "index mark";
+    }
+
+    .stage__mark {
+        display: block;
+        grid-area: mark;
+        align-self: center;
+        justify-self: end;
+        inline-size: min(100%, 28rem);
+    }
+
+    .stage--live .stage__mark {
+        max-block-size: 70svh;
+        inline-size: auto;
+    }
 }
 
 /* About: the two principles as a definition list. */
