@@ -4,47 +4,40 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const services = await getCollection("kcServices");
 
-// The page is an argument, not an index. Each section makes one claim in the
-// organization's own words, shows what backs it, and offers one way deeper.
-const claims = [
+// A landing page: one screen that says who this is, then the argument in two
+// pairs, then the action again. Each claim is in the organization's own
+// words, carries one line of evidence, and offers one way deeper. No link
+// lists, no search field.
+const principles = [
     {
         id: "means",
         label: "Equity of means",
         claim: "Lack of privilege is not lack of access.",
-        evidence: [
-            "CivicNavigator, in development, puts help with the letter, the form, and the next step in the hands of the person holding the paperwork.",
-            `The Kansas City Metro Resource Directory covers ${services.length} services across nine counties and two states, in English and Spanish, and says before you go whether you will need ID, insurance, or an appointment.`
-        ],
+        evidence: `A directory of ${services.length} services across nine counties says, before you go, whether you will need ID, insurance, or an appointment.`,
         exit: { href: "/systems", label: "See the systems" }
     },
     {
         id: "measures",
         label: "Equality of measures",
         claim: "Impacts are judged on their own merits, not the standing of those responsible.",
-        evidence: [
-            "The Record Sufficiency Matrix asks one thing of any system: does it keep enough record for a consequential action to be understood and reviewed?",
-            "Our federal comments on USCIS biometrics and NWK-408 are published whole, so they can be checked without asking us. Forecast keeps every observation attached to where and when it came from."
-        ],
+        evidence: "Our federal comments are published whole, with their sources, so they can be checked without asking us.",
         exit: { href: "/artifacts", label: "Read the record" }
-    },
+    }
+];
+
+const directions = [
     {
         id: "down",
         label: "Down through systems",
-        direction: "down",
         claim: "Institutions bear responsibility down through systems for making the means of participation accessible.",
-        evidence: [
-            "We work with public institutions and civic organizations on the parts that carry that responsibility: information people can find and use, records that hold up to review, and AI governance that names who reviews, who decides, and what stops the machine."
-        ],
+        evidence: "We build the parts that carry it: information people can use, records that hold up to review, and AI governance that names who decides.",
         exit: { href: "/capabilities", label: "What we can build" }
     },
     {
         id: "up",
         label: "Up through people",
-        direction: "up",
         claim: "Authority rises up through people who question, evaluate, and hold those institutions accountable.",
-        evidence: [
-            "So the work ships where people can get at it. Directory data is free to mirror and anyone can correct a listing. Methods, sources, and limits are stated, so the people affected can test a claim themselves."
-        ],
+        evidence: "So the work ships open: data free to mirror, listings anyone can correct, methods and limits stated.",
         exit: { href: "/work", label: "See the work" }
     }
 ];
@@ -54,49 +47,74 @@ const claims = [
     title="Means+Measures. Equity of means. Equality of measures."
     description="Means+Measures builds infrastructure, data systems, and analysis that treat equity as the first requirement. Equity of means. Equality of measures."
 >
-    <section class="home-name" aria-labelledby="homepage-title">
-        <div class="home-name__figure">
-            <h1 id="homepage-title" class="home-name__logotype"><span class="home-name__word">Means<span class="home-name__plus">+</span></span><span class="home-name__word">Measures</span></h1>
+    <section class="home-hero" aria-labelledby="homepage-title">
+        <div class="home-hero__inner">
+            <div class="home-hero__text">
+                <div class="home-name">
+                    <h1 id="homepage-title" class="home-name__logotype"><span class="home-name__word">Means<span class="home-name__plus">+</span></span><span class="home-name__word">Measures</span></h1>
+                    <hr class="gold-bar home-name__bar" />
+                    <p class="home-pair__head">Equity of means.</p>
+                    <p class="home-pair__head">Equality of measures.</p>
+                </div>
 
-            <hr class="gold-bar home-name__bar" />
+                <p class="home-hero__lede">
+                    Infrastructure, data systems, and analysis that treat equity as the first requirement.
+                </p>
 
-            <p class="home-pair__head">Equity of means.</p>
-            <p class="home-pair__head">Equality of measures.</p>
-        </div>
+                <p class="home-actions">
+                    <a class="mm-action mm-type-action home-action" href="/systems">See the work</a>
+                    <a class="home-actions__second" href="/contact">Get in touch</a>
+                </p>
+            </div>
 
-        <div class="home-name__lede">
-            <p>
-                Means+Measures builds infrastructure, data systems, and analysis that treat equity as the first requirement.
-            </p>
-            <p class="home-actions">
-                <a class="mm-action mm-type-action home-action" href="/systems">See the work</a>
-                <a class="home-actions__second" href="/contact">Get in touch</a>
-            </p>
+            <img
+                class="mm-logo home-hero__mark"
+                src="/means-measures/assets/web/means-measures-symbol-960.png"
+                alt=""
+                width="960"
+                height="960"
+            />
         </div>
     </section>
 
-    {claims.map((item) => (
-        <section class="home-claim" aria-labelledby={`claim-${item.id}`} data-direction={item.direction}>
-            <div class="home-claim__head">
-                <p class="eyebrow">{item.label}</p>
-                {item.direction && <span class="home-claim__rule" aria-hidden="true"></span>}
-            </div>
+    <section class="home-band home-band--dark" data-mm-theme="dark" aria-label="What we hold to">
+        <div class="home-band__inner home-duo">
+            {principles.map((item) => (
+                <article class="home-duo__side" aria-labelledby={`claim-${item.id}`}>
+                    <p class="eyebrow">{item.label}</p>
+                    <h2 id={`claim-${item.id}`} class="home-duo__claim">{item.claim}</h2>
+                    <p class="home-duo__evidence">{item.evidence}</p>
+                    <p class="home-duo__exit"><a href={item.exit.href}>{item.exit.label}</a></p>
+                </article>
+            ))}
+        </div>
+    </section>
 
-            <div class="home-claim__body">
-                <h2 id={`claim-${item.id}`} class="home-claim__title">{item.claim}</h2>
-                {item.evidence.map((line) => <p>{line}</p>)}
-                <p class="home-claim__exit"><a href={item.exit.href}>{item.exit.label}</a></p>
-            </div>
-        </section>
-    ))}
+    <section class="home-band" aria-label="How responsibility and authority run">
+        <div class="home-band__inner home-duo home-duo--directions">
+            {directions.map((item) => (
+                <article class="home-duo__side" data-direction={item.id} aria-labelledby={`claim-${item.id}`}>
+                    <span class="home-duo__rule" aria-hidden="true"></span>
+                    <div>
+                        <p class="eyebrow">{item.label}</p>
+                        <h2 id={`claim-${item.id}`} class="home-duo__claim home-duo__claim--long">{item.claim}</h2>
+                        <p class="home-duo__evidence">{item.evidence}</p>
+                        <p class="home-duo__exit"><a href={item.exit.href}>{item.exit.label}</a></p>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </section>
 
-    <section class="home-close">
-        <p>
-            We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
-        </p>
-        <p class="home-actions">
-            <a class="mm-action mm-type-action home-action" href="/contact">Get in touch</a>
-            <a class="home-actions__second" href="/procurement">Procurement and entity facts</a>
-        </p>
+    <section class="home-band home-band--dark home-close" data-mm-theme="dark">
+        <div class="home-band__inner">
+            <p class="home-close__line">
+                We stand with the people already doing the work, never as agents of replacement and never favoring a system over the people who comprise it.
+            </p>
+            <p class="home-actions">
+                <a class="mm-action mm-type-action home-action" href="/contact">Get in touch</a>
+                <a class="home-actions__second" href="/procurement">Procurement and entity facts</a>
+            </p>
+        </div>
     </section>
 </BaseLayout>

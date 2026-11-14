@@ -19,12 +19,12 @@ Cloudflare Workers; `wrangler.jsonc` targets `meansandmeasures.com` and
 
 ## Homepage and finder
 
-`src/pages/index.astro` is a landing page, not an index of pages. It follows the
-shape working landing pages share: a hero that says what the organization is
-with one primary action, then a short argument in which each section makes one
-claim, shows what backs it, and offers one way deeper, then the action again.
-The four claims are the organization's own lines. Do not add link lists, tiles
-or a search field to it.
+`src/pages/index.astro` is a landing page, not an index of pages. It is built
+in four full-width grounds, one idea per screen: the name and the mark with
+one primary action; the two principles; the two directions; the close with
+the action again. Each claim is in the organization's own words, carries one
+line of evidence and offers one exit. Do not add link lists, tiles or a
+search field to it.
 
 The finder (`src/components/SiteFinder.astro`) is opened from the header on
 every page (the Find button, or `/`) and sits inline on the 404 page.
